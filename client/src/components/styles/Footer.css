@@ -1,0 +1,12 @@
+.footer {
+  margin: 0;
+  background-color: red;
+}
+
+.footer h1 {
+  /* font-family: 'Courier Prime', monospace; */
+  font-size: 10rem;
+  color: white;
+  margin: 0;
+  padding: 50px;
+}

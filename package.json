@@ -1,0 +1,69 @@
+{
+  "name": "sunny-side-up",
+  "version": "1.0.0",
+  "description": "Sunny Side Up",
+  "main": "index.jsx",
+  "scripts": {
+    "build": "cross-env NODE_ENV=development webpack --config webpack.config.js",
+    "build:dev": "npx webpack --watch",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "server:dev": "npx nodemon --watch server server/index.js",
+    "server:prod": "npx nodemon server server/index.js",
+    "all:dev": "npx nodemon --watch server server/index.js & npx webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vector-Software-Engineering/sunny-side-up.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vector-Software-Engineering/sunny-side-up/issues"
+  },
+  "homepage": "https://github.com/Vector-Software-Engineering/sunny-side-up#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/testing-library__jest-dom": "^5.14.5",
+    "babel-jest": "^29.3.1",
+    "babel-loader": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.29.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.5.1",
+    "react-error-overlay": "^6.0.9",
+    "react-test-renderer": "^18.2.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "axios": "^1.2.0",
+    "css-loader": "^6.7.2",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "file-loader": "^6.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "react-select": "^5.7.0",
+    "react-share": "^4.4.1",
+    "style-loader": "^3.3.1",
+    "styled-components": "^5.3.6",
+    "url-loader": "^4.1.1"
+  }
+}
