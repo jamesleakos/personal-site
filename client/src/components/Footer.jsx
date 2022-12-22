@@ -5,7 +5,11 @@ function Footer() {
 
   return (
     <div className='footer'>
-      <h1>footer</h1>
+      <div className='footer-img'>
+      </div>
+      <div className='final'>
+        <span>c James Leakos</span>
+      </div>
     </div>
   )
 }

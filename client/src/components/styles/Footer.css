@@ -1,12 +1,29 @@
 .footer {
   margin: 0;
-  background-color: red;
 }
 
-.footer h1 {
+.footer h3 {
   /* font-family: 'Courier Prime', monospace; */
-  font-size: 10rem;
+  font-size: 2rem;
   color: white;
+  margin: 0 auto;
+  display: inline-block;
+  position: absolute;
+  bottom: 10px;
+}
+
+.footer-img {
+  background-image: url('../../images/sam_in_sask.JPG');
   margin: 0;
-  padding: 50px;
+  height: 50vh;
+  background-size: cover;
+}
+
+.final {
+  height: 100px;
+}
+
+.final span {
+  line-height: 100px;
+  text-align: center;
 }
