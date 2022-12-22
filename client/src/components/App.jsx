@@ -7,7 +7,6 @@ import Navbar from './Navbar.jsx';
 import PostList from './PostList.jsx';
 import Info from './Info.jsx';
 import './styles/App.css';
-import './styles/Scroller.css';
 // import axios from 'axios';
 // import { ThemeProvider } from 'styled-components';
 

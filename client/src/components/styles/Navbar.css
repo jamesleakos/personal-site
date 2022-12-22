@@ -1,8 +1,10 @@
+@import './constants.css';
+
 .navbar {
   margin: 0;
   background-color: white;
   color: black;
-  height: 100px;
+  height: var(--nav-bar-height);
   border: 1px solid gray;
   position: sticky;
   top: 0;
