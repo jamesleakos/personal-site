@@ -1,15 +1,53 @@
+@import './constants.css';
+
 .info {
   background-color: white;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin: 50px 20px 100px 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .info {
+    grid-template-columns: 1fr;
+  }
 }
 
 .info-block {
-  margin: 40px 20px 100px 20px;
 }
 
 .info-block p {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-align: left;
-  line-height: 1.5em;
+  line-height: 1.3em;
+}
+
+.links-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  text-align: left;
+  margin-left: 50px;
+}
+
+@media screen and (max-width: 1400px) {
+  .links-block {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .links-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+.links-block p {
+  line-height: 1.3em;
+}
+
+.links-block .links-title {
+  font-size: 1rem;
+  font-family: var(--caption-font);
 }

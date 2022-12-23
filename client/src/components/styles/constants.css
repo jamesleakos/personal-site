@@ -1,3 +1,6 @@
 :root {
   --nav-bar-height: 100px;
+  --main-title-font: 'Abril Fatface', cursive;
+  --body-text-font: 'Times New Roman', sans-serif;
+  --caption-font: 'Courier Prime', monospace;
 }

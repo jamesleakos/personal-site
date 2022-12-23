@@ -4,6 +4,7 @@ html,
 body {
   cursor: none;
   margin: 0;
+  font-family: var(--body-text-font);
 }
 
 html *,
@@ -26,4 +27,19 @@ body * {
   z-index: 1;
   position: relative;
   background-color: white;
+}
+
+.reacting-link {
+  display: block;
+  transition: 0.5s ease;
+}
+.reacting-link:hover {
+  color: red;
+  -webkit-transform: scale(1.05);
+}
+
+a {
+  color: black;
+  font-weight: 400;
+  text-decoration: none;
 }

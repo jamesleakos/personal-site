@@ -121,7 +121,7 @@ function AnimatedCursor({
 
   React.useEffect(() => {
     const clickables = document.querySelectorAll(
-      'a, input[type="submit"], input[type="image"], label[for], select, button, .link, .clickable'
+      'a, input[type="submit"], input[type="image"], label[for], select, button, .link, .links-item'
     )
     clickables.forEach((el) => {
       el.style.cursor = 'none'
