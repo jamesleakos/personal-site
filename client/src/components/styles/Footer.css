@@ -23,7 +23,11 @@
   height: 100px;
 }
 
-.final span {
-  line-height: 100px;
+.final .reacting-link {
   text-align: center;
+  display: inline-block;
+  margin: 40px 10px 40px 10px
+}
+.final .reacting-link:hover {
+  -webkit-transform: scale(1.2);
 }

@@ -68,6 +68,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 client/dist/*bundle.js
+*bundle.js.map
 client/dist/client*
 client/dist/vendors*
 

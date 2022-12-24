@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './styles/Footer.css';
 
 function Footer() {
@@ -8,7 +9,9 @@ function Footer() {
       <div className='footer-img'>
       </div>
       <div className='final'>
-        <span>c James Leakos</span>
+        <FontAwesomeIcon className='reacting-link link' icon={['fab', 'instagram']} />
+        <FontAwesomeIcon className='reacting-link link' icon={['fab', 'linkedin']} />
+        <FontAwesomeIcon className='reacting-link link' icon={['fab', 'github']} />
       </div>
     </div>
   )

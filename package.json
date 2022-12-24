@@ -1,7 +1,7 @@
 {
-  "name": "sunny-side-up",
+  "name": "james-leakos-site",
   "version": "1.0.0",
-  "description": "Sunny Side Up",
+  "description": "James Leakos personal website",
   "main": "index.jsx",
   "scripts": {
     "build": "cross-env NODE_ENV=development webpack --config webpack.config.js",
@@ -59,9 +59,11 @@
     "file-loader": "^6.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.6.1",
     "react-scripts": "^5.0.1",
     "react-select": "^5.7.0",
     "react-share": "^4.4.1",
+    "source-map-loader": "^4.0.1",
     "style-loader": "^3.3.1",
     "styled-components": "^5.3.6",
     "url-loader": "^4.1.1"

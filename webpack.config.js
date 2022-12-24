@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+const { SourceMapDevToolPlugin } = require('webpack');
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
@@ -29,6 +29,16 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      },
     ],
   },
+  plugins: [
+    new SourceMapDevToolPlugin({
+      filename: "[file].map"
+    }),
+  ],
 };
