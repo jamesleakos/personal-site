@@ -1,5 +1,7 @@
+@import './constants.css';
+
 .post-list {
-  background-color: #121212;
+  background-color: var(--background-color-dark-main);
   height: 500px;
 }
 

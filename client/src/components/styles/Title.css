@@ -1,7 +1,9 @@
+@import './constants.css';
+
 .title h1 {
   /* font-family: 'Courier Prime', monospace; */
   font-size: 7rem;
-  color: white;
+  color: #E6E0D1;
   margin: 0;
   padding: 50px;
 }

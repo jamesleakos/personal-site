@@ -5,6 +5,7 @@ body {
   cursor: none;
   margin: 0;
   font-family: var(--body-text-font);
+  background-color: #FFF9E9;
 }
 
 html *,
@@ -26,11 +27,11 @@ body * {
   margin: 0;
   z-index: 1;
   position: relative;
-  background-color: white;
+  background-color: var(--background-color-light-main);
 }
 
 .reacting-link {
-  display: block;
+  display: grid;
   transition: 0.5s ease;
 }
 .reacting-link:hover {

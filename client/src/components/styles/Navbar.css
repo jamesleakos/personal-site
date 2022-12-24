@@ -2,10 +2,26 @@
 
 .navbar {
   margin: 0;
-  background-color: white;
+  background-color: var(--background-color-light-main);
   color: black;
   height: var(--nav-bar-height);
   border: 1px solid gray;
   position: sticky;
   top: 0;
+  display: grid;
+  grid-template-columns: 50px 100px 100px 1fr 100px 100px 50px;
+}
+
+.navbar .navbar-item {
+  border: solid gray;
+  border-width: 0 1px;
+  text-align: center;
+  line-height: var(--nav-bar-height);
+}
+
+.navbar-title h3 {
+  font-family: var(--main-title-font);
+  text-align: center;
+  line-height: var(--nav-bar-height);
+  margin: 0;
 }
