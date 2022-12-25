@@ -9,3 +9,7 @@
   min-height: 2rem;
   resize: vertical;
 }
+
+.main-title .reacting-link:hover {
+  -webkit-transform: scale(1.1);
+}
