@@ -1,0 +1,12 @@
+.selector-container {
+  height: 40px;
+}
+
+.selector-container .reacting-link {
+  text-align: center;
+  display: inline-block;
+  margin: 20px 10px;
+}
+.selector-container .reacting-link:hover {
+  -webkit-transform: scale(1.2);
+}

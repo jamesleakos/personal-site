@@ -15,9 +15,12 @@ import PostBuilder from '../pages/PostBuilder.jsx';
 import './styles/App.css';
 
 // font awesome import
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-library.add(fab)
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faImage, faImages, faBook, faBookOpen, faSection, faFont, faQuoteLeft, faClosedCaptioning, faImagePortrait } from '@fortawesome/free-solid-svg-icons';
+// import { farBook } from '@fortawesome/free-regular-svg-icons';
+
+library.add(fab, faImage, faImages, faBook, faBookOpen, faSection, faFont, faQuoteLeft, faClosedCaptioning, faImagePortrait);
 
 const router = createBrowserRouter([
   {
@@ -36,10 +39,6 @@ const router = createBrowserRouter([
 
 // App
 function App() {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [router])
-
   return (
     <div className='App'>
       <AnimatedCursor/>

@@ -6,6 +6,10 @@ import PostList from '../components/PostList.jsx';
 import Info from '../components/Info.jsx';
 
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
   const [opacity, setOpacity] = useState(1);
 
   let scrollDiv = React.useRef(null);

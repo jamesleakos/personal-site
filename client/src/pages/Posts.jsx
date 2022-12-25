@@ -5,7 +5,6 @@ import PostList from '../components/PostList.jsx';
 import Info from '../components/Info.jsx';
 
 function Posts() {
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
