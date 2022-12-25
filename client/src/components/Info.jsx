@@ -7,7 +7,7 @@ function Info() {
   return (
     <div className='info'>
       <div className='info-block'>
-        <p>James Leakos is a software engineer and former professional runner living in Flagstaff, AZ and San Fransisco, CA. He is a member of the Coconino County Search and Rescue team, and enjoys backcountry skiing, mountain biking, and flying planes. He has released one video game, and has another on the way.</p>
+        <p>James Leakos is a software engineer and former professional runner living in Flagstaff, AZ and San Francisco, CA. He is a member of the Coconino County Search and Rescue team and enjoys backcountry skiing, mountain biking, and flying planes. He has released one video game, and has another on the way.</p>
         <br /><br />
       </div>
       <div className='links-block'>

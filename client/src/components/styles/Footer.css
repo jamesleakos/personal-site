@@ -13,9 +13,18 @@
 }
 
 .footer-img {
-  background-image: url('../../images/sam_in_sask.JPG');
   margin: 0;
+
+  /* set image */
+  background-image: url('../../images/sam_in_sask.JPG');
+
+  /* set height */
   height: 50vh;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
 }
 

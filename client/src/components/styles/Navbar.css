@@ -19,18 +19,30 @@
   line-height: var(--nav-bar-height);
 }
 
-.navbar-title h3 {
+.navbar-title .reacting-link {
   font-family: var(--main-title-font);
   text-align: center;
   line-height: var(--nav-bar-height);
+  font-size: 2rem;
+  font-weight: bold;
   margin: 0;
 }
 
+.navbar-title {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.navbar-title.slide-enter-active {
+  opacity: 1;
+}
+
 .slide-enter {
-  transform: translateX(-100%);
+  transform: translateY(-100%);
 }
 
 .slide-enter-active {
-  transform: translateX(0);
-  transition: transform 300ms;
+  transform: translateY(0);
+  transition: transform 600ms;
 }
+
