@@ -1,8 +1,18 @@
 :root {
-  --nav-bar-height: 70px;
+  /* fonts */
   --main-title-font: 'Abril Fatface', cursive;
   --body-text-font: 'Times New Roman', sans-serif;
   --caption-font: 'Courier Prime', monospace;
+
+  /* colours */
+  /* background colours */
   --background-color-light-main: #FFF9E9;
   --background-color-dark-main: #403E3A;
+
+  /* post width */
+  --post-width: 60%;
+
+  /* component specific */
+  /* navbar */
+  --nav-bar-height: 70px;
 }

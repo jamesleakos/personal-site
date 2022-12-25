@@ -1,0 +1,11 @@
+@import '../../components/styles/constants.css';
+
+.main-title {
+  margin: 20px;
+}
+
+.main-title textarea {
+  width: var(--post-width);
+  min-height: 2rem;
+  resize: vertical;
+}
