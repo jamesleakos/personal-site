@@ -25,3 +25,12 @@
   line-height: var(--nav-bar-height);
   margin: 0;
 }
+
+.slide-enter {
+  transform: translateX(-100%);
+}
+
+.slide-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms;
+}
