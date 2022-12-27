@@ -1,9 +1,15 @@
 import React, { useRef } from 'react';
 
-function TextAreaExpander() {
+function TextAreaExpander({ value, setText }) {
   const textareaRef = useRef(null);
 
-  const handleExpand = () => {
+  const onEnterText = (text) => {
+    console.log(text); 
+    
+    // first lets pass the changed text back up
+    setText(text);
+
+    // then we'll see if we need to expand the box
     // Get the number of lines in the textarea
     const lines = textareaRef.current.value.split('\n').length;
 
@@ -12,7 +18,7 @@ function TextAreaExpander() {
   };
 
   return (
-    <textarea ref={textareaRef} onChange={handleExpand} />
+    <textarea ref={textareaRef} value={value} onChange={(e) => { onEnterText(e.target.value); }} />
   );
 }
 

@@ -23,11 +23,12 @@ function useEventListener(eventName, handler, element = document) {
 
 function AnimatedCursor({
   color = '40, 40, 40',
-  outerAlpha = 0.4,
+  outerAlpha = 0.15,
   innerSize = 8,
-  outerSize = 8,
-  outerScale = 10,
-  innerScale = 0.7
+  outerSize = 16,
+  outerScale = 4,
+  innerScale = 0.7,
+  outerCoordAdjust = 4
 }) {
   const cursorOuterRef = React.useRef()
   const cursorInnerRef = React.useRef()
@@ -53,8 +54,8 @@ function AnimatedCursor({
       if (previousTimeRef.current !== undefined) {
         coords.x += (endX.current - coords.x) / 8
         coords.y += (endY.current - coords.y) / 8
-        cursorOuterRef.current.style.top = coords.y + 'px'
-        cursorOuterRef.current.style.left = coords.x + 'px'
+        cursorOuterRef.current.style.top = (coords.y - outerCoordAdjust) + 'px'
+        cursorOuterRef.current.style.left = (coords.x - outerCoordAdjust) + 'px'
       }
       previousTimeRef.current = time
       requestRef.current = requestAnimationFrame(animateOuterCursor)

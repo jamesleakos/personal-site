@@ -1,0 +1,57 @@
+@import '../../components/styles/constants.css';
+
+/* shared CSS */
+
+.text-comp {
+  display: inline-block;
+  width: var(--post-width);
+}
+.text-comp textarea {
+  min-height: 4rem;
+  resize: vertical;
+  width: 100%;
+}
+.editing {
+  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--background-color-dark-main);
+}
+.left-icons {
+  float: left;
+  display: block;
+}
+.left-icons .reacting-link {
+  display: inline-block;
+  margin: 0 5px;
+}
+.right-icons {
+  float: right;
+  display: block;
+}
+.text-comp .reacting-link:hover {
+  -webkit-transform: scale(1.2);
+}
+
+/* individual CSS */
+
+.main-title {
+  font-family: var(--main-title-font);
+  text-align: center;
+  font-size: 3rem;
+  margin: 40px 0 20px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0 0 40px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--background-color-dark-main);
+}
+
+.body-text {
+  text-align: left;
+  font-size: 1rem;
+}

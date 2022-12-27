@@ -78,3 +78,6 @@ client/dist/vendors*
 
 #jest coverage
 coverage/
+
+# more
+client/src/images/

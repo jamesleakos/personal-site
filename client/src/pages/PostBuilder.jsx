@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import AddComponentSelector from '../builder-components/AddComponentSelector.jsx';
-import MainTitleComp from '../builder-components/MainTitleComp.jsx';
-import SubtitleComp from '../builder-components/SubtitleComp.jsx';
-import SectionTitleComp from '../builder-components/SectionTitleComp.jsx';
-import BodyTextComp from '../builder-components/BodyTextComp.jsx';
-import QuoteComp from '../builder-components/QuoteComp.jsx';
+import TextComp from '../builder-components/TextComp.jsx';
 import PhotoComp from '../builder-components/PhotoComp.jsx';
 import PhotoGalleryComp from '../builder-components/PhotoGalleryComp.jsx';
 import BackgroundPhotoComp from '../builder-components/BackgroundPhotoComp.jsx';
-import CaptionComp from '../builder-components/CaptionComp.jsx';
 
 function PostBuilder() {
   useEffect(() => {
@@ -18,27 +13,38 @@ function PostBuilder() {
 
   // here we will store all the stuff that we're adding - no need to write to the db yet
   const [components, setComponents] = useState([]);
+  
+  const modifyComponent = (id, obj) => {
+    const newComponents = [...components];
+    const index = newComponents.findIndex(comp => comp.id === id); // find the index of the item with the specified id
+    newComponents[index] = obj; // update the item at that index by adding a new property
+    setComponents(newComponents); // update the state with the new array
+  }
+
+  const deleteComponent = (id) => {
+    const newComponents = [...components];
+    const index = newComponents.findIndex(comp => comp.id === id); // find the index of the item with the specified id
+    newComponents.splice(index, 1);
+    const out = newComponents.map((comp, index) => {
+      comp.id = index;
+      return comp;
+    });
+    setComponents(out); // update the state with the new array
+  }
 
   const addComponent = function(componentName) {
     const comp = {
+      id: components.length,
       type: componentName
     }
     switch (componentName) {
       case 'main-title':
-        comp.text = '';
-        break;
-      case 'sub-title':
-        comp.text = '';
-        break;
+      case 'subtitle':
       case 'section-title':
-        comp.text = '';
-        break;
       case 'body-text':
-        comp.text = '';
-        break;
       case 'quote':
+      case 'caption':
         comp.text = '';
-        break;
       case 'photo':
         comp.url = '';
         break;
@@ -47,9 +53,6 @@ function PostBuilder() {
         break;
       case 'background-photo':
         comp.url = '';
-        break;
-      case 'caption':
-        comp.text = '';
         break;
       default:
         break;
@@ -64,23 +67,18 @@ function PostBuilder() {
         components.map((component, index) => {
           switch (component.type) {
             case 'main-title':
-              return <MainTitleComp key={component.type + index} component={component}/>
-            case 'sub-title':
-              return <SubtitleComp key={component.type + index} component={component}/>
+            case 'subtitle':
             case 'section-title':
-              return <SectionTitleComp key={component.type + index} component={component}/>
             case 'body-text':
-              return <BodyTextComp key={component.type + index} component={component}/>
             case 'quote':
-              return <QuoteComp key={component.type + index} component={component}/>
-            case 'photo':
-              return <PhotoComp key={component.type + index} component={component}/>
-            case 'photo-gallery':
-              return <PhotoGalleryComp key={component.type + index} component={component}/>
-            case 'background-photo':
-              return <BackgroundPhotoComp key={component.type + index} component={component}/>
             case 'caption':
-              return <CaptionComp key={component.type + index} component={component}/>
+              return <TextComp key={component.type + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} />
+            case 'photo':
+              return <PhotoComp key={component.type + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} />
+            case 'photo-gallery':
+              return <PhotoGalleryComp key={component.type + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} />
+            case 'background-photo':
+              return <BackgroundPhotoComp key={component.type + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} />
             default:
               break;
           }
