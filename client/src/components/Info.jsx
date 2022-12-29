@@ -18,9 +18,6 @@ function Info() {
           <p className='links-title'>INFO</p>
           <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Resume</a>
           <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Contact</a>
-          <p className='links-item reacting-link' onClick={ addPost } >Add Post</p>
-          <p className='links-item reacting-link' onClick={ addComponent } >Add Component</p>
-          <p className='links-item reacting-link' onClick={ getPosts } >Get Posts</p>
           <br />
         </div>
         <div>

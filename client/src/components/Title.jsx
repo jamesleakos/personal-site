@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/Title.css';
 
-function TitleImage() {
+function Title() {
 
   return (
     <div className='title'>
@@ -10,4 +10,4 @@ function TitleImage() {
   )
 }
 
-export default TitleImage;
+export default Title;

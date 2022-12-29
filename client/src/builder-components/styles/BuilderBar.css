@@ -1,0 +1,23 @@
+@import '../../components/styles/constants.css';
+
+:root {
+  --builder-bar-height: 50px;
+}
+
+.builder-bar {
+  margin: 0;
+  background-color: var(--background-color-mid-main);
+  color: black;
+  height: var(--builder-bar-height);
+  border: 1px solid gray;
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-columns: 30% 1fr 1fr 1fr 1fr 30%;
+}
+
+.builder-bar-item .expand-cursor {
+  display: inline-block;
+  text-align: center;
+  line-height: var(--builder-bar-height);
+}

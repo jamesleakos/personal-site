@@ -7,6 +7,7 @@ import axios from 'axios';
 import Navbar from '../components/Navbar.jsx';
 import PostList from '../components/PostList.jsx';
 import AddComponentSelector from '../builder-components/AddComponentSelector.jsx';
+import BuilderBar from '../builder-components/BuilderBar.jsx';
 import TextComp from '../builder-components/TextComp.jsx';
 import PhotoComp from '../builder-components/PhotoComp.jsx';
 import PhotoGalleryComp from '../builder-components/PhotoGalleryComp.jsx';
@@ -83,6 +84,7 @@ function PostBuilder({ passedPost }) {
   return (
     <div className='post-builder'>
       <Navbar />
+      <BuilderBar />
       {
         !passedPost 
           ? 
