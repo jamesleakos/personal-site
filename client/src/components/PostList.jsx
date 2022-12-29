@@ -1,11 +1,31 @@
-import React from 'react';
+// dependancies
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+// import
 import './styles/PostList.css';
 
 function PostList() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get('/posts')
+    .then(res => {
+      console.log(res.data);
+      setPosts(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  })
 
   return (
     <div className='post-list'>
-      <h1>PostList</h1>
+      {
+        posts.map(post => {
+          
+        })
+      }
     </div>
   )
 }

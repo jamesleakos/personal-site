@@ -1,8 +1,41 @@
+// dependancies
 import React from 'react';
-import './styles/Info.css';
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+
+// imports
+import './styles/Info.css';
 
 function Info() {
+  const addPost = function() {
+    const today = new Date();
+    axios.post('/posts', {
+      created_at: today.toISOString(),
+      published: false,
+      published_at: null,
+      featured: false
+    })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  const addComponent = function() {
+    console.log('addComponent');
+  }
+
+  const getPosts = function() {
+    axios.get('/posts')
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   return (
     <div className='info'>
@@ -15,6 +48,9 @@ function Info() {
           <p className='links-title'>INFO</p>
           <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Resume</a>
           <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Contact</a>
+          <p className='links-item reacting-link' onClick={ addPost } >Add Post</p>
+          <p className='links-item reacting-link' onClick={ addComponent } >Add Component</p>
+          <p className='links-item reacting-link' onClick={ getPosts } >Get Posts</p>
           <br />
         </div>
         <div>
