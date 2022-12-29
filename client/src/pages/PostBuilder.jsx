@@ -34,7 +34,7 @@ function PostBuilder({ passedPost }) {
   const [components, setComponents] = useState([]);
 
   const getComponents = () => {
-
+    
   }
   
   const modifyComponent = (id, obj) => {
@@ -86,7 +86,7 @@ function PostBuilder({ passedPost }) {
       <Navbar />
       <BuilderBar />
       {
-        !passedPost 
+        !post 
           ? 
           <PostList onTileClickPostBuilder={setPost} />
           : null
@@ -113,7 +113,7 @@ function PostBuilder({ passedPost }) {
         })
       }
       {
-        !!passedPost
+        !!post
           ?
           <AddComponentSelector addComponent={addComponent} />
           : null

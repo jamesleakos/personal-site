@@ -1,3 +1,8 @@
+Next - we are here:
+- get components in post builder
+- make routes for component stuff
+- rename all posts to post info and make sure nothing is relying on post.components
+
 Post Builder
 - top options
   - open modal window for setting title, blurb, cover photo, tags

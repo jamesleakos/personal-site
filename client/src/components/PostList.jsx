@@ -23,7 +23,8 @@ function PostList({ onTileClickPostBuilder }) {
 
   const handleTileClick = function(post) {
     // check if we're in post-builder 
-    if (useLocation().pathname === '/post-builder') {
+    if (onTileClickPostBuilder) {
+      console.log('clicked?');
       onTileClickPostBuilder(post);
     } else {
       // go to post-builder with argument post
