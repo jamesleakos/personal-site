@@ -7,36 +7,6 @@ import axios from 'axios'
 import './styles/Info.css';
 
 function Info() {
-  const addPost = function() {
-    const today = new Date();
-    axios.post('/posts', {
-      created_at: today.toISOString(),
-      published: false,
-      published_at: null,
-      featured: false
-    })
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
-  const addComponent = function() {
-    console.log('addComponent');
-  }
-
-  const getPosts = function() {
-    axios.get('/posts')
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
   return (
     <div className='info'>
       <div className='info-block'>

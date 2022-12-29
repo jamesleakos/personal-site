@@ -1,8 +1,10 @@
 @import './constants.css';
 
 .post-list {
-  background-color: var(--background-color-dark-main);
+  background-color: var(--background-color-light-secondary);
   height: 500px;
+  /* overflow-y: hidden; */
+  overflow-x: scroll;
 }
 
 .post-list h1 {

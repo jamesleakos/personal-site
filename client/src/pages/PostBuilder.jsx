@@ -1,18 +1,40 @@
+// dependancies
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// import { Link, useLocation } from 'react-router-dom'
+
+// components
 import Navbar from '../components/Navbar.jsx';
+import PostList from '../components/PostList.jsx';
 import AddComponentSelector from '../builder-components/AddComponentSelector.jsx';
 import TextComp from '../builder-components/TextComp.jsx';
 import PhotoComp from '../builder-components/PhotoComp.jsx';
 import PhotoGalleryComp from '../builder-components/PhotoGalleryComp.jsx';
 import BackgroundPhotoComp from '../builder-components/BackgroundPhotoComp.jsx';
 
-function PostBuilder() {
+function PostBuilder({ passedPost }) {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  // here we will store all the stuff that we're adding - no need to write to the db yet
+  // setting post
+  const [post, setPost] = useState(null);
+  useEffect(() => {
+    if (!passedPost) return;
+    setPost(passedPost);
+  }, [])
+
+  useEffect(() => {
+    if (!post) return;
+    setComponents(post.components);
+  }, [post])
+
+  // dealing with components
   const [components, setComponents] = useState([]);
+
+  const getComponents = () => {
+
+  }
   
   const modifyComponent = (id, obj) => {
     const newComponents = [...components];
@@ -20,7 +42,6 @@ function PostBuilder() {
     newComponents[index] = obj; // update the item at that index by adding a new property
     setComponents(newComponents); // update the state with the new array
   }
-
   const deleteComponent = (id) => {
     const newComponents = [...components];
     const index = newComponents.findIndex(comp => comp.id === id); // find the index of the item with the specified id
@@ -31,7 +52,6 @@ function PostBuilder() {
     });
     setComponents(out); // update the state with the new array
   }
-
   const addComponent = function(componentName) {
     const comp = {
       id: components.length,
@@ -64,6 +84,12 @@ function PostBuilder() {
     <div className='post-builder'>
       <Navbar />
       {
+        !passedPost 
+          ? 
+          <PostList onTileClickPostBuilder={setPost} />
+          : null
+      }
+      {
         components.map((component, index) => {
           switch (component.type) {
             case 'main-title':
@@ -84,7 +110,12 @@ function PostBuilder() {
           }
         })
       }
-      <AddComponentSelector addComponent={addComponent} />
+      {
+        !!passedPost
+          ?
+          <AddComponentSelector addComponent={addComponent} />
+          : null
+      }
     </div>
   )
 }

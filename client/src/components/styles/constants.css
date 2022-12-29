@@ -7,7 +7,10 @@
   /* colours */
   /* background colours */
   --background-color-light-main: #FFF9E9;
+  --background-color-light-secondary: #E6E0D1;
+  --background-color-mid-main: #BFBBAE;
   --background-color-dark-main: #403E3A;
+  --background-color-dark-secondary: #807C74;
 
   /* post width */
   --post-width: 60%;

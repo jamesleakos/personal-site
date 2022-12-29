@@ -22,7 +22,10 @@ const ImageComponent = Component.discriminator('ImageComponent', imageSchema, op
 
 const postSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  // display info
   title: String,
+  description: String,
+  tags: [String],
   display_image_url: String,
 
   // other info

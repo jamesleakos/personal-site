@@ -35,13 +35,17 @@ const upload = multer({ storage });
 // sending static
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// getting posts from mongo 
+// post and component routes for mongo
 app.get('/posts', function(req, res) {
   controllers.getAllPosts(req, res);
 })
 
-app.get('/posts/:post_id', function(req, res) {
-  console.log('get post with id')
+app.get('/posts/info', function(req, res) {
+  controllers.getPostsInfo(req, res);
+})
+
+app.get('/components/:post_id', function(req, res) {
+  controllers.getComponents(req, res);
 })
 
 app.post('/posts', function(req, res) {
@@ -50,7 +54,7 @@ app.post('/posts', function(req, res) {
 })
 
 app.put('/posts/:post_id', function(req, res) {
-  console.log('put post with id');
+  controllers.updatePost(req, res);
 })
 
 // upload routes

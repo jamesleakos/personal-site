@@ -15,6 +15,9 @@ exports.getAllPosts = (req, res) => {
 exports.addPost = (req, res) => {
   Post.create({
     _id: new mongoose.Types.ObjectId(),
+    title: req.body.title,
+    description: req.body.description,
+    tags: req.body.tags,
     created_at: req.body.created_at,
     published: req.body.published,
     published_at: req.body.published_at,
