@@ -33,7 +33,7 @@ body * {
   transition: 0.5s ease;
 }
 .clickable:hover {
-  color: red;
+  color: var(--text-accent);
   -webkit-transform: scale(1.2);
 }
 

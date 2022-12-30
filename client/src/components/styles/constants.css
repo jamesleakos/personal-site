@@ -6,11 +6,15 @@
 
   /* colours */
   /* background colours */
-  --background-color-light-main: #FFF9E9;
-  --background-color-light-secondary: #E6E0D1;
-  --background-color-mid-main: #BFBBAE;
-  --background-color-dark-main: #403E3A;
-  --background-color-dark-secondary: #807C74;
+  /* --text-accent: #A1000E; */
+  --text-accent: green;
+  --bright-red: red;
+
+  --background-color-light-main: #FFFFF8;
+  --background-color-light-secondary: #E6E6DF;
+  --background-color-mid-main: #B3B3AD;
+  --background-color-dark-main: #40403E;
+  --background-color-dark-secondary: #787874;
 
   /* post width */
   --post-width: 60%;

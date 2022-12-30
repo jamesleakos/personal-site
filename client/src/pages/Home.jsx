@@ -34,7 +34,7 @@ function Home() {
       overlap = Math.max((scrollDivRect.top / titleDivRect.bottom), 0);
     }
     // set the fixed div's opacity based on the percentage of overlap
-    setOpacity(overlap);
+    // setOpacity(overlap);
   }
 
   return (

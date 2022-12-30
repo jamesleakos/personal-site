@@ -11,7 +11,7 @@
   height: var(--builder-bar-height);
   border: 1px solid gray;
   position: sticky;
-  top: 0;
+  top: var(--nav-bar-height);
   display: grid;
   grid-template-columns: 30% 1fr 1fr 1fr 1fr 30%;
 }
