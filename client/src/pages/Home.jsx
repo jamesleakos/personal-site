@@ -44,7 +44,7 @@ function Home() {
       </div>
       <div className='scroll-div' ref={scrollDiv}>
         <Navbar />
-        <PostList />
+        <PostList showAddNew={false} />
         <Info />
         <Footer />
       </div>

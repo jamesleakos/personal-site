@@ -26,7 +26,7 @@ function Info() {
           <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Running</a>
           <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>History</a>
           <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Art</a>
-          <Link className='links-item reacting-link' to="/posts">Posts</Link>
+          <Link className='links-item reacting-link' to="/all-posts">Posts</Link>
           <br />
         </div>
         <div>

@@ -3,9 +3,13 @@ import TextAreaExpander from './TextAreaExpander.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles/TextComp.css';
 
-function TextComp({ component, modifyComponent, deleteComponent }) {
+function TextComp({ component, modifyComponent, deleteComponent, openOnEdit }) {
+  useEffect(() => {
+    console.log(component);
+  }, []);
+  
   const [text, setText] = useState(component.text);
-  const [editActive, setEditActive] = useState(true);
+  const [editActive, setEditActive] = useState(openOnEdit);
 
   const endEdit = function() {
     component.text = text;

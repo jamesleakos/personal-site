@@ -3,4 +3,16 @@
 .post-list {
   background-color: var(--background-color-light-secondary);
   height: 500px;
+  overflow-x: scroll;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.post-list .wrapper {
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
 }

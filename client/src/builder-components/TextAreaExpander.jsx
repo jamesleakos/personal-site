@@ -3,9 +3,7 @@ import React, { useRef } from 'react';
 function TextAreaExpander({ value, setText }) {
   const textareaRef = useRef(null);
 
-  const onEnterText = (text) => {
-    console.log(text); 
-    
+  const onEnterText = (text) => {   
     // first lets pass the changed text back up
     setText(text);
 

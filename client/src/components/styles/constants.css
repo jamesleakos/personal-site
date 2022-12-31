@@ -5,10 +5,7 @@
   --caption-font: 'Courier Prime', monospace;
 
   /* colours */
-  /* background colours */
-  /* --text-accent: #A1000E; */
-  --text-accent: green;
-  --bright-red: red;
+  --text-accent: red;
 
   --background-color-light-main: #FFFFF8;
   --background-color-light-secondary: #E6E6DF;

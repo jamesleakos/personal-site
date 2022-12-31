@@ -2,7 +2,6 @@
 
 .info {
   display: grid;
-  background-color: var(--background-color-light-main);
   grid-template-columns: 1fr 1fr;
   margin: 50px 20px 100px 50px;
   font-size: 1.2rem;

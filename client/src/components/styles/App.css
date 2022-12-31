@@ -5,7 +5,7 @@ body {
   cursor: none;
   margin: 0;
   font-family: var(--body-text-font);
-  background-color: #FFF9E9;
+  background-color: var(--background-color-light-main);
 }
 
 html *,
@@ -36,7 +36,7 @@ body * {
   transition: 0.5s ease;
 }
 .reacting-link:hover {
-  color: var(--bright-red);
+  color: var(--text-accent);
   -webkit-transform: scale(1.05);
 }
 

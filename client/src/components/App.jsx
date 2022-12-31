@@ -12,6 +12,7 @@ import AnimatedCursor from '../../helpers/animated_cursor.js';
 import Home from '../pages/Home.jsx';
 import Posts from '../pages/Posts.jsx';
 import PostBuilder from '../pages/PostBuilder.jsx';
+import Admin from '../pages/Admin.jsx';
 import './styles/App.css';
 
 // font awesome import
@@ -24,16 +25,20 @@ library.add(fab, faImage, faImages, faBook, faBookOpen, faSection, faFont, faQuo
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Home />,
   },
   {
-    path: "/posts",
+    path: '/all-posts',
     element: <Posts />,
   },
   {
-    path: "/post-builder",
+    path: '/post-builder',
     element: <PostBuilder />,
+  },
+  {
+    path: '/admin',
+    element: <Admin />,
   },
 ]);
 

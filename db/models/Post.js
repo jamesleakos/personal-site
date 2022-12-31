@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 options = { discriminatorKey: 'kind' }
 // components are what make up a post
 const componentSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  // _id: mongoose.Schema.Types.ObjectId,
   type: String,
 }, options)
 
@@ -21,7 +21,7 @@ const imageSchema = new mongoose.Schema({
 const ImageComponent = Component.discriminator('ImageComponent', imageSchema, options);
 
 const postSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  // _id: mongoose.Schema.Types.ObjectId,
   // display info
   title: String,
   description: String,
@@ -41,5 +41,6 @@ const Post = mongoose.model('Post', postSchema);
 module.exports = {
   Post,
   TextComponent,
-  ImageComponent
+  ImageComponent,
+  Component
 };

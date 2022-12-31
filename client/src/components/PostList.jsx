@@ -7,13 +7,12 @@ import { Link, useLocation } from 'react-router-dom'
 import PostTile from './PostTile.jsx';
 import './styles/PostList.css';
 
-function PostList({ onTileClickPostBuilder }) {
+function PostList({ onTileClickPostBuilder, showAddNew }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('/posts')
+    axios.get('/posts/info')
     .then(res => {
-      console.log(res.data);
       setPosts(res.data);
     })
     .catch(err => {
@@ -24,8 +23,7 @@ function PostList({ onTileClickPostBuilder }) {
   const handleTileClick = function(post) {
     // check if we're in post-builder 
     if (onTileClickPostBuilder) {
-      console.log('clicked?');
-      onTileClickPostBuilder(post);
+      onTileClickPostBuilder(post._id);
     } else {
       // go to post-builder with argument post
     }
@@ -53,15 +51,20 @@ function PostList({ onTileClickPostBuilder }) {
 
   return (
     <div className='post-list'>
-      {
-        // map out the posts
-        posts.map(post => {
-          return <PostTile key={post._id} post={post} onClick={handleTileClick} />
-        })
-      }
-      {
-        <PostTile key='new-post' post={addPostObj} onClick={addPost} />
-      }
+      <div className='wrapper'>
+        {
+          // map out the posts
+          posts.map(post => {
+            return <PostTile key={post._id} post={post} onClick={handleTileClick} />
+          })
+        }
+        {
+          showAddNew
+            ?
+            <PostTile key='new-post' post={addPostObj} onClick={addPost} />
+            : null
+        }
+      </div>
     </div>
   )
 }

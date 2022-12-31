@@ -1,0 +1,37 @@
+@import '../../components/styles/constants.css';
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  background-color: rgba(0,0,0,0.75);
+  margin: 0;
+}
+
+.info-modal {
+  position: relative;
+  margin: auto;
+  padding: 20px;
+  background-color: var(--background-color-mid-main);
+  text-align: left;
+}
+
+.info-modal .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.info-modal label {
+  display: block;
+}
+
+.info-modal textarea {
+  min-height: 4rem;
+  resize: vertical;
+  width: 100%;
+}

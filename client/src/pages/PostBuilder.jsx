@@ -8,54 +8,67 @@ import Navbar from '../components/Navbar.jsx';
 import PostList from '../components/PostList.jsx';
 import AddComponentSelector from '../builder-components/AddComponentSelector.jsx';
 import BuilderBar from '../builder-components/BuilderBar.jsx';
+import InfoModal from '../builder-components/InfoModal.jsx';
 import TextComp from '../builder-components/TextComp.jsx';
 import PhotoComp from '../builder-components/PhotoComp.jsx';
 import PhotoGalleryComp from '../builder-components/PhotoGalleryComp.jsx';
 import BackgroundPhotoComp from '../builder-components/BackgroundPhotoComp.jsx';
 
 function PostBuilder({ passedPost }) {
+  // starting effects
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // scroll to the top
+    window.scrollTo(0, 0);
+
+    // at the start, if we were given a post (not likely to include components) we fetch the full post
+    if (!passedPost) return;
+    getFullPost(passedPost._id);
   }, [])
 
   // setting post
-  const [post, setPost] = useState(null);
-  useEffect(() => {
-    if (!passedPost) return;
-    setPost(passedPost);
-  }, [])
+  const [post, setPost] = useState({
+    components: []
+  });
 
-  useEffect(() => {
-    if (!post) return;
-    setComponents(post.components);
-  }, [post])
+  const [showInfoModal, setShowInfoModal] = useState(false);
 
-  // dealing with components
-  const [components, setComponents] = useState([]);
-
-  const getComponents = () => {
-    
+  // POST API CALLS
+  const getFullPost = function(id) {
+    axios.get(`/posts/${id}`)
+      .then(res => {
+        setPost(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  const modifyPost = function (newPost) {
+    console.log('modify post');
+    axios.put(`/posts?post_id=${post._id}`, {
+      ...newPost
+    })
+      .then(res => {
+        setPost(res.data)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  const deletePost = function() {
+    axios.delete(`/posts?post_id=${post._id}`)
+      .then(() => {
+        setPost({
+          components: []
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
   
-  const modifyComponent = (id, obj) => {
-    const newComponents = [...components];
-    const index = newComponents.findIndex(comp => comp.id === id); // find the index of the item with the specified id
-    newComponents[index] = obj; // update the item at that index by adding a new property
-    setComponents(newComponents); // update the state with the new array
-  }
-  const deleteComponent = (id) => {
-    const newComponents = [...components];
-    const index = newComponents.findIndex(comp => comp.id === id); // find the index of the item with the specified id
-    newComponents.splice(index, 1);
-    const out = newComponents.map((comp, index) => {
-      comp.id = index;
-      return comp;
-    });
-    setComponents(out); // update the state with the new array
-  }
+  // COMPONENT API CALLS
   const addComponent = function(componentName) {
     const comp = {
-      id: components.length,
       type: componentName
     }
     switch (componentName) {
@@ -66,6 +79,7 @@ function PostBuilder({ passedPost }) {
       case 'quote':
       case 'caption':
         comp.text = '';
+        break;
       case 'photo':
         comp.url = '';
         break;
@@ -78,21 +92,50 @@ function PostBuilder({ passedPost }) {
       default:
         break;
     }
-    setComponents([...components, comp]);
+    comp.openOnEdit = true;
+    const p = { ...post };
+    p.components.push(comp);
+    setPost(p);
+  }
+  const modifyComponent = (component) => {
+    axios.put(`/components?post_id=${post._id}`,{
+      ...component
+    })
+      .then(res => {
+        setPost(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  const deleteComponent = (component) => {
+    axios.delete(`/components?post_id=${post._id}&component_id=${component._id}`)
+      .then(res => {
+        console.log(res.data);
+        setPost(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
   
   return (
     <div className='post-builder'>
       <Navbar />
-      <BuilderBar />
       {
-        !post 
-          ? 
-          <PostList onTileClickPostBuilder={setPost} />
+        post._id 
+          ?
+          <BuilderBar post={post} setShowInfoModal={setShowInfoModal} modifyPost={modifyPost} deletePost={deletePost} />
           : null
       }
       {
-        components.map((component, index) => {
+        !post._id 
+          ? 
+          <PostList onTileClickPostBuilder={getFullPost} showAddNew={true} />
+          : null
+      }
+      {
+        post.components.map((component, index) => {
           switch (component.type) {
             case 'main-title':
             case 'subtitle':
@@ -100,13 +143,13 @@ function PostBuilder({ passedPost }) {
             case 'body-text':
             case 'quote':
             case 'caption':
-              return <TextComp key={component.type + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} />
+              return <TextComp key={component._id + index + ''} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             case 'photo':
-              return <PhotoComp key={component.type + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} />
+              return <PhotoComp key={component._id + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             case 'photo-gallery':
-              return <PhotoGalleryComp key={component.type + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} />
+              return <PhotoGalleryComp key={component._id + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             case 'background-photo':
-              return <BackgroundPhotoComp key={component.type + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} />
+              return <BackgroundPhotoComp key={component._id + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             default:
               break;
           }
@@ -116,6 +159,12 @@ function PostBuilder({ passedPost }) {
         !!post
           ?
           <AddComponentSelector addComponent={addComponent} />
+          : null
+      }
+      {
+        showInfoModal
+          ?
+          <InfoModal post={post} modifyPost={modifyPost} setShowInfoModal={setShowInfoModal} />
           : null
       }
     </div>
