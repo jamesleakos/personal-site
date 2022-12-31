@@ -2,7 +2,8 @@
 
 .post-list {
   background-color: var(--background-color-light-secondary);
-  height: 500px;
+  height: var(--post-list-height);
+  width: 100%;
   overflow-x: scroll;
 
   display: flex;
@@ -11,7 +12,7 @@
   overflow: hidden;
 }
 
-.post-list .wrapper {
+.post-list .scroller {
   display: flex;
   /* justify-content: center;
   align-items: center; */

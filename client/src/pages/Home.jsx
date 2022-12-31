@@ -39,12 +39,13 @@ function Home() {
 
   return (
     <div className='home'>
+      <div></div>
       <div className='title-div' ref={titleDiv} style={{ opacity }}>
         <Title />
       </div>
       <div className='scroll-div' ref={scrollDiv}>
         <Navbar />
-        <PostList showAddNew={false} />
+        <PostList showAddNew={false} useWindowOffset={true} />
         <Info />
         <Footer />
       </div>

@@ -13,10 +13,13 @@
   --background-color-dark-main: #40403E;
   --background-color-dark-secondary: #787874;
 
-  /* post width */
-  --post-width: 60%;
-
   /* component specific */
   /* navbar */
   --nav-bar-height: 70px;
+
+  /* post width */
+  --post-width: 60%;
+
+  /* post list height */
+  --post-list-height: 500px;
 }

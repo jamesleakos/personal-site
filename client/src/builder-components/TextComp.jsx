@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TextAreaExpander from './TextAreaExpander.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles/TextComp.css';
+import '../viewer-components/styles/TextComp.css';
 
 function TextComp({ component, modifyComponent, deleteComponent, openOnEdit }) {
   useEffect(() => {
