@@ -1,7 +1,7 @@
 // dependancies
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-// import { Link, useLocation } from 'react-router-dom'
 
 // components
 import Navbar from '../components/Navbar.jsx';
@@ -14,7 +14,13 @@ import PhotoComp from '../builder-components/PhotoComp.jsx';
 import PhotoGalleryComp from '../builder-components/PhotoGalleryComp.jsx';
 import BackgroundPhotoComp from '../builder-components/BackgroundPhotoComp.jsx';
 
-function PostBuilder({ passedPost }) {
+function PostBuilder() {
+  const location = useLocation();
+  let passedPost = false;
+  if (location.state) {
+    passedPost = location.state.passedPost;
+  }
+
   // starting effects
   useEffect(() => {
     // scroll to the top
@@ -22,7 +28,7 @@ function PostBuilder({ passedPost }) {
 
     // at the start, if we were given a post (not likely to include components) we fetch the full post
     if (!passedPost) return;
-    getFullPost(passedPost._id);
+    getFullPost(passedPost);
   }, [])
 
   // setting post
@@ -33,8 +39,8 @@ function PostBuilder({ passedPost }) {
   const [showInfoModal, setShowInfoModal] = useState(false);
 
   // POST API CALLS
-  const getFullPost = function(id) {
-    axios.get(`/posts/${id}`)
+  const getFullPost = function(post) {
+    axios.get(`/posts/${post._id}`)
       .then(res => {
         setPost(res.data);
       })
@@ -43,7 +49,6 @@ function PostBuilder({ passedPost }) {
       })
   }
   const modifyPost = function (newPost) {
-    console.log('modify post');
     axios.put(`/posts?post_id=${post._id}`, {
       ...newPost
     })
@@ -131,7 +136,7 @@ function PostBuilder({ passedPost }) {
       {
         !post._id 
           ? 
-          <PostList onTileClickPostBuilder={getFullPost} showAddNew={true} />
+          <PostList onTileClick={getFullPost} showAddNew={true} useWindowOffset={false} />
           : null
       }
       {

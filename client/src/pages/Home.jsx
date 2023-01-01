@@ -1,4 +1,8 @@
+// dependancies
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// compos
 import Title from '../components/Title.jsx';
 import Footer from '../components/Footer.jsx';
 import Navbar from '../components/Navbar.jsx';
@@ -37,6 +41,18 @@ function Home() {
     // setOpacity(overlap);
   }
 
+  const navigate = useNavigate();
+  const loadPostViewer = function(post) {
+    navigate(
+      '/post-viewer',
+      {
+        state: {
+          passedPost: post
+        }
+      }
+    )
+  }
+
   return (
     <div className='home'>
       <div></div>
@@ -45,7 +61,7 @@ function Home() {
       </div>
       <div className='scroll-div' ref={scrollDiv}>
         <Navbar />
-        <PostList showAddNew={false} useWindowOffset={true} />
+        <PostList onTileClick={loadPostViewer} showAddNew={false} useWindowOffset={true} />
         <Info />
         <Footer />
       </div>

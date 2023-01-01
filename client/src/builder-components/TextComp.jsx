@@ -6,7 +6,7 @@ import '../viewer-components/styles/TextComp.css';
 
 function TextComp({ component, modifyComponent, deleteComponent, openOnEdit }) {
   useEffect(() => {
-    console.log(component);
+    // console.log(component);
   }, []);
   
   const [text, setText] = useState(component.text);

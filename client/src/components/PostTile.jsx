@@ -7,8 +7,8 @@ import './styles/PostTile.css';
 function PostTile({post, onClick}) {
 
   return (
-    <div className='post-tile' onClick={() => onClick(post)} >
-      <h3>{ post.title }</h3>
+    <div className='post-tile' >
+      <h3 className='links-item reacting-link' onClick={() => onClick(post)} >{ post.title }</h3>
       <p>{ post.description }</p>
     </div>
   )

@@ -12,26 +12,22 @@ function TitleText() {
 function NavbarTitle() {
   const [navbarStuck, setNavbarStuck] = useState(false);
   const [windowHasScrolled, setWindowHasScrolled] = useState(false);
-  const animateTitle = useLocation().pathname === '/' || useLocation().pathname === '/post-builder';
 
-  // we don't actually need the if statement here for functionality but no point doing extra work if we want it off?
-  if (animateTitle) {
-    useEffect(() => {
-      function handleScroll() {
-        const navbarElement = document.querySelector('.navbar');
-        const navbarRect = navbarElement.getBoundingClientRect();
-        setNavbarStuck(navbarRect.top <= 0);
+  useEffect(() => {
+    function handleScroll() {
+      const navbarElement = document.querySelector('.navbar');
+      const navbarRect = navbarElement.getBoundingClientRect();
+      setNavbarStuck(navbarRect.top <= 0);
 
-        setWindowHasScrolled(window.scrollY > 0);
-      }
-  
-      window.addEventListener('scroll', handleScroll);
-  
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
-  }
+      setWindowHasScrolled(window.scrollY > 0);
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   if (useLocation().pathname === '/') {
     return (
@@ -41,7 +37,7 @@ function NavbarTitle() {
         </div>
       </CSSTransition>
     )
-  } else if (useLocation().pathname === '/post-builder') {
+  } else if (useLocation().pathname === '/post-builder' || useLocation().pathname === '/post-viewer') {
     return (
       <CSSTransition in={windowHasScrolled} timeout={300} classNames="slide" >
         <div className='navbar-title' style={windowHasScrolled ? {opacity: 1, gridColumn: 4} : {gridColumn: 4}}>

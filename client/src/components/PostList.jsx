@@ -7,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom'
 import PostTile from './PostTile.jsx';
 import './styles/PostList.css';
 
-function PostList({ onTileClickPostBuilder, showAddNew, useWindowOffset }) {
+function PostList({ onTileClick, showAddNew, useWindowOffset }) {
   // 
   const [posts, setPosts] = useState([]);
 
@@ -24,11 +24,8 @@ function PostList({ onTileClickPostBuilder, showAddNew, useWindowOffset }) {
 
   // what should we do when a tile is clicked
   const handleTileClick = function(post) {
-    // check if we're in post-builder 
-    if (onTileClickPostBuilder) {
-      onTileClickPostBuilder(post._id);
-    } else {
-      // go to post-builder with argument post
+    if (onTileClick) {
+      onTileClick(post);
     }
   }
 
@@ -81,7 +78,6 @@ function PostList({ onTileClickPostBuilder, showAddNew, useWindowOffset }) {
     const { clientX, clientY } = event;
     const { scrollX, scrollY } = window;
     const navbar = document.querySelector('.navbar');
-    console.log(navbar.clientHeight);
     const wo = useWindowOffset ? window.innerHeight - navbar.clientHeight : 0;
     setMousePos({ x: clientX + scrollX, y: clientY + scrollY - wo});
   };

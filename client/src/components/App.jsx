@@ -12,6 +12,7 @@ import AnimatedCursor from '../../helpers/animated_cursor.js';
 import Home from '../pages/Home.jsx';
 import Posts from '../pages/Posts.jsx';
 import PostBuilder from '../pages/PostBuilder.jsx';
+import PostViewer from '../pages/PostViewer.jsx';
 import Admin from '../pages/Admin.jsx';
 import './styles/App.css';
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <Admin />,
+  },
+  {
+    path: '/post-viewer',
+    element: <PostViewer />,
   },
 ]);
 
