@@ -4,8 +4,8 @@ import './styles/Title.css';
 function Title() {
   const upRef = useRef(null);
   const downRef = useRef(null);
-  const downSpeed = 1; // don't make this more than 1, it can cause weird issues with the bottom of the page
-  const upSpeed = -1.5;
+  const downSpeed = 1; 
+  const upSpeed = -2;
 
   useEffect(() => {
     function downScroll() {
