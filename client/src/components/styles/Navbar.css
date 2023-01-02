@@ -17,11 +17,16 @@
   border-width: 0 1px;
   text-align: center;
   line-height: var(--nav-bar-height);
+  width: 100px;
+}
+
+/* display: table (the default for reacting-link) doesn't work in the grid for some reason */
+.navbar-item .reacting-link {
+  display: inline;
 }
 
 .navbar-title .reacting-link {
-  font-family: var(--main-title-font);
-  text-align: center;
+  font-family: var(--fun-logo-font);
   line-height: var(--nav-bar-height);
   font-size: 2rem;
   font-weight: bold;
@@ -31,6 +36,8 @@
 .navbar-title {
   opacity: 0;
   transition: opacity 300ms;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .navbar-title.slide-enter-active {

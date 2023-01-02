@@ -49,7 +49,7 @@ function PostViewer() {
       {
         !post._id 
           ? 
-          <PostList onTileClick={getFullPost} showAddNew={false} />
+          <PostList onTileClick={getFullPost} showAddNew={false}  title='Posts' showSearch={true} postFilters={{ published: true }} useWindowOffset={false} />
           : null
       }
       {

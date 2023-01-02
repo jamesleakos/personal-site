@@ -28,7 +28,7 @@ function Posts() {
   return (
     <div className='posts'>
       <Navbar />
-      <PostList onTileClick={loadPostViewer} showAddNew={false} useWindowOffset={false} />
+      <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='Posts' useWindowOffset={false} />
       <Info />
       <Footer />
     </div>

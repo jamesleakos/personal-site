@@ -2,10 +2,31 @@
 
 .post-list {
   background-color: var(--background-color-light-secondary);
+  padding-top: 50px;
+}
+
+.post-list .title {
+  font-family: var(--caption-font);
+  font-size: .8rem;
+  display: block;
+  float: left;
+  padding-top: var(--post-list-margin);
+  margin-left: var(--post-list-margin);
+  color: var(--text-accent);
+}
+
+.post-list .search {
+  display: block;
+  float: left;
+  font-family: var(--caption-font);
+  margin-top: 15px;
+  margin-left: var(--post-list-margin);
+}
+
+.post-list .scroll-wrapper {
   height: var(--post-list-height);
   width: 100%;
   overflow-x: scroll;
-
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -14,6 +35,14 @@
 
 .post-list .scroller {
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
+}
+
+.post-list .new-post-button {
+  text-align: left;
+  display: block;
+  float: left;
+  font-family: var(--caption-font);
+  font-size: .8rem;
+  margin-left: var(--post-list-margin);
+  padding-top: var(--post-list-margin);
 }

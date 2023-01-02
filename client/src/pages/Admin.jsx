@@ -27,10 +27,8 @@ function Admin() {
   return (
     <div className='admin'>
       <Navbar />
-      <h3>Published Posts</h3>
-      <PostList onTileClick={loadPostBuilder} showAddNew={false} useWindowOffset={false} />
-      <h3>Drafts</h3>
-      <PostList onTileClick={loadPostBuilder} showAddNew={true} useWindowOffset={false} />
+      <PostList postFilters={{ published: true }} onTileClick={loadPostBuilder} showAddNew={false} useWindowOffset={false} title='Published Posts' showSearch={true} />
+      <PostList postFilters={{ published: false }} onTileClick={loadPostBuilder} showAddNew={true} useWindowOffset={false} title='Drafts' showSearch={true} />
       <br /><br /><br />
       <Footer />
     </div>

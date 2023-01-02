@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 function TitleText() {
   return (
-    <Link className='reacting-link' to="/">JAMES LEAKOS</Link>
+    <Link className='reacting-link' to="/">James Leakos</Link>
   )
 }
 

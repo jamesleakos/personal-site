@@ -1,5 +1,6 @@
 :root {
   /* fonts */
+  --fun-logo-font: 'Lobster', cursive;
   --main-title-font: 'Abril Fatface', cursive;
   --body-text-font: 'Times New Roman', sans-serif;
   --caption-font: 'Courier Prime', monospace;
@@ -7,8 +8,8 @@
   /* colours */
   --text-accent: red;
 
-  --background-color-light-main: #FFFFF8;
-  --background-color-light-secondary: #E6E6DF;
+  --background-color-light-main: #FFFFFF;
+  --background-color-light-secondary: #F4F4F4;
   --background-color-mid-main: #B3B3AD;
   --background-color-dark-main: #40403E;
   --background-color-dark-secondary: #787874;
@@ -17,9 +18,10 @@
   /* navbar */
   --nav-bar-height: 70px;
 
-  /* post width */
+  /* article */
   --post-width: 60%;
 
-  /* post list height */
+  /* post list */
   --post-list-height: 500px;
+  --post-list-margin: 20px;
 }

@@ -136,7 +136,7 @@ function PostBuilder() {
       {
         !post._id 
           ? 
-          <PostList onTileClick={getFullPost} showAddNew={true} useWindowOffset={false} />
+          <PostList onTileClick={getFullPost} showAddNew={true} useWindowOffset={false} title='Posts' showSearch={true} postFilters={{}} />
           : null
       }
       {

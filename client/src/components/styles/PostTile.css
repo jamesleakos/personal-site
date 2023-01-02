@@ -3,8 +3,8 @@
 .post-tile {
   width: 300px;
   height: calc(var(--post-list-height) * .9);
-  margin: 20px;
-  padding-right: 20px;
+  margin: var(--post-list-margin);
+  padding-right: var(--post-list-margin);
   border-right: 1px solid var(--background-color-dark-main);
   text-align: left;
   transition: 0.5s ease;

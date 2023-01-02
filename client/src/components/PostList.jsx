@@ -7,20 +7,43 @@ import { Link, useLocation } from 'react-router-dom'
 import PostTile from './PostTile.jsx';
 import './styles/PostList.css';
 
-function PostList({ onTileClick, showAddNew, useWindowOffset }) {
+function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, useWindowOffset }) {
   // 
   const [posts, setPosts] = useState([]);
+  const [shownPosts, setShownPosts] = useState([]);
+  const [search, setSearch] = useState('');
 
   // get the posts
   useEffect(() => {
-    axios.get('/posts/info')
-    .then(res => {
-      setPosts(res.data);
+    axios.get('/posts/info', {
+      params: {
+        ...postFilters
+      }
     })
-    .catch(err => {
-      console.log(err);
-    })
+      .then(res => {
+        setPosts(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }, [])
+
+  useEffect(() => {
+    let newPosts = [...posts];
+    newPosts = newPosts.filter((post) => {
+      let returning = false;
+      if (post.title.toLowerCase().includes(search.toLowerCase())) returning = true;
+      if (post.description.toLowerCase().includes(search.toLowerCase())) returning = true;
+      for (let tag of post.tags) {
+        if (tag.toLowerCase().includes(search.toLowerCase())) returning = true;
+      }
+      if (search.toLowerCase().includes('publish') && post.published) returning = true;
+      if (search.toLowerCase().includes('feature') && post.featured) returning = true;
+      if (search.toLowerCase().includes('draft') && !post.published) returning = true;
+      return returning;
+    });
+    setShownPosts(newPosts);
+  }, [search, posts])
 
   // what should we do when a tile is clicked
   const handleTileClick = function(post) {
@@ -30,7 +53,6 @@ function PostList({ onTileClick, showAddNew, useWindowOffset }) {
   }
 
   // adding a new post
-  const addPostObj = { _id: 'new-post', title: 'New Post', description: 'Click here for a new post' };
   const addPost = function() {
     const today = new Date();
     axios.post('/posts', {
@@ -98,35 +120,45 @@ function PostList({ onTileClick, showAddNew, useWindowOffset }) {
   }
 
   return (
-    <div className='post-list' ref={wrapperRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
-      <div className='scroller' >
+    <div className='post-list'>
+      <p className='title' >{title}</p>
+      {
+        showAddNew
+          ?
+          <p className='new-post-button links-item reacting-link' onClick={addPost} >Add New Draft</p>
+          : null
+      }
+      {
+        showSearch
+          ? 
+          <input className='search' type="text" placeholder='Search' value={search} onChange={(e) => { setSearch(e.target.value); }} />
+          : null
+      }
+      <div className='scroll-wrapper' ref={wrapperRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+        <div className='scroller' >
+          {
+            // map out the posts
+            shownPosts.map(post => {
+              return <PostTile key={post._id} post={post} onClick={handleTileClick} />
+            })
+          }
+        </div>
         {
-          // map out the posts
-          posts.map(post => {
-            return <PostTile key={post._id} post={post} onClick={handleTileClick} />
-          })
-        }
-        {
-          showAddNew
+          showText 
             ?
-            <PostTile key='new-post' post={addPostObj} onClick={addPost} />
+            <div className='mouseOverText' ref={textRef} style={{
+              position: 'absolute',
+              left: mousePos.x + dragOffSetX,
+              top: mousePos.y + dragOffSetY,
+              zIndex: 999
+            }} > 
+              DRAG
+            </div>
             : null
         }
       </div>
-      {
-        showText 
-          ?
-          <div className='mouseOverText' ref={textRef} style={{
-            position: 'absolute',
-            left: mousePos.x + dragOffSetX,
-            top: mousePos.y + dragOffSetY,
-            zIndex: 999
-          }} > 
-            DRAG
-          </div>
-          : null
-      }
     </div>
+
   )
 }
 

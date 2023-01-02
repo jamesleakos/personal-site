@@ -13,7 +13,9 @@ exports.getAllPosts = (req, res) => {
 };
 
 exports.getPostsInfo = (req, res) => {
-  Post.find({}, '-components')
+  Post.find({
+    ...req.query
+  }, '-components')
     .then(data => {
       res.status(200).send(data);
     })
@@ -111,7 +113,6 @@ exports.addOrUpdateTextComponent = (req, res) => {
             return Post.findById(req.query.post_id);
           })
           .then(post => {
-            console.log(post);
             res.status(200).send(post);
           })
           .catch(err => {
@@ -140,7 +141,6 @@ exports.updatePost = (req, res) => {
     new: true
   })
     .then(post => {
-      console.log(post);
       res.status(200).send(post);
     })
     .catch(err => {

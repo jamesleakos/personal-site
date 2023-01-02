@@ -32,7 +32,7 @@ body * {
 }
 
 .reacting-link {
-  display: grid;
+  display: table;
   transition: 0.5s ease;
 }
 .reacting-link:hover {
