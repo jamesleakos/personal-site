@@ -5,27 +5,38 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-// const multer = require('multer');
+const multer = require('multer');
 
 // imports
+ // DON'T DELETE THIS - it is needed just to call the DB
+require('../db') // DON'T DELETE THIS - it is needed just to call the DB
 const controllers = require('./controllers/post.js');
-// const imageController = require('./controllers/images.js');
+const imageController = require('./controllers/images.js');
 const logger = require('../middleware/logger.js');
 
 // express app
 const app = express();
 
 // multer, for interpreting images
-// const storage = multer.memoryStorage();
-// const upload = multer({storage});
+const storage = multer.memoryStorage();
+const upload = multer({ 
+  storage,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+    }
+  }
+});
 
 // body interpreters
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(cors({
-//   origin: '*',
-// }));
-// app.use(cors());
+app.use(cors({
+  origin: '*',
+}));
 app.use(logger);
 
 // sending static
@@ -72,13 +83,9 @@ app.delete('/components', function(req, res) {
 })
 
 // PICTURES
-// app.post('/image_component', upload.single('image'), function(req, res) {
-//   const { file } = req;
-//   console.log(file);
-
-//   if (!file) return res.sendStatus(400);
-//   return res.status(200).send('got file');
-// })
+app.post('/image_component', upload.single('image'), function(req, res) {
+  imageController.uploadImage(req, res);
+})
 
 // not sure what this is for
 app.get('/*', function(req, res) {
