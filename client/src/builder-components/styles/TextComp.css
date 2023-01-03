@@ -11,26 +11,26 @@
   resize: vertical;
   width: 100%;
 }
-.text-comp .editing {
+.editing {
   display: inline-block;
   width: 100%;
   margin-top: 20px;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--background-color-dark-main);
 }
-.text-comp .left-icons {
+.left-icons {
   float: left;
   display: block;
 }
-.text-comp .left-icons .reacting-link {
+.left-icons .reacting-link {
   display: inline-block;
   margin: 0 5px;
 }
-.text-comp .right-icons {
+.right-icons {
   float: right;
   display: block;
 }
-.text-comp .text-comp .reacting-link:hover {
+.text-comp .reacting-link:hover {
   -webkit-transform: scale(1.2);
 }
 

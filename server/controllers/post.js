@@ -13,12 +13,10 @@ exports.getAllPosts = (req, res) => {
 };
 
 exports.getPostsInfo = (req, res) => {
-  console.log(req.query);
   Post.find({
     ...req.query
   }, '-components')
     .then(data => {
-      console.log(data);
       res.status(200).send(data);
     })
     .catch(err => {

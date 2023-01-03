@@ -4,34 +4,39 @@ require('dotenv').config();
 // dependancies
 const path = require('path');
 const express = require('express');
-const cors = require('cors');
-// const multer = require('multer');
+const axios = require('axios');
+const multer = require('multer');
 
 // imports
+const db = require('../db');
 const controllers = require('./controllers/post.js');
-// const imageController = require('./controllers/images.js');
 const logger = require('../middleware/logger.js');
 
 // express app
 const app = express();
 
-// multer, for interpreting images
-// const storage = multer.memoryStorage();
-// const upload = multer({storage});
-
 // body interpreters
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(cors({
-//   origin: '*',
-// }));
-// app.use(cors());
 app.use(logger);
+
+// multer stuff
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, `uploads/`);
+  },
+  filename: function (req, file, cb) {
+    // Use the original file name and add the original file extension
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
 
 // sending static
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // post and component routes for mongo
+
 // POSTS
 // this one should almost never be used probably
 app.get('/posts', function(req, res) {
@@ -39,7 +44,6 @@ app.get('/posts', function(req, res) {
 })
 // this one is used to get the info for post list and other post displays
 app.get('/posts/info', function(req, res) {
-  console.log('getting post info')
   controllers.getPostsInfo(req, res);
 })
 // get a single full post
@@ -72,13 +76,19 @@ app.delete('/components', function(req, res) {
 })
 
 // PICTURES
-// app.post('/image_component', upload.single('image'), function(req, res) {
-//   const { file } = req;
-//   console.log(file);
+app.post('/upload', upload.array('images'), (req, res) => {
+  // 'images' is the name of the file input field in the HTML form
+  // req.files is an array of uploaded files
+  req.files.forEach((file) => {
+    console.log(file.originalname);
+  });
+  res.send('Files uploaded successfully');
+});
 
-//   if (!file) return res.sendStatus(400);
-//   return res.status(200).send('got file');
-// })
+app.get('/uploads/:filename', (req, res) => {
+  const file = `../uploads/${req.params.filename}`;
+  res.sendFile(file);
+});
 
 // not sure what this is for
 app.get('/*', function(req, res) {
