@@ -126,10 +126,6 @@ function PostBuilder() {
 
   // image GET calls - the POST calls are in the image component itself
   const [images, setImages] = useState([]);
-  useEffect(() => {
-    console.log('images: ');
-    console.log(images);
-  }, [images]);
 
   useEffect(() => {
     if (!post._id) return;

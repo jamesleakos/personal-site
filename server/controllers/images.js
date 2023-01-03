@@ -22,10 +22,9 @@ exports.uploadImage = (req, res) => {
 
 exports.getImages = async(req, res) => {
   const post_id = req.query.post_id;
-  console.log('post_id is ' + post_id);
 
-  const {error, presignedUrls} = await s3.getPostPresignedUrls(post_id);
+  const {error, urlObjs} = await s3.getPostPresignedUrls(post_id);
   if (error) return res.status(400).json({ message: error.message});
 
-  return res.json(presignedUrls);
+  return res.json(urlObjs);
 }

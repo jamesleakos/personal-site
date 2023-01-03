@@ -52,7 +52,15 @@ exports.getPostPresignedUrls = async (post_id) => {
       })
     );
 
-    return { presignedUrls };
+    const urlObjs = [];
+    for (let i = 0; i < imageKeys.length; i++) {
+      urlObjs.push({
+        key: imageKeys[i],
+        url: presignedUrls[i]
+      })
+    } 
+
+    return { urlObjs };
 
   } catch (error) {
     console.log(error);
