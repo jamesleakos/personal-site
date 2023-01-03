@@ -1,0 +1,34 @@
+.photo-comp {
+  display: inline-block;
+  width: var(--post-width);
+}
+
+.photo-comp .input-area {
+  display: block;
+  height: 50px;
+  text-align: center;
+}
+
+.photo-comp .editing {
+  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--background-color-dark-main);
+}
+
+.photo-comp .left-icons {
+  float: left;
+  display: block;
+}
+.photo-comp .left-icons .reacting-link {
+  display: inline-block;
+  margin: 0 5px;
+}
+.photo-comp .right-icons {
+  float: right;
+  display: block;
+}
+.photo-comp .text-comp .reacting-link:hover {
+  -webkit-transform: scale(1.2);
+}
