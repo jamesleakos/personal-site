@@ -50,7 +50,6 @@ app.get('/posts', function(req, res) {
 })
 // this one is used to get the info for post list and other post displays
 app.get('/posts/info', function(req, res) {
-  console.log('getting post info')
   controllers.getPostsInfo(req, res);
 })
 // get a single full post
@@ -83,8 +82,13 @@ app.delete('/components', function(req, res) {
 })
 
 // PICTURES
-app.post('/image_component', upload.single('image'), function(req, res) {
+app.post('/image_components', upload.single('image'), function(req, res) {
   imageController.uploadImage(req, res);
+})
+
+// we are going to get all of the images for a post - that seems like the smartest way?
+app.get('/image_components', (req, res) => {
+  imageController.getImages(req, res);
 })
 
 // not sure what this is for

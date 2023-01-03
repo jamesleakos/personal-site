@@ -123,6 +123,24 @@ function PostBuilder() {
         console.log(err);
       })
   }
+
+  // image GET calls - the POST calls are in the image component itself
+  const [images, setImages] = useState([]);
+  useEffect(() => {
+    console.log('images: ');
+    console.log(images);
+  }, [images]);
+
+  useEffect(() => {
+    if (!post._id) return;
+    axios.get(`/image_components?post_id=${post._id}`)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [post]);
   
   return (
     <div className='post-builder'>
@@ -150,7 +168,7 @@ function PostBuilder() {
             case 'caption':
               return <TextComp key={component._id + index + ''} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             case 'photo':
-              return <PhotoComp key={component._id + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
+              return <PhotoComp key={component._id + index} postId={post._id} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             case 'photo-gallery':
               return <PhotoGalleryComp key={component._id + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             case 'background-photo':

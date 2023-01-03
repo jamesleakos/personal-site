@@ -10,13 +10,15 @@ import '../viewer-components/styles/PhotoComp.css';
 // 
 const validFileTypes = ['iamge/jpg', 'image/jpeg', 'image/png'];
 
-function PhotoComp({ component, modifyComponent, deleteComponent, openOnEdit }) {
-  const [file, setFile] = useState(null);
+function PhotoComp({ postId, component, modifyComponent, deleteComponent, openOnEdit }) {
+
+  // are we editing the post?
+  const [editActive, setEditActive] = useState(openOnEdit);
+
+  // consts for qol stuff for the image uploading
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [uploadError, setUploadError] = useState('');
-  const [url, setUrl] = useState(component.url);
-  const [editActive, setEditActive] = useState(openOnEdit);
 
   const endEdit = function() {
     component.url = url;
@@ -43,7 +45,7 @@ function PhotoComp({ component, modifyComponent, deleteComponent, openOnEdit }) 
     form.append('image', file);
 
     setIsLoading(true);
-    axios.post('/image_component', form)
+    axios.post(`/image_components?post_id=${postId}`, form)
       .then(response => {
         setIsLoading(false);
         console.log(response);
@@ -90,7 +92,7 @@ function PhotoComp({ component, modifyComponent, deleteComponent, openOnEdit }) 
           </div> 
           :
           <div className={component.type} onDoubleClick={() => setEditActive(true) }>
-            <img src={url} alt='image' />
+            <img src={''} alt='image' />
           </div>
       }
     </div>
