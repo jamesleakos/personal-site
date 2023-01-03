@@ -3,19 +3,19 @@ import './styles/Title.css';
 
 function Title() {
   const upRef = useRef(null);
-  const downRef = useRef(null);
-  const downSpeed = 1; 
+  // const downRef = useRef(null);
+  // const downSpeed = 1; 
   const upSpeed = -2;
 
-  useEffect(() => {
-    function downScroll() {
-      const downNode = downRef.current;
-      const offset = window.scrollY * downSpeed;
-      downNode.style.transform = `translateY(${offset}px)`;
-    }
-    window.addEventListener('scroll', downScroll);
-    return () => window.removeEventListener('scroll', downScroll);
-  }, [upSpeed]);
+  // useEffect(() => {
+  //   function downScroll() {
+  //     const downNode = downRef.current;
+  //     const offset = window.scrollY * downSpeed;
+  //     downNode.style.transform = `translateY(${offset}px)`;
+  //   }
+  //   window.addEventListener('scroll', downScroll);
+  //   return () => window.removeEventListener('scroll', downScroll);
+  // }, [downSpeed]);
 
   useEffect(() => {
     function upScroll() {
