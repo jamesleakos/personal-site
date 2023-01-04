@@ -10,7 +10,9 @@ import '../viewer-components/styles/PhotoComp.css';
 // 
 const validFileTypes = ['iamge/jpg', 'image/jpeg', 'image/png'];
 
-function PhotoComp({ postId, component, modifyComponent, deleteComponent, openOnEdit }) {
+function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, openOnEdit }) {
+
+  console.log(url);
 
   // are we editing the post?
   const [editActive, setEditActive] = useState(openOnEdit);
@@ -21,10 +23,8 @@ function PhotoComp({ postId, component, modifyComponent, deleteComponent, openOn
   const [uploadError, setUploadError] = useState('');
 
   const endEdit = function() {
-    component.url = url;
-    modifyComponent(component);
-
     setEditActive(false);
+    if (!component.key) deleteComponent(component);
   }
 
   const changeType = function(type) {
@@ -34,7 +34,6 @@ function PhotoComp({ postId, component, modifyComponent, deleteComponent, openOn
 
   const handleUpload = (e) => {
     const file = e.target.files[0];
-    console.log(file);
 
     if (!validFileTypes.find(type => type === file.type)) {
       setError('File must be JPG/PNG');
@@ -48,7 +47,9 @@ function PhotoComp({ postId, component, modifyComponent, deleteComponent, openOn
     axios.post(`/image_components?post_id=${postId}`, form)
       .then(response => {
         setIsLoading(false);
-        console.log(response);
+        component.key = response.data.key;
+        console.log('photocomp upload key: ' + component.key);
+        modifyComponent(component);
       })
       .catch(err => {
         setIsLoading(false);
@@ -78,12 +79,8 @@ function PhotoComp({ postId, component, modifyComponent, deleteComponent, openOn
             </div>
 
             <div className='left-icons'>
-              {/* <FontAwesomeIcon style={component.type==='main-title' ? {color: 'red'} : null} onClick={() => { changeType('main-title') }} className='reacting-link expand-cursor' icon='fa-solid fa-book' />
-              <FontAwesomeIcon style={component.type==='subtitle' ? {color: 'red'} : null} onClick={() => { changeType('subtitle') }} className='reacting-link expand-cursor' icon='fa-solid fa-book-open' />
-              <FontAwesomeIcon style={component.type==='section-title' ? {color: 'red'} : null} onClick={() => { changeType('section-title') }} className='reacting-link expand-cursor' icon='fa-solid fa-section' />
-              <FontAwesomeIcon style={component.type==='body-text' ? {color: 'red'} : null} onClick={() => { changeType('body-text') }} className='reacting-link expand-cursor' icon='fa-solid fa-font' />
-              <FontAwesomeIcon style={component.type==='quote' ? {color: 'red'} : null} onClick={() => { changeType('quote') }} className='reacting-link expand-cursor' icon='fa-solid fa-quote-left' />
-              <FontAwesomeIcon style={component.type==='caption' ? {color: 'red'} : null}  onClick={() => { changeType('caption') }} className='reacting-link expand-cursor' icon='fa-solid fa-closed-captioning' /> */}
+            <FontAwesomeIcon onClick={(e) => { changeType('photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image' />
+            <FontAwesomeIcon onClick={(e) => { changeType('background-photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image-portrait' />
             </div>
             <div className='right-icons'>
               {/* <p className='reacting-link'>Add</p> */}
@@ -92,7 +89,7 @@ function PhotoComp({ postId, component, modifyComponent, deleteComponent, openOn
           </div> 
           :
           <div className={component.type} onDoubleClick={() => setEditActive(true) }>
-            <img src={''} alt='image' />
+            <img src={url} alt='image' />
           </div>
       }
     </div>

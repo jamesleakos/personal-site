@@ -97,7 +97,7 @@ exports.addOrUpdateTextComponent = (req, res) => {
       new: true
     })
       .then(comp => {
-        Post.updateOne({ 
+        return Post.updateOne({ 
           _id: req.query.post_id,
           'components._id': req.body._id
         },
@@ -108,17 +108,17 @@ exports.addOrUpdateTextComponent = (req, res) => {
             }
           }
         })
-          // does not return the updated post
-          .then(() => {
-            return Post.findById(req.query.post_id);
-          })
-          .then(post => {
-            res.status(200).send(post);
-          })
-          .catch(err => {
-            console.log(err);
-            res.status(400).send(err);
-          })
+      })
+      // does not return the updated post
+      .then(() => {
+        return Post.findById(req.query.post_id);
+      })
+      .then(post => {
+        res.status(200).send(post);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).send(err);
       })
   }
 }

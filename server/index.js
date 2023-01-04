@@ -91,6 +91,18 @@ app.get('/image_components', (req, res) => {
   imageController.getImages(req, res);
 })
 
+app.put('/image_components', function(req, res) {
+  imageController.addOrUpdateImageComponent(req, res);
+})
+
+app.delete('/image_components', function(req, res) {
+  // we can use the same method as the posts
+  controllers.deleteComponent(req, res);
+
+  // TODO: delete the image from the s3 bucket
+  // can get the key from the route and then send it along to the bucket
+})
+
 // not sure what this is for
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {

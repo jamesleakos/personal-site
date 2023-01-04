@@ -28,3 +28,75 @@ exports.getImages = async(req, res) => {
 
   return res.json(urlObjs);
 }
+
+exports.addOrUpdateImageComponent = (req, res) => {
+  console.log(req.body);
+  if (req.body.key === '') {
+    res.status(400).send('You must supply an image key');
+  }
+
+  if (!req.body._id) {
+    const imageComponent = new ImageComponent({
+      type: req.body.type,
+      key: req.body.key
+    })
+    imageComponent.save()
+      .catch(err => {
+        console.log(err);
+        res.status(400).send(err);
+      })
+
+    Post.findById(req.query.post_id)
+      .then(post => {
+        post.components.push(imageComponent);
+        return post.save()
+      })
+      .then(saveResponse => {
+        res.status(200).send(saveResponse);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).send(err);
+      })
+  } else {
+    ImageComponent.findOneAndUpdate({
+      _id: req.body._id
+    },
+    {
+      type: req.body.type,
+      key: req.body.key
+    },{
+      // without this I think it returns the old one
+      new: true
+    })
+      .then(comp => {
+        return Post.updateOne({ 
+          _id: req.query.post_id,
+          'components._id': req.body._id
+        },
+        {
+          $set: {
+            'components.$': {
+              ...comp
+            }
+          }
+        })
+      })
+      // does not return the updated post
+      .then(() => {
+        return Post.findById(req.query.post_id);
+      })
+      .then(post => {
+        res.status(200).send(post);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(400).send(err);
+      })
+  }
+}
+
+exports.deleteImage = (req, res) => {
+  // the component should have already been deleted
+  // now we need to delete the image off the s3 bucket
+}

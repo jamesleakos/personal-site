@@ -11,8 +11,6 @@ import BuilderBar from '../builder-components/BuilderBar.jsx';
 import InfoModal from '../builder-components/InfoModal.jsx';
 import TextComp from '../builder-components/TextComp.jsx';
 import PhotoComp from '../builder-components/PhotoComp.jsx';
-import PhotoGalleryComp from '../builder-components/PhotoGalleryComp.jsx';
-import BackgroundPhotoComp from '../builder-components/BackgroundPhotoComp.jsx';
 
 function PostBuilder() {
   const location = useLocation();
@@ -86,13 +84,8 @@ function PostBuilder() {
         comp.text = '';
         break;
       case 'photo':
-        comp.url = '';
-        break;
-      case 'photo-gallery':
-        comp.url = '';
-        break;
       case 'background-photo':
-        comp.url = '';
+        comp.key = '';
         break;
       default:
         break;
@@ -103,25 +96,64 @@ function PostBuilder() {
     setPost(p);
   }
   const modifyComponent = (component) => {
-    axios.put(`/components?post_id=${post._id}`,{
-      ...component
-    })
-      .then(res => {
-        setPost(res.data);
+    if (component.type === 'photo' || component.type === 'background-photo') {
+      axios.put(`/image_components?post_id=${post._id}`,{
+        ...component
       })
-      .catch(err => {
-        console.log(err);
+        .then(res => {
+          setPost(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    } else {
+      axios.put(`/components?post_id=${post._id}`,{
+        ...component
       })
+        .then(res => {
+          setPost(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
   }
   const deleteComponent = (component) => {
-    axios.delete(`/components?post_id=${post._id}&component_id=${component._id}`)
-      .then(res => {
-        console.log(res.data);
-        setPost(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    if (!component.kind) { // kind should only be on something we've got back from the server
+      const newPost = { ...post };
+      const i = post.components.indexOf(component);
+      if (i > 0) {
+        newPost.components.splice(i, 1);
+      }
+      setPost(newPost);
+      return;
+    }
+
+    if (component.kind === 'TextComponent') {
+
+      axios.delete(`/components?post_id=${post._id}&component_id=${component._id}`)
+        .then(res => {
+          console.log(res.data);
+          setPost(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
+    } else if (component.kind === 'ImageComponent') {
+
+      axios.delete(`/image_components?post_id=${post._id}&component_id=${component._id}`)
+        .then(res => {
+          console.log(res.data);
+          setPost(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
+    } else {
+      console.error('kind has unknown value');
+    }
   }
 
   // image GET calls - the POST calls are in the image component itself
@@ -132,6 +164,7 @@ function PostBuilder() {
     axios.get(`/image_components?post_id=${post._id}`)
       .then(res => {
         console.log(res.data);
+        setImages(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -164,11 +197,8 @@ function PostBuilder() {
             case 'caption':
               return <TextComp key={component._id + index + ''} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             case 'photo':
-              return <PhotoComp key={component._id + index} postId={post._id} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
-            case 'photo-gallery':
-              return <PhotoGalleryComp key={component._id + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
             case 'background-photo':
-              return <BackgroundPhotoComp key={component._id + index} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
+              return <PhotoComp key={component._id + index} postId={post._id} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} url={images.filter(c => c.key === component.key)[0]?.url} />
             default:
               break;
           }
