@@ -1,6 +1,6 @@
 .photo-comp {
   display: inline-block;
-  width: var(--post-width);
+  width: 100%;
 }
 
 .photo-comp .input-area {
@@ -11,7 +11,7 @@
 
 .photo-comp .editing {
   display: inline-block;
-  width: 100%;
+  width: var(--post-width);
   margin-top: 20px;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--background-color-dark-main);

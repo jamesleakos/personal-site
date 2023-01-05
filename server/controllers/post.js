@@ -162,7 +162,6 @@ exports.deletePost = (req, res) => {
 }
 
 exports.deleteComponent = (req, res) => {
-  console.log(req.query);
   Component.deleteOne({ _id: req.query.component_id })
     .catch(err => {
       console.log(err);

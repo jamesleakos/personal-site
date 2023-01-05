@@ -9,6 +9,9 @@ exports.uploadImage = (req, res) => {
 
   if (!file || !post_id) return res.sendStatus(400);
 
+  // let's delete the old photo, if there is one to delete
+  if (req.query.current_key) s3.deleteImage(req.query.current_key);
+
   // this is where the magic happens
   s3.uploadToS3({ file, post_id })
     .then(back => {
@@ -30,7 +33,6 @@ exports.getImages = async(req, res) => {
 }
 
 exports.addOrUpdateImageComponent = (req, res) => {
-  console.log(req.body);
   if (req.body.key === '') {
     res.status(400).send('You must supply an image key');
   }
@@ -38,7 +40,8 @@ exports.addOrUpdateImageComponent = (req, res) => {
   if (!req.body._id) {
     const imageComponent = new ImageComponent({
       type: req.body.type,
-      key: req.body.key
+      key: req.body.key,
+      extension: req.body.extension
     })
     imageComponent.save()
       .catch(err => {
@@ -64,7 +67,8 @@ exports.addOrUpdateImageComponent = (req, res) => {
     },
     {
       type: req.body.type,
-      key: req.body.key
+      key: req.body.key,
+      extension: req.body.extension
     },{
       // without this I think it returns the old one
       new: true
@@ -96,7 +100,13 @@ exports.addOrUpdateImageComponent = (req, res) => {
   }
 }
 
-exports.deleteImage = (req, res) => {
+exports.deleteImage = async (req, res) => {
   // the component should have already been deleted
   // now we need to delete the image off the s3 bucket
+  const key = req.query.key;
+
+  // this is where the magic happens
+  const { error, back } = await s3.deleteImage(key);
+  if (back) console.log('back: ' + JSON.stringify(back));
+  if (error) console.log(error);    
 }

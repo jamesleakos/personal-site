@@ -101,6 +101,7 @@ app.delete('/image_components', function(req, res) {
 
   // TODO: delete the image from the s3 bucket
   // can get the key from the route and then send it along to the bucket
+  imageController.deleteImage(req, res);
 })
 
 // not sure what this is for

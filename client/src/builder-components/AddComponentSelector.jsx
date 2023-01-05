@@ -11,7 +11,6 @@ function AddComponentSelector({ addComponent }) {
       <FontAwesomeIcon onClick={(e) => { addComponent('body-text'); }} className='reacting-link expand-cursor' icon='fa-solid fa-font' />
       <FontAwesomeIcon onClick={(e) => { addComponent('quote'); }} className='reacting-link expand-cursor' icon='fa-solid fa-quote-left' />
       <FontAwesomeIcon onClick={(e) => { addComponent('photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image' />
-      <FontAwesomeIcon onClick={(e) => { addComponent('photo-gallery'); }} className='reacting-link expand-cursor' icon='fa-solid fa-images' />
       <FontAwesomeIcon onClick={(e) => { addComponent('background-photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image-portrait' />
       <FontAwesomeIcon onClick={(e) => { addComponent('caption'); }} className='reacting-link expand-cursor' icon='fa-solid fa-closed-captioning' />
     </div>

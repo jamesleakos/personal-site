@@ -16,7 +16,8 @@ const textSchema = new mongoose.Schema({
 const TextComponent = Component.discriminator('TextComponent', textSchema, options);
 
 const imageSchema = new mongoose.Schema({
-  key: String
+  key: String,
+  extension: String,
 })
 const ImageComponent = Component.discriminator('ImageComponent', imageSchema, options);
 

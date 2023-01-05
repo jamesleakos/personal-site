@@ -1,0 +1,24 @@
+@import '../../components/styles/constants.css';
+
+.photo-comp .photo {
+  margin: 0 auto;
+}
+
+.photo-comp .photo img {
+  max-width: var(--post-width);
+}
+
+.background-photo-div {
+  margin: 0;
+
+  /* backround image set in-line */
+
+  /* set height */
+  height: 600px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

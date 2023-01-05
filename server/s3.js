@@ -1,4 +1,4 @@
-const { PutObjectCommand, GetObjectCommand, ListObjectsV2Command, S3Client } = require('@aws-sdk/client-s3');
+const { PutObjectCommand, GetObjectCommand, DeleteObjectCommand, ListObjectsV2Command, S3Client } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const { v4 } = require('uuid');
 
@@ -64,6 +64,22 @@ exports.getPostPresignedUrls = async (post_id) => {
 
   } catch (error) {
     console.log(error);
+    return { error };
+  }
+}
+
+exports.deleteImage = async (key) => {
+  console.log(key);
+
+  const command = new DeleteObjectCommand({
+    Bucket: BUCKET,
+    Key: key
+  });
+
+  try {
+    const back = await s3.send(command);
+    return { back };
+  } catch (error) {
     return { error };
   }
 }

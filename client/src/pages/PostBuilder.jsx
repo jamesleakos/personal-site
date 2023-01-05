@@ -130,7 +130,6 @@ function PostBuilder() {
     }
 
     if (component.kind === 'TextComponent') {
-
       axios.delete(`/components?post_id=${post._id}&component_id=${component._id}`)
         .then(res => {
           console.log(res.data);
@@ -141,8 +140,8 @@ function PostBuilder() {
         })
 
     } else if (component.kind === 'ImageComponent') {
-
-      axios.delete(`/image_components?post_id=${post._id}&component_id=${component._id}`)
+      console.log(component);
+      axios.delete(`/image_components?post_id=${post._id}&component_id=${component._id}&key=${component.key}`)
         .then(res => {
           console.log(res.data);
           setPost(res.data);
@@ -163,7 +162,6 @@ function PostBuilder() {
     if (!post._id) return;
     axios.get(`/image_components?post_id=${post._id}`)
       .then(res => {
-        console.log(res.data);
         setImages(res.data);
       })
       .catch(err => {

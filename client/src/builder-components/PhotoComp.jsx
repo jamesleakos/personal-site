@@ -11,9 +11,6 @@ import '../viewer-components/styles/PhotoComp.css';
 const validFileTypes = ['iamge/jpg', 'image/jpeg', 'image/png'];
 
 function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, openOnEdit }) {
-
-  console.log(url);
-
   // are we editing the post?
   const [editActive, setEditActive] = useState(openOnEdit);
 
@@ -28,6 +25,7 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
   }
 
   const changeType = function(type) {
+    setEditActive(false);
     component.type = type;
     modifyComponent(component);
   }
@@ -44,11 +42,13 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
     form.append('image', file);
 
     setIsLoading(true);
-    axios.post(`/image_components?post_id=${postId}`, form)
+
+    // we pass the current key so that the server can delete the old image
+    axios.post(`/image_components?post_id=${postId}&current_key=${component.key}`, form)
       .then(response => {
         setIsLoading(false);
         component.key = response.data.key;
-        console.log('photocomp upload key: ' + component.key);
+        component.extension = file.name.split('.').pop(); // get the extension
         modifyComponent(component);
       })
       .catch(err => {
@@ -70,17 +70,17 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
             <div className='right-icons'>
               <FontAwesomeIcon onClick={() => { deleteComponent(component) }} className='reacting-link expand-cursor' icon='fa-solid fa-xmark' />
             </div>
-            
+
             <div className='input-area'>
-              <input id={isLoading ? 'image-input is-loading' : 'image-input'} type='file' onChange={ handleUpload } />
-              { error && <p className='error-text' >{error}</p>}
-              { uploadError && <p className='error-text' >{uploadError}</p>}
-              { isLoading && <p className='loading-text' >...loading</p>}
+                <input id={isLoading ? 'image-input is-loading' : 'image-input'} type='file' onChange={ handleUpload } />
+                { error && <p className='error-text' >{error}</p>}
+                { uploadError && <p className='error-text' >{uploadError}</p>}
+                { isLoading && <p className='loading-text' >...loading</p>}
             </div>
 
             <div className='left-icons'>
-            <FontAwesomeIcon onClick={(e) => { changeType('photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image' />
-            <FontAwesomeIcon onClick={(e) => { changeType('background-photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image-portrait' />
+            <FontAwesomeIcon onClick={(e) => { changeType('photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image' style={component.type==='photo' ? {color: 'red'} : null} />
+            <FontAwesomeIcon onClick={(e) => { changeType('background-photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image-portrait' style={component.type==='background-photo' ? {color: 'red'} : null} />
             </div>
             <div className='right-icons'>
               {/* <p className='reacting-link'>Add</p> */}
@@ -89,7 +89,15 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
           </div> 
           :
           <div className={component.type} onDoubleClick={() => setEditActive(true) }>
-            <img src={url} alt='image' />
+            {
+              component.type === 'photo'
+                ?
+                <img src={url} alt='image' />
+                :
+                <div className='background-photo-div' style={{backgroundImage: `url(${url})`}}>
+                </div>
+            }
+            
           </div>
       }
     </div>
