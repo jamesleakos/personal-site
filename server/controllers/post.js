@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Post, TextComponent, ImageComponent, Component } = require('../../db/models/Post.js');
+const s3 = require('../s3.js');
 
 exports.getAllPosts = (req, res) => {
   Post.find({})
@@ -12,18 +13,61 @@ exports.getAllPosts = (req, res) => {
     })
 };
 
-exports.getPostsInfo = (req, res) => {
-  Post.find({
-    ...req.query
-  }, '-components')
-    .then(data => {
-      res.status(200).send(data);
+exports.getPostsInfo = async (req, res) => {
+  try {
+    let posts = await Post.find({
+      ...req.query
+    }, '-components');
+    
+    const keys = posts.map(post => {
+      return post.display_image_key;
     })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(400);
+  
+    const { urlObjs } = await s3.getPresignedUrlsFromKeys(keys);
+
+    posts = posts.map(post => {
+      post = post.toJSON();
+      const urlObj = urlObjs.find(u => u.key === post.display_image_key);
+      if (urlObj !== undefined) {
+        const url = urlObj.url;
+        post.url = url;
+      }
+      return post;
     })
+    console.log(posts);
+    res.status(200).send(posts);
+
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
 }
+
+// exports.getPostsInfo = async (req, res) => {
+//   const posts = await Post.find({
+//     ...req.query
+//   }, '-components');
+
+//   const keys = posts.map(post => )
+
+//     .then(data => {
+//       console.log(data);
+//       // now we have to get the presigned URLs for each of these
+//       const keys = data.map(post => {
+//         return post.display_image_key;
+//       })
+
+//       const urls = s3.
+
+
+
+//       res.status(200).send(data);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.sendStatus(400);
+//     })
+// }
 
 exports.getPost = (req, res) => {
   Post.find({_id: req.query.post_id})
@@ -131,6 +175,8 @@ exports.updatePost = (req, res) => {
     title: req.body.title,
     description: req.body.description,
     tags: req.body.tags,
+    display_image_key: req.body.display_image_key,
+    display_image_extension: req.body.display_image_extension,
     created_at: req.body.created_at,
     published: req.body.published,
     published_at: req.body.published_at,
@@ -151,6 +197,11 @@ exports.updatePost = (req, res) => {
 }
 
 exports.deletePost = (req, res) => {
+  if (!req.query.post_id) {
+    res.status(400).send('You need to supply a post_id');
+  }
+  s3.emptyS3Directory(req.query.post_id);
+
   Post.deleteOne({ _id: req.query.post_id })
     .then(() => {
       res.sendStatus(200);
@@ -166,6 +217,7 @@ exports.deleteComponent = (req, res) => {
     .catch(err => {
       console.log(err);
     })
+
   Post.findOneAndUpdate(
     {
       _id: req.query.post_id

@@ -8,7 +8,7 @@ import './styles/PhotoComp.css';
 import '../viewer-components/styles/PhotoComp.css';
 
 // 
-const validFileTypes = ['iamge/jpg', 'image/jpeg', 'image/png'];
+const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 
 function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, openOnEdit }) {
   // are we editing the post?

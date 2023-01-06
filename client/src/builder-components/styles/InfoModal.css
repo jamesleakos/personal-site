@@ -28,10 +28,15 @@
 
 .info-modal label {
   display: block;
+  margin-top: 10px;
 }
 
 .info-modal textarea {
   min-height: 4rem;
   resize: vertical;
   width: 100%;
+}
+
+.info-modal .submit-button {
+  margin-top: 20px;
 }

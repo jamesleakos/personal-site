@@ -6,10 +6,23 @@ import './styles/PostTile.css';
 
 function PostTile({post, onClick}) {
 
+  // get the image
+
+
   return (
     <div className='post-tile' >
-      <h3 className='links-item reacting-link' onClick={() => onClick(post)} >{ post.title }</h3>
-      <p>{ post.description }</p>
+      <div className='tags'>
+        {
+          post.tags.map(tag => {
+            return <span className='tag'>{tag}</span>
+          })
+        }
+      </div>
+      <div className='tile-title-image'>
+        <img src={post.url} alt='tile image' onClick={() => onClick(post)} />
+      </div>
+      <h3 className='tile-title links-item reacting-link' onClick={() => onClick(post)} >{ post.title }</h3>
+      <p className='description'>{ post.description }</p>
     </div>
   )
 }

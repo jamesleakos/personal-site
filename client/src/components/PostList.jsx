@@ -21,6 +21,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
       }
     })
       .then(res => {
+        console.log(res.data);
         setPosts(res.data);
       })
       .catch(err => {
@@ -76,7 +77,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   // for drag
   const wrapperRef = useRef(null); // this is used by both
   const [initialMousePos, setInitialMousePos] = useState(null);
-  const dragOffSetX = -20;
+  const dragOffSetX = -50;
   const dragOffSetY = -30;
 
   // for text
@@ -152,7 +153,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
               top: mousePos.y + dragOffSetY,
               zIndex: 999
             }} > 
-              DRAG
+              {/* DRAG */}
             </div>
             : null
         }

@@ -27,7 +27,8 @@ const postSchema = new mongoose.Schema({
   title: String,
   description: String,
   tags: [String],
-  display_image_url: String,
+  display_image_key: String,
+  display_image_extension: String,
 
   // other info
   created_at: Date,

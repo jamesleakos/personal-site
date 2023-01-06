@@ -68,6 +68,32 @@ exports.getPostPresignedUrls = async (post_id) => {
   }
 }
 
+exports.getPresignedUrlsFromKeys = async (keys) => {
+  try {
+    const presignedUrls = await Promise.all(
+      keys.map(key => {
+        const command = new GetObjectCommand({
+          Bucket: BUCKET, 
+          Key: key,
+        })
+        return getSignedUrl(s3, command, { expiresIn:900 });
+      })
+    );
+
+    const urlObjs = [];
+    for (let i = 0; i < keys.length; i++) {
+      urlObjs.push({
+        key: keys[i],
+        url: presignedUrls[i]
+      })
+    }
+    return { urlObjs };
+  } catch (error) {
+    console.log(error);
+    return { error };
+  }
+}
+
 exports.deleteImage = async (key) => {
   console.log(key);
 
@@ -82,4 +108,29 @@ exports.deleteImage = async (key) => {
   } catch (error) {
     return { error };
   }
+}
+
+exports.emptyS3Directory = async (dir) => {
+
+  const command = new ListObjectsV2Command({
+    Bucket: BUCKET,
+    Prefix: dir
+  });
+
+  const { Contents = [] } = await s3.send(command);
+
+  if (Contents.length === 0) return;
+
+  Contents.forEach(({ Key }) => {
+    const command = new DeleteObjectCommand({
+      Bucket: BUCKET,
+      Key: Key
+    });
+
+    try {
+      s3.send(command);
+    } catch (error) {
+      return { error };
+    }
+  });
 }
