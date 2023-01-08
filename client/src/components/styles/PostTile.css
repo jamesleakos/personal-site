@@ -38,6 +38,15 @@
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
 }
+.post-tile-title-area:hover img {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+}
+.post-tile-title-area:hover .tile-title {
+  color: var(--text-accent);
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+}
 
 .post-tile .tag {
   font-family: var(--caption-font);

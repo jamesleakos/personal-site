@@ -23,7 +23,14 @@
 
 .body-text {
   text-align: left;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  margin: var(--post-component-margin) auto;
+  width: 30%;
+}
+@media screen and (max-width: 1000px) {
+  .body-text {
+    width: 80%;
+  }
 }
 
 .quote {

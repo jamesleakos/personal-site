@@ -20,6 +20,7 @@
 
   /* article */
   --post-width: 60%;
+  --post-component-margin: 30px;
 
   /* post list */
   --post-list-height: 500px;

@@ -8,6 +8,7 @@ import Footer from '../components/Footer.jsx';
 import Navbar from '../components/Navbar.jsx';
 import PostList from '../components/PostList.jsx';
 import Info from '../components/Info.jsx';
+import BackgroundImage from '../components/BackgroundImage.jsx';
 
 function Home() {
   useEffect(() => {
@@ -63,6 +64,7 @@ function Home() {
         <Navbar />
         <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} useWindowOffset={true} title='Featured Posts' showSearch={false} />
         <Info />
+        <BackgroundImage height='600px' image={'url(' + require('../images/skinning_outside.JPG') + ')'} />
         <Footer />
       </div>
     </div>

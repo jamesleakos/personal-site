@@ -1,42 +1,13 @@
 .footer {
   margin: 0;
-}
-
-.footer h3 {
-  /* font-family: 'Courier Prime', monospace; */
-  font-size: 2rem;
-  color: white;
-  margin: 0 auto;
-  display: inline-block;
-  position: absolute;
-  bottom: 10px;
-}
-
-.footer-img {
-  margin: 0;
-
-  /* set image */
-  background-image: url('../../images/skinning_outside.jpg');
-
-  /* set height */
-  height: 50vh;
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.final {
   height: 100px;
 }
 
-.final .reacting-link {
+.footer .reacting-link {
   text-align: center;
   display: inline-block;
   margin: 40px 10px 40px 10px
 }
-.final .reacting-link:hover {
+.footer .reacting-link:hover {
   -webkit-transform: scale(1.2);
 }

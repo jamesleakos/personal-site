@@ -34,7 +34,6 @@ exports.getPostsInfo = async (req, res) => {
       }
       return post;
     })
-    console.log(posts);
     res.status(200).send(posts);
 
   } catch (err) {

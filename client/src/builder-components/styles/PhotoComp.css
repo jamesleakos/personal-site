@@ -17,6 +17,16 @@
   border-bottom: 1px solid var(--background-color-dark-main);
 }
 
+.photo-comp .editing img {
+  width: 400px;
+  margin: 20px 0; 
+}
+@media screen and (max-width: 1000px) {
+  .photo-comp .editing img {
+    width: 90%;
+  }
+}
+
 .photo-comp .left-icons {
   float: left;
   display: block;

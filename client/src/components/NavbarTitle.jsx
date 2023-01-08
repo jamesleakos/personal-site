@@ -9,7 +9,7 @@ function TitleText() {
   )
 }
 
-function NavbarTitle() {
+function NavbarTitle({gridColumn}) {
   const [navbarStuck, setNavbarStuck] = useState(false);
   const [windowHasScrolled, setWindowHasScrolled] = useState(false);
 
@@ -32,7 +32,7 @@ function NavbarTitle() {
   if (useLocation().pathname === '/') {
     return (
       <CSSTransition in={navbarStuck} timeout={300} classNames="slide" >
-        <div className='navbar-title' style={navbarStuck ? {opacity: 1, gridColumn: 4} : {gridColumn: 4}}>
+        <div className='navbar-title' style={navbarStuck ? {opacity: 1, gridColumn: gridColumn} : {gridColumn: gridColumn}}>
           <TitleText />
         </div>
       </CSSTransition>
@@ -40,14 +40,14 @@ function NavbarTitle() {
   } else if (useLocation().pathname === '/post-builder' || useLocation().pathname === '/post-viewer') {
     return (
       <CSSTransition in={windowHasScrolled} timeout={300} classNames="slide" >
-        <div className='navbar-title' style={windowHasScrolled ? {opacity: 1, gridColumn: 4} : {gridColumn: 4}}>
+        <div className='navbar-title' style={windowHasScrolled ? {opacity: 1, gridColumn: gridColumn} : {gridColumn: gridColumn}}>
           <TitleText />
         </div>
       </CSSTransition>
     )
   } else {
     return (
-      <div className='navbar-title' style={{opacity: 1, gridColumn: 4}}>
+      <div className='navbar-title' style={{opacity: 1, gridColumn: gridColumn}}>
         <TitleText />
       </div>
     )

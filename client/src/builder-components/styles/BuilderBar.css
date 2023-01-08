@@ -15,6 +15,16 @@
   display: grid;
   grid-template-columns: 30% 1fr 1fr 1fr 1fr 30%;
 }
+@media screen and (max-width: 1200px) {
+  .builder-bar {
+    grid-template-columns: 20% 1fr 1fr 1fr 1fr 20%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .builder-bar {
+    grid-template-columns: 10px 1fr 1fr 1fr 1fr 10px;
+  }
+}
 
 .builder-bar-item .expand-cursor {
   display: inline-block;

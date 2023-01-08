@@ -1,7 +1,7 @@
 @import '../../components/styles/constants.css';
 
 .photo-comp .photo {
-  margin: 0 auto;
+  margin: var(--post-component-margin) auto;
 }
 
 .photo-comp .photo img {
@@ -9,7 +9,7 @@
 }
 
 .background-photo-div {
-  margin: 0;
+  margin: var(--post-component-margin) 0;
 
   /* backround image set in-line */
 

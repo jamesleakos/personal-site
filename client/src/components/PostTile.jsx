@@ -11,17 +11,23 @@ function PostTile({post, onClick}) {
 
   return (
     <div className='post-tile' >
+      {/* tags */}
       <div className='tags'>
         {
-          post.tags.map(tag => {
-            return <span className='tag'>{tag}</span>
+          post.tags.map((tag, index) => {
+            return <span key={tag + index + ''} className='tag'>{tag}</span>
           })
         }
       </div>
-      <div className='tile-title-image'>
-        <img src={post.url} alt='tile image' onClick={() => onClick(post)} />
+      <div className='post-tile-title-area' onClick={() => onClick(post)} >
+        {/* image */}
+        <div className='tile-title-image'>
+          <img src={post.url} alt='tile image' />
+        </div>
+        {/* title */}
+        <h3 className='tile-title links-item reacting-link' >{ post.title }</h3>
       </div>
-      <h3 className='tile-title links-item reacting-link' onClick={() => onClick(post)} >{ post.title }</h3>
+      {/* description */}
       <p className='description'>{ post.description }</p>
     </div>
   )

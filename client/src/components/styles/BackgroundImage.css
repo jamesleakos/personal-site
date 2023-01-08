@@ -1,0 +1,13 @@
+@import './constants.css';
+
+.background-image-main-component {
+  /* background image set inline */
+
+  /* height set inline */
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

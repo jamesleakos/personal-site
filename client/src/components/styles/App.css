@@ -45,3 +45,15 @@ a {
   font-weight: 400;
   text-decoration: none;
 }
+
+.inline-background-image {
+  /* background image set inline */
+
+  /* height set inline */
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -71,6 +71,8 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
               <FontAwesomeIcon onClick={() => { deleteComponent(component) }} className='reacting-link expand-cursor' icon='fa-solid fa-xmark' />
             </div>
 
+            <img src={url} alt='image' />
+
             <div className='input-area'>
                 <input id={isLoading ? 'image-input is-loading' : 'image-input'} type='file' onChange={ handleUpload } />
                 { error && <p className='error-text' >{error}</p>}
