@@ -80,5 +80,10 @@ client/dist/vendors*
 coverage/
 
 # more
-client/src/images/
+# client/src/images/ - I think we'll actually want these
 uploads/
+
+client/dist/*.JPG
+client/dist/*.jpg
+client/dist/*.png
+client/dist/*.jpeg
