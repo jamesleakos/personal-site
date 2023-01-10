@@ -10,7 +10,7 @@ import '../viewer-components/styles/PhotoComp.css';
 // 
 const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 
-function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, openOnEdit }) {
+function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, openOnEdit, moveComponent }) {
   // are we editing the post?
   const [editActive, setEditActive] = useState(openOnEdit);
 
@@ -58,20 +58,37 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
       })
   }
 
+  const toggleMarginTop = function() {
+    component.margin_top = !component.margin_top;
+    modifyComponent(component);
+  }
+
+  const toggleMarginBottom = function() {
+    component.margin_bottom = !component.margin_bottom;
+    modifyComponent(component);
+  }
+
   return (
     <div className='photo-comp'>
       {
         editActive 
           ?
           <div className='editing'>
-            <div className='left-icons'>
-              <FontAwesomeIcon onClick={(e) => { }} className='reacting-link expand-cursor' icon='fa-solid fa-bars' />
-            </div>
-            <div className='right-icons'>
-              <FontAwesomeIcon onClick={() => { deleteComponent(component) }} className='reacting-link expand-cursor' icon='fa-solid fa-xmark' />
+            <div className='top-icons'>
+              <div className='left-icons'>
+                <FontAwesomeIcon onClick={() => { moveComponent(component, -1); }} className='reacting-link expand-cursor' icon='fa-solid fa-arrow-up' />
+                <FontAwesomeIcon onClick={() => { moveComponent(component, 1); }} className='reacting-link expand-cursor' icon='fa-solid fa-arrow-down' />
+                <span className='reacting-link expand-cursor' onClick={() => {toggleMarginTop(); }}>{component.margin_top ? 'Remove Top Margin' : 'Add Top Margin'}</span>
+                <span className='reacting-link expand-cursor' onClick={() => {toggleMarginBottom(); }}>{component.margin_bottom ? 'Remove Bottom Margin' : 'Add Buttom Margin'}</span>
+              </div>
+              <div className='right-icons'>
+                <FontAwesomeIcon onClick={() => { deleteComponent(component) }} className='reacting-link expand-cursor' icon='fa-solid fa-xmark' />
+              </div>
             </div>
 
-            <img src={url} alt='image' />
+            {
+              url ? <img src={url} alt='image' /> : null
+            }
 
             <div className='input-area'>
                 <input id={isLoading ? 'image-input is-loading' : 'image-input'} type='file' onChange={ handleUpload } />
@@ -90,7 +107,7 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
             </div>
           </div> 
           :
-          <div className={component.type} onDoubleClick={() => setEditActive(true) }>
+          <div className={component.type + (component.margin_top ? ' has-top-margin' : '') + (component.margin_bottom ? ' has-bottom-margin' : '')} onDoubleClick={() => setEditActive(true) }>
             {
               component.type === 'photo'
                 ?

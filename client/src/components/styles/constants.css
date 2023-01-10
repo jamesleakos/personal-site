@@ -7,6 +7,7 @@
 
   /* colours */
   --text-accent: red;
+  --text-color-light-main: #FFFFFF;
 
   --background-color-light-main: #FFFFFF;
   --background-color-light-secondary: #F4F4F4;
@@ -20,9 +21,10 @@
 
   /* article */
   --post-width: 60%;
-  --post-component-margin: 30px;
+  --post-component-vertical-margin: 60px;
+  --post-component-horizontal-margin: 30px;
 
   /* post list */
   --post-list-height: 500px;
-  --post-list-margin: 20px;
+  --post-list-margin: 40px;
 }

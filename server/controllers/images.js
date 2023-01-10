@@ -36,12 +36,18 @@ exports.addOrUpdateImageComponent = (req, res) => {
   if (req.body.key === '') {
     res.status(400).send('You must supply an image key');
   }
+  // we do this because we use it twice
+  const newObj = {
+    type: req.body.type,
+    key: req.body.key,
+    extension: req.body.extension,
+    margin_top: req.body.margin_top,
+    margin_bottom: req.body.margin_bottom
+  }
 
   if (!req.body._id) {
     const imageComponent = new ImageComponent({
-      type: req.body.type,
-      key: req.body.key,
-      extension: req.body.extension
+      ...newObj
     })
     imageComponent.save()
       .catch(err => {
@@ -66,9 +72,7 @@ exports.addOrUpdateImageComponent = (req, res) => {
       _id: req.body._id
     },
     {
-      type: req.body.type,
-      key: req.body.key,
-      extension: req.body.extension
+      ...newObj
     },{
       // without this I think it returns the old one
       new: true

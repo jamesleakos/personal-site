@@ -3,7 +3,8 @@ import React, { useEffect, useState, Suspense } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  Router
+  Router,
+  useParams
 } from "react-router-dom";
 
 // components
@@ -19,10 +20,10 @@ import './styles/App.css';
 // font awesome import
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faImage, faImages, faBook, faBookOpen, faSection, faFont, faQuoteLeft, faClosedCaptioning, faImagePortrait, faArrowRight, faSquarePlus, faXmark, faX, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faImages, faBook, faBookOpen, faSection, faFont, faQuoteLeft, faClosedCaptioning, faImagePortrait, faArrowRight, faSquarePlus, faXmark, faX, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 // import { farBook } from '@fortawesome/free-regular-svg-icons';
 
-library.add(fab, faImage, faImages, faBook, faBookOpen, faSection, faFont, faQuoteLeft, faClosedCaptioning, faImagePortrait, faArrowRight, faSquarePlus, faXmark, faX, faBars);
+library.add(fab, faImage, faImages, faBook, faBookOpen, faSection, faFont, faQuoteLeft, faClosedCaptioning, faImagePortrait, faArrowRight, faSquarePlus, faXmark, faX, faArrowUp, faArrowDown);
 
 const router = createBrowserRouter([
   {
@@ -34,12 +35,12 @@ const router = createBrowserRouter([
     element: <Posts />,
   },
   {
-    path: '/post-builder',
-    element: <PostBuilder />,
-  },
-  {
     path: '/admin',
     element: <Admin />,
+  },
+  {
+    path: '/post-builder',
+    element: <PostBuilder />,
   },
   {
     path: '/post-viewer',

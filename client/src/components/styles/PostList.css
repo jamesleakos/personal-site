@@ -1,25 +1,31 @@
 @import './constants.css';
 
 .post-list {
-  background-color: var(--background-color-light-secondary);
-  padding-top: 20px;
+  background-color: var(--background-color-dark-main);
+}
+
+.post-list hr {
+  margin-top: calc(var(--post-list-margin) + 10px);
+  width: calc(100% - 2 * var(--post-list-margin));
+  height: 0;
+  border-top: .5px solid var(--text-color-light-main);
 }
 
 .post-list .title {
-  font-family: var(--caption-font);
-  font-size: .8rem;
+  font-family: var(--main-title-font);
+  font-size: 1.5rem;
   display: block;
   float: left;
   padding-top: var(--post-list-margin);
   margin-left: var(--post-list-margin);
-  color: var(--text-accent);
+  color: var(--text-color-light-main);
 }
 
 .post-list .search {
   display: block;
   float: left;
   font-family: var(--caption-font);
-  margin-top: 15px;
+  /* margin-top: 15px; */
   margin-left: var(--post-list-margin);
 }
 
@@ -38,11 +44,18 @@
 }
 
 .post-list .new-post-button {
+  color: var(--text-color-light-main);
   text-align: left;
   display: block;
   float: left;
   font-family: var(--caption-font);
   font-size: .8rem;
   margin-left: var(--post-list-margin);
-  padding-top: var(--post-list-margin);
+  /* padding-top: var(--post-list-margin); */
+}
+
+.post-list .span-wrapper {
+  display: block;
+  min-height: 100px;
+  margin: 100px 30% 0 30%;
 }

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Post, TextComponent, ImageComponent, Component } = require('../../db/models/Post.js');
 const s3 = require('../s3.js');
+const { moveArrayElement } = require('../helpers/moveArrayElement.js');
 
 exports.getAllPosts = (req, res) => {
   Post.find({})
@@ -21,7 +22,11 @@ exports.getPostsInfo = async (req, res) => {
     
     const keys = posts.map(post => {
       return post.display_image_key;
+    }).filter(key => {
+      return !!key;
     })
+
+    console.log(keys);
   
     const { urlObjs } = await s3.getPresignedUrlsFromKeys(keys);
 
@@ -99,15 +104,47 @@ exports.addPost = (req, res) => {
     })
 };
 
+exports.reorderComponent = (req, res) => {
+  const post_id = req.query.post_id;
+  const from = req.query.from;
+  const to = req.query.to;
+
+  if (!post_id || !from || !to) {
+    console.error('You are missing required params');
+  }
+
+  Post.findById(req.query.post_id)
+  .then(post => {
+    let newComps = [...post.components];
+    newComps = moveArrayElement(newComps, from, to);
+    post.components = newComps;
+    return post.save()
+  })
+  .then(saveResponse => {
+    res.status(200).send(saveResponse);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(400).send(err);
+  })
+}
+
 exports.addOrUpdateTextComponent = (req, res) => {
   if (req.body.text === '') {
     res.status(400).send('You cannot add blank text');
   }
 
+  // we define it here because it's used in two places
+  const newComp = {
+    type: req.body.type,
+    text: req.body.text,
+    margin_top: req.body.margin_top,
+    margin_bottom: req.body.margin_bottom
+  }
+
   if (!req.body._id) {
     const textComponent = new TextComponent({
-      type: req.body.type,
-      text: req.body.text
+      ...newComp
     })
     textComponent.save()
       .catch(err => {
@@ -117,6 +154,7 @@ exports.addOrUpdateTextComponent = (req, res) => {
 
     Post.findById(req.query.post_id)
       .then(post => {
+        console.log(textComponent);
         post.components.push(textComponent);
         return post.save()
       })
@@ -132,8 +170,7 @@ exports.addOrUpdateTextComponent = (req, res) => {
       _id: req.body._id
     },
     {
-      type: req.body.type,
-      text: req.body.text
+      ...newComp
     },
     {
       // without this I think it returns the old one

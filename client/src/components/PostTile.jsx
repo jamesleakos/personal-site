@@ -15,15 +15,20 @@ function PostTile({post, onClick}) {
       <div className='tags'>
         {
           post.tags.map((tag, index) => {
-            return <span key={tag + index + ''} className='tag'>{tag}</span>
+            return <div className='tag' key={tag + index + ''}>
+              <span className='tag-span'>{tag}</span>
+            </div>
           })
         }
       </div>
       <div className='post-tile-title-area' onClick={() => onClick(post)} >
         {/* image */}
-        <div className='tile-title-image'>
-          <img src={post.url} alt='tile image' />
-        </div>
+        {
+          post.url ?
+            <div className='tile-title-image'>
+              <img src={post.url} alt='tile image' />
+            </div> : null
+        }
         {/* title */}
         <h3 className='tile-title links-item reacting-link' >{ post.title }</h3>
       </div>

@@ -1,18 +1,24 @@
 // dependancies
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 // components
 import Navbar from '../components/Navbar.jsx';
 import PostList from '../components/PostList.jsx';
+import Footer from '../components/Footer.jsx';
 import AddComponentSelector from '../builder-components/AddComponentSelector.jsx';
 import BuilderBar from '../builder-components/BuilderBar.jsx';
 import InfoModal from '../builder-components/InfoModal.jsx';
 import TextComp from '../builder-components/TextComp.jsx';
 import PhotoComp from '../builder-components/PhotoComp.jsx';
 
-function PostBuilder() {
+function PostBuilder({ match }) {
+  
+  // let { test } = useParams();
+  console.log(match);
+  console.log(useLocation().pathname);
+
   const location = useLocation();
   let passedPost = false;
   if (location.state) {
@@ -72,7 +78,9 @@ function PostBuilder() {
   // COMPONENT API CALLS
   const addComponent = function(componentName) {
     const comp = {
-      type: componentName
+      type: componentName,
+      margin_top: false,
+      margin_bottom: false
     }
     switch (componentName) {
       case 'main-title':
@@ -107,6 +115,7 @@ function PostBuilder() {
           console.log(err);
         })
     } else {
+      console.log('sending message');
       axios.put(`/components?post_id=${post._id}`,{
         ...component
       })
@@ -154,18 +163,44 @@ function PostBuilder() {
       console.error('kind has unknown value');
     }
   }
+  // move element forward or backward
+  const moveComponent = (comp, positionsToMove) => {
+    const index = post.components.indexOf(comp);
+    if (index < 0) return;
+
+    axios.patch(`/components/reorder?post_id=${post._id}&from=${index}&to=${index+positionsToMove}`)
+      .then(res => {
+        setPost(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   // image GET calls - the POST calls are in the image component itself
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     if (!post._id) return;
+
+    let resetNeeded = false;
+    for (let comp of post.components) {
+      if (comp.kind === 'ImageComponent') {
+        if (images.findIndex(i => i.key === comp.key) < 0) {
+          resetNeeded = true;
+          // console.log('A reset is needed. ' + JSON.stringify(images) + ' does not include the ')
+        }
+      }
+    }
+
+    if (!resetNeeded) return;
+
     axios.get(`/image_components?post_id=${post._id}`)
       .then(res => {
         setImages(res.data);
       })
       .catch(err => {
-        console.log(err);
+        console.log('Received error: ' + err.message);
       })
   }, [post]);
   
@@ -181,7 +216,7 @@ function PostBuilder() {
       {
         !post._id 
           ? 
-          <PostList onTileClick={getFullPost} showAddNew={true} useWindowOffset={false} title='Posts' showSearch={true} postFilters={{}} />
+          <PostList onTileClick={getFullPost} showAddNew={true} useWindowOffset={false} title='Posts' showSearch={true} postFilters={{}} amTiled={true} />
           : null
       }
       {
@@ -193,17 +228,17 @@ function PostBuilder() {
             case 'body-text':
             case 'quote':
             case 'caption':
-              return <TextComp key={component._id + index + ''} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} />
+              return <TextComp key={component._id + index + ''} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} moveComponent={moveComponent} />
             case 'photo':
             case 'background-photo':
-              return <PhotoComp key={component._id + index} postId={post._id} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} url={images.filter(c => c.key === component.key)[0]?.url} />
+              return <PhotoComp key={component._id + index} postId={post._id} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} url={images.filter(c => c.key === component.key)[0]?.url} moveComponent={moveComponent} />
             default:
               break;
           }
         })
       }
       {
-        !!post
+        !!post._id
           ?
           <AddComponentSelector addComponent={addComponent} />
           : null
@@ -214,6 +249,7 @@ function PostBuilder() {
           <InfoModal post={post} modifyPost={modifyPost} setShowInfoModal={setShowInfoModal} />
           : null
       }
+      {/* <Footer /> */}
     </div>
   )
 }

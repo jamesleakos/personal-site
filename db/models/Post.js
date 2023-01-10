@@ -5,6 +5,8 @@ options = { discriminatorKey: 'kind' }
 const componentSchema = new mongoose.Schema({
   // _id: mongoose.Schema.Types.ObjectId,
   type: String,
+  margin_top: Boolean,
+  margin_bottom: Boolean
 }, options)
 
 const Component = mongoose.model('Component', componentSchema);  

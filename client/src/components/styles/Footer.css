@@ -1,6 +1,9 @@
+@import './constants.css';
+
 .footer {
   margin: 0;
   height: 100px;
+  background-color: var(--background-color-light-secondary);
 }
 
 .footer .reacting-link {
@@ -9,5 +12,6 @@
   margin: 40px 10px 40px 10px
 }
 .footer .reacting-link:hover {
+  transform: scale(1.2);
   -webkit-transform: scale(1.2);
 }

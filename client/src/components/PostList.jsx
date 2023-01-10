@@ -5,9 +5,10 @@ import { Link, useLocation } from 'react-router-dom'
 
 // import
 import PostTile from './PostTile.jsx';
+import PostSpan from './PostSpan.jsx';
 import './styles/PostList.css';
 
-function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, useWindowOffset }) {
+function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, useWindowOffset, amTiled }) {
   // 
   const [posts, setPosts] = useState([]);
   const [shownPosts, setShownPosts] = useState([]);
@@ -21,7 +22,6 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
       }
     })
       .then(res => {
-        console.log(res.data);
         setPosts(res.data);
       })
       .catch(err => {
@@ -123,6 +123,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   return (
     <div className='post-list'>
       <p className='title' >{title}</p>
+      <hr />
       {
         showAddNew
           ?
@@ -135,29 +136,41 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
           <input className='search' type="text" placeholder='Search' value={search} onChange={(e) => { setSearch(e.target.value); }} />
           : null
       }
-      <div className='scroll-wrapper' ref={wrapperRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
-        <div className='scroller' >
-          {
-            // map out the posts
-            shownPosts.map(post => {
-              return <PostTile key={post._id} post={post} onClick={handleTileClick} />
-            })
-          }
-        </div>
-        {
-          showText 
-            ?
-            <div className='mouseOverText' ref={textRef} style={{
-              position: 'absolute',
-              left: mousePos.x + dragOffSetX,
-              top: mousePos.y + dragOffSetY,
-              zIndex: 999
-            }} > 
-              {/* DRAG */}
+      {
+        amTiled 
+          ?
+          <div className='scroll-wrapper' ref={wrapperRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+            <div className='scroller' >
+              {
+                // map out the posts
+                shownPosts.map(post => {
+                  return <PostTile key={post._id} post={post} onClick={handleTileClick} />
+                })
+              }
             </div>
-            : null
-        }
-      </div>
+            {
+              showText 
+                ?
+                <div className='mouseOverText' ref={textRef} style={{
+                  position: 'absolute',
+                  left: mousePos.x + dragOffSetX,
+                  top: mousePos.y + dragOffSetY,
+                  zIndex: 999
+                }} > 
+                  {/* DRAG */}
+                </div>
+                : null
+            }
+          </div>
+          :
+          <div className='span-wrapper'>
+            {
+              shownPosts.map((post, index) => {
+                return <PostSpan key={post._id} post={post} onClick={handleTileClick} showSlash={index === (shownPosts.length - 1)} />
+              })
+            }
+          </div>
+      }
     </div>
 
   )

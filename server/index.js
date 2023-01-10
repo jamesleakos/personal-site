@@ -81,6 +81,10 @@ app.delete('/components', function(req, res) {
   controllers.deleteComponent(req, res);
 })
 
+app.patch('/components/reorder', function(req, res) {
+  controllers.reorderComponent(req, res);
+})
+
 // PICTURES
 app.post('/image_components', upload.single('image'), function(req, res) {
   imageController.uploadImage(req, res);

@@ -18,13 +18,19 @@
 }
 
 .photo-comp .editing img {
+  display: block;
   width: 400px;
-  margin: 20px 0; 
+  margin: 20px auto; 
 }
 @media screen and (max-width: 1000px) {
   .photo-comp .editing img {
     width: 90%;
   }
+}
+
+.photo-comp .top-icons {
+  display: block;
+  margin-bottom: 40px;
 }
 
 .photo-comp .left-icons {

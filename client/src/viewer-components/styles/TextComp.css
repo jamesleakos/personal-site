@@ -4,13 +4,14 @@
   font-family: var(--main-title-font);
   text-align: center;
   font-size: 3rem;
+  /* we don't want the main title to be used with the margin classes */
   margin: 40px 0 20px;
 }
 
 .subtitle {
   text-align: center;
   font-size: 1.5rem;
-  margin: 0 0 40px 0;
+  margin: 0;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--background-color-dark-main);
 }
@@ -24,7 +25,9 @@
 .body-text {
   text-align: left;
   font-size: 1.2rem;
-  margin: var(--post-component-margin) auto;
+  /* we're doing margin stuff a bit funny because we can add and remove */
+  margin-left: auto;
+  margin-right: auto;
   width: 30%;
 }
 @media screen and (max-width: 1000px) {
@@ -39,8 +42,23 @@
 
 .caption {
   font-family: var(--caption-font);
-  font-size: 1rem;
-  margin: 0 0 40px 0;
+  font-size: .7rem;
+  color: var(--text-accent);
+  /* we're doing margin stuff a bit funny because we can add and remove */
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--background-color-dark-main);
+  width: 50%;
+  border-bottom: 1px solid var(--text-accent);
+}
+
+
+/* these should be at the bottom so that they override other things */
+.has-top-margin {
+  margin-top: var(--post-component-vertical-margin);
+}
+
+.has-bottom-margin {
+  margin-bottom: var(--post-component-vertical-margin);
 }

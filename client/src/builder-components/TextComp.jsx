@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles/TextComp.css';
 import '../viewer-components/styles/TextComp.css';
 
-function TextComp({ component, modifyComponent, deleteComponent, openOnEdit }) {
+function TextComp({ component, modifyComponent, deleteComponent, openOnEdit, moveComponent }) {
   useEffect(() => {
     // console.log(component);
   }, []);
@@ -24,6 +24,17 @@ function TextComp({ component, modifyComponent, deleteComponent, openOnEdit }) {
     modifyComponent(component);
   }
 
+  const toggleMarginTop = function() {
+    component.margin_top = !component.margin_top;
+    modifyComponent(component);
+  }
+
+  const toggleMarginBottom = function() {
+    // console.log('toggle bottom');
+    component.margin_bottom = !component.margin_bottom;
+    modifyComponent(component);
+  }
+
   return (
     <div className='text-comp'>
       {
@@ -31,7 +42,10 @@ function TextComp({ component, modifyComponent, deleteComponent, openOnEdit }) {
           ?
           <div className='editing'>
             <div className='left-icons'>
-              <FontAwesomeIcon onClick={(e) => { }} className='reacting-link expand-cursor' icon='fa-solid fa-bars' />
+              <FontAwesomeIcon onClick={() => { moveComponent(component, -1); }} className='reacting-link expand-cursor' icon='fa-solid fa-arrow-up' />
+              <FontAwesomeIcon onClick={() => { moveComponent(component, 1); }} className='reacting-link expand-cursor' icon='fa-solid fa-arrow-down' />
+              <span className='reacting-link expand-cursor' onClick={() => {toggleMarginTop(); }}>{component.margin_top ? 'Remove Top Margin' : 'Add Top Margin'}</span>
+              <span className='reacting-link expand-cursor' onClick={() => {toggleMarginBottom(); }}>{component.margin_bottom ? 'Remove Bottom Margin' : 'Add Buttom Margin'}</span>
             </div>
             <div className='right-icons'>
               <FontAwesomeIcon onClick={() => { deleteComponent(component) }} className='reacting-link expand-cursor' icon='fa-solid fa-xmark' />
@@ -51,7 +65,7 @@ function TextComp({ component, modifyComponent, deleteComponent, openOnEdit }) {
             </div>
           </div> 
           :
-          <div className={component.type} onDoubleClick={() => setEditActive(true) }  dangerouslySetInnerHTML={{ __html: component.text.replace(/\n/g, '<br />') }}>
+          <div className={component.type + (component.margin_top ? ' has-top-margin' : '') + (component.margin_bottom ? ' has-bottom-margin' : '')} onDoubleClick={() => setEditActive(true) }  dangerouslySetInnerHTML={{ __html: component.text.replace(/\n/g, '<br />') }}>
           </div>
       }
     </div>

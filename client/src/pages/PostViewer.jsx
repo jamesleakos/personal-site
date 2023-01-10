@@ -6,8 +6,9 @@ import axios from 'axios';
 // components
 import Navbar from '../components/Navbar.jsx';
 import PostList from '../components/PostList.jsx';
+import Footer from '../components/Footer.jsx';
 import TextComp from '../viewer-components/TextComp.jsx';
-// import PhotoComp from '../viewer-components/PhotoComp.jsx';
+import PhotoComp from '../viewer-components/PhotoComp.jsx';
 // import PhotoGalleryComp from '../viewer-components/PhotoGalleryComp.jsx';
 // import BackgroundPhotoComp from '../viewer-components/BackgroundPhotoComp.jsx';
 
@@ -42,14 +43,28 @@ function PostViewer() {
         console.log(err);
       })
   }
+
+    // image GET calls - the POST calls are in the image component itself
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+      if (!post._id) return;
+      axios.get(`/image_components?post_id=${post._id}`)
+        .then(res => {
+          setImages(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }, [post]);
   
   return (
-    <div className='post-builder'>
+    <div className='post-viewer'>
       <Navbar />
       {
         !post._id 
           ? 
-          <PostList onTileClick={getFullPost} showAddNew={false}  title='Posts' showSearch={true} postFilters={{ published: true }} useWindowOffset={false} />
+          <PostList onTileClick={getFullPost} showAddNew={false}  title='Posts' showSearch={true} postFilters={{ published: true }} useWindowOffset={false} amTiled={true} />
           : null
       }
       {
@@ -63,16 +78,14 @@ function PostViewer() {
             case 'caption':
               return <TextComp key={component._id + index + ''} component={component} />
             case 'photo':
-              // return <PhotoComp key={component._id + index} component={component} />
-            case 'photo-gallery':
-              // return <PhotoGalleryComp key={component._id + index} component={component} />
             case 'background-photo':
-              // return <BackgroundPhotoComp key={component._id + index} component={component} />
+              return <PhotoComp key={component._id + index} component={component} url={images.filter(c => c.key === component.key)[0]?.url} />
             default:
               break;
           }
         })
       }
+      <Footer />
     </div>
   )
 }

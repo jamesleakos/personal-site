@@ -47,6 +47,7 @@
 }
 
 .links-block .links-title {
-  font-size: 1rem;
+  font-size: .9rem;
   font-family: var(--caption-font);
+  letter-spacing: .15rem;
 }

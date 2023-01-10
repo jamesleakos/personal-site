@@ -62,9 +62,9 @@ function Home() {
       </div>
       <div className='scroll-div' ref={scrollDiv}>
         <Navbar />
-        <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} useWindowOffset={true} title='Featured Posts' showSearch={false} />
+        <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} useWindowOffset={true} title='Featured Posts' showSearch={false} amTiled={true} />
         <Info />
-        <BackgroundImage height='600px' image={'url(' + require('../images/skinning_outside.JPG') + ')'} />
+        <BackgroundImage height='80vh' image={'url(' + require('../images/cascade_party.JPG') + ')'} />
         <Footer />
       </div>
     </div>
