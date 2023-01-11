@@ -7,15 +7,26 @@ import { Link, useLocation } from 'react-router-dom'
 import PostTile from './PostTile.jsx';
 import PostSpan from './PostSpan.jsx';
 import './styles/PostList.css';
+import { set } from 'date-fns/esm';
 
 function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, useWindowOffset, amTiled }) {
   // 
   const [posts, setPosts] = useState([]);
   const [shownPosts, setShownPosts] = useState([]);
+  const [tags, setTags] = useState([]);
   const [search, setSearch] = useState('');
 
   // get the posts
   useEffect(() => {
+    axios.get('tags')
+      .then(ts => {
+        console.log(ts.data);
+        setTags(ts.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
     axios.get('/posts/info', {
       params: {
         ...postFilters
@@ -35,9 +46,11 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
       let returning = false;
       if (post.title.toLowerCase().includes(search.toLowerCase())) returning = true;
       if (post.description.toLowerCase().includes(search.toLowerCase())) returning = true;
-      for (let tag of post.tags) {
-        if (tag.toLowerCase().includes(search.toLowerCase())) returning = true;
-      }
+      // tags
+      const tagNames = tags.filter(t => post.tag_ids.includes(t._id)).map(t => t.name);
+        for (let name of tagNames) {
+          if (name.toLowerCase().includes(search.toLowerCase())) returning = true;
+        }
       if (search.toLowerCase().includes('publish') && post.published) returning = true;
       if (search.toLowerCase().includes('feature') && post.featured) returning = true;
       if (search.toLowerCase().includes('draft') && !post.published) returning = true;
@@ -59,7 +72,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     axios.post('/posts', {
       title: 'Temp Title',
       description: 'Temp Description',
-      tags: ['adventure', 'culture', 'winter 2023'],
+      tags: [],
       created_at: today.toISOString(),
       published: false,
       published_at: null,
@@ -120,6 +133,8 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     setShowText(false);
   }
 
+  console.log('tags: ' + JSON.stringify(tags));
+
   return (
     <div className='post-list'>
       <p className='title' >{title}</p>
@@ -144,7 +159,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
               {
                 // map out the posts
                 shownPosts.map(post => {
-                  return <PostTile key={post._id} post={post} onClick={handleTileClick} />
+                  return <PostTile key={post._id} post={post} onClick={handleTileClick} tags={tags.filter(t => post.tag_ids.includes(t._id)).map(t => t.name)} />
                 })
               }
             </div>

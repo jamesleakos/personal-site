@@ -4,7 +4,7 @@ import React from 'react';
 // imports
 import './styles/PostTile.css';
 
-function PostTile({post, onClick}) {
+function PostTile({post, onClick, tags}) {
 
   // get the image
 
@@ -14,7 +14,8 @@ function PostTile({post, onClick}) {
       {/* tags */}
       <div className='tags'>
         {
-          post.tags.map((tag, index) => {
+          // these tags are really just the tag names passed in
+          tags.map((tag, index) => {
             return <div className='tag' key={tag + index + ''}>
               <span className='tag-span'>{tag}</span>
             </div>

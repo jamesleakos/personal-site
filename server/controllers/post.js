@@ -89,7 +89,7 @@ exports.addPost = (req, res) => {
     _id: new mongoose.Types.ObjectId(),
     title: req.body.title,
     description: req.body.description,
-    tags: req.body.tags,
+    tag_ids: req.body.tag_ids,
     created_at: req.body.created_at,
     published: req.body.published,
     published_at: req.body.published_at,
@@ -210,7 +210,7 @@ exports.updatePost = (req, res) => {
   {
     title: req.body.title,
     description: req.body.description,
-    tags: req.body.tags,
+    tag_ids: req.body.tag_ids,
     display_image_key: req.body.display_image_key,
     display_image_extension: req.body.display_image_extension,
     created_at: req.body.created_at,

@@ -12,6 +12,7 @@ const multer = require('multer');
 require('../db') // DON'T DELETE THIS - it is needed just to call the DB
 const controllers = require('./controllers/post.js');
 const imageController = require('./controllers/images.js');
+const tagController = require('./controllers/tags.js');
 const logger = require('../middleware/logger.js');
 
 // express app
@@ -103,9 +104,17 @@ app.delete('/image_components', function(req, res) {
   // we can use the same method as the posts
   controllers.deleteComponent(req, res);
 
-  // TODO: delete the image from the s3 bucket
   // can get the key from the route and then send it along to the bucket
   imageController.deleteImage(req, res);
+})
+
+// tags
+app.get('/tags', function(req, res) {
+  tagController.getAllTags(req, res);
+})
+
+app.put('/tags', function(req, res) {
+  tagController.addOrUpdateTag(req, res);
 })
 
 // not sure what this is for

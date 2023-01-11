@@ -20,6 +20,7 @@ const TextComponent = Component.discriminator('TextComponent', textSchema, optio
 const imageSchema = new mongoose.Schema({
   key: String,
   extension: String,
+  size: String,
 })
 const ImageComponent = Component.discriminator('ImageComponent', imageSchema, options);
 
@@ -28,7 +29,7 @@ const postSchema = new mongoose.Schema({
   // display info
   title: String,
   description: String,
-  tags: [String],
+  tag_ids: [mongoose.Schema.Types.ObjectId],
   display_image_key: String,
   display_image_extension: String,
 
@@ -42,9 +43,16 @@ const postSchema = new mongoose.Schema({
 
 const Post = mongoose.model('Post', postSchema);
 
+const tagSchema = new mongoose.Schema({
+  name: String,
+})
+
+const Tag = mongoose.model('Tag', tagSchema);
+
 module.exports = {
   Post,
   TextComponent,
   ImageComponent,
-  Component
+  Component,
+  Tag
 };
