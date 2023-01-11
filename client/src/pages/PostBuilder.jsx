@@ -15,9 +15,6 @@ import PhotoComp from '../builder-components/PhotoComp.jsx';
 
 function PostBuilder({ match }) {
   
-  // let { test } = useParams();
-  console.log(match);
-  console.log(useLocation().pathname);
 
   const location = useLocation();
   let passedPost = false;

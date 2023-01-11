@@ -133,8 +133,6 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     setShowText(false);
   }
 
-  console.log('tags: ' + JSON.stringify(tags));
-
   return (
     <div className='post-list'>
       <p className='title' >{title}</p>
