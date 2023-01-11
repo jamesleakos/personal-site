@@ -111,6 +111,7 @@ exports.reorderComponent = (req, res) => {
 
   if (!post_id || !from || !to) {
     console.error('You are missing required params');
+    return;
   }
 
   Post.findById(req.query.post_id)
@@ -132,6 +133,7 @@ exports.reorderComponent = (req, res) => {
 exports.addOrUpdateTextComponent = (req, res) => {
   if (req.body.text === '') {
     res.status(400).send('You cannot add blank text');
+    return;
   }
 
   // we define it here because it's used in two places
@@ -235,6 +237,7 @@ exports.updatePost = (req, res) => {
 exports.deletePost = (req, res) => {
   if (!req.query.post_id) {
     res.status(400).send('You need to supply a post_id');
+    return;
   }
   s3.emptyS3Directory(req.query.post_id);
 
