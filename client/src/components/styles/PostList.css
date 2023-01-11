@@ -37,6 +37,7 @@
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
+  padding-left: var(--post-list-margin);
 }
 
 .post-list .scroller {
