@@ -15,6 +15,7 @@ exports.getAllTags = (req, res) => {
 exports.addOrUpdateTag = (req, res) => {
   if (req.body.name === '') {
     res.status(400).send('Must include a name');
+    return;
   }
 
   // we define it here because it's used in two places
@@ -27,12 +28,15 @@ exports.addOrUpdateTag = (req, res) => {
       ...newTag
     })
     tag.save()
-      .then(t => {
-        res.status(200).send(t);
+      .then(() => {
+        return Tag.find({});
+      })
+      .then(data => {
+        res.status(200).send(data);
       })
       .catch(err => {
         console.log(err);
-        res.status(400).send(err);
+        res.sendStatus(400);
       })
 
   } else {
@@ -46,12 +50,33 @@ exports.addOrUpdateTag = (req, res) => {
       // without this I think it returns the old one
       new: true
     })
-      .then(t => {
-        res.status(200).send(t);
+      .then(() => {
+        return Tag.find({});
+      })
+      .then(data => {
+        res.status(200).send(data);
       })
       .catch(err => {
         console.log(err);
-        res.status(400).send(err);
+        res.sendStatus(400);
       })
   }
+}
+
+exports.deleteTag = (req, res) => {
+  if (!req.query.tag_id) {
+    res.status(400).send('You need to supply a tag_id');
+  }
+
+  Tag.deleteOne({ _id: req.query.tag_id })
+    .then(() => {
+      return Tag.find({});
+    })
+    .then(data => {
+      res.status(200).send(data);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(400);
+    })
 }

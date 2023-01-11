@@ -1,1 +1,33 @@
 @import '../../components/styles/constants.css';
+
+.tag-manager {
+  padding: var(--post-list-margin);
+}
+
+.tag-manager .tag-bar {
+  display: block;
+  width: 100%;
+  height: 50px;
+}
+
+.tag-manager .tag-title {
+  font-family: var(--main-title-font);
+  float: left;
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--background-color-dark-main);
+}
+
+.tag-manager .add-tag {
+  font-family: var(--caption-font);
+  float: left;
+  margin: 15px 0 0 30px;
+  font-size: .8rem;
+  color: var(--background-color-dark-main);
+}
+
+.tag-manager .tag-holder {
+  display: block;
+  min-height: 100px;
+  width: calc(100% - (2 * var(--post-list-margin)));
+}

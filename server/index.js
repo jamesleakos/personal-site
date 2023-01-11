@@ -117,6 +117,10 @@ app.put('/tags', function(req, res) {
   tagController.addOrUpdateTag(req, res);
 })
 
+app.delete('/tags', function(req, res) {
+  tagController.deleteTag(req, res);
+})
+
 // not sure what this is for
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
