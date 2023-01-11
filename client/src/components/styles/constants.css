@@ -25,6 +25,9 @@
   --post-component-horizontal-margin: 30px;
 
   /* post list */
-  --post-list-height: 500px;
+  --post-list-height: 700px;
   --post-list-margin: 40px;
+
+  /* --post-tile-width */
+  --post-tile-width: 280px;
 }

@@ -3,6 +3,7 @@
 .post-tile {
   width: 300px;
   height: calc(var(--post-list-height) * .9);
+  padding: 0 10px;
   margin: 0 var(--post-list-margin);
   border-right: .5px solid var(--text-color-light-main);
   text-align: left;
@@ -17,11 +18,13 @@
   font-family: var(--main-title-font);
   margin: 10px 0 10px 0;
   font-size: 1.5rem;
+  max-width: var(--post-tile-width);
 }
 
 .post-tile .description {
   color: var(--text-color-light-main);
   font-family: var(--body-text-font);
+  max-width: var(--post-tile-width);
 }
 
 .post-tile .tile-title-image {
