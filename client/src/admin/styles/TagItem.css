@@ -1,0 +1,15 @@
+@import '../../components/styles/constants.css';
+
+.tag-item {
+  float: left;
+  margin: 10px;
+}
+
+.tag-item .tag-name {
+  display: inline;
+  margin-right: 5px
+}
+
+.tag-item .tag-delete {
+  display: inline;
+}
