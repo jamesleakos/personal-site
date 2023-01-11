@@ -14,7 +14,6 @@ function TagManager() {
   useEffect(() => {
     axios.get('tags')
       .then(res => {
-        console.log(res.data);
         setTags(res.data);
       })
       .catch(err => {
@@ -27,7 +26,6 @@ function TagManager() {
       name: 'New Tag'
     })
       .then(res => {
-        console.log(res.data);
         setTags(res.data);
       })
       .catch(err => {
@@ -40,7 +38,6 @@ function TagManager() {
       ...tag
     })  
       .then(res => {
-        console.log(res.data);
         setTags(res.data);
       })
       .catch(err => {

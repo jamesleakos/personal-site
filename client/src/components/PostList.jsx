@@ -20,7 +20,6 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   useEffect(() => {
     axios.get('tags')
       .then(ts => {
-        console.log(ts.data);
         setTags(ts.data);
       })
       .catch(err => {
