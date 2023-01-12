@@ -87,6 +87,7 @@ function PostBuilder({ match }) {
       case 'quote':
       case 'caption':
         comp.text = '';
+        comp.margin_bottom = true;
         break;
       case 'photo':
       case 'background-photo':
