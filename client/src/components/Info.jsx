@@ -39,7 +39,7 @@ function Info() {
           <p className='links-title'>FOLLOW</p>
             <a className='links-item reacting-link' href='https://github.com/jamesleakos'>Github</a>
             <a className='links-item reacting-link' href='https://www.instagram.com/jamesleakos/'>Instagram</a>
-            <a className='links-item reacting-link' href='https://www.linkedin.com/in/james-leakos-571074137/'>LinkedIn</a>
+            <a className='links-item reacting-link' href='https://www.linkedin.com/in/jamesleakos/'>LinkedIn</a>
             <br />
         </div>
       </div>

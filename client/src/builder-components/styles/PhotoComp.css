@@ -12,7 +12,7 @@
 .photo-comp .editing {
   display: inline-block;
   width: var(--post-width);
-  margin-top: 20px;
+  margin: var(--post-component-vertical-margin) 0;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--background-color-dark-main);
 }
@@ -41,9 +41,22 @@
   display: inline-block;
   margin: 0 5px;
 }
+.photo-comp .left-icons .size-field-div {
+  display: inline-block;
+  margin-left: 10px;
+}
+.photo-comp .left-icons .size-field-div label {
+  margin-right: 5px;
+}
+
+
 .photo-comp .right-icons {
   float: right;
   display: block;
+}
+.photo-comp .right-icons .reacting-link {
+  display: inline-block;
+  margin: 0 5px;
 }
 .photo-comp .text-comp .reacting-link:hover {
   -webkit-transform: scale(1.2);

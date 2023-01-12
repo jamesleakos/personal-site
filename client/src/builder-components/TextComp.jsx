@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles/TextComp.css';
 import '../viewer-components/styles/TextComp.css';
 
-function TextComp({ component, modifyComponent, deleteComponent, openOnEdit, moveComponent }) {
+function TextComp({ component, addComponent, index, modifyComponent, deleteComponent, openOnEdit, moveComponent }) {
   useEffect(() => {
     // console.log(component);
   }, []);
@@ -14,25 +14,31 @@ function TextComp({ component, modifyComponent, deleteComponent, openOnEdit, mov
 
   const endEdit = function() {
     component.text = text;
-    modifyComponent(component);
+    modifyComponent(component, index);
 
     setEditActive(false);
   }
 
   const changeType = function(type) {
     component.type = type;
-    modifyComponent(component);
+    modifyComponent(component, index);
   }
 
   const toggleMarginTop = function() {
     component.margin_top = !component.margin_top;
-    modifyComponent(component);
+    modifyComponent(component, index);
   }
 
   const toggleMarginBottom = function() {
     // console.log('toggle bottom');
     component.margin_bottom = !component.margin_bottom;
-    modifyComponent(component);
+    modifyComponent(component, index);
+  }
+
+  const handleAddBelow = function (compName) {
+    console.log('click');
+    setEditActive(false);
+    addComponent(compName, index + 1);
   }
 
   return (
@@ -61,6 +67,8 @@ function TextComp({ component, modifyComponent, deleteComponent, openOnEdit, mov
             </div>
             <div className='right-icons'>
               {/* <p className='reacting-link'>Add</p> */}
+              <span className='reacting-link expand-cursor' onClick={() => { handleAddBelow('body-text'); }}>Text Below</span>
+              <span className='reacting-link expand-cursor' onClick={() => { handleAddBelow('photo'); }}>Photo Below</span>
               <FontAwesomeIcon onClick={ endEdit } className='reacting-link expand-cursor' icon='fa-solid fa-arrow-right' />
             </div>
           </div> 

@@ -15,7 +15,7 @@
 .text-comp .editing {
   display: inline-block;
   width: var(--post-width);
-  margin: 20px 0;
+  margin: var(--post-component-vertical-margin) 0;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--background-color-dark-main);
 }
@@ -30,6 +30,10 @@
 .text-comp .right-icons {
   float: right;
   display: block;
+}
+.text-comp .right-icons .reacting-link {
+  display: inline-block;
+  margin: 0 5px;
 }
 .text-comp .text-comp .reacting-link:hover {
   -webkit-transform: scale(1.2);

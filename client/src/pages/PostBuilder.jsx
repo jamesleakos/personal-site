@@ -73,7 +73,7 @@ function PostBuilder({ match }) {
   }
   
   // COMPONENT API CALLS
-  const addComponent = function(componentName) {
+  const addComponent = function(componentName, position) {
     const comp = {
       type: componentName,
       margin_top: false,
@@ -97,12 +97,15 @@ function PostBuilder({ match }) {
     }
     comp.openOnEdit = true;
     const p = { ...post };
-    p.components.push(comp);
+    if (!position) p.components.push(comp);
+    else {
+      p.components.splice(position, 0, comp);
+    }
     setPost(p);
   }
-  const modifyComponent = (component) => {
+  const modifyComponent = (component, index) => {
     if (component.type === 'photo' || component.type === 'background-photo') {
-      axios.put(`/image_components?post_id=${post._id}`,{
+      axios.put(`/image_components?post_id=${post._id}&index=${index}`,{
         ...component
       })
         .then(res => {
@@ -112,8 +115,7 @@ function PostBuilder({ match }) {
           console.log(err);
         })
     } else {
-      console.log('sending message');
-      axios.put(`/components?post_id=${post._id}`,{
+      axios.put(`/components?post_id=${post._id}&index=${index}`,{
         ...component
       })
         .then(res => {
@@ -225,10 +227,10 @@ function PostBuilder({ match }) {
             case 'body-text':
             case 'quote':
             case 'caption':
-              return <TextComp key={component._id + index + ''} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} moveComponent={moveComponent} />
+              return <TextComp key={component._id + index + ''} index={index} component={component} addComponent={addComponent} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} moveComponent={moveComponent} />
             case 'photo':
             case 'background-photo':
-              return <PhotoComp key={component._id + index} postId={post._id} component={component} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} url={images.filter(c => c.key === component.key)[0]?.url} moveComponent={moveComponent} />
+              return <PhotoComp key={component._id + index} index={index} postId={post._id} component={component} addComponent={addComponent} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} url={images.filter(c => c.key === component.key)[0]?.url} moveComponent={moveComponent} />
             default:
               break;
           }

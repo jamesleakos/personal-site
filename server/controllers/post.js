@@ -157,7 +157,7 @@ exports.addOrUpdateTextComponent = (req, res) => {
     Post.findById(req.query.post_id)
       .then(post => {
         console.log(textComponent);
-        post.components.push(textComponent);
+        post.components.splice(req.query.index, 0, textComponent);
         return post.save()
       })
       .then(saveResponse => {

@@ -42,7 +42,8 @@ exports.addOrUpdateImageComponent = (req, res) => {
     key: req.body.key,
     extension: req.body.extension,
     margin_top: req.body.margin_top,
-    margin_bottom: req.body.margin_bottom
+    margin_bottom: req.body.margin_bottom,
+    size: req.body.size,
   }
 
   if (!req.body._id) {
@@ -57,7 +58,7 @@ exports.addOrUpdateImageComponent = (req, res) => {
 
     Post.findById(req.query.post_id)
       .then(post => {
-        post.components.push(imageComponent);
+        post.components.splice(req.query.index, 0, imageComponent);
         return post.save()
       })
       .then(saveResponse => {

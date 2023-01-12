@@ -1,11 +1,12 @@
 @import '../../components/styles/constants.css';
 
 .photo-comp .photo {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .photo-comp .photo img {
-  max-width: var(--post-width);
+  width: var(--post-width);
 }
 
 .background-photo-div {
@@ -13,7 +14,9 @@
 
   /* backround image set in-line */
 
-  /* set height */
+  /* height set in-line - however..  */
+  /* we supply one here to overwrite any bad input */
+  min-height: 10px;
   height: 600px;
 
   /* Create the parallax scrolling effect */
@@ -21,4 +24,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* these should be at the bottom so that they override other things */
+.has-top-margin {
+  margin-top: var(--post-component-vertical-margin);
+}
+
+.has-bottom-margin {
+  margin-bottom: var(--post-component-vertical-margin);
 }

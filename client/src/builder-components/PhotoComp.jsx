@@ -10,7 +10,7 @@ import '../viewer-components/styles/PhotoComp.css';
 // 
 const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 
-function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, openOnEdit, moveComponent }) {
+function PhotoComp({ postId, url, component,  addComponent, index, modifyComponent, deleteComponent, openOnEdit, moveComponent }) {
   // are we editing the post?
   const [editActive, setEditActive] = useState(openOnEdit);
 
@@ -19,15 +19,21 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
   const [error, setError] = useState('');
   const [uploadError, setUploadError] = useState('');
 
+  // size stuff
+  const [size, setSize] = useState(component.size);
+
   const endEdit = function() {
+    component.size = size;
     setEditActive(false);
     if (!component.key) deleteComponent(component);
+    // this is just for size
+    else modifyComponent(component, index);
   }
 
   const changeType = function(type) {
     setEditActive(false);
     component.type = type;
-    modifyComponent(component);
+    modifyComponent(component, index);
   }
 
   const handleUpload = (e) => {
@@ -49,7 +55,7 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
         setIsLoading(false);
         component.key = response.data.key;
         component.extension = file.name.split('.').pop(); // get the extension
-        modifyComponent(component);
+        modifyComponent(component, index);
       })
       .catch(err => {
         setIsLoading(false);
@@ -60,12 +66,18 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
 
   const toggleMarginTop = function() {
     component.margin_top = !component.margin_top;
-    modifyComponent(component);
+    modifyComponent(component, index);
   }
 
   const toggleMarginBottom = function() {
     component.margin_bottom = !component.margin_bottom;
-    modifyComponent(component);
+    modifyComponent(component, index);
+  }
+
+  const handleAddBelow = function (compName) {
+    console.log('click');
+    setEditActive(false);
+    addComponent(compName, index + 1);
   }
 
   return (
@@ -98,11 +110,17 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
             </div>
 
             <div className='left-icons'>
-            <FontAwesomeIcon onClick={(e) => { changeType('photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image' style={component.type==='photo' ? {color: 'red'} : null} />
-            <FontAwesomeIcon onClick={(e) => { changeType('background-photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image-portrait' style={component.type==='background-photo' ? {color: 'red'} : null} />
+              <FontAwesomeIcon onClick={(e) => { changeType('photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image' style={component.type==='photo' ? {color: 'red'} : null} />
+              <FontAwesomeIcon onClick={(e) => { changeType('background-photo'); }} className='reacting-link expand-cursor' icon='fa-solid fa-image-portrait' style={component.type==='background-photo' ? {color: 'red'} : null} />
+              <div className='size-field-div'>
+                <label htmlFor='size'>Size:</label>
+                <input name='size' value={size} onChange={(e) => { setSize(e.target.value) }} type="text" />
+              </div>
             </div>
             <div className='right-icons'>
               {/* <p className='reacting-link'>Add</p> */}
+              <span className='reacting-link expand-cursor' onClick={() => { handleAddBelow('body-text'); }}>Text Below</span>
+              <span className='reacting-link expand-cursor' onClick={() => { handleAddBelow('photo'); }}>Photo Below</span>
               <FontAwesomeIcon onClick={ endEdit } className='reacting-link expand-cursor' icon='fa-solid fa-arrow-right' />
             </div>
           </div> 
@@ -111,9 +129,9 @@ function PhotoComp({ postId, url, component, modifyComponent, deleteComponent, o
             {
               component.type === 'photo'
                 ?
-                <img src={url} alt='image' />
+                <img src={url} alt='image' style={{ width: component.size }} />
                 :
-                <div className='background-photo-div' style={{backgroundImage: `url(${url})`}}>
+                <div className='background-photo-div' style={{backgroundImage: `url(${url})`, height: component.size || '600px' }}>
                 </div>
             }
             
