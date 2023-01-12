@@ -102,10 +102,12 @@ function InfoModal({ post, modifyPost, setShowInfoModal }) {
         <label htmlFor='image-upload' >Title Image</label>
         <input name='image-upload' id={isLoading ? 'image-input is-loading' : 'image-input'} type='file' onChange={ handleTitleImageUpload } />
         { isLoading && <p className='loading-text' >...loading</p>}
-
-        <div className='submit-button'>
-          <p className='expand-cursor reacting-link' onClick={ submit } >Submit</p>
-        </div>
+        { !isLoading && 
+          <div className='submit-button'>
+            <p className='expand-cursor reacting-link' onClick={ submit } >Submit</p>
+          </div>
+        }
+        
 
       </div>
     </div>

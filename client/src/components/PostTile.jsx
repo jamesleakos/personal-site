@@ -17,7 +17,7 @@ function PostTile({post, onClick, tags}) {
           // these tags are really just the tag names passed in
           tags.map((tag, index) => {
             return <div className='tag' key={tag + index + ''}>
-              <span className='tag-span'>{tag}</span>
+              <span className='tag-span no-select'>{tag}</span>
             </div>
           })
         }
@@ -27,14 +27,14 @@ function PostTile({post, onClick, tags}) {
         {
           post.url ?
             <div className='tile-title-image'>
-              <img src={post.url} alt='tile image' />
+              <img className='no-select' src={post.url} alt='tile image' draggable='false' />
             </div> : null
         }
         {/* title */}
-        <h3 className='tile-title links-item reacting-link' >{ post.title }</h3>
+        <h3 className='tile-title links-item reacting-link no-select' >{ post.title }</h3>
       </div>
       {/* description */}
-      <p className='description'>{ post.description }</p>
+      <p className='description no-select'>{ post.description }</p>
     </div>
   )
 }
