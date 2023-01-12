@@ -30,8 +30,9 @@ function Admin() {
     <div className='admin'>
       <Navbar />
       <PostList postFilters={{ published: true }} onTileClick={loadPostBuilder} showAddNew={false} useWindowOffset={false} title='Published Posts' showSearch={true} amTiled={true} />
-      <BackgroundImage height='100px' image={'url(' + require('../images/gc_wall.JPG') + ')'} />
+      <PostList postFilters={{ }} onTileClick={loadPostBuilder} showAddNew={false} showSearch={false} title='All Posts' useWindowOffset={false} amTiled={false} />
       <PostList postFilters={{ published: false }} onTileClick={loadPostBuilder} showAddNew={true} useWindowOffset={false} title='Drafts' showSearch={true} amTiled={true} />
+      <PostList postFilters={{ }} onTileClick={loadPostBuilder} showAddNew={false} showSearch={false} title='All Posts' useWindowOffset={false} amTiled={false} />
       <TagManager />
       <BackgroundImage height='50vh' image={'url(' + require('../images/skinning_outside.JPG') + ')'} />
       <Footer />
