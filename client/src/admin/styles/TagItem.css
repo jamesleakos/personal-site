@@ -2,7 +2,7 @@
 
 .tag-item {
   float: left;
-  margin: 10px;
+  margin: 10px 20px 10px 0;
 }
 
 .tag-item .tag-name {
