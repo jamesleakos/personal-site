@@ -37,6 +37,7 @@ body * {
 }
 .reacting-link:hover {
   color: var(--text-accent);
+  transform: scale(1.05);
   -webkit-transform: scale(1.05);
 }
 

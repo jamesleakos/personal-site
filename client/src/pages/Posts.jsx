@@ -30,10 +30,10 @@ function Posts() {
     <div className='posts'>
       <Navbar />
       <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2022 Featured Articles' useWindowOffset={false} amTiled={true} />
-      <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2022 Featured Articles' useWindowOffset={false} amTiled={false} />
-      <BackgroundImage height='600px' image={'url(' + require('../images/skinning_outside.JPG') + ')'} />
-      <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2022 Featured Articles' useWindowOffset={false} amTiled={true} />
-      <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2022 Featured Articles' useWindowOffset={false} amTiled={false} />
+      <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2022 Other' useWindowOffset={false} amTiled={false} />
+      <BackgroundImage height='600px' image={'url(' + require('../images/sam_in_sask.JPG') + ')'} />
+      <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2021 Featured Articles' useWindowOffset={false} amTiled={true} />
+      <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2021 Other' useWindowOffset={false} amTiled={false} />
       <BackgroundImage height='600px' image={'url(' + require('../images/skinning_outside.JPG') + ')'} />
       <Footer />
     </div>

@@ -81,7 +81,13 @@ function PostBuilder({ match }) {
     }
     switch (componentName) {
       case 'main-title':
+        comp.text = post.title || '';
+        comp.margin_bottom = false;
+        break;
       case 'subtitle':
+        comp.text = post.description || '';
+        comp.margin_bottom = false;
+        break;
       case 'section-title':
       case 'body-text':
       case 'quote':

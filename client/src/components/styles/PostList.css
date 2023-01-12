@@ -1,7 +1,11 @@
 @import './constants.css';
 
-.post-list {
+.post-list.tiled {
   background-color: var(--background-color-dark-main);
+  overflow: hidden;
+}
+.post-list.spanned {
+  background-color: var(--background-color-light-secondary);
 }
 
 .post-list hr {
@@ -9,6 +13,9 @@
   width: calc(100% - 2 * var(--post-list-margin));
   height: 0;
   border-top: .5px solid var(--text-color-light-main);
+}
+.post-list.spanned hr {
+  border-color: var(--background-color-dark-main);
 }
 
 .post-list .title {
@@ -18,7 +25,12 @@
   float: left;
   padding-top: var(--post-list-margin);
   margin-left: var(--post-list-margin);
+}
+.post-list.tiled .title {
   color: var(--text-color-light-main);
+}
+.post-list.spanned .title {
+  color: var(--background-color-dark-main);
 }
 
 .post-list .search {
@@ -55,8 +67,9 @@
   /* padding-top: var(--post-list-margin); */
 }
 
-.post-list .span-wrapper {
+.post-list .span-area {
   display: block;
   min-height: 100px;
-  margin: 100px 30% 0 30%;
+  margin: 100px 20% 0 20%;
+  padding-bottom: 100px;
 }

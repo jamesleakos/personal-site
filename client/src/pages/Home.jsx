@@ -63,6 +63,7 @@ function Home() {
       <div className='scroll-div' ref={scrollDiv}>
         <Navbar />
         <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} useWindowOffset={true} title='Featured Posts' showSearch={false} amTiled={true} />
+        <PostList postFilters={{ }} onTileClick={loadPostViewer} showAddNew={false} showSearch={false} title='All Posts' useWindowOffset={false} amTiled={false} />
         <Info />
         <BackgroundImage height='80vh' image={'url(' + require('../images/cascade_party.JPG') + ')'} />
         <Footer />

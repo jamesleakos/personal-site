@@ -133,7 +133,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   }
 
   return (
-    <div className='post-list'>
+    <div className={amTiled ? 'post-list tiled' : 'post-list spanned'}>
       <p className='title' >{title}</p>
       <hr />
       {
@@ -175,10 +175,10 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
             }
           </div>
           :
-          <div className='span-wrapper'>
+          <div className='span-area'>
             {
               shownPosts.map((post, index) => {
-                return <PostSpan key={post._id} post={post} onClick={handleTileClick} showSlash={index === (shownPosts.length - 1)} />
+                return <PostSpan key={post._id} post={post} onClick={handleTileClick} showSlash={index !== (shownPosts.length - 1)} />
               })
             }
           </div>
