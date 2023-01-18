@@ -10,7 +10,7 @@ import '../viewer-components/styles/PhotoComp.css';
 // 
 const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 
-function PhotoComp({ postId, url, component,  addComponent, index, modifyComponent, deleteComponent, openOnEdit, moveComponent }) {
+function PhotoComp({ postId, component,  addComponent, index, modifyComponent, deleteComponent, openOnEdit, moveComponent }) {
   // are we editing the post?
   const [editActive, setEditActive] = useState(openOnEdit);
 
@@ -99,7 +99,7 @@ function PhotoComp({ postId, url, component,  addComponent, index, modifyCompone
             </div>
 
             {
-              url ? <img src={url} alt='image' /> : null
+              component.key ? <img src={`https://ik.imagekit.io/hfywj4j0a/${component.key})`} alt='image' /> : null
             }
 
             <div className='input-area'>
@@ -129,9 +129,9 @@ function PhotoComp({ postId, url, component,  addComponent, index, modifyCompone
             {
               component.type === 'photo'
                 ?
-                <img src={url} alt='image' style={{ width: component.size }} />
+                <img src={`https://ik.imagekit.io/hfywj4j0a/${component.key}`} alt='image' style={{ width: component.size }} />
                 :
-                <div className='background-photo-div' style={{backgroundImage: `url(${url})`, height: component.size || '600px' }}>
+                <div className='background-photo-div' style={{backgroundImage: `url('https://ik.imagekit.io/hfywj4j0a/${component.key}')`, height: component.size || '600px' }}>
                 </div>
             }
             

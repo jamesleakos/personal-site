@@ -20,25 +20,28 @@ exports.getPostsInfo = async (req, res) => {
       ...req.query
     }, '-components');
     
-    const keys = posts.map(post => {
-      return post.display_image_key;
-    }).filter(key => {
-      return !!key;
-    })
+    // we shouldn't need all this anymore because of image kit
+    // the front end doesn't need urls, just the key to render an image
 
-    console.log(keys);
+    // const keys = posts.map(post => {
+    //   return post.display_image_key;
+    // }).filter(key => {
+    //   return !!key;
+    // })
+
+    // console.log(keys);
   
-    const { urlObjs } = await s3.getPresignedUrlsFromKeys(keys);
+    // const { urlObjs } = await s3.getPresignedUrlsFromKeys(keys);
 
-    posts = posts.map(post => {
-      post = post.toJSON();
-      const urlObj = urlObjs.find(u => u.key === post.display_image_key);
-      if (urlObj !== undefined) {
-        const url = urlObj.url;
-        post.url = url;
-      }
-      return post;
-    })
+    // posts = posts.map(post => {
+    //   post = post.toJSON();
+    //   const urlObj = urlObjs.find(u => u.key === post.display_image_key);
+    //   if (urlObj !== undefined) {
+    //     const url = urlObj.url;
+    //     post.url = url;
+    //   }
+    //   return post;
+    // })
     res.status(200).send(posts);
 
   } catch (err) {
