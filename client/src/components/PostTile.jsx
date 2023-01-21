@@ -25,9 +25,9 @@ function PostTile({post, onClick, tags}) {
       <div className='post-tile-title-area' onClick={() => onClick(post)} >
         {/* image */}
         {
-          post.display_image_key ?
+          post.url ?
             <div className='tile-title-image'>
-              <img className='no-select' src={`https://ik.imagekit.io/hfywj4j0a/${post.display_image_key}`} alt='tile image' draggable='false' />
+              <img className='no-select' src={post.url} alt='tile image' draggable='false' />
             </div> : null
         }
         {/* title */}

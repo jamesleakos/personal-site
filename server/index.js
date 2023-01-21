@@ -91,8 +91,7 @@ app.post('/image_components', upload.single('image'), function(req, res) {
   imageController.uploadImage(req, res);
 })
 
-// we shouldn't need this anymore - with imageKit, we no longer need presigned URLs and can get the images with
-// the keys that are stored in Mongo
+// we are going to get all of the images for a post - that seems like the smartest way?
 app.get('/image_components', (req, res) => {
   imageController.getImages(req, res);
 })
@@ -122,7 +121,7 @@ app.delete('/tags', function(req, res) {
   tagController.deleteTag(req, res);
 })
 
-// needed to send the base files
+// not sure what this is for
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
     if (err) {
