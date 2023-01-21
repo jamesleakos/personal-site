@@ -1,3 +1,4 @@
+
 // dependancies
 import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
@@ -14,7 +15,6 @@ import TextComp from '../builder-components/TextComp.jsx';
 import PhotoComp from '../builder-components/PhotoComp.jsx';
 
 function PostBuilder({ match }) {
-  
 
   const location = useLocation();
   let passedPost = false;
@@ -183,32 +183,35 @@ function PostBuilder({ match }) {
       })
   }
 
+  // NOTE: with imagekit, we shouldn't need this any more
+  // images are not displayed with presigned URLs, but very simply with the imagekit url + key path
+
   // image GET calls - the POST calls are in the image component itself
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
 
-  useEffect(() => {
-    if (!post._id) return;
+  // useEffect(() => {
+  //   if (!post._id) return;
 
-    let resetNeeded = false;
-    for (let comp of post.components) {
-      if (comp.kind === 'ImageComponent') {
-        if (images.findIndex(i => i.key === comp.key) < 0) {
-          resetNeeded = true;
-          // console.log('A reset is needed. ' + JSON.stringify(images) + ' does not include the ')
-        }
-      }
-    }
+  //   let resetNeeded = false;
+  //   for (let comp of post.components) {
+  //     if (comp.kind === 'ImageComponent') {
+  //       if (images.findIndex(i => i.key === comp.key) < 0) {
+  //         resetNeeded = true;
+  //         // console.log('A reset is needed. ' + JSON.stringify(images) + ' does not include the ')
+  //       }
+  //     }
+  //   }
 
-    if (!resetNeeded) return;
+  //   if (!resetNeeded) return;
 
-    axios.get(`/image_components?post_id=${post._id}`)
-      .then(res => {
-        setImages(res.data);
-      })
-      .catch(err => {
-        console.log('Received error: ' + err.message);
-      })
-  }, [post]);
+  //   axios.get(`/image_components?post_id=${post._id}`)
+  //     .then(res => {
+  //       setImages(res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log('Received error: ' + err.message);
+  //     })
+  // }, [post]);
   
   return (
     <div className='post-builder'>
@@ -237,7 +240,7 @@ function PostBuilder({ match }) {
               return <TextComp key={component._id + index + ''} index={index} component={component} addComponent={addComponent} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} moveComponent={moveComponent} />
             case 'photo':
             case 'background-photo':
-              return <PhotoComp key={component._id + index} index={index} postId={post._id} component={component} addComponent={addComponent} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} url={images.filter(c => c.key === component.key)[0]?.url} moveComponent={moveComponent} />
+              return <PhotoComp key={component._id + index} index={index} postId={post._id} component={component} addComponent={addComponent} modifyComponent={modifyComponent} deleteComponent={deleteComponent} openOnEdit={!!component.openOnEdit} moveComponent={moveComponent} />
             default:
               break;
           }

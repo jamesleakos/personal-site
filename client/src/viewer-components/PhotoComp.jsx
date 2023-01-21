@@ -11,9 +11,9 @@ function PhotoComp({ url, component }) {
         {
           component.type === 'photo'
             ?
-            <img src={url} alt='image' style={{ width: component.size }}/>
+            <img src={`https://ik.imagekit.io/hfywj4j0a/${component.key}`} alt='image' style={{ width: component.size }}/>
             :
-            <div className='background-photo-div' style={{backgroundImage: `url(${url})`, height: component.size || '600px' }}>
+            <div className='background-photo-div' style={{backgroundImage: `url('https://ik.imagekit.io/hfywj4j0a/${component.key}')`, height: component.size || '600px' }}>
             </div>
         }
       </div>
