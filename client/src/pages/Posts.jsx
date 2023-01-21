@@ -31,10 +31,10 @@ function Posts() {
       <Navbar />
       <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2022 Featured Articles' useWindowOffset={false} amTiled={true} />
       <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2022 Other' useWindowOffset={false} amTiled={false} />
-      <BackgroundImage height='600px' image={'url(' + require('../images/sam_in_sask.JPG') + ')'} />
+      <BackgroundImage height='600px' imageURL='https://ik.imagekit.io/hfywj4j0a/sam_in_sask_vGufgsbWx.JPG?ik-sdk-version=javascript-1.4.3&updatedAt=1674278558563' />
       <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2021 Featured Articles' useWindowOffset={false} amTiled={true} />
       <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} showSearch={true} title='2021 Other' useWindowOffset={false} amTiled={false} />
-      <BackgroundImage height='600px' image={'url(' + require('../images/skinning_outside.JPG') + ')'} />
+      <BackgroundImage height='600px' imageURL='https://ik.imagekit.io/hfywj4j0a/skinning_outside_RJ4rJKy53.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1674278399179' />
       <Footer />
     </div>
   )

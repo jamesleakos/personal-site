@@ -5,10 +5,6 @@ import React from 'react';
 import './styles/PostTile.css';
 
 function PostTile({post, onClick, tags}) {
-
-  // get the image
-
-
   return (
     <div className='post-tile' >
       {/* tags */}
@@ -27,7 +23,7 @@ function PostTile({post, onClick, tags}) {
         {
           post.display_image_key ?
             <div className='tile-title-image'>
-              <img className='no-select' src={`https://ik.imagekit.io/hfywj4j0a/${post.display_image_key}`} alt='tile image' draggable='false' />
+              <img className='no-select' src={`https://ik.imagekit.io/hfywj4j0a/tr:w-500/${post.display_image_key}`} alt='tile image' draggable='false' />
             </div> : null
         }
         {/* title */}

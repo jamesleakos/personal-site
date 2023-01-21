@@ -6,6 +6,7 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
+const compression = require('compression');
 
 // imports
  // DON'T DELETE THIS - it is needed just to call the DB
@@ -13,7 +14,7 @@ require('../db') // DON'T DELETE THIS - it is needed just to call the DB
 const controllers = require('./controllers/post.js');
 const imageController = require('./controllers/images.js');
 const tagController = require('./controllers/tags.js');
-const logger = require('../middleware/logger.js');
+// const logger = require('../middleware/logger.js');
 
 // express app
 const app = express();
@@ -35,10 +36,15 @@ const upload = multer({
 // body interpreters
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// cors
 app.use(cors({
   origin: '*',
 }));
-app.use(logger);
+// app.use(logger);
+
+// compression
+app.use(compression());
 
 // sending static
 app.use(express.static(path.join(__dirname, '../client/dist')));

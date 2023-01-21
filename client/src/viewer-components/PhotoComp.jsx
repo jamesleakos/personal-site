@@ -13,7 +13,7 @@ function PhotoComp({ url, component }) {
             ?
             <img src={`https://ik.imagekit.io/hfywj4j0a/${component.key}`} alt='image' style={{ width: component.size }}/>
             :
-            <div className='background-photo-div' style={{backgroundImage: `url('https://ik.imagekit.io/hfywj4j0a/${component.key}')`, height: component.size || '600px' }}>
+            <div className='background-photo-div' style={{backgroundImage: `url('https://ik.imagekit.io/hfywj4j0a/tr:w-2500/${component.key}')`, height: component.size || '600px' }}>
             </div>
         }
       </div>
