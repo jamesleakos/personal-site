@@ -11,3 +11,26 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.background-caption {
+  width: 300px;
+  position: absolute;
+  right: 40px;
+  bottom: 140px;
+  padding: 10px;
+
+  border: 1px solid var(--text-accent);
+
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.background-caption-text {
+  text-align: left;
+  font-family: var(--caption-font);
+  font-size: .9rem;
+  color: var(--text-accent);
+}

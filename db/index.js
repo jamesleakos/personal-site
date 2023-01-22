@@ -1,6 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-const mongoURI = 'mongodb://localhost:27017/wolfmoor';
+const mongoURI = `mongodb+srv://${process.env.MONGO_CLOUD_ATLAS_USER}:${process.env.MONGO_CLOUD_ATLAS_PASSWORD}@${process.env.MONGO_CLOUD_ATLAS_URL}/${process.env.MONGO_CLOUD_ATLAS_DB}`;
+
+console.log(process.env.MONGO_CLOUD_ATLAS_DB)
 
 const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
 

@@ -65,7 +65,7 @@ function Home() {
         <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} useWindowOffset={true} title='Featured Posts' showSearch={false} amTiled={true} />
         <PostList postFilters={{ }} onTileClick={loadPostViewer} showAddNew={false} showSearch={false} title='All Posts' useWindowOffset={false} amTiled={false} />
         <Info />
-        <BackgroundImage height='80vh' imageURL='cascade_party_o3vag5CSz.JPG' />
+        <BackgroundImage height='80vh' imageURL='cascade_party_o3vag5CSz.JPG' caption='On the Monday before our wedding in Lake Louise, Sam and I led a crew up Cascade Mountain. Most of the party was able to summit, and everyone had a grand time.' />
         <Footer />
       </div>
     </div>
