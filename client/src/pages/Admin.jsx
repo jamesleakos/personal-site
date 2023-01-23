@@ -34,7 +34,7 @@ function Admin() {
       <PostList postFilters={{ published: false }} onTileClick={loadPostBuilder} showAddNew={true} useWindowOffset={false} title='Drafts' showSearch={true} amTiled={true} />
       <PostList postFilters={{ }} onTileClick={loadPostBuilder} showAddNew={false} showSearch={false} title='All Posts' useWindowOffset={false} amTiled={false} />
       <TagManager />
-      <BackgroundImage height='50vh' imageURL='https://ik.imagekit.io/hfywj4j0a/skinning_outside_RJ4rJKy53.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1674278399179' />
+      <BackgroundImage height='50vh' imageURL='skinning_outside_RJ4rJKy53.jpg' />
       <Footer />
     </div>
   )
