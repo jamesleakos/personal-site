@@ -8,7 +8,6 @@ const postController = require('../controllers/post.js');
 // });
 // this one is used to get the info for post list and other post displays
 router.get('/info', function (req, res) {
-  console.log(req.user);
   postController.getPostsInfo(req, res);
 });
 // get a single full post

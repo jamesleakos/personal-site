@@ -16,18 +16,6 @@ function Home() {
     window.scrollTo(0, 0);
   }, []);
 
-  axios
-    .post('/auth/register_login', {
-      email: 'james@james.com',
-      password: 'password',
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
   const [opacity, setOpacity] = useState(1);
 
   let scrollDiv = React.useRef(null);
