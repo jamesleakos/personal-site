@@ -1,0 +1,11 @@
+@import './constants.css';
+
+.sign-in-up-wrapper {
+  margin: auto;
+  display: block;
+  width: 500px;
+}
+
+.sign-in-up-wrapper input {
+  margin: 50px 10px;
+}
