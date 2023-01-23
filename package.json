@@ -4,12 +4,9 @@
   "description": "James Leakos personal website",
   "main": "index.jsx",
   "scripts": {
-    "build": "cross-env NODE_ENV=development webpack --config webpack.config.js",
     "build:dev": "npx webpack --watch",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "server:dev": "npx nodemon --watch server server/index.js",
-    "server:prod": "npx nodemon server server/index.js",
-    "all:dev": "npx nodemon --watch server server/index.js & npx webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -57,11 +54,13 @@
     "axios": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
+    "connect-mongo": "^4.6.0",
     "cors": "^2.8.5",
     "css-loader": "^6.7.2",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "file-loader": "^6.2.0",
     "mongoose": "^6.8.2",
     "multer": "^1.4.5-lts.1",

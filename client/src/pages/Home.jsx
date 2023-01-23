@@ -9,12 +9,25 @@ import Navbar from '../components/Navbar.jsx';
 import PostList from '../components/PostList.jsx';
 import Info from '../components/Info.jsx';
 import BackgroundImage from '../components/BackgroundImage.jsx';
+import axios from 'axios';
 
 function Home() {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-  
+    window.scrollTo(0, 0);
+  }, []);
+
+  axios
+    .post('/auth/register_login', {
+      email: 'james@james.com',
+      password: 'password',
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   const [opacity, setOpacity] = useState(1);
 
   let scrollDiv = React.useRef(null);
@@ -36,23 +49,20 @@ function Home() {
     if (scrollDivRect.top < titleDivRect.top) {
       overlap = 1;
     } else {
-      overlap = Math.max((scrollDivRect.top / titleDivRect.bottom), 0);
+      overlap = Math.max(scrollDivRect.top / titleDivRect.bottom, 0);
     }
     // set the fixed div's opacity based on the percentage of overlap
     // setOpacity(overlap);
-  }
+  };
 
   const navigate = useNavigate();
-  const loadPostViewer = function(post) {
-    navigate(
-      '/post-viewer',
-      {
-        state: {
-          passedPost: post
-        }
-      }
-    )
-  }
+  const loadPostViewer = function (post) {
+    navigate('/post-viewer', {
+      state: {
+        passedPost: post,
+      },
+    });
+  };
 
   return (
     <div className='home'>
@@ -62,14 +72,34 @@ function Home() {
       </div>
       <div className='scroll-div' ref={scrollDiv}>
         <Navbar />
-        <PostList postFilters={{ published: true }} onTileClick={loadPostViewer} showAddNew={false} useWindowOffset={true} title='Featured Posts' showSearch={false} amTiled={true} />
-        <PostList postFilters={{ }} onTileClick={loadPostViewer} showAddNew={false} showSearch={false} title='All Posts' useWindowOffset={false} amTiled={false} />
+        <PostList
+          postFilters={{ published: true }}
+          onTileClick={loadPostViewer}
+          showAddNew={false}
+          useWindowOffset={true}
+          title='Featured Posts'
+          showSearch={false}
+          amTiled={true}
+        />
+        <PostList
+          postFilters={{}}
+          onTileClick={loadPostViewer}
+          showAddNew={false}
+          showSearch={false}
+          title='All Posts'
+          useWindowOffset={false}
+          amTiled={false}
+        />
         <Info />
-        <BackgroundImage height='80vh' imageURL='cascade_party_o3vag5CSz.JPG' caption='On the Monday before our wedding in Lake Louise, Sam and I led a crew up Cascade Mountain. Most of the party was able to summit, and everyone had a grand time.' />
+        <BackgroundImage
+          height='80vh'
+          imageURL='cascade_party_o3vag5CSz.JPG'
+          caption='On the Monday before our wedding in Lake Louise, Sam and I led a crew up Cascade Mountain. Most of the party was able to summit, and everyone had a grand time.'
+        />
         <Footer />
       </div>
     </div>
-  )
+  );
 }
 
 export default Home;
