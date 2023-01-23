@@ -6,7 +6,7 @@
   "scripts": {
     "build:dev": "npx webpack --watch",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "server:dev": "npx nodemon --watch server server/index.js",
+    "server:dev": "npx nodemon --watch server server/index.js"
   },
   "repository": {
     "type": "git",
