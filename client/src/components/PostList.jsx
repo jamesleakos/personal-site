@@ -132,6 +132,24 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     setShowText(false);
   }
 
+  const handleTouchStart = (event) => {
+    setInitialMousePos(event.touches[0].clientX);
+  };
+
+  const handleTouchMove = (event) => {
+    // Same logic as handleMouseMove
+    const wrapper = wrapperRef.current;
+    if (initialMousePos !== null) {
+      const difference = event.touches[0].clientX - initialMousePos;
+      wrapper.scrollLeft -= difference;
+      setInitialMousePos(event.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setInitialMousePos(null);
+  };
+
   return (
     <div className={amTiled ? 'post-list tiled' : 'post-list spanned'}>
       <p className='title' >{title}</p>
@@ -151,7 +169,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
       {
         amTiled 
           ?
-          <div className='scroll-wrapper' ref={wrapperRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+          <div className='scroll-wrapper' ref={wrapperRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
             <div className='scroller' >
               {
                 // map out the posts

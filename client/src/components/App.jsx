@@ -37,6 +37,7 @@ import {
   faX,
   faArrowUp,
   faArrowDown,
+  faBars,
 } from '@fortawesome/free-solid-svg-icons';
 // import { farBook } from '@fortawesome/free-regular-svg-icons';
 
@@ -56,7 +57,8 @@ library.add(
   faXmark,
   faX,
   faArrowUp,
-  faArrowDown
+  faArrowDown,
+  faBars,
 );
 
 const router = createBrowserRouter([

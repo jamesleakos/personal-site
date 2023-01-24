@@ -82,7 +82,6 @@ function Home() {
         <BackgroundImage
           height='80vh'
           imageURL='cascade_party_o3vag5CSz.JPG'
-          caption='On the Monday before our wedding in Lake Louise, Sam and I led a crew up Cascade Mountain. Most of the party was able to summit, and everyone had a grand time.'
         />
         <Footer />
       </div>

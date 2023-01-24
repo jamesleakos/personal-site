@@ -12,9 +12,10 @@
   grid-template-columns: 50px 100px 100px 1fr 100px 100px 50px;
   z-index: 1;
 }
+
 @media screen and (max-width: 800px) {
   .navbar {
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 50px 1fr 50px;
   }
 }
 
@@ -24,6 +25,12 @@
   text-align: center;
   line-height: var(--nav-bar-height);
   width: 100px;
+}
+
+@media screen and (max-width: 800px) {
+  .navbar .navbar-item {
+    width: 50px;
+  }
 }
 
 /* display: table (the default for reacting-link) doesn't work in the grid for some reason */
@@ -58,4 +65,3 @@
   transform: translateY(0);
   transition: transform 600ms;
 }
-

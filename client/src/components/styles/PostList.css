@@ -4,6 +4,7 @@
   background-color: var(--background-color-dark-main);
   overflow: hidden;
 }
+
 .post-list.spanned {
   background-color: var(--background-color-light-secondary);
 }
@@ -14,6 +15,7 @@
   height: 0;
   border-top: .5px solid var(--text-color-light-main);
 }
+
 .post-list.spanned hr {
   border-color: var(--background-color-dark-main);
 }
@@ -26,9 +28,11 @@
   padding-top: var(--post-list-margin);
   margin-left: var(--post-list-margin);
 }
+
 .post-list.tiled .title {
   color: var(--text-color-light-main);
 }
+
 .post-list.spanned .title {
   color: var(--background-color-dark-main);
 }
@@ -72,4 +76,10 @@
   min-height: 100px;
   margin: 100px 20% 0 20%;
   padding-bottom: 100px;
+}
+
+@media screen and (max-width: 1200px) {
+  .post-list .span-area {
+    margin: 50px var(--post-list-margin) 0 var(--post-list-margin);
+  }
 }

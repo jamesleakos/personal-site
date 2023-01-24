@@ -83,6 +83,23 @@ function Navbar() {
           </Link>
         </div>
       ) : null}
+
+      {/* right icon */}
+      {width < breakpoint ? (
+        <div
+          className='navbar-item'
+          style={{ gridColumn: 3, borderWidth: '0 0 0 1px' }}
+        >
+          <FontAwesomeIcon
+            onClick={() => {
+              console.log('clicked');
+            }}
+            className='reacting-link expand-cursor'
+            icon='fa-solid fa-bars'
+          />
+        </div>
+      ) : null}
+
     </div>
   );
 }

@@ -14,8 +14,7 @@
   }
 }
 
-.info-block {
-}
+.info-block {}
 
 .info-block p {
   font-size: 1.4rem;
@@ -33,6 +32,12 @@
 @media screen and (max-width: 1400px) {
   .links-block {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .links-block {
+    margin-left: 0;
   }
 }
 
