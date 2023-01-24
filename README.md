@@ -1,6 +1,6 @@
 # personal-site
 
-This is my personal website. You can visit it at [jamesleakos.com](jamesleakos.com).
+This is my personal website. You can visit it at [jamesleakos.com](http://www.jamesleakos.com).
 
 ## tech stack
 * express.js with passport.js for authentication
