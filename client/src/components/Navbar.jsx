@@ -13,11 +13,9 @@ function MobileNavbar({ toggleModal }) {
     <div
       className='navbar-item'
       style={{ gridColumn: 1, borderWidth: '0 1px 0 0' }}
+      onClick={ () => {toggleModal(); }}
     >
       <FontAwesomeIcon
-        onClick={() => {
-          toggleModal();
-        }}
         className='reacting-link expand-cursor'
         icon='fa-solid fa-bars'
       />
@@ -29,11 +27,9 @@ function MobileNavbar({ toggleModal }) {
     <div
       className='navbar-item'
       style={{ gridColumn: 3, borderWidth: '0 0 0 1px' }}
+      onClick={ () => {toggleModal(); }}
     >
       <FontAwesomeIcon
-        onClick={() => {
-          toggleModal();
-        }}
         className='reacting-link expand-cursor'
         icon='fa-solid fa-bars'
       />
