@@ -13,7 +13,7 @@ function MobileNavbar({ toggleModal }) {
     <div
       className='navbar-item'
       style={{ gridColumn: 1, borderWidth: '0 1px 0 0' }}
-      onClick={ () => {toggleModal(); }}
+      onClick={ () => { toggleModal(); }}
     >
       <FontAwesomeIcon
         className='reacting-link expand-cursor'
@@ -27,7 +27,7 @@ function MobileNavbar({ toggleModal }) {
     <div
       className='navbar-item'
       style={{ gridColumn: 3, borderWidth: '0 0 0 1px' }}
-      onClick={ () => {toggleModal(); }}
+      onClick={ () => { toggleModal(); }}
     >
       <FontAwesomeIcon
         className='reacting-link expand-cursor'
