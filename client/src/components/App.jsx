@@ -6,6 +6,7 @@ import {
   Router,
   useParams,
 } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 // components
 import AnimatedCursor from '../../helpers/animated_cursor.js';
@@ -92,7 +93,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className='App'>
-      <AnimatedCursor />
+      { !isMobile ? <AnimatedCursor /> : null }
       <RouterProvider router={router} />
     </div>
   );

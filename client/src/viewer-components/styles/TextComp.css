@@ -8,6 +8,13 @@
   margin: 40px 0 20px;
 }
 
+@media screen and (max-width: 1000px) {
+  .main-title {
+    margin: auto;
+    width: 80%;
+  }
+}
+
 .subtitle {
   text-align: center;
   font-size: 1.5rem;
@@ -17,6 +24,12 @@
   width: 60%;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--background-color-dark-main);
+}
+
+@media screen and (max-width: 1000px) {
+  .subtitle {
+    width: 70%;
+  }
 }
 
 .section-title {
@@ -33,15 +46,14 @@
   margin-right: auto;
   width: 30%;
 }
+
 @media screen and (max-width: 1000px) {
   .body-text {
     width: 80%;
   }
 }
 
-.quote {
-
-}
+.quote {}
 
 .caption {
   font-family: var(--caption-font);
@@ -54,6 +66,12 @@
   padding-bottom: 10px;
   width: 50%;
   border-bottom: 1px solid var(--text-accent);
+}
+
+@media screen and (max-width: 1000px) {
+  .caption {
+    width: 80%;
+  }
 }
 
 

@@ -34,3 +34,9 @@
   font-size: .9rem;
   color: var(--text-accent);
 }
+
+.background-mobile-image {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
