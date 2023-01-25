@@ -38,7 +38,7 @@ function NavbarTitle({gridColumn}) {
         </div>
       </CSSTransition>
     )
-  } else if ((useLocation().pathname === '/post-builder' || useLocation().pathname === '/post-viewer') && !isMobile) {
+  } else if (!isMobile && (useLocation().pathname === '/post-builder' || useLocation().pathname === '/post-viewer')) {
     return (
       <CSSTransition in={windowHasScrolled} timeout={300} classNames="slide" >
         <div className='navbar-title' style={windowHasScrolled ? {opacity: 1, gridColumn: gridColumn} : {gridColumn: gridColumn}}>

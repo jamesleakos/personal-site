@@ -4,13 +4,13 @@
   font-family: var(--main-title-font);
   text-align: center;
   font-size: 3rem;
+  width: 70%;
   /* we don't want the main title to be used with the margin classes */
-  margin: 40px 0 20px;
+  margin: 100px auto 20px;
 }
 
 @media screen and (max-width: 1000px) {
   .main-title {
-    margin: auto;
     width: 80%;
   }
 }
