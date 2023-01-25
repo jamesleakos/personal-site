@@ -16,23 +16,23 @@ function Info() {
       <div className='links-block'>
         <div>
           <p className='links-title'>INFO</p>
-          <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Resume</a>
-          <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Contact</a>
+          <a className='links-item reacting-link' href='https://www.linkedin.com/in/jamesleakos/'>LinkedIn</a>
+          <a className='links-item reacting-link' href='https://github.com/jamesleakos'>Github</a>
           <br />
         </div>
         <div>
           <p className='links-title'>BLOG</p>
-          <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Adventure</a>
-          <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Running</a>
-          <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>History</a>
-          <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Art</a>
+          <Link className='links-item reacting-link' to="/all-posts">Adventure</Link>
+          <Link className='links-item reacting-link' to="/all-posts">Running</Link>
+          <Link className='links-item reacting-link' to="/all-posts">History</Link>
+          <Link className='links-item reacting-link' to="/all-posts">Art</Link>
           <Link className='links-item reacting-link' to="/all-posts">Posts</Link>
           <br />
         </div>
         <div>
           <p className='links-title'>WORK</p>
             <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Artemis</a>
-            <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Projects</a>
+            <a className='links-item reacting-link' href='https://github.com/jamesleakos'>Projects</a>
             <br />
         </div>
         <div>

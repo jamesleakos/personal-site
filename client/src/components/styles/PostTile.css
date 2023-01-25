@@ -9,6 +9,7 @@
   text-align: left;
   transition: 0.5s ease;
 }
+
 .post-tile:hover {
   /* -webkit-transform: scale(1.02); */
 }
@@ -39,15 +40,19 @@
   object-fit: cover;
   transition: 0.5s ease;
 }
+
 .post-tile img:hover {
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
   z-index: -1;
 }
+
 .post-tile-title-area:hover img {
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
+  z-index: -1;
 }
+
 .post-tile-title-area:hover .tile-title {
   color: var(--text-accent);
   transform: scale(1.05);

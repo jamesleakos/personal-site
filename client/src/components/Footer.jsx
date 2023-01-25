@@ -6,9 +6,9 @@ function Footer() {
 
   return (
     <div className='footer'>
-      <FontAwesomeIcon className='reacting-link expand-cursor' icon={['fab', 'instagram']} />
-      <FontAwesomeIcon className='reacting-link expand-cursor' icon={['fab', 'linkedin']} />
-      <FontAwesomeIcon className='reacting-link expand-cursor' icon={['fab', 'github']} />
+      <a href='https://www.instagram.com/jamesleakos/'><FontAwesomeIcon className='reacting-link expand-cursor' icon={['fab', 'instagram']} /></a>
+      <a href='https://www.linkedin.com/in/jamesleakos/'><FontAwesomeIcon className='reacting-link expand-cursor' icon={['fab', 'linkedin']} /></a>
+      <a href='https://github.com/jamesleakos'><FontAwesomeIcon className='reacting-link expand-cursor' icon={['fab', 'github']} /></a>
     </div>
   )
 }

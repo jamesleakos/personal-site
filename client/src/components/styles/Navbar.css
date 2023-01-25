@@ -1,22 +1,32 @@
 @import './constants.css';
 
+.navbar-holder {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-top {
+  height: var(--nav-bar-height);
+}
+
 .navbar {
+  position: relative;
   margin: 0;
   background-color: var(--background-color-light-main);
   color: black;
-  height: var(--nav-bar-height);
   border: 1px solid gray;
-  position: sticky;
-  top: 0;
   display: grid;
-  grid-template-columns: 50px 100px 100px 1fr 100px 100px 50px;
-  z-index: 1;
+  z-index: 10;
 }
 
-@media screen and (max-width: 800px) {
-  .navbar {
-    grid-template-columns: 50px 1fr 50px;
-  }
+.desktop-navbar {
+  grid-template-columns: 50px 100px 100px 1fr 100px 100px 50px;
+}
+
+.mobile-navbar {
+  grid-template-columns: 50px 1fr 50px;
+  border-bottom: 1px solid gray;
 }
 
 .navbar .navbar-item {
@@ -24,13 +34,33 @@
   border-width: 0 1px;
   text-align: center;
   line-height: var(--nav-bar-height);
+}
+
+.desktop-navbar .navbar-item {
   width: 100px;
 }
 
-@media screen and (max-width: 800px) {
-  .navbar .navbar-item {
-    width: 50px;
-  }
+.mobile-navbar .navbar-item {
+  width: 50px;
+}
+
+.mobile-modal {
+  /* height: calc(100% - var(--nav-bar-height)); */
+  border-top: 1px solid gray;
+  height: calc(100vh - var(--nav-bar-height));
+  width: 100%;
+  z-index: 1;
+  background-color: var(--background-color-light-main);
+}
+
+.modal-option {
+  font-family: var(--caption-font);
+  line-height: var(--nav-bar-height);
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 auto;
+  border-bottom: 1px solid gray;
+  width: 90%;
 }
 
 /* display: table (the default for reacting-link) doesn't work in the grid for some reason */
