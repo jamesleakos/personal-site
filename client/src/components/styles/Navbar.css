@@ -6,6 +6,10 @@
   z-index: 10;
 }
 
+.navbar-holder::before {
+  will-change: transform;
+}
+
 .navbar-top {
   height: var(--nav-bar-height);
 }
