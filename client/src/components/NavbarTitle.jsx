@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './styles/Navbar.css';
 import { Link, useLocation } from 'react-router-dom'
+import { isMobile } from 'react-device-detect';
 
 function TitleText() {
   return (
@@ -29,7 +30,7 @@ function NavbarTitle({gridColumn}) {
     };
   }, []);
 
-  if (useLocation().pathname === '/') {
+  if (useLocation().pathname === '/' && !isMobile) {
     return (
       <CSSTransition in={navbarStuck} timeout={300} classNames="slide" >
         <div className='navbar-title' style={navbarStuck ? {opacity: 1, gridColumn: gridColumn} : {gridColumn: gridColumn}}>
@@ -37,7 +38,7 @@ function NavbarTitle({gridColumn}) {
         </div>
       </CSSTransition>
     )
-  } else if (useLocation().pathname === '/post-builder' || useLocation().pathname === '/post-viewer') {
+  } else if ((useLocation().pathname === '/post-builder' || useLocation().pathname === '/post-viewer') && !isMobile) {
     return (
       <CSSTransition in={windowHasScrolled} timeout={300} classNames="slide" >
         <div className='navbar-title' style={windowHasScrolled ? {opacity: 1, gridColumn: gridColumn} : {gridColumn: gridColumn}}>
