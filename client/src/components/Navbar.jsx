@@ -116,7 +116,7 @@ function Navbar() {
               <a className='reacting-link modal-option' href='https://github.com/jamesleakos'>
                 GitHub
               </a>
-              <Link className='reacting-link modal-option' to='/all-posts'>
+              <Link className='reacting-link modal-option' to='/all-posts' onClick={ () => setModalOn(false) }>
                 Posts
               </Link>
               <a className='reacting-link modal-option' href='https://github.com/jamesleakos'>
