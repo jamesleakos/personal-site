@@ -37,7 +37,7 @@
   #title-name #im {
     position: absolute;
     top: 20;
-    left: 140px;
+    left: 135px;
     font-size: 1.5rem;
   }
 }
@@ -53,7 +53,7 @@
   #title-name #james {
     position: absolute;
     top: 10px;
-    left: 100px;
+    left: 95px;
     font-size: 3.5rem;
   }
 }
@@ -69,7 +69,7 @@
   #title-name #leakos {
     position: absolute;
     top: 60px;
-    left: 120px;
+    left: 115px;
     font-size: 3.5rem;
   }
 }
@@ -110,7 +110,7 @@
   #title-welcome #to {
     position: absolute;
     top: 34px;
-    left: 345px;
+    left: 355px;
     font-size: 1.5rem;
   }
 }
