@@ -3,7 +3,20 @@
 .post-span {
   display: inline-block;
 }
+
 .post-span span {
   display: inline-block;
   font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1000px) {
+  .post-span span {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .post-span span {
+    font-size: .8rem;
+  }
 }

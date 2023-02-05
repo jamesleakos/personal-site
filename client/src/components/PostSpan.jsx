@@ -8,8 +8,8 @@ function PostSpan({post, onClick, showSlash}) {
 
   return (
     <div className='post-span' onClick={() => onClick(post)} >
-      <span className='actual-post-span expand-cursor reacting-link'>{ post.title + (showSlash ? '\xa0\xa0\xa0/\xa0\xa0\xa0' : '' ) }</span>
-      {/* { showSlash && <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span> } */}
+      <span className='actual-post-span expand-cursor reacting-link'>{ post.title }</span>
+      { showSlash && <span className='post-span-slash'>&nbsp;&nbsp;/&nbsp;&nbsp;</span> }
     </div>
   )
 }

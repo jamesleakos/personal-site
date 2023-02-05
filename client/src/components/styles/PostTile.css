@@ -10,6 +10,12 @@
   transition: 0.5s ease;
 }
 
+@media screen and (max-width: 800px) {
+  .post-tile {
+    width: 200px;
+  }
+}
+
 .post-tile:hover {
   /* -webkit-transform: scale(1.02); */
 }
@@ -33,6 +39,12 @@
   max-height: 300px;
   margin-top: 10px;
   overflow: hidden;
+}
+
+@media screen and (max-width: 800px) {
+  .post-tile .tile-title-image {
+    width: 180px;
+  }
 }
 
 .post-tile img {
