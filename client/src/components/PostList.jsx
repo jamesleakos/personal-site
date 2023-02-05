@@ -89,32 +89,39 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   // for drag
   const wrapperRef = useRef(null); // this is used by both
   const [initialMousePos, setInitialMousePos] = useState(null);
-  const dragOffSetX = -50;
-  const dragOffSetY = -30;
+  const [velX, setVelX] = useState(0);
 
   // for text
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [showText, setShowText] = useState(false);
   const textRef = useRef(null);
 
+  const dragOffSetX = -50;
+  const dragOffSetY = -30;
+
+  // functions
+
   const handleMouseDown = (event) => {
     setInitialMousePos(event.clientX);
   };
 
   const handleMouseMove = (event) => {
-    //for drag
-    const wrapper = wrapperRef.current;
-    if (initialMousePos !== null) {
-      const difference = event.clientX - initialMousePos;
-      wrapper.scrollLeft -= difference;
-      setInitialMousePos(event.clientX);
-    }
     // for text
     const { clientX, clientY } = event;
     const { scrollX, scrollY } = window;
     const navbar = document.querySelector('.navbar');
     const wo = useWindowOffset ? window.innerHeight - navbar.clientHeight : 0;
     setMousePos({ x: clientX + scrollX, y: clientY + scrollY - wo});
+    
+    //for drag
+    const wrapper = wrapperRef.current;
+    if (initialMousePos !== null) {
+      const difference = event.clientX - initialMousePos;
+      wrapper.scrollLeft -= difference;
+      setVelX(difference);
+      setInitialMousePos(event.clientX);
+    }
+
   };
 
   const handleMouseUp = () => {
