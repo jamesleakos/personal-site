@@ -129,7 +129,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     const wrapper = wrapperRef.current;
     const difference = event.clientX - initialMousePos;
     wrapper.scrollLeft -= difference;
-    setVelX(difference * 2);
+    setVelX(difference * 1.5);
     setInitialMousePos(event.clientX);
   };
 
@@ -139,7 +139,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     const wrapper = wrapperRef.current;
     const difference = event.touches[0].clientX - initialMousePos;
     wrapper.scrollLeft -= difference;
-    setVelX(difference * 2);
+    setVelX(difference);
     setInitialMousePos(event.touches[0].clientX);
   };
 
@@ -173,7 +173,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   function momentumLoop(){
     wrapperRef.current.scrollLeft -= velX;
     setVelX(
-      prev => prev * .99
+      prev => prev * .97
     );
   }
 
