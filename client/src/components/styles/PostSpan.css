@@ -5,18 +5,10 @@
 }
 
 .post-span span {
+  display: inline;
+}
+
+.actual-post-span {
   display: inline-block;
   font-size: 1.5rem;
-}
-
-@media screen and (max-width: 1100px) {
-  .post-span span {
-    font-size: 1.25rem;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .post-span span {
-    font-size: 1rem;
-  }
 }
