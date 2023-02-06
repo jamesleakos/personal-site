@@ -1,12 +1,11 @@
 
 // dependancies
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 
 // components
 import Navbar from '../components/Navbar.jsx';
-import PostList from '../components/PostList.jsx';
 import Footer from '../components/Footer.jsx';
 import AddComponentSelector from '../builder-components/AddComponentSelector.jsx';
 import BuilderBar from '../builder-components/BuilderBar.jsx';
@@ -14,22 +13,23 @@ import InfoModal from '../builder-components/InfoModal.jsx';
 import TextComp from '../builder-components/TextComp.jsx';
 import PhotoComp from '../builder-components/PhotoComp.jsx';
 
-function PostBuilder({ match }) {
-
-  const location = useLocation();
-  let passedPost = false;
-  if (location.state) {
-    passedPost = location.state.passedPost;
-  }
+function PostBuilder() {
+  const passedPostID = useLoaderData();
 
   // starting effects
   useEffect(() => {
     // scroll to the top
     window.scrollTo(0, 0);
 
-    // at the start, if we were given a post (not likely to include components) we fetch the full post
-    if (!passedPost) return;
-    getFullPost(passedPost);
+    if (!passedPostID) return;
+    axios.get(`/posts/${passedPostID}`)
+    .then(res => {
+      setPost(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
   }, [])
 
   // setting post
@@ -40,15 +40,6 @@ function PostBuilder({ match }) {
   const [showInfoModal, setShowInfoModal] = useState(false);
 
   // POST API CALLS
-  const getFullPost = function(post) {
-    axios.get(`/posts/${post._id}`)
-      .then(res => {
-        setPost(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
   const modifyPost = function (newPost) {
     axios.put(`/posts?post_id=${post._id}`, {
       ...newPost
@@ -220,12 +211,6 @@ function PostBuilder({ match }) {
         post._id 
           ?
           <BuilderBar post={post} setShowInfoModal={setShowInfoModal} modifyPost={modifyPost} deletePost={deletePost} />
-          : null
-      }
-      {
-        !post._id 
-          ? 
-          <PostList onTileClick={getFullPost} showAddNew={true} useWindowOffset={false} title='Posts' showSearch={true} postFilters={{}} amTiled={true} />
           : null
       }
       {

@@ -7,7 +7,7 @@ function IDPage() {
   console.log(id);
   return (
     <div className='id-page'>
-      Hello
+      test
     </div>
   )
 }

@@ -18,7 +18,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
 
   // get the posts
   useEffect(() => {
-    axios.get('tags')
+    axios.get('/tags')
       .then(ts => {
         setTags(ts.data);
       })
@@ -61,7 +61,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   // what should we do when a tile is clicked
   const handleTileClick = function(post) {
     if (onTileClick) {
-      onTileClick(post);
+      onTileClick(post._id);
     }
   }
 
@@ -171,6 +171,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     cancelAnimationFrame(requestRef.current);
   }
   function momentumLoop(){
+    if (!wrapperRef.current) return;
     wrapperRef.current.scrollLeft -= velX;
     setVelX(
       prev => prev * .97

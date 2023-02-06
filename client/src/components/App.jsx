@@ -77,30 +77,28 @@ const router = createBrowserRouter([
     element: <Admin />,
   },
   {
-    path: '/post-builder',
+    path: '/post-builder/:post_id',
     element: <PostBuilder />,
+    loader: async ({params}) => {
+      return params.post_id;
+    }
+
   },
   {
-    path: '/post-viewer',
+    path: '/post-viewer/:post_id',
     element: <PostViewer />,
+    loader: async ({params}) => {
+      return params.post_id;
+    }
   },
   {
     path: '/sign-in-up',
     element: <SignInUpPage />,
   },
-  // {
-  //   path: '/test',
-  //   element: <IDPage />,
-  //   children: [
-  //     {
-  //       element: <IDPage />,
-  //       path: 'test/:id',
-  //       loader: async ({params}) => {
-  //         return params.id;
-  //       }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/test',
+    element: <IDPage />,
+  },
   {
     element: <IDPage />,
     path: 'test/:id',

@@ -1,6 +1,6 @@
 // dependancies
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 
 // components
@@ -13,19 +13,21 @@ import PhotoComp from '../viewer-components/PhotoComp.jsx';
 // import BackgroundPhotoComp from '../viewer-components/BackgroundPhotoComp.jsx';
 
 function PostViewer() {
-  const location = useLocation();
-  let passedPost = false;
-  if (location.state) {
-    passedPost = location.state.passedPost;
-  }
+  const passedPostID = useLoaderData();
+
   // starting effects
   useEffect(() => {
     // scroll to the top
     window.scrollTo(0, 0);
 
-    // at the start, if we were given a post (not likely to include components) we fetch the full post
-    if (!passedPost) return;
-    getFullPost(passedPost);
+    if (!passedPostID) return;
+    axios.get(`/posts/${passedPostID}`)
+    .then(res => {
+      setPost(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }, [])
 
   // setting post
@@ -34,39 +36,13 @@ function PostViewer() {
   });
 
   // POST API CALLS
-  const getFullPost = function(post) {
-    axios.get(`/posts/${post._id}`)
-      .then(res => {
-        setPost(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
 
-    // image GET calls - the POST calls are in the image component itself
-    const [images, setImages] = useState([]);
-
-    useEffect(() => {
-      if (!post._id) return;
-      axios.get(`/image_components?post_id=${post._id}`)
-        .then(res => {
-          setImages(res.data);
-        })
-        .catch(err => {
-          console.log(err);
-        })
-    }, [post]);
+  // image GET calls - the POST calls are in the image component itself
+  const [images, setImages] = useState([]);
   
   return (
     <div className='post-viewer'>
       <Navbar />
-      {
-        !post._id 
-          ? 
-          <PostList onTileClick={getFullPost} showAddNew={false}  title='Posts' showSearch={true} postFilters={{ published: true }} useWindowOffset={false} amTiled={true} />
-          : null
-      }
       {
         post.components.map((component, index) => {
           switch (component.type) {

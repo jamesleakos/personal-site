@@ -15,12 +15,8 @@ function Posts() {
   }, []);
 
   const navigate = useNavigate();
-  const loadPostViewer = function (post) {
-    navigate('/post-viewer', {
-      state: {
-        passedPost: post,
-      },
-    });
+  const loadPostViewer = function (post_id) {
+    navigate(`/post-viewer/${post_id}`)
   };
 
   return (

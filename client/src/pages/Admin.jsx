@@ -15,15 +15,8 @@ function Admin() {
   }, [])
 
   const navigate = useNavigate();
-  const loadPostBuilder = function(post) {
-    navigate(
-      '/post-builder',
-      {
-        state: {
-          passedPost: post
-        }
-      }
-    )
+  const loadPostBuilder = function(post_id) {
+    navigate(`/post-builder/${post_id}`)
   }
   
   return (
