@@ -17,6 +17,7 @@ import PostBuilder from '../pages/PostBuilder.jsx';
 import PostViewer from '../pages/PostViewer.jsx';
 import Admin from '../pages/Admin.jsx';
 import SignInUpPage from '../pages/SignInUpPage.jsx';
+import IDPage from '../pages/IDPage.jsx';
 import './styles/App.css';
 
 // font awesome import
@@ -86,6 +87,26 @@ const router = createBrowserRouter([
   {
     path: '/sign-in-up',
     element: <SignInUpPage />,
+  },
+  // {
+  //   path: '/test',
+  //   element: <IDPage />,
+  //   children: [
+  //     {
+  //       element: <IDPage />,
+  //       path: 'test/:id',
+  //       loader: async ({params}) => {
+  //         return params.id;
+  //       }
+  //     }
+  //   ]
+  // },
+  {
+    element: <IDPage />,
+    path: 'test/:id',
+    loader: async ({params}) => {
+      return params.id;
+    }
   },
 ]);
 
