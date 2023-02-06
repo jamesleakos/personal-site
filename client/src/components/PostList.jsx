@@ -90,6 +90,8 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   const wrapperRef = useRef(null); // this is used by both
   const [initialMousePos, setInitialMousePos] = useState(null);
   const [velX, setVelX] = useState(0);
+  const requestRef = useRef();
+  const [isDown, setIsDown] = useState(false);
 
   // for text
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -102,7 +104,16 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   // functions
 
   const handleMouseDown = (event) => {
+    setIsDown(true);
     setInitialMousePos(event.clientX);
+    cancelMomentumTracking();
+    setVelX(0);
+  };
+  const handleTouchStart = (event) => {
+    setIsDown(true);
+    setInitialMousePos(event.touches[0].clientX);
+    cancelMomentumTracking();
+    setVelX(0);
   };
 
   const handleMouseMove = (event) => {
@@ -114,18 +125,31 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     setMousePos({ x: clientX + scrollX, y: clientY + scrollY - wo});
     
     //for drag
+    if (!isDown) return;
     const wrapper = wrapperRef.current;
-    if (initialMousePos !== null) {
-      const difference = event.clientX - initialMousePos;
-      wrapper.scrollLeft -= difference;
-      setVelX(difference);
-      setInitialMousePos(event.clientX);
-    }
+    const difference = event.clientX - initialMousePos;
+    wrapper.scrollLeft -= difference;
+    setVelX(difference * 2);
+    setInitialMousePos(event.clientX);
+  };
 
+  const handleTouchMove = (event) => {
+    // Same logic as handleMouseMove
+    if (!isDown) return;
+    const wrapper = wrapperRef.current;
+    const difference = event.touches[0].clientX - initialMousePos;
+    wrapper.scrollLeft -= difference;
+    setVelX(difference * 2);
+    setInitialMousePos(event.touches[0].clientX);
   };
 
   const handleMouseUp = () => {
-    setInitialMousePos(null);
+    setIsDown(false);
+    beginMomentumTracking();
+  };
+  const handleTouchEnd = () => {
+    setIsDown(false);
+    beginMomentumTracking();
   };
 
   const handleMouseEnter = () => {
@@ -134,28 +158,31 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
 
   const handleMouseLeave = () => {
     // if the mouse leaves we also want to stop drag tracking
-    setInitialMousePos(null);
+    setIsDown(false);
     // and we want to stop showing text
     setShowText(false);
   }
 
-  const handleTouchStart = (event) => {
-    setInitialMousePos(event.touches[0].clientX);
-  };
+  function beginMomentumTracking(){
+    cancelMomentumTracking();
+    requestRef.current = requestAnimationFrame(momentumLoop);
+  }
+  function cancelMomentumTracking(){
+    cancelAnimationFrame(requestRef.current);
+  }
+  function momentumLoop(){
+    wrapperRef.current.scrollLeft -= velX;
+    setVelX(
+      prev => prev * .99
+    );
+  }
 
-  const handleTouchMove = (event) => {
-    // Same logic as handleMouseMove
-    const wrapper = wrapperRef.current;
-    if (initialMousePos !== null) {
-      const difference = event.touches[0].clientX - initialMousePos;
-      wrapper.scrollLeft -= difference;
-      setInitialMousePos(event.touches[0].clientX);
+  useEffect(() => {
+    if (isDown) return;
+    if (Math.abs(velX) > 0.5){
+      requestRef.current = requestAnimationFrame(momentumLoop);
     }
-  };
-
-  const handleTouchEnd = () => {
-    setInitialMousePos(null);
-  };
+  }, [velX])
 
   return (
     <div className={amTiled ? 'post-list tiled' : 'post-list spanned'}>
