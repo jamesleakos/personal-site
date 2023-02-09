@@ -3,8 +3,6 @@ import React, { useEffect, useState, Suspense } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  Router,
-  useParams,
 } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
