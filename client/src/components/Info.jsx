@@ -32,6 +32,7 @@ function Info() {
         <div>
           <p className='links-title'>WORK</p>
             <a className='links-item reacting-link' href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>Artemis</a>
+            <a className='links-item reacting-link' href='http://playsystemseven.com/'>System Seven</a>
             <a className='links-item reacting-link' href='https://github.com/jamesleakos'>Projects</a>
             <br />
         </div>
