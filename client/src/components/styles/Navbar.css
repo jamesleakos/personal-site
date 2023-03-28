@@ -69,7 +69,9 @@
 
 /* display: table (the default for reacting-link) doesn't work in the grid for some reason */
 .navbar-item .reacting-link {
-  display: inline;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .navbar-title .reacting-link {
