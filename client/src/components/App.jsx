@@ -1,24 +1,25 @@
-// modules
-import React, { useEffect, useState, Suspense } from 'react';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from 'react-router-dom';
+// EXTERNAL
+import React from 'react';
+import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
+// INTERNAL
 // components
 import AnimatedCursor from '../../helpers/animated_cursor.js';
-// import ScrollToTop from '../../helpers/scrollToTop.js';
 import Home from '../pages/Home.jsx';
 import Posts from '../pages/Posts.jsx';
 import PostBuilder from '../pages/PostBuilder.jsx';
 import PostViewer from '../pages/PostViewer.jsx';
 import Admin from '../pages/Admin.jsx';
 import SignInUpPage from '../pages/SignInUpPage.jsx';
-import IDPage from '../pages/IDPage.jsx';
+import Protected from '../utility-components/Protected.jsx';
+// css
 import './styles/App.css';
+// contexts
+import MasterContextProvider from '../contexts/MasterContextProvider.jsx';
+import AuthContext from '../contexts/AuthContext.js';
 
-// font awesome import
+//#region FONTAWESOME
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -60,6 +61,7 @@ library.add(
   faArrowDown,
   faBars,
 );
+//#endregion
 
 const router = createBrowserRouter([
   {
@@ -72,15 +74,14 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Admin />,
+    element: <Protected><Admin /></Protected>,
   },
   {
     path: '/post-builder/:post_id',
-    element: <PostBuilder />,
+    element: <Protected><PostBuilder /></Protected>,
     loader: async ({params}) => {
       return params.post_id;
     }
-
   },
   {
     path: '/post-viewer/:post_id',
@@ -93,27 +94,23 @@ const router = createBrowserRouter([
     path: '/sign-in-up',
     element: <SignInUpPage />,
   },
-  {
-    path: '/test',
-    element: <IDPage />,
-  },
-  {
-    element: <IDPage />,
-    path: 'test/:id',
-    loader: async ({params}) => {
-      return params.id;
-    }
-  },
 ]);
 
-// App
 function App() {
   return (
-    <div className='App'>
-      { !isMobile ? <AnimatedCursor /> : null }
-      <RouterProvider router={router} />
-    </div>
+    <MasterContextProvider>
+      <Root />
+    </MasterContextProvider>
   );
+}
+
+function Root() {
+    return (
+      <div className='App'>
+        { !isMobile ? <AnimatedCursor /> : null }
+        <RouterProvider router={router} />
+      </div>
+    );
 }
 
 export default App;

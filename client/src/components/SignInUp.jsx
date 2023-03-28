@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// imports
+// internal
+import AuthContext from '../contexts/AuthContext.js';
 import './styles/SignInUp.css';
 
 function SignInUp() {
   const navigate = useNavigate();
+  const { setIsLoggedIn } = React.useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +23,7 @@ function SignInUp() {
       })
       .then((res) => {
         console.log(res);
+        setIsLoggedIn(true);
         navigate('/');
       })
       .catch((err) => {
