@@ -26,7 +26,7 @@ function Info() {
           <Link className='links-item reacting-link' to="/all-posts">Running</Link>
           <Link className='links-item reacting-link' to="/all-posts">History</Link>
           <Link className='links-item reacting-link' to="/all-posts">Art</Link>
-          <Link className='links-item reacting-link' to="/all-posts">Posts</Link>
+          <Link className='links-item reacting-link' to="/all-posts">All Posts</Link>
           <br />
         </div>
         <div>
