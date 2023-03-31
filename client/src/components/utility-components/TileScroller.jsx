@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 // css
 import { TileScrollerStyled } from './styles/TileScroller.styled.js';
@@ -19,6 +19,11 @@ function TileScroller({ Mapper }) {
 
   const dragOffSetX = -50;
   const dragOffSetY = -30;
+
+  // memoize the mapper
+  const memoizedMapper = useMemo(() => {
+    return <Mapper />;
+  }, []);
 
   // functions
 
@@ -119,7 +124,7 @@ function TileScroller({ Mapper }) {
         onTouchEnd={handleTouchEnd}
       >
         <div className='scroller'>
-          <Mapper />
+          <div className='mapper'>{memoizedMapper}</div>
         </div>
       </div>
     </TileScrollerStyled>
