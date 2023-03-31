@@ -1,0 +1,49 @@
+@import '../../styles/constants.css';
+
+/* shared CSS */
+
+.text-comp {
+  display: inline-block;
+  width: 100%;
+}
+
+.text-comp textarea {
+  min-height: 12rem;
+  resize: vertical;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.text-comp .editing {
+  display: inline-block;
+  width: var(--post-width);
+  margin: var(--post-component-vertical-margin) 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--background-color-dark-main);
+}
+
+.text-comp .left-icons {
+  float: left;
+  display: block;
+}
+
+.text-comp .left-icons .reacting-link {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.text-comp .right-icons {
+  float: right;
+  display: block;
+}
+
+.text-comp .right-icons .reacting-link {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.text-comp .text-comp .reacting-link:hover {
+  -webkit-transform: scale(1.2);
+}
+
+/* individual CSS for viewable components is in viewer-components/styles */

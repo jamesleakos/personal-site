@@ -1,0 +1,85 @@
+@import '../../styles/constants.css';
+
+.main-title {
+  font-family: var(--main-title-font);
+  text-align: center;
+  font-size: 3rem;
+  width: 70%;
+  /* we don't want the main title to be used with the margin classes */
+  margin: 100px auto 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .main-title {
+    width: 80%;
+  }
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.5rem;
+  /* we're doing margin stuff a bit funny because we can add and remove */
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--background-color-dark-main);
+}
+
+@media screen and (max-width: 1000px) {
+  .subtitle {
+    width: 70%;
+  }
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.body-text {
+  text-align: left;
+  font-size: 1.2rem;
+  /* we're doing margin stuff a bit funny because we can add and remove */
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+
+@media screen and (max-width: 1000px) {
+  .body-text {
+    width: 80%;
+  }
+}
+
+.quote {}
+
+.caption {
+  font-family: var(--caption-font);
+  font-size: .7rem;
+  color: var(--text-accent);
+  /* we're doing margin stuff a bit funny because we can add and remove */
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+  width: 50%;
+  border-bottom: 1px solid var(--text-accent);
+}
+
+@media screen and (max-width: 1000px) {
+  .caption {
+    width: 80%;
+  }
+}
+
+
+/* these should be at the bottom so that they override other things */
+.has-top-margin {
+  margin-top: var(--post-component-vertical-margin);
+}
+
+.has-bottom-margin {
+  margin-bottom: var(--post-component-vertical-margin);
+}
