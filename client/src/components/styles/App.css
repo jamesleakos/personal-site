@@ -14,6 +14,20 @@ body * {
   cursor: none;
 }
 
+p {
+  margin: 0;
+}
+
+a {
+  color: black;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+#app {
+  text-align: center;
+}
+
 .title-div {
   background-image: url('https://ik.imagekit.io/hfywj4j0a/tr:w-2500/drone_running_Xvk-_Re6J.JPG?ik-sdk-version=javascript-1.4.3&updatedAt=1674278601364');
   background-size: cover;
@@ -47,10 +61,16 @@ body * {
   -webkit-transform: scale(1.05);
 }
 
-a {
-  color: black;
-  font-weight: 400;
+.clickable {
   text-decoration: none;
+  color: black;
+  font-weight: 600;
+  transition: 0.5s ease;
+}
+
+.clickable:hover {
+  color: var(--text-accent);
+  -webkit-transform: scale(1.2);
 }
 
 .inline-background-image {
@@ -77,4 +97,10 @@ a {
 
 .no-select:focus {
   outline: none !important;
+}
+
+.icon {
+  font-size: 16px;
+  margin: 10px 10px 0 0;
+  display: inline;
 }

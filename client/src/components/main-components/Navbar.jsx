@@ -31,10 +31,12 @@ function MobileNavbar({ toggleModal }) {
       style={{ gridColumn: 3, borderWidth: '0 0 0 1px' }}
       onClick={ () => { toggleModal(); }}
     >
-      <FontAwesomeIcon
-        className='reacting-link expand-cursor'
-        icon='fa-solid fa-bars'
-      />
+      <div className='reacting-link navbar-item'>
+        <FontAwesomeIcon
+          className='reacting-link icon'
+          icon='fa-solid fa-bars'
+        />
+      </div>
     </div>
   </div>
 
