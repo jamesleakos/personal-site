@@ -77,8 +77,8 @@ function DesktopNavbar() {
       className='navbar-item'
       style={{ gridColumn: 6, borderWidth: '0 1px 0 0' }}
     >
-      <Link className='reacting-link' to='/poetry'>
-        Poetry
+      <Link className='reacting-link' to='/contact'>
+        Contact
       </Link>
     </div>
   </div>

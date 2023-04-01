@@ -70,6 +70,7 @@ a {
 
 .clickable:hover {
   color: var(--text-accent);
+  transform: scale(1.2);
   -webkit-transform: scale(1.2);
 }
 

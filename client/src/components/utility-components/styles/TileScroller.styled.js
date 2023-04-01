@@ -3,7 +3,6 @@ import '../../styles/constants.css';
 
 export const TileScrollerStyled = styled.div`
   --post-list-margin: 20px;
-
   overflow: hidden;
 
   .scroll-wrapper {
@@ -13,7 +12,6 @@ export const TileScrollerStyled = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
     overflow: hidden;
   }
 

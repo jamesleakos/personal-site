@@ -19,6 +19,9 @@
   /* navbar */
   --nav-bar-height: 70px;
 
+  /* work list */
+  --work-list-height: 400px;
+
   /* article */
   --post-width: 60%;
   --post-component-vertical-margin: 60px;

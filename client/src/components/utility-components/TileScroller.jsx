@@ -124,7 +124,7 @@ function TileScroller({ Mapper }) {
         onTouchEnd={handleTouchEnd}
       >
         <div className='scroller'>
-          <div className='mapper'>{memoizedMapper}</div>
+          {memoizedMapper}
         </div>
       </div>
     </TileScrollerStyled>

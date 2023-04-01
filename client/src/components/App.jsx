@@ -16,6 +16,7 @@ import Protected from './utility-components/Protected.jsx';
 import WorkPage from './work-components/WorkPage.jsx';
 import GamesPage from './game-components/GamesPage.jsx';
 import PoetryPage from './pages/PoetryPage.jsx';
+import ContactPage from './contact-page/ContactPage.jsx';
 
 // css
 import './styles/App.css';
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
   {
     path: '/poetry',
     element: <PoetryPage />,
+  },
+  {
+    path: '/contact',
+    element: <ContactPage />,
   },
 ]);
 

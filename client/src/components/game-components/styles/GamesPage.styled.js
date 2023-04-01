@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import '../../styles/constants.css';
 
-export const WorkPageStyled = styled.div`
+export const GamesPageStyled = styled.div`
 
   .projects {
     width: 100vw;
@@ -25,10 +25,6 @@ export const WorkPageStyled = styled.div`
   .work-section {
     width: 100vw;
     padding: var(--post-list-margin) 0;
-  }
-
-  .about-me {
-    background-color: var(--background-color-light-main);
   }
 
   .current-work {
