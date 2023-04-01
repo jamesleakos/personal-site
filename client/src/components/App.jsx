@@ -8,13 +8,13 @@ import { isMobile } from 'react-device-detect';
 import AnimatedCursor from '../../helpers/animated_cursor.js';
 import Home from './pages/Home.jsx';
 import Posts from './pages/Posts.jsx';
-import PostBuilder from './pages/PostBuilder.jsx';
-import PostViewer from './pages/PostViewer.jsx';
+import PostBuilder from './builder-components/PostBuilder.jsx';
+import PostViewer from './viewer-components/PostViewer.jsx';
 import Admin from './pages/Admin.jsx';
 import SignInUpPage from './pages/SignInUpPage.jsx';
 import Protected from './utility-components/Protected.jsx';
-import WorkPage from './pages/WorkPage.jsx';
-import GamesPage from './pages/GamesPage.jsx';
+import WorkPage from './work-components/WorkPage.jsx';
+import GamesPage from './game-components/GamesPage.jsx';
 import PoetryPage from './pages/PoetryPage.jsx';
 
 // css
