@@ -5,10 +5,9 @@ import axios from 'axios';
 
 // components
 import Navbar from '../main-components/Navbar.jsx';
-import PostList from '../main-components/PostList.jsx';
 import Footer from '../main-components/Footer.jsx';
-import TextComp from '../viewer-components/TextComp.jsx';
-import PhotoComp from '../viewer-components/PhotoComp.jsx';
+import TextComp from './TextComp.jsx';
+import PhotoComp from './PhotoComp.jsx';
 // import PhotoGalleryComp from '../viewer-components/PhotoGalleryComp.jsx';
 // import BackgroundPhotoComp from '../viewer-components/BackgroundPhotoComp.jsx';
 
