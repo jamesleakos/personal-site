@@ -88,7 +88,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
   // drag to scroll and text near cursor (all is for drag unless specified)
   // for drag
   const wrapperRef = useRef(null); // this is used by both
-  const [initialMousePos, setInitialMousePos] = useState(null);
+  const [initialMousePosX, setInitialMousePos] = useState(null);
   const [velX, setVelX] = useState(0);
   const requestRef = useRef();
   const [isDown, setIsDown] = useState(false);
@@ -127,7 +127,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     //for drag
     if (!isDown) return;
     const wrapper = wrapperRef.current;
-    const difference = event.clientX - initialMousePos;
+    const difference = event.clientX - initialMousePosX;
     wrapper.scrollLeft -= difference;
     setVelX(difference * 1.5);
     setInitialMousePos(event.clientX);
@@ -137,7 +137,7 @@ function PostList({ postFilters, onTileClick, showAddNew, showSearch, title, use
     // Same logic as handleMouseMove
     if (!isDown) return;
     const wrapper = wrapperRef.current;
-    const difference = event.touches[0].clientX - initialMousePos;
+    const difference = event.touches[0].clientX - initialMousePosX;
     wrapper.scrollLeft -= difference;
     setVelX(difference);
     setInitialMousePos(event.touches[0].clientX);

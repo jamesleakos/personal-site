@@ -65,6 +65,7 @@ function Home() {
           showSearch={false}
           amTiled={true}
         />
+        <Info />
         <PostList
           postFilters={{}}
           onTileClick={loadPostViewer}
@@ -74,7 +75,6 @@ function Home() {
           useWindowOffset={false}
           amTiled={false}
         />
-        <Info />
         <BackgroundImage
           height='80vh'
           imageURL='cascade_party_o3vag5CSz.JPG'

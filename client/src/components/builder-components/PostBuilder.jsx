@@ -7,11 +7,11 @@ import axios from 'axios';
 // components
 import Navbar from '../main-components/Navbar.jsx';
 import Footer from '../main-components/Footer.jsx';
-import AddComponentSelector from '../builder-components/AddComponentSelector.jsx';
-import BuilderBar from '../builder-components/BuilderBar.jsx';
-import InfoModal from '../builder-components/InfoModal.jsx';
-import TextComp from '../builder-components/TextComp.jsx';
-import PhotoComp from '../builder-components/PhotoComp.jsx';
+import AddComponentSelector from './AddComponentSelector.jsx';
+import BuilderBar from './BuilderBar.jsx';
+import InfoModal from './InfoModal.jsx';
+import TextComp from './TextComp.jsx';
+import PhotoComp from './PhotoComp.jsx';
 
 function PostBuilder() {
   const passedPostID = useLoaderData();

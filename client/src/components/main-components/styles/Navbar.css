@@ -46,6 +46,7 @@
 
 .mobile-navbar .navbar-item {
   width: 50px;
+  line-height: var(--nav-bar-height);
 }
 
 .mobile-modal {
