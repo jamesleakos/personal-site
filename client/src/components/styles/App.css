@@ -1,5 +1,12 @@
 @import './constants.css';
 
+:root {
+  --color-cursor: 40, 40, 40;
+  --cursor-outline-shade: 0.3;
+  --cursor-size: 10px;
+  --cursor-outline-size: 30px;
+}
+
 html,
 body {
   cursor: none;
@@ -12,6 +19,7 @@ body {
 html *,
 body * {
   cursor: none;
+  margin: 0;
 }
 
 .title-div {
@@ -47,6 +55,18 @@ body * {
   -webkit-transform: scale(1.05);
 }
 
+.clickable {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  transition: 0.5s ease;
+}
+
+.clickable:hover {
+  color: var(--text-accent);
+  -webkit-transform: scale(1.2);
+}
+
 a {
   color: black;
   font-weight: 400;
@@ -77,4 +97,36 @@ a {
 
 .no-select:focus {
   outline: none !important;
+}
+
+#cursor-dot,
+#cursor-dot-outline {
+  z-index: 999;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+#cursor-dot {
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  background-color: rgba(var(--color-cursor), 1);
+  z-index: 999;
+}
+
+#cursor-dot-outline {
+  width: var(--cursor-outline-size);
+  height: var(--cursor-outline-size);
+  background-color: rgba(var(--color-cursor), var(--cursor-outline-shade));
+}
+
+.icon {
+  font-size: 16px;
+  margin: 10px 10px 0 0;
+  display: inline;
 }

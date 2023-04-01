@@ -1,5 +1,10 @@
 @import '../../styles/constants.css';
 
+.post-list {
+  text-align: center;
+  padding-left: var(--post-list-margin);
+}
+
 .post-list.tiled {
   background-color: var(--background-color-dark-main);
   overflow: hidden;
