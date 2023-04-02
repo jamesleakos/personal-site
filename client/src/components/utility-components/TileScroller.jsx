@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 // css
 import { TileScrollerStyled } from './styles/TileScroller.styled.js';
 
-function TileScroller({ Mapper }) {
+function TileScroller({ Mapper, MapArray }) {
   // drag to scroll and text near cursor (all is for drag unless specified)
   // for drag
   const wrapperRef = useRef(null); // this is used by both
@@ -22,8 +22,8 @@ function TileScroller({ Mapper }) {
 
   // memoize the mapper
   const memoizedMapper = useMemo(() => {
-    return <Mapper />;
-  }, []);
+    return Mapper(MapArray);
+  }, [MapArray]);
 
   // functions
 
@@ -123,9 +123,7 @@ function TileScroller({ Mapper }) {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className='scroller'>
-          {memoizedMapper}
-        </div>
+        <div className='scroller'>{memoizedMapper}</div>
       </div>
     </TileScrollerStyled>
   );

@@ -7,17 +7,18 @@
 
   /* colours */
   --text-accent: red;
-  --text-color-light-main: #FFFFFF;
+  --text-color-light-main: #ffffff;
 
-  --background-color-light-main: #FFFFFF;
-  --background-color-light-secondary: #F4F4F4;
-  --background-color-mid-main: #B3B3AD;
-  --background-color-dark-main: #40403E;
+  --background-color-light-main: #ffffff;
+  --background-color-light-secondary: #f4f4f4;
+  --background-color-mid-main: #b3b3ad;
+  --background-color-dark-main: #40403e;
   --background-color-dark-secondary: #787874;
 
   /* component specific */
-  /* navbar */
+  /* navbar and footer */
   --nav-bar-height: 70px;
+  --footer-height: 100px;
 
   /* work list */
   --work-list-height: 400px;

@@ -1,6 +1,6 @@
 // EXTERNAL
 import React from 'react';
-import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
 // INTERNAL
@@ -15,7 +15,8 @@ import SignInUpPage from './pages/SignInUpPage.jsx';
 import Protected from './utility-components/Protected.jsx';
 import WorkPage from './work-components/WorkPage.jsx';
 import GamesPage from './game-components/GamesPage.jsx';
-import PoetryPage from './pages/PoetryPage.jsx';
+import PoetryPage from './poetry-components/PoetryPage.jsx';
+import PoemPage from './poetry-components/PoemPage.jsx';
 import ContactPage from './contact-page/ContactPage.jsx';
 
 // css
@@ -63,7 +64,7 @@ library.add(
   faX,
   faArrowUp,
   faArrowDown,
-  faBars,
+  faBars
 );
 //#endregion
 
@@ -78,21 +79,29 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Protected><Admin /></Protected>,
+    element: (
+      <Protected>
+        <Admin />
+      </Protected>
+    ),
   },
   {
     path: '/post-builder/:post_id',
-    element: <Protected><PostBuilder /></Protected>,
-    loader: async ({params}) => {
+    element: (
+      <Protected>
+        <PostBuilder />
+      </Protected>
+    ),
+    loader: async ({ params }) => {
       return params.post_id;
-    }
+    },
   },
   {
     path: '/post-viewer/:post_id',
     element: <PostViewer />,
-    loader: async ({params}) => {
+    loader: async ({ params }) => {
       return params.post_id;
-    }
+    },
   },
   {
     path: '/sign-in-up',
@@ -111,6 +120,13 @@ const router = createBrowserRouter([
     element: <PoetryPage />,
   },
   {
+    path: '/poem/:poem_id',
+    element: <PoemPage />,
+    loader: async ({ params }) => {
+      return params.poem_id;
+    },
+  },
+  {
     path: '/contact',
     element: <ContactPage />,
   },
@@ -125,12 +141,12 @@ function App() {
 }
 
 function Root() {
-    return (
-      <div className='App'>
-        { !isMobile ? <AnimatedCursor /> : null }
-        <RouterProvider router={router} />
-      </div>
-    );
+  return (
+    <div className='App'>
+      {!isMobile ? <AnimatedCursor /> : null}
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
 export default App;

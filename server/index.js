@@ -21,6 +21,7 @@ const postRouter = require('./routers/posts.js');
 const componentRouter = require('./routers/components.js');
 const imageComponentRouter = require('./routers/image_components.js');
 const tagRouter = require('./routers/tags.js');
+const poemRouter = require('./routers/poems.js');
 
 // express app
 const app = express();
@@ -63,6 +64,7 @@ app.use('/components', componentRouter);
 app.use('/image_components', imageComponentRouter);
 app.use('/tags', tagRouter);
 app.use('/auth', authRouter);
+app.use('/poems', poemRouter);
 
 // needed to send the base files
 app.get('/*', function (req, res) {

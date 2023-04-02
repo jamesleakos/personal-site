@@ -2,14 +2,14 @@
 
 .footer {
   margin: 0;
-  height: 100px;
+  height: var(--footer-height);
   background-color: var(--background-color-light-secondary);
 }
 
 .footer .reacting-link {
   text-align: center;
   display: inline-block;
-  margin: 40px 10px 40px 10px
+  margin: 40px 10px 40px 10px;
 }
 
 .footer .reacting-link:hover {

@@ -18,19 +18,19 @@ router.get('/:post_id', function (req, res) {
 // add a post
 router.post('/', function (req, res) {
   if (!req.user) return;
-  if (!req.user.role === 'admin') return;
+  if (req.user.toJSON().role !== 'admin') return;
   postController.addPost(req, res);
 });
 // update a post
 router.put('/', function (req, res) {
   if (!req.user) return;
-  if (!req.user.role === 'admin') return;
+  if (req.user.toJSON().role !== 'admin') return;
   postController.updatePost(req, res);
 });
 // delete a post
 router.delete('/', function (req, res) {
   if (!req.user) return;
-  if (!req.user.role === 'admin') return;
+  if (req.user.toJSON().role !== 'admin') return;
   postController.deletePost(req, res);
 });
 

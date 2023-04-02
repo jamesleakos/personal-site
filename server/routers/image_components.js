@@ -25,7 +25,7 @@ const imageController = require('../controllers/images.js');
 
 router.post('/', upload.single('image'), function (req, res) {
   if (!req.user) return;
-  if (!req.user.role === 'admin') return;
+  if (req.user.toJSON().role !== 'admin') return;
   imageController.uploadImage(req, res);
 });
 
@@ -37,13 +37,13 @@ router.get('/', (req, res) => {
 
 router.put('/', function (req, res) {
   if (!req.user) return;
-  if (!req.user.role === 'admin') return;
+  if (req.user.toJSON().role !== 'admin') return;
   imageController.addOrUpdateImageComponent(req, res);
 });
 
 router.delete('/image_components', function (req, res) {
   if (!req.user) return;
-  if (!req.user.role === 'admin') return;
+  if (req.user.toJSON().role !== 'admin') return;
   // we can use the same method as the posts
   postController.deleteComponent(req, res);
 

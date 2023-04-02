@@ -56,7 +56,7 @@ function GamesPage() {
       <div className='main-content'>
         <BackgroundImage
           height='100vh'
-          imageURL='/Personal_Site/artemis_thorns.jpeg'
+          imageURL='Personal_Site/artemis_thorns.jpeg'
         />
         <div className='projects'>
           <div className='projects-section'>          
@@ -64,6 +64,10 @@ function GamesPage() {
             <TileScroller Mapper={projectMapper}/>
           </div>
         </div>
+        <BackgroundImage
+          height='100vh'
+          imageURL='Personal_Site/trollherds_3.png'
+        />
         {/* <div className='current-work work-section'>
           <div className='section-content'>          
             <p className='section-title' >Artemis</p>
