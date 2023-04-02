@@ -31,10 +31,6 @@ export const GamesPageStyled = styled.div`
     background-color: var(--background-color-light-secondary);
   }
 
-  .past-work {
-    background-color: var(--background-color-light-main);
-  }
-
   .section-content {
     text-align: left;
     font-size: 1.2rem;

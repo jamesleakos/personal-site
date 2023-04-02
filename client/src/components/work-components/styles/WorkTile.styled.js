@@ -21,6 +21,7 @@ export const WorkTileStyled = styled.div`
     margin: 10px 0 10px 0;
     font-size: 1.5rem;
     max-width: var(--post-tile-width);
+    transition: 0.5s ease;
   }
   
   .description {
@@ -52,6 +53,18 @@ export const WorkTileStyled = styled.div`
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
     z-index: -1;
+  }
+
+  .title-area:hover img {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    z-index: -1;
+  }
+  
+  .title-area:hover .tile-title {
+    color: var(--text-accent);
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
   }
   
   .tag {
