@@ -78,6 +78,7 @@ function Home() {
         <BackgroundImage
           height='80vh'
           imageURL='Personal_Site/cascade_party_o3vag5CSz.JPG'
+          backgroundPosition='bottom'
         />
         <Footer />
       </div>

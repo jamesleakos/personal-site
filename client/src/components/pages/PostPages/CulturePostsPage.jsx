@@ -22,7 +22,10 @@ function CulturePostsPage({ isMobile }) {
     <div className='posts'>
       <Navbar />
       {!isMobile ? (
-        <BackgroundImage imageURL='Personal_Site/amangiri_far_shot_077VZ07AC.JPG' />
+        <BackgroundImage
+          imageURL='Personal_Site/plunge_pool_at_amangiri.jpg'
+          backgroundPosition='bottom'
+        />
       ) : null}
       <PostList
         postFilters={{ published: true, tags: 'Culture' }}

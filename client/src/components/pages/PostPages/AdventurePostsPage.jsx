@@ -22,7 +22,7 @@ function AdventurePostsPage({ isMobile }) {
     <div className='posts'>
       <Navbar />
       {!isMobile ? (
-        <BackgroundImage imageURL='Personal_Site/sam_in_sask_vGufgsbWx.JPG' />
+        <BackgroundImage imageURL='Personal_Site/sam_on_rock_spine.JPG' />
       ) : null}
       <PostList
         postFilters={{ published: true, tags: 'Adventure' }}

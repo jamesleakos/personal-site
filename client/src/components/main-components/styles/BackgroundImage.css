@@ -8,6 +8,7 @@
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
+  /* we provide an override option for this */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
