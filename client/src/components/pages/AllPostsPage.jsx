@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../main-components/Footer.jsx';
 import Navbar from '../main-components/Navbar.jsx';
 import PostList from '../main-components/PostList.jsx';
-import Info from '../main-components/Info.jsx';
 import BackgroundImage from '../main-components/BackgroundImage.jsx';
 
 function Posts() {
@@ -16,18 +15,18 @@ function Posts() {
 
   const navigate = useNavigate();
   const loadPostViewer = function (post_id) {
-    navigate(`/post-viewer/${post_id}`)
+    navigate(`/post-viewer/${post_id}`);
   };
 
   return (
-    <div className="posts">
+    <div className='posts'>
       <Navbar />
       <PostList
         postFilters={{ published: true }}
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title="2022 Featured Articles"
+        title='2022 Featured Articles'
         useWindowOffset={false}
         amTiled={true}
       />
@@ -36,32 +35,35 @@ function Posts() {
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title="2022 Other"
-        useWindowOffset={false}
-        amTiled={false}
-      />
-      <BackgroundImage height="600px" imageURL="sam_in_sask_vGufgsbWx.JPG" />
-      <PostList
-        postFilters={{ published: true }}
-        onTileClick={loadPostViewer}
-        showAddNew={false}
-        showSearch={true}
-        title="2021 Featured Articles"
-        useWindowOffset={false}
-        amTiled={true}
-      />
-      <PostList
-        postFilters={{ published: true }}
-        onTileClick={loadPostViewer}
-        showAddNew={false}
-        showSearch={true}
-        title="2021 Other"
+        title='2022 Other'
         useWindowOffset={false}
         amTiled={false}
       />
       <BackgroundImage
-        height="600px"
-        imageURL="skinning_outside_RJ4rJKy53.jpg"
+        height='600px'
+        imageURL='Personal_Site/_sask_vGufgsbWx.JPG'
+      />
+      <PostList
+        postFilters={{ published: true }}
+        onTileClick={loadPostViewer}
+        showAddNew={false}
+        showSearch={true}
+        title='2021 Featured Articles'
+        useWindowOffset={false}
+        amTiled={true}
+      />
+      <PostList
+        postFilters={{ published: true }}
+        onTileClick={loadPostViewer}
+        showAddNew={false}
+        showSearch={true}
+        title='2021 Other'
+        useWindowOffset={false}
+        amTiled={false}
+      />
+      <BackgroundImage
+        height='600px'
+        imageURL='Personal_Site/skinning_outside_RJ4rJKy53.jpg'
       />
       <Footer />
     </div>

@@ -3,7 +3,8 @@
 .background-image-main-component {
   /* background image set inline */
 
-  /* height set inline */
+  /* height set inline, but we can make a default here */
+  height: calc(100vh - var(--nav-bar-height));
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -31,7 +32,7 @@
 .background-caption-text {
   text-align: left;
   font-family: var(--caption-font);
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: var(--text-accent);
 }
 

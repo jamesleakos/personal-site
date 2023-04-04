@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Post, TextComponent, ImageComponent, Component } = require('../../db/models/Post.js');
+const { Post, TextComponent, ImageComponent, Component, Tag } = require('../../db/models/Post.js');
 const s3 = require('../s3.js');
 const { moveArrayElement } = require('../helpers/moveArrayElement.js');
 
@@ -11,15 +11,28 @@ exports.getAllPosts = (req, res) => {
     .catch(err => {
       console.log(err);
       res.sendStatus(400);
-    })
+    });
 };
 
 exports.getPostsInfo = async (req, res) => {
   try {
+    // first we need to check if the filters inlcude a tag
+    // if it does, we need to retrieve the tag ids for that tag and then use that to filter the posts
+    // if it doesn't, we can just use the query as is
+
+    if (req.query.tags) {
+      // we need to get the tag ids for the tags in the query
+      const tags = req.query.tags.split(',');
+      const tagIds = await Tag.find({ name: { $in: tags } }, '_id');
+      const tagIdsArr = tagIds.map(tag => tag._id);
+      req.query.tag_ids = { $in: tagIdsArr };
+      delete req.query.tags;
+    }
+
     let posts = await Post.find({
       ...req.query
     }, '-components');
-    
+
     // we shouldn't need all this anymore because of image kit
     // the front end doesn't need urls, just the key to render an image
 
@@ -30,7 +43,7 @@ exports.getPostsInfo = async (req, res) => {
     // })
 
     // console.log(keys);
-  
+
     // const { urlObjs } = await s3.getPresignedUrlsFromKeys(keys);
 
     // posts = posts.map(post => {
@@ -48,7 +61,7 @@ exports.getPostsInfo = async (req, res) => {
     console.log(err);
     res.sendStatus(400);
   }
-}
+};
 
 // exports.getPostsInfo = async (req, res) => {
 //   const posts = await Post.find({
@@ -77,15 +90,15 @@ exports.getPostsInfo = async (req, res) => {
 // }
 
 exports.getPost = (req, res) => {
-  Post.find({_id: req.query.post_id})
+  Post.find({ _id: req.query.post_id })
     .then(data => {
       res.status(200).send(data[0]);
     })
     .catch(err => {
       console.log(err);
       res.sendStatus(400);
-    })
-}
+    });
+};
 
 exports.addPost = (req, res) => {
   Post.create({
@@ -104,7 +117,7 @@ exports.addPost = (req, res) => {
     .catch(err => {
       console.log(err);
       res.sendStatus(400);
-    })
+    });
 };
 
 exports.reorderComponent = (req, res) => {
@@ -118,20 +131,20 @@ exports.reorderComponent = (req, res) => {
   }
 
   Post.findById(req.query.post_id)
-  .then(post => {
-    let newComps = [...post.components];
-    newComps = moveArrayElement(newComps, from, to);
-    post.components = newComps;
-    return post.save()
-  })
-  .then(saveResponse => {
-    res.status(200).send(saveResponse);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(400).send(err);
-  })
-}
+    .then(post => {
+      let newComps = [...post.components];
+      newComps = moveArrayElement(newComps, from, to);
+      post.components = newComps;
+      return post.save();
+    })
+    .then(saveResponse => {
+      res.status(200).send(saveResponse);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).send(err);
+    });
+};
 
 exports.addOrUpdateTextComponent = (req, res) => {
   if (req.body.text === '') {
@@ -145,23 +158,23 @@ exports.addOrUpdateTextComponent = (req, res) => {
     text: req.body.text,
     margin_top: req.body.margin_top,
     margin_bottom: req.body.margin_bottom
-  }
+  };
 
   if (!req.body._id) {
     const textComponent = new TextComponent({
       ...newComp
-    })
+    });
     textComponent.save()
       .catch(err => {
         console.log(err);
         res.status(400).send(err);
-      })
+      });
 
     Post.findById(req.query.post_id)
       .then(post => {
         console.log(textComponent);
         post.components.splice(req.query.index, 0, textComponent);
-        return post.save()
+        return post.save();
       })
       .then(saveResponse => {
         res.status(200).send(saveResponse);
@@ -169,30 +182,30 @@ exports.addOrUpdateTextComponent = (req, res) => {
       .catch(err => {
         console.log(err);
         res.status(400).send(err);
-      })
+      });
   } else {
     TextComponent.findOneAndUpdate({
       _id: req.body._id
     },
-    {
-      ...newComp
-    },
-    {
-      // without this I think it returns the old one
-      new: true
-    })
+      {
+        ...newComp
+      },
+      {
+        // without this I think it returns the old one
+        new: true
+      })
       .then(comp => {
-        return Post.updateOne({ 
+        return Post.updateOne({
           _id: req.query.post_id,
           'components._id': req.body._id
         },
-        {
-          $set: {
-            'components.$': {
-              ...comp
+          {
+            $set: {
+              'components.$': {
+                ...comp
+              }
             }
-          }
-        })
+          });
       })
       // does not return the updated post
       .then(() => {
@@ -204,38 +217,38 @@ exports.addOrUpdateTextComponent = (req, res) => {
       .catch(err => {
         console.log(err);
         res.status(400).send(err);
-      })
+      });
   }
-}
+};
 
 exports.updatePost = (req, res) => {
   Post.findOneAndUpdate({
     _id: req.query.post_id
   },
-  {
-    title: req.body.title,
-    description: req.body.description,
-    tag_ids: req.body.tag_ids,
-    display_image_key: req.body.display_image_key,
-    display_image_extension: req.body.display_image_extension,
-    created_at: req.body.created_at,
-    published: req.body.published,
-    published_at: req.body.published_at,
-    featured: req.body.featured,
-  },
-  {
-    // without this I think it returns the old one
-    new: true
-  })
+    {
+      title: req.body.title,
+      description: req.body.description,
+      tag_ids: req.body.tag_ids,
+      display_image_key: req.body.display_image_key,
+      display_image_extension: req.body.display_image_extension,
+      created_at: req.body.created_at,
+      published: req.body.published,
+      published_at: req.body.published_at,
+      featured: req.body.featured,
+    },
+    {
+      // without this I think it returns the old one
+      new: true
+    })
     .then(post => {
       res.status(200).send(post);
     })
     .catch(err => {
       console.log(err);
       res.sendStatus(400);
-    })
+    });
 
-}
+};
 
 exports.deletePost = (req, res) => {
   if (!req.query.post_id) {
@@ -251,14 +264,14 @@ exports.deletePost = (req, res) => {
     .catch(err => {
       console.log(err);
       res.sendStatus(400);
-    })
-}
+    });
+};
 
 exports.deleteComponent = (req, res) => {
   Component.deleteOne({ _id: req.query.component_id })
     .catch(err => {
       console.log(err);
-    })
+    });
 
   Post.findOneAndUpdate(
     {
@@ -281,5 +294,5 @@ exports.deleteComponent = (req, res) => {
     .catch(err => {
       console.log(err);
       res.sendStatus(400);
-    })
-}
+    });
+};

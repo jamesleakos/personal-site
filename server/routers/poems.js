@@ -20,7 +20,7 @@ router.put('/', function (req, res) {
 });
 
 router.delete('/:poem_id', function (req, res) {
-  console.log('req.user', req.user);
+  // console.log('req.user', req.user);
   if (!req.user) return;
   if (req.user.toJSON().role !== 'admin') return;
   if (!req.query.poem_id) req.query.poem_id = req.params.poem_id;

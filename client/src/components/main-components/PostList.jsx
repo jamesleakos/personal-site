@@ -74,10 +74,9 @@ function PostList({
         returning = true;
       return returning;
     });
-    console.log('useEffect posts:', posts);
-    console.log('useEffect newPosts:', newPosts);
-    setShownPosts(newPosts);
-  }, [search, posts]);
+
+    setShownPosts(newPosts.reverse());
+  }, [search, posts, postFilters]);
 
   // what should we do when a tile is clicked
   const handleTileClick = function (post) {
@@ -109,7 +108,6 @@ function PostList({
 
   const postMapper = (arr) => {
     // map out the posts
-    console.log('post mapper: ', shownPosts);
     return arr.map((post) => {
       return (
         <PostTile

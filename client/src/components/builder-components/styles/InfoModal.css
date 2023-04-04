@@ -12,17 +12,26 @@
   margin: 0;
 }
 
+.modal-wrapper {
+  position: absolute;
+  top: calc(var(--nav-bar-height) + 20px);
+  left: 20px;
+  right: 20px;
+  padding: 20px;
+  width: 90%;
+  background-color: var(--background-color-mid-main);
+}
+
 .info-modal {
   position: relative;
+  top: 0;
   margin: auto;
-  padding: 20px;
-  background-color: var(--background-color-mid-main);
   text-align: left;
 }
 
 .info-modal .close {
   position: absolute;
-  top: 10px;
+  top: 0;
   right: 10px;
 }
 
@@ -54,7 +63,6 @@
   overflow-y: scroll;
   margin-bottom: 20px;
 }
-
 
 .info-modal .submit-button {
   margin-top: 20px;

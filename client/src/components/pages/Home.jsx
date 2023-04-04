@@ -45,7 +45,7 @@ function Home() {
 
   const navigate = useNavigate();
   const loadPostViewer = function (post_id) {
-    navigate(`/post-viewer/${post_id}`)
+    navigate(`/post-viewer/${post_id}`);
   };
 
   return (
@@ -77,7 +77,7 @@ function Home() {
         />
         <BackgroundImage
           height='80vh'
-          imageURL='cascade_party_o3vag5CSz.JPG'
+          imageURL='Personal_Site/cascade_party_o3vag5CSz.JPG'
         />
         <Footer />
       </div>

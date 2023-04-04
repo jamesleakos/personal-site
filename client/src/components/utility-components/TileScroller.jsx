@@ -7,10 +7,18 @@ function TileScroller({ Mapper, MapArray }) {
   // drag to scroll and text near cursor (all is for drag unless specified)
   // for drag
   const wrapperRef = useRef(null); // this is used by both
-  const [initialMousePos, setInitialMousePos] = useState(null);
+  const [startX, setStartX] = useState(null);
+  const [startY, setStartY] = useState(null);
   const [velX, setVelX] = useState(0);
   const requestRef = useRef();
-  const [isDown, setIsDown] = useState(false);
+  const [mouseDown, setMouseIsDown] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  // for long press tracking
+  const [mouseMoved, setMouseMoved] = useState(false);
+  const [longPress, setLongPress] = useState(false);
+  const [timer, setTimer] = useState(null);
+  // preventing vertical scrolling
+  const [scrollingHor, setScrollingHor] = useState(false);
 
   // for text
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -28,16 +36,22 @@ function TileScroller({ Mapper, MapArray }) {
   // functions
 
   const handleMouseDown = (event) => {
-    setIsDown(true);
-    setInitialMousePos(event.clientX);
+    setMouseIsDown(true);
+    setStartX(event.clientX);
+    setStartY(event.clientY);
     cancelMomentumTracking();
     setVelX(0);
+    setMouseMoved(false);
+    setTimer(setTimeout(() => setLongPress(true), 500)); // 500ms for a long press
   };
   const handleTouchStart = (event) => {
-    setIsDown(true);
-    setInitialMousePos(event.touches[0].clientX);
+    setMouseIsDown(true);
+    setStartX(event.touches[0].clientX);
+    setStartY(event.touches[0].clientY);
     cancelMomentumTracking();
     setVelX(0);
+    setMouseMoved(false);
+    setTimer(setTimeout(() => setLongPress(true), 500)); // 500ms for a long press
   };
 
   const handleMouseMove = (event) => {
@@ -47,35 +61,52 @@ function TileScroller({ Mapper, MapArray }) {
     const navbar = document.querySelector('.navbar');
     // see personal site
     // const wo = useWindowOffset ? window.innerHeight - navbar.clientHeight : 0;
+    // for other
     const wo = 0;
     setMousePos({ x: clientX + scrollX, y: clientY + scrollY - wo });
+    // for long press anti click
+    setMouseMoved(true);
 
     //for drag
-    if (!isDown) return;
+    if (!mouseDown) return;
     const wrapper = wrapperRef.current;
-    const difference = event.clientX - initialMousePos;
+    const difference = event.clientX - startX;
     wrapper.scrollLeft -= difference;
     setVelX(difference * 1.5);
-    setInitialMousePos(event.clientX);
+    setStartX(event.clientX);
+    setStartY(event.clientY);
   };
 
   const handleTouchMove = (event) => {
     // Same logic as handleMouseMove
-    if (!isDown) return;
+    if (!mouseDown) return;
     const wrapper = wrapperRef.current;
-    const difference = event.touches[0].clientX - initialMousePos;
-    wrapper.scrollLeft -= difference;
-    setVelX(difference);
-    setInitialMousePos(event.touches[0].clientX);
+    const deltaX = event.touches[0].clientX - startX;
+    const deltaY = event.touches[0].clientY - startY;
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      setScrollingHor(true);
+    } else {
+      setScrollingHor(false);
+    }
+    wrapper.scrollLeft -= deltaX;
+    setVelX(deltaX);
+    setStartX(event.touches[0].clientX);
+    setStartY(event.touches[0].clientY);
+    setMouseMoved(true);
   };
 
   const handleMouseUp = () => {
-    setIsDown(false);
+    setMouseIsDown(false);
     beginMomentumTracking();
+    clearTimeout(timer);
+    setLongPress(false);
   };
   const handleTouchEnd = () => {
-    setIsDown(false);
+    setMouseIsDown(false);
     beginMomentumTracking();
+    clearTimeout(timer);
+    setLongPress(false);
+    setScrollingHor(false);
   };
 
   const handleMouseEnter = () => {
@@ -84,9 +115,11 @@ function TileScroller({ Mapper, MapArray }) {
 
   const handleMouseLeave = () => {
     // if the mouse leaves we also want to stop drag tracking
-    setIsDown(false);
+    setMouseIsDown(false);
     // and we want to stop showing text
     setShowText(false);
+    clearTimeout(timer);
+    setLongPress(false);
   };
 
   function beginMomentumTracking() {
@@ -103,14 +136,14 @@ function TileScroller({ Mapper, MapArray }) {
   }
 
   useEffect(() => {
-    if (isDown) return;
+    if (mouseDown) return;
     if (Math.abs(velX) > 0.5) {
       requestRef.current = requestAnimationFrame(momentumLoop);
     }
   }, [velX]);
 
   return (
-    <TileScrollerStyled>
+    <TileScrollerStyled style={scrollingHor ? { overflowY: 'hidden' } : {}}>
       <div
         className='scroll-wrapper'
         ref={wrapperRef}

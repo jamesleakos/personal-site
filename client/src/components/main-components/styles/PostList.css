@@ -4,6 +4,7 @@
   background-color: var(--background-color-dark-main);
   overflow: hidden;
   text-align: left;
+  padding-bottom: var(--post-list-margin);
 }
 
 .post-list.spanned {

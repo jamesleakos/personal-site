@@ -2,10 +2,10 @@
 
 .post-tile {
   width: 300px;
-  height: calc(var(--post-list-height) * .9);
+  /* height: calc(var(--post-list-height) * .9); */
   padding: 0 10px 0 0;
   margin: 0 var(--post-list-margin) 0 0;
-  border-right: .5px solid var(--text-color-light-main);
+  border-right: 0.5px solid var(--text-color-light-main);
   text-align: left;
   transition: 0.5s ease;
 }
@@ -78,7 +78,7 @@
 .post-tile .tag-span {
   font-family: var(--caption-font);
   color: var(--text-accent);
-  font-size: .85rem;
+  font-size: 0.85rem;
   margin: 0 20px 0 0;
-  letter-spacing: .15rem;
+  letter-spacing: 0.15rem;
 }
