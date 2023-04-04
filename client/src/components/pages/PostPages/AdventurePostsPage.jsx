@@ -8,7 +8,7 @@ import Navbar from '../../main-components/Navbar.jsx';
 import PostList from '../../main-components/PostList.jsx';
 import BackgroundImage from '../../main-components/BackgroundImage.jsx';
 
-function AdventurePostsPage() {
+function AdventurePostsPage({ isMobile }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -21,7 +21,9 @@ function AdventurePostsPage() {
   return (
     <div className='posts'>
       <Navbar />
-      <BackgroundImage imageURL='sam_in_sask_vGufgsbWx.JPG' />
+      {!isMobile ? (
+        <BackgroundImage imageURL='Personal_Site/sam_in_sask_vGufgsbWx.JPG' />
+      ) : null}
       <PostList
         postFilters={{ published: true, tags: 'Adventure' }}
         onTileClick={loadPostViewer}

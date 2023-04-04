@@ -8,7 +8,7 @@ import Navbar from '../../main-components/Navbar.jsx';
 import PostList from '../../main-components/PostList.jsx';
 import BackgroundImage from '../../main-components/BackgroundImage.jsx';
 
-function CulturePostsPage() {
+function CulturePostsPage({ isMobile }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -21,7 +21,9 @@ function CulturePostsPage() {
   return (
     <div className='posts'>
       <Navbar />
-      <BackgroundImage imageURL='Personal_Site/amangiri_far_shot_077VZ07AC.jpg' />
+      {!isMobile ? (
+        <BackgroundImage imageURL='Personal_Site/amangiri_far_shot_077VZ07AC.JPG' />
+      ) : null}
       <PostList
         postFilters={{ published: true, tags: 'Culture' }}
         onTileClick={loadPostViewer}

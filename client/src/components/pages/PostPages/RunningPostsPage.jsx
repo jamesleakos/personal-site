@@ -8,7 +8,7 @@ import Navbar from '../../main-components/Navbar.jsx';
 import PostList from '../../main-components/PostList.jsx';
 import BackgroundImage from '../../main-components/BackgroundImage.jsx';
 
-function RunningPostsPage() {
+function RunningPostsPage({ isMobile }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -21,7 +21,9 @@ function RunningPostsPage() {
   return (
     <div className='posts'>
       <Navbar />
-      <BackgroundImage imageURL='Personal_Site/sam_running_in_kanab_curve.JPG' />
+      {!isMobile ? (
+        <BackgroundImage imageURL='Personal_Site/sam_running_in_kanab_curve.JPG' />
+      ) : null}
       <PostList
         postFilters={{ published: true, tags: 'Running' }}
         onTileClick={loadPostViewer}

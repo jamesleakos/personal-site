@@ -85,19 +85,19 @@ const router = createBrowserRouter([
   },
   {
     path: '/adventure-posts',
-    element: <AdventurePostsPage />,
+    element: <AdventurePostsPage isMobile={isMobile} />,
   },
   {
     path: '/culture-posts',
-    element: <CulturePostsPage />,
+    element: <CulturePostsPage isMobile={isMobile} />,
   },
   {
     path: '/running-posts',
-    element: <RunningPostsPage />,
+    element: <RunningPostsPage isMobile={isMobile} />,
   },
   {
     path: '/skiing-posts',
-    element: <SkiingPostsPage />,
+    element: <SkiingPostsPage isMobile={isMobile} />,
   },
   {
     path: '/posts-by-tag/:tag',
