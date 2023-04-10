@@ -15,22 +15,22 @@ exports.uploadImage = (req, res) => {
   // this is where the magic happens
   s3.uploadToS3({ file, post_id })
     .then(back => {
-      return res.status(201).json({ key: back.key });    
+      return res.status(201).json({ key: back.key });
     })
     .catch(err => {
       console.log('error is: ' + err);
-      return res.status(500).json({message: err.message})
-    })
+      return res.status(500).json({ message: err.message });
+    });
 };
 
-exports.getImages = async(req, res) => {
+exports.getImages = async (req, res) => {
   const post_id = req.query.post_id;
 
-  const {error, urlObjs} = await s3.getPostPresignedUrls(post_id);
-  if (error) return res.status(400).json({ message: error.message});
+  const { error, urlObjs } = await s3.getPostPresignedUrls(post_id);
+  if (error) return res.status(400).json({ message: error.message });
 
   return res.json(urlObjs);
-}
+};
 
 exports.addOrUpdateImageComponent = (req, res) => {
   if (req.body.key === '') {
@@ -44,22 +44,23 @@ exports.addOrUpdateImageComponent = (req, res) => {
     margin_top: req.body.margin_top,
     margin_bottom: req.body.margin_bottom,
     size: req.body.size,
-  }
+    background_position: req.body.background_position,
+  };
 
   if (!req.body._id) {
     const imageComponent = new ImageComponent({
       ...newObj
-    })
+    });
     imageComponent.save()
       .catch(err => {
         console.log(err);
         res.status(400).send(err);
-      })
+      });
 
     Post.findById(req.query.post_id)
       .then(post => {
         post.components.splice(req.query.index, 0, imageComponent);
-        return post.save()
+        return post.save();
       })
       .then(saveResponse => {
         res.status(200).send(saveResponse);
@@ -67,29 +68,29 @@ exports.addOrUpdateImageComponent = (req, res) => {
       .catch(err => {
         console.log(err);
         res.status(400).send(err);
-      })
+      });
   } else {
     ImageComponent.findOneAndUpdate({
       _id: req.body._id
     },
-    {
-      ...newObj
-    },{
+      {
+        ...newObj
+      }, {
       // without this I think it returns the old one
       new: true
     })
       .then(comp => {
-        return Post.updateOne({ 
+        return Post.updateOne({
           _id: req.query.post_id,
           'components._id': req.body._id
         },
-        {
-          $set: {
-            'components.$': {
-              ...comp
+          {
+            $set: {
+              'components.$': {
+                ...comp
+              }
             }
-          }
-        })
+          });
       })
       // does not return the updated post
       .then(() => {
@@ -101,9 +102,9 @@ exports.addOrUpdateImageComponent = (req, res) => {
       .catch(err => {
         console.log(err);
         res.status(400).send(err);
-      })
+      });
   }
-}
+};
 
 exports.deleteImage = async (req, res) => {
   // the component should have already been deleted
@@ -113,5 +114,5 @@ exports.deleteImage = async (req, res) => {
   // this is where the magic happens
   const { error, back } = await s3.deleteImage(key);
   if (back) console.log('back: ' + JSON.stringify(back));
-  if (error) console.log(error);    
-}
+  if (error) console.log(error);
+};

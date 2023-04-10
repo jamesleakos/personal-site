@@ -110,6 +110,7 @@ exports.addPost = (req, res) => {
     published: req.body.published,
     published_at: req.body.published_at,
     featured: req.body.featured,
+    isDark: req.body.isDark,
   })
     .then(data => {
       res.status(200).send(data);
@@ -157,7 +158,7 @@ exports.addOrUpdateTextComponent = (req, res) => {
     type: req.body.type,
     text: req.body.text,
     margin_top: req.body.margin_top,
-    margin_bottom: req.body.margin_bottom
+    margin_bottom: req.body.margin_bottom,
   };
 
   if (!req.body._id) {
@@ -235,6 +236,7 @@ exports.updatePost = (req, res) => {
       published: req.body.published,
       published_at: req.body.published_at,
       featured: req.body.featured,
+      isDark: req.body.isDark,
     },
     {
       // without this I think it returns the old one

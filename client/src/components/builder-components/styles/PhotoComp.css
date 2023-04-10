@@ -20,7 +20,7 @@
 .photo-comp .editing img {
   display: block;
   width: 400px;
-  margin: 20px auto; 
+  margin: 20px auto;
 }
 @media screen and (max-width: 1000px) {
   .photo-comp .editing img {
@@ -48,7 +48,13 @@
 .photo-comp .left-icons .size-field-div label {
   margin-right: 5px;
 }
-
+.photo-comp .left-icons .bg-position-field-div {
+  display: inline-block;
+  margin-left: 10px;
+}
+.photo-comp .left-icons .bg-position-field-div label {
+  margin-right: 5px;
+}
 
 .photo-comp .right-icons {
   float: right;

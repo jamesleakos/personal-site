@@ -20,49 +20,62 @@ function PostViewer() {
     window.scrollTo(0, 0);
 
     if (!passedPostID) return;
-    axios.get(`/posts/${passedPostID}`)
-    .then(res => {
-      setPost(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }, [])
+    axios
+      .get(`/posts/${passedPostID}`)
+      .then((res) => {
+        setPost(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   // setting post
   const [post, setPost] = useState({
-    components: []
+    components: [],
   });
 
   // POST API CALLS
 
   // image GET calls - the POST calls are in the image component itself
   const [images, setImages] = useState([]);
-  
+
   return (
-    <div className='post-viewer'>
+    <div
+      className='post-viewer'
+      style={post.isDark ? { backgroundColor: 'black', color: 'white' } : null}
+    >
       <Navbar />
-      {
-        post.components.map((component, index) => {
-          switch (component.type) {
-            case 'main-title':
-            case 'subtitle':
-            case 'section-title':
-            case 'body-text':
-            case 'quote':
-            case 'caption':
-              return <TextComp key={component._id + index + ''} component={component} />
-            case 'photo':
-            case 'background-photo':
-              return <PhotoComp key={component._id + index} component={component} url={images.filter(c => c.key === component.key)[0]?.url} />
-            default:
-              break;
-          }
-        })
-      }
+      {post.components.map((component, index) => {
+        switch (component.type) {
+          case 'main-title':
+          case 'subtitle':
+          case 'section-title':
+          case 'body-text':
+          case 'quote':
+          case 'caption':
+            return (
+              <TextComp
+                key={component._id + index + ''}
+                component={component}
+              />
+            );
+          case 'photo':
+          case 'background-photo':
+            return (
+              <PhotoComp
+                key={component._id + index}
+                component={component}
+                url={images.filter((c) => c.key === component.key)[0]?.url}
+              />
+            );
+          default:
+            break;
+        }
+      })}
       <Footer />
     </div>
-  )
+  );
 }
 
 export default PostViewer;

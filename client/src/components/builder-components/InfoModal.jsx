@@ -10,6 +10,7 @@ function InfoModal({ post, modifyPost, setShowInfoModal }) {
   const [description, setDescription] = useState(post.description);
   const [tags, setTags] = useState([]);
   const [tagOptions, setTagOptions] = useState([]);
+  const [isDark, setIsDark] = useState(!!post.isDark);
   // for photos
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,6 +32,7 @@ function InfoModal({ post, modifyPost, setShowInfoModal }) {
     post.title = title;
     post.description = description;
     post.tag_ids = tags.map((t) => t._id);
+    post.isDark = isDark;
     modifyPost(post);
 
     setShowInfoModal(false);
@@ -132,6 +134,18 @@ function InfoModal({ post, modifyPost, setShowInfoModal }) {
                 );
               })}
             </div>
+          </div>
+
+          <div className='set-dark-theme'>
+            <label htmlFor='dark-theme'>Dark Theme</label>
+            <input
+              type='checkbox'
+              id='dark-theme'
+              onClick={(e) => {
+                setIsDark(e.target.checked);
+              }}
+              defaultChecked={post.isDark}
+            />
           </div>
 
           <label htmlFor='image-upload'>Title Image</label>
