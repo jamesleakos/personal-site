@@ -57,7 +57,7 @@ function Home() {
       <div className='scroll-div' ref={scrollDiv}>
         <Navbar />
         <PostList
-          postFilters={{ published: true }}
+          postFilters={{ published: true, featured: true }}
           onTileClick={loadPostViewer}
           showAddNew={false}
           useWindowOffset={true}
