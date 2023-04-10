@@ -26,7 +26,7 @@ function Posts() {
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title='2022 Featured Articles'
+        title='2022 Wolfmoor Magazine'
         useWindowOffset={false}
         amTiled={true}
       />
@@ -35,29 +35,29 @@ function Posts() {
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title='2022 Other'
+        title='2022 List'
         useWindowOffset={false}
         amTiled={false}
       />
       <BackgroundImage
         height='600px'
-        imageURL='Personal_Site/_sask_vGufgsbWx.JPG'
+        imageURL='Personal_Site/sam_in_sask_vGufgsbWx.JPG'
       />
       <PostList
-        postFilters={{ published: true }}
+        postFilters={{ published: true, tags: 'WM 2021' }}
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title='2021 Featured Articles'
+        title='2021 Wolfmoor Magazine'
         useWindowOffset={false}
         amTiled={true}
       />
       <PostList
-        postFilters={{ published: true }}
+        postFilters={{ published: true, tags: 'WM 2021' }}
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title='2021 Other'
+        title='2021 List'
         useWindowOffset={false}
         amTiled={false}
       />

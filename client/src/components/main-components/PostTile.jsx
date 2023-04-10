@@ -11,8 +11,6 @@ function PostTile({ post, onClick, tags }) {
     navigate(`/posts-by-tag/${tag}`);
   };
 
-  console.log(tags);
-
   return (
     <div className='post-tile'>
       {/* tags */}
