@@ -32,11 +32,14 @@ function PhotoComp({
   const [size, setSize] = useState(component.size);
 
   // background position stuff
-  const [backgroundPosition, setBackgroundPosition] = useState('center');
+  const [backgroundPosition, setBackgroundPosition] = useState(
+    component.background_position
+  );
 
   const endEdit = function () {
     component.size = size;
     component.background_position = backgroundPosition;
+    console.log(component.background_position);
     setEditActive(false);
     if (!component.key) deleteComponent(component);
     // this is just for size
