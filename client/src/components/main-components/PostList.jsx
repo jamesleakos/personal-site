@@ -76,7 +76,7 @@ function PostList({
     });
 
     setShownPosts(newPosts.reverse());
-  }, [search, posts, postFilters]);
+  }, [search, posts, tags, postFilters]);
 
   // what should we do when a tile is clicked
   const handleTileClick = function (post) {
