@@ -34,7 +34,7 @@ router.delete('/', function (req, res) {
   postController.deletePost(req, res);
 });
 // get a random post id
-router.get('/random', function (req, res) {
+router.get('/ext/random', function (req, res) {
   postController.getRandomPostId(req, res);
 });
 
