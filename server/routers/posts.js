@@ -33,5 +33,9 @@ router.delete('/', function (req, res) {
   if (req.user.toJSON().role !== 'admin') return;
   postController.deletePost(req, res);
 });
+// get a random post id
+router.get('/random', function (req, res) {
+  postController.getRandomPostId(req, res);
+});
 
 module.exports = router;

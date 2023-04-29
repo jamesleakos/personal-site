@@ -298,3 +298,15 @@ exports.deleteComponent = (req, res) => {
       res.sendStatus(400);
     });
 };
+
+exports.getRandomPostId = (req, res) => {
+  Post.find()
+    .then(posts => {
+      const randomPost = posts[Math.floor(Math.random() * posts.length)];
+      res.status(200).send(randomPost._id);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(400);
+    });
+};
