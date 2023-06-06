@@ -14,6 +14,7 @@ import AuthContext from '../../contexts/AuthContext.js';
 
 function Admin() {
   const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn, logout } = React.useContext(AuthContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,10 +29,13 @@ function Admin() {
       .catch((err) => {
         console.log(err);
         console.log('auth check not successful');
-        navigate('/sign-in-up');
+        setIsLoggedIn(false);
       });
   }, []);
-  const { logout } = React.useContext(AuthContext);
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate('/sign-in-up');
+  }, [isLoggedIn]);
 
   const loadPostBuilder = function (post_id) {
     navigate(`/post-builder/${post_id}`);
