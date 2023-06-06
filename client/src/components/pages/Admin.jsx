@@ -1,6 +1,7 @@
 // dependencies
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // comps
 import Footer from '../main-components/Footer.jsx';
@@ -12,12 +13,26 @@ import TagManager from '../../admin/TagManager.jsx';
 import AuthContext from '../../contexts/AuthContext.js';
 
 function Admin() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    axios
+      .get('/auth/check-auth')
+      .then((res) => {
+        // if 200 response, do nothing
+        console.log('auth check successful');
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log('auth check not successful');
+        navigate('/sign-in-up');
+      });
   }, []);
   const { logout } = React.useContext(AuthContext);
 
-  const navigate = useNavigate();
   const loadPostBuilder = function (post_id) {
     navigate(`/post-builder/${post_id}`);
   };

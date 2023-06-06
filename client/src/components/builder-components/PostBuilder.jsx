@@ -1,6 +1,6 @@
 // dependancies
 import React, { useState, useEffect } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 // components
@@ -14,11 +14,22 @@ import PhotoComp from './PhotoComp.jsx';
 
 function PostBuilder() {
   const passedPostID = useLoaderData();
+  const navigate = useNavigate();
 
   // starting effects
   useEffect(() => {
     // scroll to the top
     window.scrollTo(0, 0);
+
+    axios
+      .get('/auth/check-auth')
+      .then((res) => {
+        // if 200 response, do nothing
+        console.log(res);
+      })
+      .catch((err) => {
+        navigate('/sign-in-up');
+      });
 
     if (!passedPostID) return;
     axios

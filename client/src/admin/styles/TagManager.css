@@ -22,12 +22,11 @@
   font-family: var(--caption-font);
   float: left;
   margin: 15px 0 0 30px;
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: var(--background-color-dark-main);
 }
 
 .tag-manager .tag-holder {
   display: block;
   min-height: 100px;
-  width: calc(100% - (2 * var(--post-list-margin)));
 }

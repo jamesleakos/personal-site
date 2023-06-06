@@ -1,5 +1,5 @@
 // dependancies
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,11 +9,17 @@ import './styles/SignInUp.css';
 
 function SignInUp() {
   const navigate = useNavigate();
-  const { setIsLoggedIn } = React.useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn } = React.useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/admin');
+    }
+  }, [isLoggedIn]);
 
   const handleSubmit = function () {
     setError(null);
@@ -25,7 +31,8 @@ function SignInUp() {
       .then((res) => {
         console.log(res);
         setIsLoggedIn(true);
-        navigate('/admin');
+        // we do this in a useEffect because we need to wait for the state to update
+        // navigate('/admin');
       })
       .catch((err) => {
         console.log(err);
