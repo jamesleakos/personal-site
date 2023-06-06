@@ -16,6 +16,7 @@ function SignInUp() {
   const [error, setError] = useState();
 
   const handleSubmit = function () {
+    setError(null);
     axios
       .post('/auth/register_login', {
         email: email,
@@ -24,7 +25,7 @@ function SignInUp() {
       .then((res) => {
         console.log(res);
         setIsLoggedIn(true);
-        navigate('/');
+        navigate('/admin');
       })
       .catch((err) => {
         console.log(err);
@@ -43,15 +44,15 @@ function SignInUp() {
           }}
         />
         <input
-          type='text'
+          type='password'
           placeholder='password'
           onChange={(e) => {
             setPassword(e.target.value);
           }}
         />
         <input type='button' onClick={handleSubmit} value='Submit' />
+        {error ? <p className='input-error'>{error}</p> : null}
       </div>
-      {error ? <p>{error}</p> : null}
     </div>
   );
 }
