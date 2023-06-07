@@ -72,24 +72,26 @@ function TextComp({
               className='reacting-link expand-cursor'
               icon='fa-solid fa-arrow-down'
             />
-            <span
-              className='reacting-link expand-cursor'
+            <FontAwesomeIcon
               onClick={() => {
                 toggleMarginTop();
               }}
-            >
-              {component.margin_top ? 'Remove Top Margin' : 'Add Top Margin'}
-            </span>
-            <span
+              style={
+                component.margin_top ? { color: 'red' } : { color: 'green' }
+              }
               className='reacting-link expand-cursor'
+              icon='fa-solid fa-arrows-up-to-line'
+            />
+            <FontAwesomeIcon
               onClick={() => {
                 toggleMarginBottom();
               }}
-            >
-              {component.margin_bottom
-                ? 'Remove Bottom Margin'
-                : 'Add Buttom Margin'}
-            </span>
+              style={
+                component.margin_bottom ? { color: 'red' } : { color: 'green' }
+              }
+              className='reacting-link expand-cursor'
+              icon='fa-solid fa-arrows-down-to-line'
+            />
           </div>
           <div className='right-icons'>
             <FontAwesomeIcon
@@ -161,7 +163,7 @@ function TextComp({
                 handleAddBelow('body-text');
               }}
             >
-              Text Below
+              <FontAwesomeIcon icon='fa-solid fa-font' />
             </span>
             <span
               className='reacting-link expand-cursor'
@@ -169,7 +171,7 @@ function TextComp({
                 handleAddBelow('photo');
               }}
             >
-              Photo Below
+              <FontAwesomeIcon icon='fa-solid fa-image' />
             </span>
             <FontAwesomeIcon
               onClick={endEdit}

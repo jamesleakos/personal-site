@@ -5,6 +5,9 @@
 .text-comp {
   display: inline-block;
   width: 100%;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .text-comp textarea {
@@ -16,7 +19,7 @@
 
 .text-comp .editing {
   display: inline-block;
-  width: var(--post-width);
+  width: 90%;
   margin: var(--post-component-vertical-margin) 0;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--background-color-dark-main);
