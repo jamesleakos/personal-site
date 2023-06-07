@@ -21,6 +21,7 @@ function PoemPage() {
   const { isLoggedIn } = React.useContext(AuthContext);
 
   const [modalOn, setModalOn] = useState(false);
+  const [deleteModalOn, setDeleteModalOn] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,13 +36,6 @@ function PoemPage() {
       })
       .catch((err) => console.log(err));
   }, [modalOn]);
-
-  useEffect(() => {
-    if (!poem) return;
-    if (poem.title === 'New Poem') {
-      setModalOn(true);
-    }
-  }, [poem]);
 
   const deletePoem = () => {
     console.log('delete poem');
@@ -62,7 +56,7 @@ function PoemPage() {
           {isLoggedIn ? (
             <BlockyButton
               style={{ float: 'right' }}
-              onClick={() => deletePoem(passedPoemID)}
+              onClick={() => setDeleteModalOn(true)}
               text='DELETE'
             />
           ) : null}
@@ -88,6 +82,15 @@ function PoemPage() {
           poem={poem}
           close={() => {
             setModalOn(false);
+          }}
+        />
+      ) : null}
+      {deleteModalOn ? (
+        <ConfirmDeleteModal
+          poem={poem}
+          deletePoem={deletePoem}
+          close={() => {
+            setDeleteModalOn(false);
           }}
         />
       ) : null}
@@ -148,19 +151,29 @@ const PoemModal = ({ poem, close }) => {
                 setExplanation(e.target.value);
               }}
             />
-
-            <BlockyButton
-              onClick={() => save()}
-              text='SAVE'
-              // style={{ position: 'absolute', top: '5px', right: '5px' }}
-            />
+            <BlockyButton onClick={() => close()} text='CANCEL' />
+            <BlockyButton onClick={() => save()} text='SAVE' />
           </div>
+        </div>
+      </div>
+    </PoemModalStyled>
+  );
+};
 
-          <BlockyButton
-            onClick={() => close()}
-            text='CLOSE'
-            style={{ position: 'absolute', top: '5px', right: '5px' }}
-          />
+const ConfirmDeleteModal = ({ deletePoem, close }) => {
+  return (
+    <PoemModalStyled>
+      <div className='background'></div>
+      <div
+        className='content'
+        style={{ width: '250px', height: '120px', margin: 'auto' }}
+      >
+        <div className='relative-content'>
+          <div style={{ marginBottom: '10px' }}>Are you sure?</div>
+          <div className='form' style={{ textAlign: 'center' }}>
+            <BlockyButton onClick={() => close()} text='CANCEL' />
+            <BlockyButton onClick={() => deletePoem()} text='DELETE' />
+          </div>
         </div>
       </div>
     </PoemModalStyled>

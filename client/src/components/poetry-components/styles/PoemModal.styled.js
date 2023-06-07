@@ -19,6 +19,7 @@ export const PoemModalStyled = styled.div`
     background-color: rgba(0, 0, 0, 0.5);
   }
 
+  // delete modal content overridden inline
   .content {
     z-index: 1;
     position: absolute;
@@ -31,12 +32,6 @@ export const PoemModalStyled = styled.div`
     background-color: var(--background-color-light-main);
   }
 
-  .close-button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-  }
-
   .relative-content {
     padding: 30px;
     position: relative;
@@ -47,9 +42,14 @@ export const PoemModalStyled = styled.div`
   }
 
   .form {
-    width: 50%;
+    width: 95%;
     margin: 0 auto;
     text-align: left;
+  }
+  @media screen and (max-width: 1000px) {
+    .form {
+      width: 95%;
+    }
   }
 
   label {
