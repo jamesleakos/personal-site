@@ -50,6 +50,8 @@ import {
   faArrowUp,
   faArrowDown,
   faBars,
+  faArrowsDownToLine,
+  faArrowsUpToLine,
 } from '@fortawesome/free-solid-svg-icons';
 // import { farBook } from '@fortawesome/free-regular-svg-icons';
 
@@ -70,6 +72,8 @@ library.add(
   faX,
   faArrowUp,
   faArrowDown,
+  faArrowsDownToLine,
+  faArrowsUpToLine,
   faBars
 );
 //#endregion

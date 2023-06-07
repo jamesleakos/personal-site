@@ -11,10 +11,12 @@ import BuilderBar from './BuilderBar.jsx';
 import InfoModal from './InfoModal.jsx';
 import TextComp from './TextComp.jsx';
 import PhotoComp from './PhotoComp.jsx';
+import AuthContext from '../../contexts/AuthContext.js';
 
 function PostBuilder() {
   const passedPostID = useLoaderData();
   const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn } = React.useContext(AuthContext);
 
   // starting effects
   useEffect(() => {
@@ -25,10 +27,13 @@ function PostBuilder() {
       .get('/auth/check-auth')
       .then((res) => {
         // if 200 response, do nothing
+        console.log('auth check successful');
         console.log(res);
       })
       .catch((err) => {
-        navigate('/sign-in-up');
+        console.log(err);
+        console.log('auth check not successful');
+        setIsLoggedIn(false);
       });
 
     if (!passedPostID) return;
@@ -41,6 +46,10 @@ function PostBuilder() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate('/sign-in-up');
+  }, [isLoggedIn]);
 
   // setting post
   const [post, setPost] = useState({

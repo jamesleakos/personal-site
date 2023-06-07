@@ -1,6 +1,7 @@
 // dependancies
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { isMobile } from 'react-device-detect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //imports
@@ -101,10 +102,11 @@ function PhotoComp({
   };
 
   return (
-    <div className='photo-comp'>
+    <div className={'photo-comp' + (isMobile ? ' mobile' : '')}>
       {editActive ? (
         <div className='editing'>
           <div className='top-icons'>
+            {/* TOP LEFT ICONS */}
             <div className='left-icons'>
               <FontAwesomeIcon
                 onClick={() => {
@@ -120,25 +122,30 @@ function PhotoComp({
                 className='reacting-link expand-cursor'
                 icon='fa-solid fa-arrow-down'
               />
-              <span
-                className='reacting-link expand-cursor'
+              <FontAwesomeIcon
                 onClick={() => {
                   toggleMarginTop();
                 }}
-              >
-                {component.margin_top ? 'Remove Top Margin' : 'Add Top Margin'}
-              </span>
-              <span
+                style={
+                  component.margin_top ? { color: 'red' } : { color: 'green' }
+                }
                 className='reacting-link expand-cursor'
+                icon='fa-solid fa-arrows-up-to-line'
+              />
+              <FontAwesomeIcon
                 onClick={() => {
                   toggleMarginBottom();
                 }}
-              >
-                {component.margin_bottom
-                  ? 'Remove Bottom Margin'
-                  : 'Add Buttom Margin'}
-              </span>
+                style={
+                  component.margin_bottom
+                    ? { color: 'red' }
+                    : { color: 'green' }
+                }
+                className='reacting-link expand-cursor'
+                icon='fa-solid fa-arrows-down-to-line'
+              />
             </div>
+            {/* TOP RIGHT ICONS */}
             <div className='right-icons'>
               <FontAwesomeIcon
                 onClick={() => {
@@ -149,10 +156,10 @@ function PhotoComp({
               />
             </div>
           </div>
-
-          {component.key ? (
+          {/* MIDDLE IMAGE */}
+          {!!component.key ? (
             <img
-              src={`https://ik.imagekit.io/hfywj4j0a/${component.key})`}
+              src={`https://ik.imagekit.io/hfywj4j0a/${component.key}`}
               alt='image'
             />
           ) : null}
@@ -220,7 +227,7 @@ function PhotoComp({
                 handleAddBelow('body-text');
               }}
             >
-              Text Below
+              <FontAwesomeIcon icon='fa-solid fa-font' />
             </span>
             <span
               className='reacting-link expand-cursor'
@@ -228,7 +235,7 @@ function PhotoComp({
                 handleAddBelow('photo');
               }}
             >
-              Photo Below
+              <FontAwesomeIcon icon='fa-solid fa-image' />
             </span>
             <FontAwesomeIcon
               onClick={endEdit}

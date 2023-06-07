@@ -14,15 +14,15 @@
 
 .photo-comp .editing {
   display: inline-block;
-  width: var(--post-width);
-  margin: var(--post-component-vertical-margin) 0;
-  padding-bottom: 5px;
-  border-bottom: 1px solid var(--background-color-dark-main);
+  width: 90%;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .photo-comp .editing img {
   display: block;
-  width: 400px;
+  width: 600px;
   margin: 20px auto;
 }
 @media screen and (max-width: 1000px) {
