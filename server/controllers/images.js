@@ -110,6 +110,7 @@ exports.addOrUpdateImageComponent = (req, res) => {
 exports.deleteImage = async (req, res) => {
   // the component should have already been deleted
   // now we need to delete the image off the s3 bucket
+  console.log('images.deleteimage - key: ' + req.query.key);
   const key = req.query.key;
 
   // this is where the magic happens

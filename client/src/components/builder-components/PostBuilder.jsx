@@ -170,7 +170,6 @@ function PostBuilder() {
           console.log(err);
         });
     } else if (component.kind === 'ImageComponent') {
-      console.log(component);
       axios
         .delete(
           `/image_components?post_id=${post._id}&component_id=${component._id}&key=${component.key}`

@@ -270,6 +270,7 @@ exports.deletePost = (req, res) => {
 };
 
 exports.deleteComponent = (req, res) => {
+  console.log('deleting components');
   Component.deleteOne({ _id: req.query.component_id })
     .catch(err => {
       console.log(err);
@@ -291,6 +292,7 @@ exports.deleteComponent = (req, res) => {
     }
   )
     .then(post => {
+      console.log('success??');
       res.status(200).send(post);
     })
     .catch(err => {

@@ -41,10 +41,12 @@ router.put('/', function (req, res) {
   imageController.addOrUpdateImageComponent(req, res);
 });
 
-router.delete('/image_components', function (req, res) {
+router.delete('/', function (req, res) {
+  console.log('delete image component 1');
   if (!req.user) return;
   if (req.user.toJSON().role !== 'admin') return;
   // we can use the same method as the posts
+  console.log('delete image component 2');
   postController.deleteComponent(req, res);
 
   // can get the key from the route and then send it along to the bucket
