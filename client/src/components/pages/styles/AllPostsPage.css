@@ -1,0 +1,5 @@
+@import '../../styles/constants.css';
+
+.posts .image-scroll-item img {
+  height: 300px;
+}

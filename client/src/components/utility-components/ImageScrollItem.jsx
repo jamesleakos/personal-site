@@ -6,17 +6,17 @@ import { ImageScrollItemStyled } from './styles/ImageScrollItem.styled.js';
 
 const ImageMapper = (urlArr) => {
   return urlArr.map((url, index) => {
-    return <ImageScrollItem key={url + index} url={url} />;
+    return <ImageScrollItem key={url + index} url={url} first={index === 0} />;
   });
 };
 
-function ImageScrollItem({ url }) {
+function ImageScrollItem({ url, first }) {
   return (
-    <ImageScrollItemStyled>
-      <div className='image'>
+    <ImageScrollItemStyled className='image-scroll-item'>
+      <div className={'image' + (!!first ? ' first' : '')}>
         <img
           className='no-select'
-          src={`https://ik.imagekit.io/hfywj4j0a/tr:w-500/${url}`}
+          src={`https://ik.imagekit.io/hfywj4j0a/${url}`}
           alt='tile image'
           draggable='false'
         />

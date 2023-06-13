@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// internal
+import './styles/AllPostsPage.css';
+
 // comps
 import Footer from '../main-components/Footer.jsx';
 import Navbar from '../main-components/Navbar.jsx';
@@ -27,13 +30,16 @@ function Posts() {
     <div className='posts'>
       <Navbar />
       <div className='wm-spreads'>
-        <p className='title'>{title}</p>
+        <p className='title'></p>
         <hr />
         <TileScroller
           Mapper={ImageMapper}
           MapArray={[
-            '0_wolfmoor_spreads/2022/WolfmoorMag2022-28.jpg',
-            '0_wolfmoor_spreads/2022/WolfmoorMag2022-28.jpg',
+            '0_wolfmoor_spreads/2021/WolfmoorMag2021-28.jpg',
+            '0_wolfmoor_spreads/2022/WolfmoorMag2022-3.jpg',
+            '0_wolfmoor_spreads/2022/WolfmoorMag2022-3.jpg',
+            '0_wolfmoor_spreads/2022/WolfmoorMag2022-3.jpg',
+            '0_wolfmoor_spreads/2022/WolfmoorMag2022-3.jpg',
           ]}
         />
       </div>
