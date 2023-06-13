@@ -4,15 +4,26 @@ import React from 'react';
 // imports
 import { ImageScrollItemStyled } from './styles/ImageScrollItem.styled.js';
 
-const ImageMapper = (urlArr) => {
+const ImageMapper = (urlArr, callback) => {
   return urlArr.map((url, index) => {
-    return <ImageScrollItem key={url + index} url={url} />;
+    return (
+      <ImageScrollItem
+        key={url + index}
+        url={url}
+        callback={() => {
+          if (!!callback) callback(index);
+        }}
+      />
+    );
   });
 };
 
-function ImageScrollItem({ url }) {
+function ImageScrollItem({ url, callback }) {
   return (
-    <ImageScrollItemStyled className='image-scroll-item'>
+    <ImageScrollItemStyled
+      className='image-scroll-item'
+      onDoubleClick={callback}
+    >
       <div className='image'>
         <img
           className='no-select'

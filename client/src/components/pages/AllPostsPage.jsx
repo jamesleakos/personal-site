@@ -9,12 +9,7 @@ import './styles/AllPostsPage.css';
 import Footer from '../main-components/Footer.jsx';
 import Navbar from '../main-components/Navbar.jsx';
 import PostList from '../main-components/PostList.jsx';
-import TileScroller from '../utility-components/TileScroller.jsx';
-import {
-  ImageScrollItem,
-  ImageMapper,
-} from '../utility-components/ImageScrollItem.jsx';
-import UnderlinedTitle from '../utility-components/UnderlinedTitle.jsx';
+import ImageScroller from '../utility-components/ImageScroller.jsx';
 import BackgroundImage from '../main-components/BackgroundImage.jsx';
 
 function Posts() {
@@ -31,10 +26,9 @@ function Posts() {
     <div className='posts'>
       <Navbar />
       <div className='wm-spreads'>
-        <UnderlinedTitle title='2022 Wolfmoor Magazine' />
-        <TileScroller
-          Mapper={ImageMapper}
-          MapArray={Array.from(
+        <ImageScroller
+          title='2022 Wolfmoor Magazine'
+          imageURLArray={Array.from(
             { length: 64 },
             (_, i) => `0_wolfmoor_spreads/2022/WolfmoorMag2022-${i + 1}.jpg`
           )}
@@ -63,10 +57,9 @@ function Posts() {
         imageURL='Personal_Site/sam_in_sask_vGufgsbWx.JPG'
       />
       <div className='wm-spreads'>
-        <UnderlinedTitle title='2021 Wolfmoor Magazine' />
-        <TileScroller
-          Mapper={ImageMapper}
-          MapArray={Array.from(
+        <ImageScroller
+          title='2021 Wolfmoor Magazine'
+          imageURLArray={Array.from(
             { length: 70 },
             (_, i) => `0_wolfmoor_spreads/2021/WolfmoorMag2021-${i + 1}.jpg`
           )}
