@@ -7,6 +7,10 @@
   padding: var(--post-list-margin);
 }
 
+.posts .wm-spreads.mobile {
+  padding-right: 0;
+}
+
 .posts .image-scroll-item img {
   height: 400px;
 }

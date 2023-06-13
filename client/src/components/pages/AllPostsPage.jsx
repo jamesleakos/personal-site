@@ -1,6 +1,7 @@
 // dependencies
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 // internal
 import './styles/AllPostsPage.css';
@@ -27,7 +28,7 @@ function Posts() {
     <div className='posts'>
       <Navbar />
       <InlineImage imageURL='Personal_Site/skinning_cropped.jpg' />
-      <div className='wm-spreads'>
+      <div className={'wm-spreads' + (!!isMobile ? ' mobile' : '')}>
         <ImageScroller
           title='2022 Wolfmoor Magazine'
           imageURLArray={Array.from(

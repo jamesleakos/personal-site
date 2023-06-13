@@ -1,5 +1,6 @@
 // dependancies
 import React, { useState, useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
 
 // imports
 import { ImageScrollerStyled } from './styles/ImageScroller.styled.js';
@@ -8,7 +9,6 @@ import { ImageScrollerStyled } from './styles/ImageScroller.styled.js';
 import TileScroller from './TileScroller.jsx';
 import { ImageMapper } from './ImageScrollItem.jsx';
 import UnderlinedTitle from './UnderlinedTitle.jsx';
-import { set } from 'date-fns';
 
 function ImageScroller({ title, imageURLArray }) {
   const [showModal, setShowModal] = useState(false);
@@ -38,6 +38,7 @@ function ImageScroller({ title, imageURLArray }) {
   }, [showModal]);
 
   const expandImage = function (index) {
+    if (isMobile) return;
     setImageIndex(index);
     setShowModal(true);
   };
