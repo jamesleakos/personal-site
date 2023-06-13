@@ -11,6 +11,7 @@ import Navbar from '../main-components/Navbar.jsx';
 import PostList from '../main-components/PostList.jsx';
 import ImageScroller from '../utility-components/ImageScroller.jsx';
 import BackgroundImage from '../main-components/BackgroundImage.jsx';
+import InlineImage from '../main-components/InlineImage.jsx';
 
 function Posts() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function Posts() {
   return (
     <div className='posts'>
       <Navbar />
+      <InlineImage imageURL='Personal_Site/skinning_cropped.jpg' />
       <div className='wm-spreads'>
         <ImageScroller
           title='2022 Wolfmoor Magazine'
@@ -56,10 +58,11 @@ function Posts() {
         height='70vh'
         imageURL='Personal_Site/sam_in_sask_vGufgsbWx.JPG'
       /> */}
-      <img
+      {/* <img
         src='https://ik.imagekit.io/hfywj4j0a/tr:w-2500/Personal_Site/sam_in_sask_vGufgsbWx.JPG'
         style={{ width: '100%' }}
-      />
+      /> */}
+      <InlineImage imageURL='Personal_Site/SJ-162.jpg' />
       <div className='wm-spreads'>
         <ImageScroller
           title='2021 Wolfmoor Magazine'
