@@ -21,6 +21,7 @@ export const ImageScrollerStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
   .image-modal-content img {
     max-width: 100%;
