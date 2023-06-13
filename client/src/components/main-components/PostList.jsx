@@ -135,15 +135,17 @@ function PostList({
         </p>
       ) : null}
       {showSearch ? (
-        <input
-          className='search'
-          type='text'
-          placeholder='Search'
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
+        <div className='search-holder'>
+          <input
+            className='search'
+            type='text'
+            placeholder='Search'
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </div>
       ) : null}
       {amTiled ? (
         <div className='post-list-scroller'>

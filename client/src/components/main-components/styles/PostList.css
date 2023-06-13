@@ -18,6 +18,11 @@
   border-top: 0.5px solid var(--text-color-light-main);
 }
 
+.post-list .search-holder {
+  width: 100vw;
+  text-align: left;
+}
+
 .post-list.spanned hr {
   border-color: var(--background-color-dark-main);
 }

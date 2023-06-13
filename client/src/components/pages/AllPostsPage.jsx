@@ -22,20 +22,20 @@ function Posts() {
     <div className='posts'>
       <Navbar />
       <PostList
-        postFilters={{ published: true }}
+        postFilters={{ published: true, featured: true, tags: 'WM 2022' }}
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title='2022 Wolfmoor Magazine'
+        title='2022 Featured Posts'
         useWindowOffset={false}
         amTiled={true}
       />
       <PostList
-        postFilters={{ published: true }}
+        postFilters={{ published: true, tags: 'WM 2022' }}
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title='2022 List'
+        title='2022 All Posts'
         useWindowOffset={false}
         amTiled={false}
       />
@@ -44,11 +44,11 @@ function Posts() {
         imageURL='Personal_Site/sam_in_sask_vGufgsbWx.JPG'
       />
       <PostList
-        postFilters={{ published: true, tags: 'WM 2021' }}
+        postFilters={{ published: true, featured: true, tags: 'WM 2021' }}
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title='2021 Wolfmoor Magazine'
+        title='2021 Featured Posts'
         useWindowOffset={false}
         amTiled={true}
       />
@@ -57,7 +57,7 @@ function Posts() {
         onTileClick={loadPostViewer}
         showAddNew={false}
         showSearch={true}
-        title='2021 List'
+        title='2021 All Posts'
         useWindowOffset={false}
         amTiled={false}
       />
