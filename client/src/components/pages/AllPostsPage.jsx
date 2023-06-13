@@ -52,9 +52,13 @@ function Posts() {
         useWindowOffset={false}
         amTiled={false}
       />
-      <BackgroundImage
+      {/* <BackgroundImage
         height='70vh'
         imageURL='Personal_Site/sam_in_sask_vGufgsbWx.JPG'
+      /> */}
+      <img
+        src='https://ik.imagekit.io/hfywj4j0a/tr:w-2500/Personal_Site/sam_in_sask_vGufgsbWx.JPG'
+        style={{ width: '100%' }}
       />
       <div className='wm-spreads'>
         <ImageScroller
