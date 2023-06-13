@@ -145,7 +145,10 @@ function TileScroller({ Mapper, MapArray }) {
   }, [velX]);
 
   return (
-    <TileScrollerStyled style={scrollingHor ? { overflowY: 'hidden' } : {}}>
+    <TileScrollerStyled
+      style={scrollingHor ? { overflowY: 'hidden' } : {}}
+      className='tile-scroller'
+    >
       <div
         className='scroll-wrapper'
         ref={wrapperRef}

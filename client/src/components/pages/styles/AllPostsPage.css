@@ -1,5 +1,12 @@
 @import '../../styles/constants.css';
 
+.posts .wm-spreads {
+  background-color: var(--background-color-light-secondary);
+  overflow: hidden;
+  text-align: left;
+  padding: var(--post-list-margin);
+}
+
 .posts .image-scroll-item img {
-  height: 300px;
+  height: 400px;
 }
