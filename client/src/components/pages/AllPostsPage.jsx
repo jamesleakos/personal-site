@@ -6,6 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../main-components/Footer.jsx';
 import Navbar from '../main-components/Navbar.jsx';
 import PostList from '../main-components/PostList.jsx';
+import TileScroller from '../utility-components/TileScroller.jsx';
+import {
+  ImageScrollItem,
+  ImageMapper,
+} from '../utility-components/ImageScrollItem.jsx';
 import BackgroundImage from '../main-components/BackgroundImage.jsx';
 
 function Posts() {
@@ -21,6 +26,17 @@ function Posts() {
   return (
     <div className='posts'>
       <Navbar />
+      <div className='wm-spreads'>
+        <p className='title'>{title}</p>
+        <hr />
+        <TileScroller
+          Mapper={ImageMapper}
+          MapArray={[
+            '0_wolfmoor_spreads/2022/WolfmoorMag2022-28.jpg',
+            '0_wolfmoor_spreads/2022/WolfmoorMag2022-28.jpg',
+          ]}
+        />
+      </div>
       <PostList
         postFilters={{ published: true, featured: true, tags: 'WM 2022' }}
         onTileClick={loadPostViewer}
@@ -39,10 +55,10 @@ function Posts() {
         useWindowOffset={false}
         amTiled={false}
       />
-      <BackgroundImage
+      {/* <BackgroundImage
         height='600px'
         imageURL='Personal_Site/sam_in_sask_vGufgsbWx.JPG'
-      />
+      /> */}
       <PostList
         postFilters={{ published: true, featured: true, tags: 'WM 2021' }}
         onTileClick={loadPostViewer}
@@ -61,10 +77,10 @@ function Posts() {
         useWindowOffset={false}
         amTiled={false}
       />
-      <BackgroundImage
+      {/* <BackgroundImage
         height='600px'
         imageURL='Personal_Site/skinning_outside_RJ4rJKy53.jpg'
-      />
+      /> */}
       <Footer />
     </div>
   );

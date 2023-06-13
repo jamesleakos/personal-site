@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 // css
 import { TileScrollerStyled } from './styles/TileScroller.styled.js';
 
+// Mapper is a required argument, as it is the function called to output the components
+// MapArray is an optional argument to Mapper that can influence the output of the Mapper function
 function TileScroller({ Mapper, MapArray }) {
   // drag to scroll and text near cursor (all is for drag unless specified)
   // for drag
