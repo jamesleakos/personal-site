@@ -80,11 +80,13 @@ function Admin() {
         useWindowOffset={false}
         amTiled={false}
       /> */}
+
       <TagManager />
-      <BackgroundImage
+
+      {/* <BackgroundImage
         height='50vh'
         imageURL='Personal_Site/skinning_outside_RJ4rJKy53.jpg'
-      />
+      /> */}
       <div
         className='admin_logout'
         onClick={logout}
