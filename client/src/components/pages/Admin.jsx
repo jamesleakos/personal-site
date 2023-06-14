@@ -71,7 +71,7 @@ function Admin() {
         showSearch={true}
         amTiled={true}
       />
-      <PostList
+      {/* <PostList
         postFilters={{}}
         onTileClick={loadPostBuilder}
         showAddNew={false}
@@ -79,7 +79,7 @@ function Admin() {
         title='All Posts'
         useWindowOffset={false}
         amTiled={false}
-      />
+      /> */}
       <TagManager />
       <BackgroundImage
         height='50vh'
