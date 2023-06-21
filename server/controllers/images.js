@@ -33,10 +33,6 @@ exports.getImages = async (req, res) => {
 };
 
 exports.addOrUpdateImageComponent = (req, res) => {
-  if (req.body.key === '') {
-    res.status(400).send('You must supply an image key');
-  }
-  console.log('background_position: ' + req.body.background_position);
   // we do this because we use it twice
   const newObj = {
     type: req.body.type,

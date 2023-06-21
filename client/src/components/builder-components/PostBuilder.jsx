@@ -115,13 +115,11 @@ function PostBuilder() {
       default:
         break;
     }
-    comp.openOnEdit = true;
-    const p = { ...post };
-    if (!position) p.components.push(comp);
-    else {
-      p.components.splice(position, 0, comp);
-    }
-    mergePost(p);
+    modifyComponentByIndex(
+      comp,
+      !!position ? position : post.components.length,
+      true
+    );
   };
   const setComponentEdit = (index, set) => {
     const newPost = { ...post };
@@ -130,10 +128,17 @@ function PostBuilder() {
   };
 
   const mergePost = (newPost) => {
+    const newComponents = newPost.components.map((comp, i) => {
+      if (post.components[i]) {
+        comp.openOnEdit = !!post.components[i].openOnEdit;
+      }
+      return comp;
+    });
+    newPost.components = newComponents;
     setPost(newPost);
   };
 
-  const modifyComponentByIndex = (component, index) => {
+  const modifyComponentByIndex = (component, index, openOnEdit) => {
     console.log('comps - top: ', post.components);
     if (component.type === 'photo' || component.type === 'background-photo') {
       axios
@@ -141,6 +146,9 @@ function PostBuilder() {
           ...component,
         })
         .then((res) => {
+          // add openOnEdit property to component
+          console.log('comps - bottom: ', res.data);
+          res.data.components[index].openOnEdit = !!openOnEdit;
           mergePost(res.data);
         })
         .catch((err) => {
@@ -152,6 +160,9 @@ function PostBuilder() {
           ...component,
         })
         .then((res) => {
+          console.log('comps - bottom: ', res.data);
+          console.log('index: ', index);
+          res.data.components[index].openOnEdit = !!openOnEdit;
           mergePost(res.data);
         })
         .catch((err) => {

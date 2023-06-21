@@ -148,10 +148,6 @@ exports.reorderComponent = (req, res) => {
 };
 
 exports.addOrUpdateTextComponent = (req, res) => {
-  if (req.body.text === '') {
-    res.status(400).send('You cannot add blank text');
-    return;
-  }
 
   // we define it here because it's used in two places
   const newComp = {
