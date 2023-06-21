@@ -40,6 +40,7 @@ function PostBuilder() {
     axios
       .get(`/posts/${passedPostID}`)
       .then((res) => {
+        console.log(res.data);
         setPost(res.data);
       })
       .catch((err) => {
@@ -65,7 +66,7 @@ function PostBuilder() {
         ...newPost,
       })
       .then((res) => {
-        setPost(res.data);
+        mergePost(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -120,16 +121,27 @@ function PostBuilder() {
     else {
       p.components.splice(position, 0, comp);
     }
-    setPost(p);
+    mergePost(p);
   };
-  const modifyComponent = (component, index) => {
+  const setComponentEdit = (index, set) => {
+    const newPost = { ...post };
+    newPost.components[index].openOnEdit = set;
+    setPost(newPost);
+  };
+
+  const mergePost = (newPost) => {
+    setPost(newPost);
+  };
+
+  const modifyComponentByIndex = (component, index) => {
+    console.log('comps - top: ', post.components);
     if (component.type === 'photo' || component.type === 'background-photo') {
       axios
         .put(`/image_components?post_id=${post._id}&index=${index}`, {
           ...component,
         })
         .then((res) => {
-          setPost(res.data);
+          mergePost(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -140,7 +152,7 @@ function PostBuilder() {
           ...component,
         })
         .then((res) => {
-          setPost(res.data);
+          mergePost(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -258,13 +270,14 @@ function PostBuilder() {
           case 'caption':
             return (
               <TextComp
-                key={component._id + index + ''}
+                key={'' + component._id + index}
                 index={index}
                 component={component}
                 addComponent={addComponent}
-                modifyComponent={modifyComponent}
+                modifyComponentByIndex={modifyComponentByIndex}
                 deleteComponent={deleteComponent}
                 openOnEdit={!!component.openOnEdit}
+                setComponentEdit={setComponentEdit}
                 moveComponent={moveComponent}
               />
             );
@@ -272,14 +285,15 @@ function PostBuilder() {
           case 'background-photo':
             return (
               <PhotoComp
-                key={component._id + index}
+                key={'' + component._id + index}
                 index={index}
                 postId={post._id}
                 component={component}
                 addComponent={addComponent}
-                modifyComponent={modifyComponent}
+                modifyComponentByIndex={modifyComponentByIndex}
                 deleteComponent={deleteComponent}
                 openOnEdit={!!component.openOnEdit}
+                setComponentEdit={setComponentEdit}
                 moveComponent={moveComponent}
               />
             );

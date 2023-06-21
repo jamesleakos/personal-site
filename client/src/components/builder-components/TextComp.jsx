@@ -12,44 +12,52 @@ function TextComp({
   component,
   addComponent,
   index,
-  modifyComponent,
+  modifyComponentByIndex,
   deleteComponent,
   openOnEdit,
+  setComponentEdit,
   moveComponent,
 }) {
   useEffect(() => {
-    // console.log(component);
+    if (!component.text || component.text === '') {
+      handleEdit(true);
+    }
   }, []);
 
   const [text, setText] = useState(component.text);
   const [editActive, setEditActive] = useState(openOnEdit);
 
+  const handleEdit = function (set) {
+    setEditActive(set);
+    setComponentEdit(index, set);
+  };
+
   const endEdit = function () {
     component.text = text;
-    modifyComponent(component, index);
+    handleEdit(false);
 
-    setEditActive(false);
+    modifyComponentByIndex(component, index);
   };
 
   const changeType = function (type) {
     component.type = type;
-    modifyComponent(component, index);
+    modifyComponentByIndex(component, index);
   };
 
   const toggleMarginTop = function () {
     component.margin_top = !component.margin_top;
-    modifyComponent(component, index);
+    modifyComponentByIndex(component, index);
   };
 
   const toggleMarginBottom = function () {
     // console.log('toggle bottom');
     component.margin_bottom = !component.margin_bottom;
-    modifyComponent(component, index);
+    modifyComponentByIndex(component, index);
   };
 
   const handleAddBelow = function (compName) {
     console.log('click');
-    setEditActive(false);
+    handleEdit(false);
     addComponent(compName, index + 1);
   };
 
@@ -187,7 +195,7 @@ function TextComp({
             (component.margin_top ? ' has-top-margin' : '') +
             (component.margin_bottom ? ' has-bottom-margin' : '')
           }
-          onDoubleClick={() => setEditActive(true)}
+          onDoubleClick={() => handleEdit(true)}
           dangerouslySetInnerHTML={{
             __html: component.text.replace(/\n/g, '<br />'),
           }}

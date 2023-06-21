@@ -16,13 +16,20 @@ function PhotoComp({
   component,
   addComponent,
   index,
-  modifyComponent,
+  modifyComponentByIndex,
   deleteComponent,
   openOnEdit,
+  setComponentEdit,
   moveComponent,
 }) {
   // are we editing the post?
   const [editActive, setEditActive] = useState(openOnEdit);
+
+  useEffect(() => {
+    if (!component.key) {
+      handleEdit(true);
+    }
+  }, []);
 
   // consts for qol stuff for the image uploading
   const [isLoading, setIsLoading] = useState(false);
@@ -41,16 +48,21 @@ function PhotoComp({
     component.size = size;
     component.background_position = backgroundPosition;
     console.log(component.background_position);
-    setEditActive(false);
+    handleEdit(false);
     if (!component.key) deleteComponent(component);
     // this is just for size
-    else modifyComponent(component, index);
+    else modifyComponentByIndex(component, index);
+  };
+
+  const handleEdit = function (set) {
+    setEditActive(set);
+    setComponentEdit(index, set);
   };
 
   const changeType = function (type) {
-    setEditActive(false);
+    handleEdit(false);
     component.type = type;
-    modifyComponent(component, index);
+    modifyComponentByIndex(component, index);
   };
 
   const handleUpload = (e) => {
@@ -76,7 +88,7 @@ function PhotoComp({
         setIsLoading(false);
         component.key = response.data.key;
         component.extension = file.name.split('.').pop(); // get the extension
-        modifyComponent(component, index);
+        modifyComponentByIndex(component, index);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -87,17 +99,17 @@ function PhotoComp({
 
   const toggleMarginTop = function () {
     component.margin_top = !component.margin_top;
-    modifyComponent(component, index);
+    modifyComponentByIndex(component, index);
   };
 
   const toggleMarginBottom = function () {
     component.margin_bottom = !component.margin_bottom;
-    modifyComponent(component, index);
+    modifyComponentByIndex(component, index);
   };
 
   const handleAddBelow = function (compName) {
     console.log('click');
-    setEditActive(false);
+    handleEdit(false);
     addComponent(compName, index + 1);
   };
 
@@ -251,7 +263,7 @@ function PhotoComp({
             (component.margin_top ? ' has-top-margin' : '') +
             (component.margin_bottom ? ' has-bottom-margin' : '')
           }
-          onDoubleClick={() => setEditActive(true)}
+          onDoubleClick={() => handleEdit(true)}
         >
           {!isMobile ? (
             component.type === 'photo' ? (
