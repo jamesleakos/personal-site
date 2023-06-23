@@ -9,4 +9,5 @@ export const UnderlinedTitleStyled = styled.div`
   color: var(--background-color-dark-main);
   border-bottom: 2px solid var(--background-color-dark-secondary);
   margin-bottom: 20px;
+  margin-right: var(--post-list-margin);
 `;

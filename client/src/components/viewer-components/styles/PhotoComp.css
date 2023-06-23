@@ -34,3 +34,29 @@
 .has-bottom-margin {
   margin-bottom: var(--post-component-vertical-margin);
 }
+
+.photo-comp .image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photo-comp .image-modal-content {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.photo-comp .image-modal-content img {
+  max-width: 100%;
+  max-height: 100%;
+}

@@ -64,7 +64,7 @@ function Posts() {
         style={{ width: '100%' }}
       /> */}
       <InlineImage imageURL='Personal_Site/SJ-162.jpg' />
-      <div className='wm-spreads'>
+      <div className={'wm-spreads' + (!!isMobile ? ' mobile' : '')}>
         <ImageScroller
           title='2021 Wolfmoor Magazine'
           imageURLArray={Array.from(
