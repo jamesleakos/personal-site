@@ -28,6 +28,12 @@ const imageSchema = new mongoose.Schema({
 });
 const ImageComponent = Component.discriminator('ImageComponent', imageSchema, options);
 
+const imageScrollerSchema = new mongoose.Schema({
+  keys: [String],
+  size: String,
+});
+const ImageScrollerComponent = Component.discriminator('ImageScrollerComponent', imageScrollerSchema, options);
+
 const postSchema = new mongoose.Schema({
   // _id: mongoose.Schema.Types.ObjectId,
   // display info
@@ -61,6 +67,7 @@ module.exports = {
   Post,
   TextComponent,
   ImageComponent,
+  ImageScrollerComponent,
   Component,
   Tag
 };

@@ -11,6 +11,7 @@ import BuilderBar from './BuilderBar.jsx';
 import InfoModal from './InfoModal.jsx';
 import TextComp from './TextComp.jsx';
 import PhotoComp from './PhotoComp.jsx';
+import PhotoScrollerComp from './PhotoScrollerComp.jsx';
 import AuthContext from '../../contexts/AuthContext.js';
 
 function PostBuilder() {
@@ -112,6 +113,9 @@ function PostBuilder() {
       case 'background-photo':
         comp.key = '';
         break;
+      case 'photo-scroller':
+        comp.keys = [];
+        break;
       default:
         break;
     }
@@ -139,15 +143,24 @@ function PostBuilder() {
   };
 
   const modifyComponentByIndex = (component, index, openOnEdit) => {
-    console.log('comps - top: ', post.components);
     if (component.type === 'photo' || component.type === 'background-photo') {
       axios
         .put(`/image_components?post_id=${post._id}&index=${index}`, {
           ...component,
         })
         .then((res) => {
-          // add openOnEdit property to component
-          console.log('comps - bottom: ', res.data);
+          res.data.components[index].openOnEdit = !!openOnEdit;
+          mergePost(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if ((component.type = 'photo-scroller')) {
+      axios
+        .put('/image_scroller_components?post_id=${post._id}&index=${index}', {
+          ...component,
+        })
+        .then((res) => {
           res.data.components[index].openOnEdit = !!openOnEdit;
           mergePost(res.data);
         })
@@ -160,8 +173,6 @@ function PostBuilder() {
           ...component,
         })
         .then((res) => {
-          console.log('comps - bottom: ', res.data);
-          console.log('index: ', index);
           res.data.components[index].openOnEdit = !!openOnEdit;
           mergePost(res.data);
         })
@@ -196,6 +207,18 @@ function PostBuilder() {
       axios
         .delete(
           `/image_components?post_id=${post._id}&component_id=${component._id}&key=${component.key}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          setPost(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (component.kind === 'ImageScrollerComponent') {
+      axios
+        .delete(
+          `/image_scroller_components?post_id=${post._id}&component_id=${component._id}`
         )
         .then((res) => {
           console.log(res.data);
@@ -296,6 +319,21 @@ function PostBuilder() {
           case 'background-photo':
             return (
               <PhotoComp
+                key={'' + component._id + index}
+                index={index}
+                postId={post._id}
+                component={component}
+                addComponent={addComponent}
+                modifyComponentByIndex={modifyComponentByIndex}
+                deleteComponent={deleteComponent}
+                openOnEdit={!!component.openOnEdit}
+                setComponentEdit={setComponentEdit}
+                moveComponent={moveComponent}
+              />
+            );
+          case 'photo-scroller':
+            return (
+              <PhotoScrollerComp
                 key={'' + component._id + index}
                 index={index}
                 postId={post._id}

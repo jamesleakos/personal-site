@@ -21,34 +21,43 @@ const upload = multer({
 
 const router = express.Router();
 const postController = require('../controllers/post.js');
-const imageController = require('../controllers/images.js');
+const imageScrollerController = require('../controllers/imageScrollers.js');
 
 router.post('/', upload.single('image'), function (req, res) {
   if (!req.user) return;
   if (req.user.toJSON().role !== 'admin') return;
-  imageController.uploadImage(req, res);
-});
-
-// we shouldn't need this anymore - with imageKit, we no longer need presigned URLs and can get the images with
-// the keys that are stored in Mongo
-router.get('/', (req, res) => {
-  imageController.getImages(req, res);
+  imageScrollerController.uploadImageForScroller(req, res);
 });
 
 router.put('/', function (req, res) {
   if (!req.user) return;
   if (req.user.toJSON().role !== 'admin') return;
-  imageController.addOrUpdateImageComponent(req, res);
+  imageScrollerController.addOrUpdateImageScrollerComponent(req, res);
 });
 
 router.delete('/', function (req, res) {
   if (!req.user) return;
   if (req.user.toJSON().role !== 'admin') return;
-  // we can use the same method as the posts
   postController.deleteComponent(req, res);
+  imageScrollerController.deleteImages(req, res);
+});
 
-  // can get the key from the route and then send it along to the bucket
-  imageController.deleteImage(req, res);
+router.put('/imageToScroller', function (req, res) {
+  if (!req.user) return;
+  if (req.user.toJSON().role !== 'admin') return;
+  imageScrollerController.convertImageToImageScroller(req, res);
+});
+
+router.put('/scollerToImage', function (req, res) {
+  if (!req.user) return;
+  if (req.user.toJSON().role !== 'admin') return;
+  imageScrollerController.convertImageScrollerToImage(req, res);
+});
+
+router.put('/updateImageScrollerOrder', function (req, res) {
+  if (!req.user) return;
+  if (req.user.toJSON().role !== 'admin') return;
+  imageScrollerController.updateImageScrollerOrder(req, res);
 });
 
 module.exports = router;
