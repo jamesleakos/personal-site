@@ -54,10 +54,11 @@ router.put('/scollerToImage', function (req, res) {
   imageScrollerController.convertImageScrollerToImage(req, res);
 });
 
-router.put('/updateImageScrollerOrder', function (req, res) {
-  if (!req.user) return;
-  if (req.user.toJSON().role !== 'admin') return;
-  imageScrollerController.updateImageScrollerOrder(req, res);
-});
+// just use the PUT '/' route
+// router.put('/updateImageScrollerOrder', function (req, res) {
+//   if (!req.user) return;
+//   if (req.user.toJSON().role !== 'admin') return;
+//   imageScrollerController.updateImageScrollerOrder(req, res);
+// });
 
 module.exports = router;

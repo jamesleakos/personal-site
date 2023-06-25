@@ -129,7 +129,7 @@ function ImageScroller({ title, imageURLArray }) {
 
   return (
     <ImageScrollerStyled className='image-scroller'>
-      <UnderlinedTitle title={title} />
+      {!!title ? <UnderlinedTitle title={title} /> : null}
       <TileScroller Mapper={() => ImageMapper(imageURLArray, expandImage)} />
       {/* full screen image view modal */}
       {showModal && (
@@ -143,7 +143,7 @@ function ImageScroller({ title, imageURLArray }) {
             {/* zoom with the scroll bar */}
             <img
               className='image-modal-image'
-              src={`https://ik.imagekit.io/hfywj4j0a/${imageURLArray[imageIndex]}`}
+              src={`https://ik.imagekit.io/hfywj4j0a/tr:w-2500/${imageURLArray[imageIndex]}`}
               onClick={(e) => e.stopPropagation()}
               alt='tile image'
               draggable='false'
