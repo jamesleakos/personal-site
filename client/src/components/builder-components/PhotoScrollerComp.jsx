@@ -38,17 +38,10 @@ function PhotoScrollerComp({
   // size stuff
   const [size, setSize] = useState(component.size);
 
-  // background position stuff
-  const [backgroundPosition, setBackgroundPosition] = useState(
-    component.background_position
-  );
-
   const endEdit = function () {
     component.size = size;
-    component.background_position = backgroundPosition;
-    console.log(component.background_position);
     handleEdit(false);
-    if (!component.key) deleteComponent(component);
+    if (component.keys.length === 0) deleteComponent(component);
     // this is just for size
     else modifyComponentByIndex(component, index);
   };
@@ -58,6 +51,10 @@ function PhotoScrollerComp({
     setComponentEdit(index, set);
   };
 
+  // TODO : change position function - edit the image order but don't push to the server - that can be finalized on endEdit
+  const changePosition = function (index, newPosition) {};
+
+  // TODO : changing type likely needs to make an axios call in the PostBuilder, as we'll need to reload the components
   const changeType = function (type) {
     handleEdit(false);
     component.type = type;
@@ -86,7 +83,6 @@ function PhotoScrollerComp({
       .then((response) => {
         setIsLoading(false);
         component.key = response.data.key;
-        component.extension = file.name.split('.').pop(); // get the extension
         modifyComponentByIndex(component, index);
       })
       .catch((err) => {
@@ -95,6 +91,8 @@ function PhotoScrollerComp({
         console.log(err);
       });
   };
+
+  // #region margin and add below
 
   const toggleMarginTop = function () {
     component.margin_top = !component.margin_top;
@@ -112,8 +110,12 @@ function PhotoScrollerComp({
     addComponent(compName, index + 1);
   };
 
+  // #endregion
+
   return (
-    <div className={'photo-comp' + (isMobile ? ' mobile' : '')}>
+    <PhotoScrollerCompStyled
+      className={'photo-scroller-comp' + (isMobile ? ' mobile' : '')}
+    >
       {editActive ? (
         <div className='editing'>
           <div className='top-icons'>
@@ -256,41 +258,9 @@ function PhotoScrollerComp({
           </div>
         </div>
       ) : (
-        <div
-          className={
-            component.type +
-            (component.margin_top ? ' has-top-margin' : '') +
-            (component.margin_bottom ? ' has-bottom-margin' : '')
-          }
-          onDoubleClick={() => handleEdit(true)}
-        >
-          {!isMobile ? (
-            component.type === 'photo' ? (
-              <img
-                src={`https://ik.imagekit.io/hfywj4j0a/tr:w-2500/${component.key}`}
-                alt='image'
-                style={{ width: component.size }}
-              />
-            ) : (
-              <div
-                className='background-photo-div'
-                style={{
-                  backgroundImage: `url('https://ik.imagekit.io/hfywj4j0a/tr:w-2500/${component.key}')`,
-                  height: component.size || '600px',
-                  backgroundPosition: component.background_position || 'center',
-                }}
-              ></div>
-            )
-          ) : (
-            <img
-              src={`https://ik.imagekit.io/hfywj4j0a/tr:w-2500/${component.key}`}
-              alt='image'
-              style={{ width: '95%' }}
-            />
-          )}
-        </div>
+        <ImageScroller imageURLArray={component.keys} />
       )}
-    </div>
+    </PhotoScrollerCompStyled>
   );
 }
 

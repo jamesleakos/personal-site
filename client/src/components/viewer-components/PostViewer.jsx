@@ -8,6 +8,7 @@ import Navbar from '../main-components/Navbar.jsx';
 import Footer from '../main-components/Footer.jsx';
 import TextComp from './TextComp.jsx';
 import PhotoComp from './PhotoComp.jsx';
+import PhotoScrollerComp from './PhotoScrollerComp.jsx';
 // import PhotoGalleryComp from '../viewer-components/PhotoGalleryComp.jsx';
 // import BackgroundPhotoComp from '../viewer-components/BackgroundPhotoComp.jsx';
 
@@ -35,11 +36,6 @@ function PostViewer() {
     components: [],
   });
 
-  // POST API CALLS
-
-  // image GET calls - the POST calls are in the image component itself
-  const [images, setImages] = useState([]);
-
   return (
     <div
       className='post-viewer'
@@ -63,10 +59,13 @@ function PostViewer() {
           case 'photo':
           case 'background-photo':
             return (
-              <PhotoComp
+              <PhotoComp key={component._id + index} component={component} />
+            );
+          case 'photo-scroller':
+            return (
+              <PhotoScrollerComp
                 key={component._id + index}
                 component={component}
-                url={images.filter((c) => c.key === component.key)[0]?.url}
               />
             );
           default:
