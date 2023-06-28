@@ -20,6 +20,7 @@ const logger = require('../middleware/logger.js');
 const postRouter = require('./routers/posts.js');
 const componentRouter = require('./routers/components.js');
 const imageComponentRouter = require('./routers/image_components.js');
+const imageScrollerComponentRouter = require('./routers/image_scroller_components.js');
 const tagRouter = require('./routers/tags.js');
 const poemRouter = require('./routers/poems.js');
 
@@ -62,6 +63,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use('/posts', postRouter);
 app.use('/components', componentRouter);
 app.use('/image_components', imageComponentRouter);
+app.use('/image_scroller_components', imageScrollerComponentRouter);
 app.use('/tags', tagRouter);
 app.use('/auth', authRouter);
 app.use('/poems', poemRouter);

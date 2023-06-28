@@ -1,5 +1,5 @@
-const { Post, ImageScrollerComponent, ImageComponent } = require('../db/models/Post.js');
-const s3 = require('./s3.js');
+const { Post, ImageScrollerComponent, ImageComponent } = require('../../db/models/Post.js');
+const s3 = require('../s3.js');
 
 exports.uploadImageForScroller = (req, res) => {
   const post_id = req.query.post_id;
@@ -23,6 +23,7 @@ exports.uploadImageForScroller = (req, res) => {
 // exports.getImages
 
 exports.addOrUpdateImageScrollerComponent = (req, res) => {
+  console.log('add or update');
   const newObj = {
     type: req.body.type,
     keys: req.body.keys,
@@ -32,6 +33,7 @@ exports.addOrUpdateImageScrollerComponent = (req, res) => {
   };
 
   if (!req.body._id) {
+    console.log('no id');
     const imageScrollerComponent = new ImageScrollerComponent({
       ...newObj
     });
@@ -41,7 +43,7 @@ exports.addOrUpdateImageScrollerComponent = (req, res) => {
         console.log(err);
         res.status(400).send(err);
       });
-
+    console.log('req.query: ', req.query);
     Post.findById(req.query.post_id)
       .then(post => {
         post.components.splice(req.query.index, 0, imageScrollerComponent);
@@ -56,6 +58,7 @@ exports.addOrUpdateImageScrollerComponent = (req, res) => {
       });
 
   } else {
+    console.log('yes id');
     ImageScrollerComponent.findOneAndUpdate({
       _id: req.body._id
     },

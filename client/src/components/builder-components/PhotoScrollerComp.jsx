@@ -5,7 +5,8 @@ import { isMobile } from 'react-device-detect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //imports
-import PhotoScrollerCompStyled from './styles/PhotoScrollerComp.styled.js';
+import { PhotoScrollerCompStyled } from './styles/PhotoScrollerComp.styled.js';
+import ImageScroller from '../utility-components/ImageScroller.jsx';
 
 //
 const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];

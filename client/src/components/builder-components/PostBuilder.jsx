@@ -155,9 +155,9 @@ function PostBuilder() {
         .catch((err) => {
           console.log(err);
         });
-    } else if ((component.type = 'photo-scroller')) {
+    } else if (component.type === 'photo-scroller') {
       axios
-        .put('/image_scroller_components?post_id=${post._id}&index=${index}', {
+        .put(`/image_scroller_components?post_id=${post._id}&index=${index}`, {
           ...component,
         })
         .then((res) => {
