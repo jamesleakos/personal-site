@@ -143,6 +143,18 @@ function PostBuilder() {
   };
 
   const modifyComponentByIndex = (component, index, openOnEdit) => {
+    // add component to post locally (for speed / responsiveness)
+    const newPost = { ...post };
+
+    if (index === newPost.components.length) {
+      newPost.components.push(component);
+    } else {
+      newPost.components[index] = component;
+    }
+
+    setPost(newPost);
+
+    // axios call
     if (component.type === 'photo' || component.type === 'background-photo') {
       axios
         .put(`/image_components?post_id=${post._id}&index=${index}`, {

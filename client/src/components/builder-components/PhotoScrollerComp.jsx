@@ -24,9 +24,10 @@ function PhotoScrollerComp({
 }) {
   // are we editing the post?
   const [editActive, setEditActive] = useState(openOnEdit);
+  const [editIndex, setEditIndex] = useState(0);
 
   useEffect(() => {
-    if (!component.key) {
+    if (component.keys.length === 0) {
       handleEdit(true);
     }
   }, []);
@@ -75,10 +76,9 @@ function PhotoScrollerComp({
 
     setIsLoading(true);
 
-    // we pass the current key so that the server can delete the old image
     axios
       .post(
-        `/image_components?post_id=${postId}&current_key=${component.key}`,
+        `/image_scroller_components?post_id=${postId}&current_key=${component.keys[editIndex]}`,
         form
       )
       .then((response) => {
@@ -171,11 +171,8 @@ function PhotoScrollerComp({
             </div>
           </div>
           {/* MIDDLE IMAGE */}
-          {!!component.key ? (
-            <img
-              src={`https://ik.imagekit.io/hfywj4j0a/${component.key}`}
-              alt='image'
-            />
+          {component.keys.length > 0 ? (
+            <ImageScroller imageURLArray={component.keys} />
           ) : null}
 
           <div className='input-area'>
