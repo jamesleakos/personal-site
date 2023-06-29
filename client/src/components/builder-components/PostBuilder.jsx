@@ -195,7 +195,7 @@ function PostBuilder() {
   };
   const deleteComponent = (component) => {
     if (!component.kind) {
-      // kind should only be on something we've got back from the server
+      // kind should only be on something we've got back from the server - although under the new format, it'll usually have it
       const newPost = { ...post };
       const i = post.components.indexOf(component);
       if (i > 0) {
@@ -228,9 +228,12 @@ function PostBuilder() {
           console.log(err);
         });
     } else if (component.kind === 'ImageScrollerComponent') {
+      console.log('sending delete requestfor keys: ', component.keys.join(','));
       axios
         .delete(
-          `/image_scroller_components?post_id=${post._id}&component_id=${component._id}`
+          `/image_scroller_components?post_id=${post._id}&component_id=${
+            component._id
+          }&keys=${component.keys.join(',')}`
         )
         .then((res) => {
           console.log(res.data);
