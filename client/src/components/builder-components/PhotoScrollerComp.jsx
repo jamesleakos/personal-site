@@ -43,6 +43,7 @@ function PhotoScrollerComp({
   const endEdit = function () {
     component.size = size;
     handleEdit(false);
+    console.log('end edit - component: ', component);
     if (component.keys.length === 0) deleteComponent(component);
     // this is just for size
     else modifyComponentByIndex(component, index);
@@ -82,6 +83,7 @@ function PhotoScrollerComp({
         form
       )
       .then((response) => {
+        console.log('handleUpload response: ', response);
         setIsLoading(false);
         component.key = response.data.key;
         modifyComponentByIndex(component, index);
