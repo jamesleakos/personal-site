@@ -85,7 +85,7 @@ function PhotoScrollerComp({
       .then((response) => {
         console.log('handleUpload response: ', response);
         setIsLoading(false);
-        component.key = response.data.key;
+        component.keys.push(response.data.key);
         modifyComponentByIndex(component, index);
       })
       .catch((err) => {
