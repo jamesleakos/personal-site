@@ -258,7 +258,9 @@ function PhotoScrollerComp({
           </div>
         </div>
       ) : (
-        <ImageScroller imageURLArray={component.keys} />
+        <div className='not-editing' onDoubleClick={() => handleEdit(true)}>
+          <ImageScroller imageURLArray={component.keys} />
+        </div>
       )}
     </PhotoScrollerCompStyled>
   );
