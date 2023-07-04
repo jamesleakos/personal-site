@@ -99,7 +99,8 @@ exports.deleteImages = (req, res) => {
   // the component should already have been deleted
   // now we need to delete the images off the s3 bucket
   console.log('\nQuery: ', req.query.keys, '\n');
-  const keys = req.query.keys;
+  // split the keys into an array, instead of the comma separated string
+  const keys = req.query.keys.split(',');
 
   // this is where the magic happens
   for (let i = 0; i < keys.length; i++) {

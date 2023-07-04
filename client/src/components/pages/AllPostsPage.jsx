@@ -11,6 +11,7 @@ import Footer from '../main-components/Footer.jsx';
 import Navbar from '../main-components/Navbar.jsx';
 import PostList from '../main-components/PostList.jsx';
 import ImageScroller from '../utility-components/ImageScroller.jsx';
+import { ImageMapper } from '../utility-components/ImageScrollItem.jsx';
 import BackgroundImage from '../main-components/BackgroundImage.jsx';
 import InlineImage from '../main-components/InlineImage.jsx';
 
@@ -35,6 +36,7 @@ function Posts() {
             { length: 64 },
             (_, i) => `0_wolfmoor_spreads/2022/WolfmoorMag2022-${i + 1}.jpg`
           )}
+          ImageMapper={ImageMapper}
         />
       </div>
       <PostList
@@ -71,6 +73,7 @@ function Posts() {
             { length: 70 },
             (_, i) => `0_wolfmoor_spreads/2021/WolfmoorMag2021-${i + 1}.jpg`
           )}
+          ImageMapper={ImageMapper}
         />
       </div>
       <PostList

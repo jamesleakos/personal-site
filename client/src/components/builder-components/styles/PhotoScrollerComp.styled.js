@@ -10,13 +10,24 @@ export const PhotoScrollerCompStyled = styled.div`
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 
+  .not-editing {
+    // background-color: var(--background-color-light-secondary);
+    overflow: hidden;
+    text-align: left;
+    padding: var(--post-list-margin);
+  }
+  
+  .not-editing.mobile {
+    padding-right: 0;
+  }
+
   .input-area {
     display: block;
     height: 50px;
     text-align: center;
   }
 
-  .image-scroller .image {
+  .image-scroller img {
     height: 300px;
   }
 
@@ -26,17 +37,6 @@ export const PhotoScrollerCompStyled = styled.div`
     padding: 20px;
     border: 1px solid black;
     border-radius: 5px;
-  }
-
-  .editing img {
-    display: block;
-    width: 600px;
-    margin: 20px auto;
-  }
-  @media screen and (max-width: 1000px) {
-    .editing img {
-      width: 90%;
-    }
   }
 
   .top-icons {

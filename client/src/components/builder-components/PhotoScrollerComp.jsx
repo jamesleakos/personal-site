@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //imports
 import { PhotoScrollerCompStyled } from './styles/PhotoScrollerComp.styled.js';
 import ImageScroller from '../utility-components/ImageScroller.jsx';
+import { ImageMapper } from '../utility-components/ImageScrollItem.jsx';
+import { ImageMapper as EditingMapper } from './PhotoScrollerEditingItem.jsx';
 
 //
 const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
@@ -174,7 +176,10 @@ function PhotoScrollerComp({
           </div>
           {/* MIDDLE IMAGE */}
           {component.keys.length > 0 ? (
-            <ImageScroller imageURLArray={component.keys} />
+            <ImageScroller
+              imageURLArray={component.keys}
+              ImageMapper={EditingMapper}
+            />
           ) : null}
 
           <div className='input-area'>
@@ -258,8 +263,14 @@ function PhotoScrollerComp({
           </div>
         </div>
       ) : (
-        <div className='not-editing' onDoubleClick={() => handleEdit(true)}>
-          <ImageScroller imageURLArray={component.keys} />
+        <div
+          className={'not-editing' + (isMobile ? ' mobile' : '')}
+          onDoubleClick={() => handleEdit(true)}
+        >
+          <ImageScroller
+            imageURLArray={component.keys}
+            ImageMapper={ImageMapper}
+          />
         </div>
       )}
     </PhotoScrollerCompStyled>

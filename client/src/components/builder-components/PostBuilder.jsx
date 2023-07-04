@@ -230,7 +230,10 @@ function PostBuilder() {
           console.log(err);
         });
     } else if (component.kind === 'ImageScrollerComponent') {
-      console.log('sending delete requestfor keys: ', component.keys.join(','));
+      console.log(
+        'sending delete request for keys: ',
+        component.keys.join(',')
+      );
       axios
         .delete(
           `/image_scroller_components?post_id=${post._id}&component_id=${

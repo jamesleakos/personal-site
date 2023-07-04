@@ -7,10 +7,9 @@ import { ImageScrollerStyled } from './styles/ImageScroller.styled.js';
 
 // comps
 import TileScroller from './TileScroller.jsx';
-import { ImageMapper } from './ImageScrollItem.jsx';
 import UnderlinedTitle from './UnderlinedTitle.jsx';
 
-function ImageScroller({ title, imageURLArray }) {
+function ImageScroller({ title, imageURLArray, ImageMapper }) {
   const [showModal, setShowModal] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
   const [scale, setScale] = useState(1);

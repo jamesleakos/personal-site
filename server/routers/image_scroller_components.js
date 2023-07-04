@@ -36,9 +36,11 @@ router.put('/', function (req, res) {
 });
 
 router.delete('/', function (req, res) {
+  console.log('top of the post delete route');
   if (!req.user) return;
   if (req.user.toJSON().role !== 'admin') return;
   postController.deleteComponent(req, res);
+  console.log('delete image scroller component');
   imageScrollerController.deleteImages(req, res);
 });
 
