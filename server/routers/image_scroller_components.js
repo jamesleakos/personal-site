@@ -44,6 +44,12 @@ router.delete('/', function (req, res) {
   imageScrollerController.deleteImages(req, res);
 });
 
+router.delete('/image', function (req, res) {
+  if (!req.user) return;
+  if (req.user.toJSON().role !== 'admin') return;
+  imageScrollerController.deleteImage(req, res);
+});
+
 router.put('/imageToScroller', function (req, res) {
   if (!req.user) return;
   if (req.user.toJSON().role !== 'admin') return;

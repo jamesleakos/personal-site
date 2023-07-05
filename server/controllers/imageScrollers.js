@@ -95,6 +95,11 @@ exports.addOrUpdateImageScrollerComponent = (req, res) => {
   }
 };
 
+exports.deleteImage = (req, res) => {
+  console.log('\nQuery: ', req.query.key, '\n');
+  s3.deleteImage(req.query.key);
+};
+
 exports.deleteImages = (req, res) => {
   // the component should already have been deleted
   // now we need to delete the images off the s3 bucket

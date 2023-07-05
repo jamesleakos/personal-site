@@ -56,8 +56,15 @@ function PhotoScrollerComp({
     setComponentEdit(index, set);
   };
 
-  // TODO : change position function - edit the image order but don't push to the server - that can be finalized on endEdit
-  const changePosition = function (index, newPosition) {};
+  const changeImagePosition = function (currentIndex, newPosition) {
+    // move a key to a new position, adjusting the array as appropriate. Make sure to not do anything if the index is 0 and we're moving left or if the index is the last index and we're moving right
+    if (newPosition === -1 || newPosition === component.keys.length) return;
+
+    const key = component.keys[currentIndex];
+    component.keys.splice(currentIndex, 1);
+    component.keys.splice(currentIndex + newPosition, 0, key);
+    modifyComponentByIndex(component, index);
+  };
 
   // TODO : changing type likely needs to make an axios call in the PostBuilder, as we'll need to reload the components
   const changeType = function (type) {
@@ -95,6 +102,25 @@ function PhotoScrollerComp({
         setUploadError(err.message);
         console.log(err);
       });
+  };
+
+  const deleteSingleImage = function (imageIndex) {
+    // delete at '/image_scroller_components/image' with key in query
+    axios
+      .delete(
+        `/image_scroller_components/image?post_id=${post._id}&component_id=${component._id}&key=${component.keys[index]}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setPost(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // import that this comes after the axios call
+    component.keys.splice(imageIndex, 1);
+    modifyComponentByIndex(component, index);
   };
 
   // #region margin and add below
@@ -178,7 +204,13 @@ function PhotoScrollerComp({
           {component.keys.length > 0 ? (
             <ImageScroller
               imageURLArray={component.keys}
-              ImageMapper={EditingMapper}
+              ImageMapper={() =>
+                EditingMapper(
+                  component.keys,
+                  deleteSingleImage,
+                  changeImagePosition
+                )
+              }
             />
           ) : null}
 
