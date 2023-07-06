@@ -168,14 +168,12 @@ function PostBuilder() {
           console.log(err);
         });
     } else if (component.type === 'photo-scroller') {
-      console.log('modifying photo scroller');
       axios
         .put(`/image_scroller_components?post_id=${post._id}&index=${index}`, {
           ...component,
         })
         .then((res) => {
           res.data.components[index].openOnEdit = !!openOnEdit;
-          console.log('response from server: ', res.data);
           mergePost(res.data);
         })
         .catch((err) => {

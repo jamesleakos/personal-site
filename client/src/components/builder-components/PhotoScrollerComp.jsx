@@ -27,6 +27,11 @@ function PhotoScrollerComp({
   // are we editing the post?
   const [editActive, setEditActive] = useState(openOnEdit);
   const [editIndex, setEditIndex] = useState(0);
+  const [keys, setKeys] = useState(component.keys);
+
+  useEffect(() => {
+    setKeys(component.keys);
+  }, [component.keys]);
 
   useEffect(() => {
     if (component.keys.length === 0) {
@@ -58,11 +63,15 @@ function PhotoScrollerComp({
 
   const changeImagePosition = function (currentIndex, newPosition) {
     // move a key to a new position, adjusting the array as appropriate. Make sure to not do anything if the index is 0 and we're moving left or if the index is the last index and we're moving right
+    console.log('changeImagePosition: curr, new', currentIndex, newPosition);
+    console.log('component.keys: ', component.keys);
     if (newPosition === -1 || newPosition === component.keys.length) return;
 
     const key = component.keys[currentIndex];
     component.keys.splice(currentIndex, 1);
-    component.keys.splice(currentIndex + newPosition, 0, key);
+    component.keys.splice(newPosition, 0, key);
+
+    console.log('component.keys: ', component.keys);
     modifyComponentByIndex(component, index);
   };
 
