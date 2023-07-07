@@ -30,10 +30,6 @@ function PhotoScrollerComp({
   const [keys, setKeys] = useState(component.keys);
 
   useEffect(() => {
-    setKeys(component.keys);
-  }, [component.keys]);
-
-  useEffect(() => {
     if (component.keys.length === 0) {
       handleEdit(true);
     }
@@ -67,11 +63,14 @@ function PhotoScrollerComp({
     console.log('component.keys: ', component.keys);
     if (newPosition === -1 || newPosition === component.keys.length) return;
 
-    const key = component.keys[currentIndex];
-    component.keys.splice(currentIndex, 1);
-    component.keys.splice(newPosition, 0, key);
+    const newKeys = component.keys.slice();
 
-    console.log('component.keys: ', component.keys);
+    const key = newKeys[currentIndex];
+    newKeys.splice(currentIndex, 1);
+    newKeys.splice(newPosition, 0, key);
+
+    setKeys(newKeys);
+    component.keys = newKeys;
     modifyComponentByIndex(component, index);
   };
 
@@ -210,15 +209,11 @@ function PhotoScrollerComp({
             </div>
           </div>
           {/* MIDDLE IMAGE */}
-          {component.keys.length > 0 ? (
+          {keys.length > 0 ? (
             <ImageScroller
-              imageURLArray={component.keys}
+              imageURLArray={keys}
               ImageMapper={() =>
-                EditingMapper(
-                  component.keys,
-                  deleteSingleImage,
-                  changeImagePosition
-                )
+                EditingMapper(keys, deleteSingleImage, changeImagePosition)
               }
             />
           ) : null}
@@ -308,10 +303,7 @@ function PhotoScrollerComp({
           className={'not-editing' + (isMobile ? ' mobile' : '')}
           onDoubleClick={() => handleEdit(true)}
         >
-          <ImageScroller
-            imageURLArray={component.keys}
-            ImageMapper={ImageMapper}
-          />
+          <ImageScroller imageURLArray={keys} ImageMapper={ImageMapper} />
         </div>
       )}
     </PhotoScrollerCompStyled>
