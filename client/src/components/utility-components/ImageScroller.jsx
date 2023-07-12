@@ -10,6 +10,7 @@ import TileScroller from './TileScroller.jsx';
 import UnderlinedTitle from './UnderlinedTitle.jsx';
 
 function ImageScroller({ title, imageURLArray, ImageMapper }) {
+  const [urlArray, setUrlArray] = useState(imageURLArray);
   const [showModal, setShowModal] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
   const [scale, setScale] = useState(1);
@@ -18,6 +19,11 @@ function ImageScroller({ title, imageURLArray, ImageMapper }) {
   const [initialY, setInitialY] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const [currentY, setCurrentY] = useState(0);
+
+  useEffect(() => {
+    console.log('urlArray in imageScroller: ', urlArray);
+    setUrlArray(imageURLArray);
+  }, [imageURLArray]);
 
   useEffect(() => {
     setDragging(false);
@@ -129,7 +135,10 @@ function ImageScroller({ title, imageURLArray, ImageMapper }) {
   return (
     <ImageScrollerStyled className='image-scroller'>
       {!!title ? <UnderlinedTitle title={title} /> : null}
-      <TileScroller Mapper={() => ImageMapper(imageURLArray, expandImage)} />
+      <TileScroller
+        key={JSON.stringify(urlArray)}
+        Mapper={() => ImageMapper(urlArray, expandImage)}
+      />
       {/* full screen image view modal */}
       {showModal && (
         <div

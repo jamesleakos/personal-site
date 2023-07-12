@@ -13,6 +13,23 @@ import { ImageMapper as EditingMapper } from './PhotoScrollerEditingItem.jsx';
 //
 const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 
+function EditingScroller({ keys, deleteSingleImage, changeImagePosition }) {
+  const [forceRerender, setForceRerender] = useState(0);
+  useEffect(() => {
+    setForceRerender(forceRerender + 1);
+    console.log('keys in EditingScroller: ', keys);
+  }, [keys]);
+
+  return (
+    <ImageScroller
+      imageURLArray={keys}
+      ImageMapper={() =>
+        EditingMapper(keys, deleteSingleImage, changeImagePosition)
+      }
+    />
+  );
+}
+
 function PhotoScrollerComp({
   postId,
   component,
@@ -46,7 +63,6 @@ function PhotoScrollerComp({
   const endEdit = function () {
     component.size = size;
     handleEdit(false);
-    console.log('end edit - component: ', component);
     if (component.keys.length === 0) deleteComponent(component);
     // this is just for size
     else modifyComponentByIndex(component, index);
@@ -59,8 +75,6 @@ function PhotoScrollerComp({
 
   const changeImagePosition = function (currentIndex, newPosition) {
     // move a key to a new position, adjusting the array as appropriate. Make sure to not do anything if the index is 0 and we're moving left or if the index is the last index and we're moving right
-    console.log('changeImagePosition: curr, new', currentIndex, newPosition);
-    console.log('component.keys: ', component.keys);
     if (newPosition === -1 || newPosition === component.keys.length) return;
 
     const newKeys = component.keys.slice();
@@ -70,8 +84,7 @@ function PhotoScrollerComp({
     newKeys.splice(newPosition, 0, key);
 
     setKeys(newKeys);
-    component.keys = newKeys;
-    modifyComponentByIndex(component, index);
+    modifyComponentByIndex({ ...component, keys: newKeys }, index);
   };
 
   // TODO : changing type likely needs to make an axios call in the PostBuilder, as we'll need to reload the components
@@ -208,13 +221,12 @@ function PhotoScrollerComp({
               />
             </div>
           </div>
-          {/* MIDDLE IMAGE */}
+          {/* MIDDLE IMAGES */}
           {keys.length > 0 ? (
-            <ImageScroller
-              imageURLArray={keys}
-              ImageMapper={() =>
-                EditingMapper(keys, deleteSingleImage, changeImagePosition)
-              }
+            <EditingScroller
+              keys={keys}
+              deleteSingleImage={deleteSingleImage}
+              changeImagePosition={changeImagePosition}
             />
           ) : null}
 
