@@ -42,8 +42,11 @@ function PhotoScrollerEditingItem({ url, deleteImage, moveLeft, moveRight }) {
         <button className='image-scroll-item-button right' onClick={moveRight}>
           &gt;
         </button>
-        <button className='image-scroll-item-button' onClick={deleteImage}>
-          <i className='fas fa-trash'></i>
+        <button
+          className='image-scroll-item-button delete'
+          onClick={deleteImage}
+        >
+          <i className='fas fa-trash'> X </i>
         </button>
       </div>
     </PhotoScrollerEditingItemStyled>
