@@ -47,6 +47,10 @@ function PhotoScrollerComp({
   const [keys, setKeys] = useState(component.keys);
 
   useEffect(() => {
+    if (!!component) setKeys(component.keys);
+  }, [component.keys]);
+
+  useEffect(() => {
     if (component.keys.length === 0) {
       handleEdit(true);
     }
@@ -127,9 +131,10 @@ function PhotoScrollerComp({
 
   const deleteSingleImage = function (imageIndex) {
     // delete at '/image_scroller_components/image' with key in query
+    console.log('deleteSingleImage called: ', imageIndex);
     axios
       .delete(
-        `/image_scroller_components/image?post_id=${post._id}&component_id=${component._id}&key=${component.keys[index]}`
+        `/image_scroller_components/image?post_id=${postId}&component_id=${component._id}&key=${component.keys[index]}`
       )
       .then((res) => {
         console.log(res.data);
