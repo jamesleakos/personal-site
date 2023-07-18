@@ -7,7 +7,6 @@ export const PhotoScrollerEditingItemStyled = styled.div`
   text-align: left;
   position: relative;
 
-
   .image-scroll-item-button.left {
     position: absolute;
     left: 0;
