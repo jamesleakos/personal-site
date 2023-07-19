@@ -31,6 +31,10 @@ export const PhotoScrollerCompStyled = styled.div`
     height: 300px;
   }
 
+  .not-editing .image-scroller img {
+    height: 500px;
+  }
+
   .editing {
     display: inline-block;
     width: 90%;
