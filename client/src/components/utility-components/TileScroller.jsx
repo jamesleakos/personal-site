@@ -21,6 +21,16 @@ function TileScroller({ Mapper, MapArray }) {
   const [timer, setTimer] = useState(null);
   // preventing vertical scrolling
   const [scrollingHor, setScrollingHor] = useState(false);
+  useEffect(() => {
+    console.log('scrollingHor', scrollingHor);
+    if (scrollingHor) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = null;
+      document.documentElement.style.overflow = null;
+    }
+  }, [scrollingHor]);
 
   // for text
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -89,6 +99,8 @@ function TileScroller({ Mapper, MapArray }) {
       setScrollingHor(true);
     } else {
       setScrollingHor(false);
+      handleTouchEnd();
+      return;
     }
     wrapper.scrollLeft -= deltaX;
     setVelX(deltaX);
