@@ -96,11 +96,11 @@ function PostBuilder() {
     switch (componentName) {
       case 'main-title':
         comp.text = post.title || '';
-        comp.margin_bottom = false;
+        comp.margin_bottom = true;
         break;
       case 'subtitle':
         comp.text = post.description || '';
-        comp.margin_bottom = false;
+        comp.margin_bottom = true;
         break;
       case 'section-title':
       case 'body-text':
