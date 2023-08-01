@@ -12,7 +12,12 @@ import { ImageMapper } from '../utility-components/ImageScrollItem.jsx';
 function PhotoScrollerComp({ component }) {
   return (
     <PhotoScrollerCompStyled className='photo-scroller-comp'>
-      <ImageScroller imageURLArray={component.keys} ImageMapper={ImageMapper} />
+      <div className={'holder' + (isMobile ? ' mobile' : '')}>
+        <ImageScroller
+          imageURLArray={component.keys}
+          ImageMapper={ImageMapper}
+        />
+      </div>
     </PhotoScrollerCompStyled>
   );
 }
