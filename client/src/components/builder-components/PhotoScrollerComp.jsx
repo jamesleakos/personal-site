@@ -99,15 +99,21 @@ function PhotoScrollerComp({
   };
 
   const handleUpload = (e) => {
-    const file = e.target.files[0];
+    const files = Array.from(e.target.files);
 
-    if (!validFileTypes.find((type) => type === file.type)) {
-      setError('File must be JPG/PNG');
+    // Check if all files are valid
+    if (!files.every((file) => validFileTypes.includes(file.type))) {
+      setError('All files must be JPG/PNG');
       return;
     }
 
+    // Prepare FormData
     const form = new FormData();
-    form.append('image', file);
+    files.forEach((file, index) => {
+      form.append(`image`, file);
+    });
+
+    console.log('form: ', form);
 
     setIsLoading(true);
 
@@ -119,7 +125,7 @@ function PhotoScrollerComp({
       .then((response) => {
         console.log('handleUpload response: ', response);
         setIsLoading(false);
-        component.keys.push(response.data.key);
+        response.data.keys.forEach((key) => component.keys.push(key));
         modifyComponentByIndex(component, index);
       })
       .catch((err) => {
@@ -239,6 +245,7 @@ function PhotoScrollerComp({
             <input
               id={isLoading ? 'image-input is-loading' : 'image-input'}
               type='file'
+              multiple
               onChange={handleUpload}
             />
             {error && <p className='error-text'>{error}</p>}

@@ -1,22 +1,30 @@
 const { Post, ImageScrollerComponent, ImageComponent } = require('../../db/models/Post.js');
 const s3 = require('../s3.js');
 
-exports.uploadImageForScroller = (req, res) => {
+exports.uploadImagesForScroller = async (req, res) => {
   const post_id = req.query.post_id;
 
-  const { file } = req;
+  const { files } = req;
 
-  if (!file || !post_id) return res.sendStatus(400);
+  if (!files || !post_id) return res.sendStatus(400);
 
   // this is where the magic happens
-  s3.uploadToS3({ file, post_id })
-    .then(back => {
-      return res.status(201).json({ key: back.key });
-    })
-    .catch(err => {
-      console.log('error is: ' + err);
-      return res.status(500).json({ message: err.message });
+  try {
+    const uploadPromises = files.map(file => {
+      return s3.uploadToS3({ file, post_id });
     });
+
+    const uploadResponses = await Promise.all(uploadPromises);
+
+    // Get keys from responses
+    const keys = uploadResponses.map(response => response.key);
+
+    return res.status(201).json({ keys });
+
+  } catch (err) {
+    console.log('error is: ' + err);
+    return res.status(500).json({ message: err.message });
+  }
 };
 
 // we don't need this because the one in images.js works with images for scrollers as well

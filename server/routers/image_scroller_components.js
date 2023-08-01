@@ -23,10 +23,10 @@ const router = express.Router();
 const postController = require('../controllers/post.js');
 const imageScrollerController = require('../controllers/imageScrollers.js');
 
-router.post('/', upload.single('image'), function (req, res) {
+router.post('/', upload.array('image'), function (req, res) {
   if (!req.user) return;
   if (req.user.toJSON().role !== 'admin') return;
-  imageScrollerController.uploadImageForScroller(req, res);
+  imageScrollerController.uploadImagesForScroller(req, res);
 });
 
 router.put('/', function (req, res) {
