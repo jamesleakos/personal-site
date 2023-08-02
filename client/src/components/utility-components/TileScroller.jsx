@@ -21,16 +21,17 @@ function TileScroller({ Mapper, MapArray }) {
   const [timer, setTimer] = useState(null);
   // preventing vertical scrolling
   const [scrollingHor, setScrollingHor] = useState(false);
-  useEffect(() => {
-    console.log('scrollingHor', scrollingHor);
-    if (scrollingHor) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = null;
-      document.documentElement.style.overflow = null;
-    }
-  }, [scrollingHor]);
+
+  // useEffect(() => {
+  //   console.log('scrollingHor', scrollingHor);
+  //   if (scrollingHor) {
+  //     document.body.style.overflowY = 'hidden';
+  //     document.documentElement.style.overflowY = 'hidden';
+  //   } else {
+  //     document.body.style.overflowY = null;
+  //     document.documentElement.style.overflowY = null;
+  //   }
+  // }, [scrollingHor]);
 
   // for text
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -95,15 +96,16 @@ function TileScroller({ Mapper, MapArray }) {
     const wrapper = wrapperRef.current;
     const deltaX = event.touches[0].clientX - startX;
     const deltaY = event.touches[0].clientY - startY;
+
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
       setScrollingHor(true);
+      wrapper.scrollLeft -= deltaX;
+      setVelX(deltaX);
     } else {
       setScrollingHor(false);
       handleTouchEnd();
-      return;
     }
-    wrapper.scrollLeft -= deltaX;
-    setVelX(deltaX);
+
     setStartX(event.touches[0].clientX);
     setStartY(event.touches[0].clientY);
     setMouseMoved(true);
