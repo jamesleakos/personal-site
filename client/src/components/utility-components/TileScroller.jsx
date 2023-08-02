@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 // css
 import { TileScrollerStyled } from './styles/TileScroller.styled.js';
@@ -22,16 +23,9 @@ function TileScroller({ Mapper, MapArray }) {
   // preventing vertical scrolling
   const [scrollingHor, setScrollingHor] = useState(false);
 
-  // useEffect(() => {
-  //   console.log('scrollingHor', scrollingHor);
-  //   if (scrollingHor) {
-  //     document.body.style.overflowY = 'hidden';
-  //     document.documentElement.style.overflowY = 'hidden';
-  //   } else {
-  //     document.body.style.overflowY = null;
-  //     document.documentElement.style.overflowY = null;
-  //   }
-  // }, [scrollingHor]);
+  useEffect(() => {
+    scrollingHor ? disableBodyScroll(document) : enableBodyScroll(document);
+  }, [scrollingHor]);
 
   // for text
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
