@@ -23,10 +23,6 @@ function TileScroller({ Mapper, MapArray }) {
   // preventing vertical scrolling
   const [scrollingHor, setScrollingHor] = useState(false);
 
-  useEffect(() => {
-    scrollingHor ? disableBodyScroll(document) : enableBodyScroll(document);
-  }, [scrollingHor]);
-
   // for text
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [showText, setShowText] = useState(false);
