@@ -15,10 +15,6 @@ export const PhotoScrollerCompStyled = styled.div`
   }
 
   .holder.mobile {
-    padding: 0 10px;
-  }
-
-  .mobile .image img {
-    height: 250px;
+    padding: 0;
   }
 `;

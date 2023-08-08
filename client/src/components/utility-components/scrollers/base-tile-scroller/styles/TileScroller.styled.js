@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import '../../styles/constants.css';
+import '../../../../styles/constants.css';
 
 export const TileScrollerStyled = styled.div`
   --post-list-margin: 20px;

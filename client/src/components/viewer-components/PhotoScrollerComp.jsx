@@ -6,17 +6,22 @@ import { isMobile } from 'react-device-detect';
 // css
 import { PhotoScrollerCompStyled } from './styles/PhotoScrollerComp.styled.js';
 // comps
-import ImageScroller from '../utility-components/ImageScroller.jsx';
-import { ImageMapper } from '../utility-components/ImageScrollItem.jsx';
+import ImageScroller from '../utility-components/scrollers/desktop-image-scroller/ImageScroller.jsx';
+import { ImageMapper } from '../utility-components/scrollers/desktop-image-scroller/ImageScrollItem.jsx';
+import MobileImageScroller from '../utility-components/scrollers/mobile-image-scroller/MobileImageScroller.jsx';
 
-function PhotoScrollerComp({ component }) {
+function PhotoScrollerComp({ component, handlePreventScrolling }) {
   return (
     <PhotoScrollerCompStyled className='photo-scroller-comp'>
       <div className={'holder' + (isMobile ? ' mobile' : '')}>
-        <ImageScroller
-          imageURLArray={component.keys}
-          ImageMapper={ImageMapper}
-        />
+        {!isMobile ? (
+          <ImageScroller
+            imageURLArray={component.keys}
+            ImageMapper={ImageMapper}
+          />
+        ) : (
+          <MobileImageScroller imageURLArray={component.keys} />
+        )}
       </div>
     </PhotoScrollerCompStyled>
   );

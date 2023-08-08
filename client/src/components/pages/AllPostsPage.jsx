@@ -10,8 +10,8 @@ import './styles/AllPostsPage.css';
 import Footer from '../main-components/Footer.jsx';
 import Navbar from '../main-components/Navbar.jsx';
 import PostList from '../main-components/PostList.jsx';
-import ImageScroller from '../utility-components/ImageScroller.jsx';
-import { ImageMapper } from '../utility-components/ImageScrollItem.jsx';
+import ImageScroller from '../utility-components/scrollers/desktop-image-scroller/ImageScroller.jsx';
+import { ImageMapper } from '../utility-components/scrollers/desktop-image-scroller/ImageScrollItem.jsx';
 import BackgroundImage from '../main-components/BackgroundImage.jsx';
 import InlineImage from '../main-components/InlineImage.jsx';
 

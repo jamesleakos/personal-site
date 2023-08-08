@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import '../../styles/constants.css';
+import '../../../../styles/constants.css';
 
 export const ImageScrollItemStyled = styled.div`
   padding: 0 10px 0 0;

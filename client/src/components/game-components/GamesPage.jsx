@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Footer from '../main-components/Footer.jsx';
 import Navbar from '../main-components/Navbar.jsx';
 import BackgroundImage from '../main-components/BackgroundImage.jsx';
-import TileScroller from '../utility-components/TileScroller.jsx';
+import TileScroller from '../utility-components/scrollers/base-tile-scroller/TileScroller.jsx';
 import WorkTile from '../work-components/WorkTile.jsx';
 
 // styles

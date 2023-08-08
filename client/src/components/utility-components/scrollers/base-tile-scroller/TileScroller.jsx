@@ -3,10 +3,11 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 // css
 import { TileScrollerStyled } from './styles/TileScroller.styled.js';
+import { set } from 'date-fns';
 
 // Mapper is a required argument, as it is the function called to output the components
 // MapArray is an optional argument to Mapper that can influence the output of the Mapper function
-function TileScroller({ Mapper, MapArray }) {
+function TileScroller({ Mapper, MapArray, handlePreventScrolling }) {
   // drag to scroll and text near cursor (all is for drag unless specified)
   // for drag
   const wrapperRef = useRef(null); // this is used by both
@@ -15,13 +16,14 @@ function TileScroller({ Mapper, MapArray }) {
   const [velX, setVelX] = useState(0);
   const requestRef = useRef();
   const [mouseDown, setMouseIsDown] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
   // for long press tracking
   const [mouseMoved, setMouseMoved] = useState(false);
   const [longPress, setLongPress] = useState(false);
   const [timer, setTimer] = useState(null);
   // preventing vertical scrolling
-  const [scrollingHor, setScrollingHor] = useState(false);
+  const [scrollAxis, setScrollAxis] = useState(null);
+
+  useEffect(() => {}, [scrollAxis]);
 
   // for text
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -82,20 +84,24 @@ function TileScroller({ Mapper, MapArray }) {
 
   const handleTouchMove = (event) => {
     // Same logic as handleMouseMove
+
     if (!mouseDown) return;
+    if (scrollAxis === 'y') return;
+
     const wrapper = wrapperRef.current;
     const deltaX = event.touches[0].clientX - startX;
     const deltaY = event.touches[0].clientY - startY;
 
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      setScrollingHor(true);
-      wrapper.scrollLeft -= deltaX;
-      setVelX(deltaX);
-    } else {
-      setScrollingHor(false);
-      handleTouchEnd();
+    if (!scrollAxis) {
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        setScrollAxis('x');
+      } else {
+        setScrollAxis('y');
+      }
     }
 
+    wrapper.scrollLeft -= deltaX;
+    setVelX(deltaX);
     setStartX(event.touches[0].clientX);
     setStartY(event.touches[0].clientY);
     setMouseMoved(true);
@@ -112,7 +118,7 @@ function TileScroller({ Mapper, MapArray }) {
     beginMomentumTracking();
     clearTimeout(timer);
     setLongPress(false);
-    setScrollingHor(false);
+    setScrollAxis(null);
   };
 
   const handleMouseEnter = () => {
@@ -126,6 +132,16 @@ function TileScroller({ Mapper, MapArray }) {
     setShowText(false);
     clearTimeout(timer);
     setLongPress(false);
+  };
+
+  const handleTouchLeave = () => {
+    // if the mouse leaves we also want to stop drag tracking
+    setMouseIsDown(false);
+    // and we want to stop showing text
+    setShowText(false);
+    clearTimeout(timer);
+    setLongPress(false);
+    setScrollAxis(null);
   };
 
   function beginMomentumTracking() {
@@ -149,10 +165,7 @@ function TileScroller({ Mapper, MapArray }) {
   }, [velX]);
 
   return (
-    <TileScrollerStyled
-      style={scrollingHor ? { overflowY: 'hidden' } : {}}
-      className='tile-scroller'
-    >
+    <TileScrollerStyled className='tile-scroller'>
       <div
         className='scroll-wrapper'
         ref={wrapperRef}
@@ -164,6 +177,7 @@ function TileScroller({ Mapper, MapArray }) {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchLeave}
       >
         <div className='scroller'>{memoizedMapper}</div>
       </div>

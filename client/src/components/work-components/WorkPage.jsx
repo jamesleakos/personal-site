@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 // comps
 import Footer from '../main-components/Footer.jsx';
 import Navbar from '../main-components/Navbar.jsx';
-import TileScroller from '../utility-components/TileScroller.jsx';
+import TileScroller from '../utility-components/scrollers/base-tile-scroller/TileScroller.jsx';
 import WorkTile from './WorkTile.jsx';
 
 // styles
@@ -12,17 +12,19 @@ import { WorkPageStyled } from './styles/WorkPage.styled.js';
 
 function WorkPage() {
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   const projectMapper = () => {
     const projects = [
       {
         title: 'Legends of Leakos',
-        description: 'Multiplayer card game in the style of Hearthstone and Magic: the Gathering',
+        description:
+          'Multiplayer card game in the style of Hearthstone and Magic: the Gathering',
         url: 'https://legendsofleakos.com',
         tags: ['TypeScript', 'React', 'Express', 'NoSQL', 'AWS'],
-        image_url: 'https://ik.imagekit.io/hfywj4j0a/LoL/canyon_city_N6bb4PTK3.png',
+        image_url:
+          'https://ik.imagekit.io/hfywj4j0a/LoL/canyon_city_N6bb4PTK3.png',
       },
       {
         title: 'Artemis: God-Queen of the Hunt',
@@ -36,53 +38,89 @@ function WorkPage() {
         description: 'Online Strategy Card Game',
         url: 'http://playsystemseven.com/',
         tags: ['Websockets', 'Node.js / Express.js', 'React', 'MongoDB', 'AWS'],
-        image_url: 'https://ik.imagekit.io/hfywj4j0a/HOSS_Images/council_2_-xtCInoWU.png',
+        image_url:
+          'https://ik.imagekit.io/hfywj4j0a/HOSS_Images/council_2_-xtCInoWU.png',
       },
-    ]
+    ];
 
     return projects.map((project, index) => {
-      return (
-        <WorkTile
-          key={project.title + index + ''}
-          project={project}
-        />
-      );
+      return <WorkTile key={project.title + index + ''} project={project} />;
     });
   };
-  
+
   return (
     <WorkPageStyled>
       <Navbar />
       <div className='main-content'>
         <div className='about-me work-section'>
-          <div className='section-content'>          
-            <p className='section-title' >About My Work</p>
-            <p className='description' >Hi, I'm James! I've worked as a software engineer since I stopped running professionally in 2015. Most of my professional experience has been pretty analytics foward - I started as a quant at a hedge fund - but more recently I've been into making games and experimenting with AI agents.</p>
+          <div className='section-content'>
+            <p className='section-title'>About My Work</p>
+            <p className='description'>
+              Hi, I'm James! I've worked as a software engineer since I stopped
+              running professionally in 2015. Most of my professional experience
+              has been pretty analytics foward - I started as a quant at a hedge
+              fund - but more recently I've been into making games and
+              experimenting with AI agents.
+            </p>
           </div>
         </div>
         <div className='projects'>
-          <div className='projects-section'>          
-            <p className='section-title' >What I've Built</p>
-            <TileScroller Mapper={projectMapper}/>
+          <div className='projects-section'>
+            <p className='section-title'>What I've Built</p>
+            <TileScroller Mapper={projectMapper} />
           </div>
         </div>
         <div className='current-work work-section'>
-          <div className='section-content'>          
-            <p className='section-title' >Current</p>
-            <p className='description' >After the release of my first title <a href="https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/">Artemis</a>, I began working tinkering with my next idea, a multiplayer card game in the style of <a href="https://hearthstone.blizzard.com/en-us">Hearthstone</a> and <a href="https://magic.wizards.com/en">Magic: the Gathering</a>. In April of 2022, I left my job at Tracksmith and have been working in earnest on <a href="https://legendsofleakos.com">Legends of Leakos</a> and doing contract dev work.</p>
+          <div className='section-content'>
+            <p className='section-title'>Current</p>
+            <p className='description'>
+              After the release of my first title{' '}
+              <a href='https://store.steampowered.com/app/1081850/Artemis_GodQueen_of_The_Hunt/'>
+                Artemis
+              </a>
+              , I began working tinkering with my next idea, a multiplayer card
+              game in the style of{' '}
+              <a href='https://hearthstone.blizzard.com/en-us'>Hearthstone</a>{' '}
+              and{' '}
+              <a href='https://magic.wizards.com/en'>Magic: the Gathering</a>.
+              In April of 2022, I left my job at Tracksmith and have been
+              working in earnest on{' '}
+              <a href='https://legendsofleakos.com'>Legends of Leakos</a> and
+              doing contract dev work.
+            </p>
           </div>
         </div>
         <div className='past-work work-section'>
-          <div className='section-content'>          
-            <p className='section-title' >Past Work</p>
-            <p className='description' >After a short career as a professional runner post-college, my first “real job” was as a developer and analyst at FDO Partners, a quantitative hedge fund in Cambridge, MA. I was responsible for writing software (a lot of Monte Carlo simulations!) to model fund performance, optimize cash management and distributions to investors, manage risk, and determine purchasing strategy. I also worked on a number of projects to improve the firm’s data infrastructure, including a data warehouse and a data visualization tool.</p><br />
-            <p>I left FDO to join Tracksmith, again as a developer and analyst, and rose to become Director of Analytics and Business Intelligence. I was responsible for the company’s data science and data infrastructure. I wrote custom ingestion pipelines for disparate data sources (inc Shopify, Google Analytics, Returnly) to centralize record-keeping for 100,000+ customers. I built and left them with custom analytics that lead materials / inventory purchasing strategy each quarter.</p>
+          <div className='section-content'>
+            <p className='section-title'>Past Work</p>
+            <p className='description'>
+              After a short career as a professional runner post-college, my
+              first “real job” was as a developer and analyst at FDO Partners, a
+              quantitative hedge fund in Cambridge, MA. I was responsible for
+              writing software (a lot of Monte Carlo simulations!) to model fund
+              performance, optimize cash management and distributions to
+              investors, manage risk, and determine purchasing strategy. I also
+              worked on a number of projects to improve the firm’s data
+              infrastructure, including a data warehouse and a data
+              visualization tool.
+            </p>
+            <br />
+            <p>
+              I left FDO to join Tracksmith, again as a developer and analyst,
+              and rose to become Director of Analytics and Business
+              Intelligence. I was responsible for the company’s data science and
+              data infrastructure. I wrote custom ingestion pipelines for
+              disparate data sources (inc Shopify, Google Analytics, Returnly)
+              to centralize record-keeping for 100,000+ customers. I built and
+              left them with custom analytics that lead materials / inventory
+              purchasing strategy each quarter.
+            </p>
           </div>
         </div>
       </div>
       <Footer />
     </WorkPageStyled>
-  )
+  );
 }
 
 export default WorkPage;

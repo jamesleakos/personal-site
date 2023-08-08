@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //imports
 import { PhotoScrollerCompStyled } from './styles/PhotoScrollerComp.styled.js';
-import ImageScroller from '../utility-components/ImageScroller.jsx';
-import { ImageMapper } from '../utility-components/ImageScrollItem.jsx';
+import ImageScroller from '../utility-components/scrollers/desktop-image-scroller/ImageScroller.jsx';
+import { ImageMapper } from '../utility-components/scrollers/desktop-image-scroller/ImageScrollItem.jsx';
 import { ImageMapper as EditingMapper } from './PhotoScrollerEditingItem.jsx';
 
 //

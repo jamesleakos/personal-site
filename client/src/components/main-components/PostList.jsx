@@ -7,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 // comps
 import PostTile from './PostTile.jsx';
 import PostSpan from './PostSpan.jsx';
-import TileScroller from '../utility-components/TileScroller.jsx';
+import TileScroller from '../utility-components/scrollers/base-tile-scroller/TileScroller.jsx';
 // css
 import './styles/PostList.css';
 

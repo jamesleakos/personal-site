@@ -6,8 +6,8 @@ import { isMobile } from 'react-device-detect';
 import { ImageScrollerStyled } from './styles/ImageScroller.styled.js';
 
 // comps
-import TileScroller from './TileScroller.jsx';
-import UnderlinedTitle from './UnderlinedTitle.jsx';
+import TileScroller from '../base-tile-scroller/TileScroller.jsx';
+import UnderlinedTitle from '../../UnderlinedTitle.jsx';
 
 function ImageScroller({ title, imageURLArray, ImageMapper }) {
   const [urlArray, setUrlArray] = useState(imageURLArray);
