@@ -52,6 +52,12 @@ import {
   faBars,
   faArrowsDownToLine,
   faArrowsUpToLine,
+  faCaretRight,
+  faCaretLeft,
+  faForward,
+  faBackward,
+  faAngleRight,
+  faAngleLeft,
 } from '@fortawesome/free-solid-svg-icons';
 // import { farBook } from '@fortawesome/free-regular-svg-icons';
 
@@ -74,7 +80,13 @@ library.add(
   faArrowDown,
   faArrowsDownToLine,
   faArrowsUpToLine,
-  faBars
+  faBars,
+  faCaretRight,
+  faCaretLeft,
+  faForward,
+  faBackward,
+  faAngleRight,
+  faAngleLeft
 );
 //#endregion
 

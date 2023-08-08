@@ -1,5 +1,6 @@
 // dependancies
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // imports
 import { MobileImageScrollerStyled } from './styles/MobileImageScroller.styled.js';
@@ -58,13 +59,17 @@ function MobileImageScroller({ title, imageURLArray }) {
       {/* left arrow */}
       {imageIndex > 0 && (
         <button onClick={prevImage} className='carousel-arrow left-arrow'>
-          &lt;
+          {/* <FontAwesomeIcon icon='fa-solid fa-backward' /> */}
+          <FontAwesomeIcon icon='fa-solid fa-angle-left' />
+          {/* <FontAwesomeIcon icon='fa-solid fa-caret-left' /> */}{' '}
         </button>
       )}
       {/* right arrow */}
       {imageIndex < imageURLArray.length - 1 && (
         <button onClick={nextImage} className='carousel-arrow right-arrow'>
-          &gt;
+          {/* <FontAwesomeIcon icon='fa-solid fa-forward' /> */}
+          <FontAwesomeIcon icon='fa-solid fa-angle-right' />
+          {/* <FontAwesomeIcon icon='fa-solid fa-caret-right' /> */}
         </button>
       )}
     </MobileImageScrollerStyled>
