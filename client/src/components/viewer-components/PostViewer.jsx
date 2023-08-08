@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { isMobile } from 'react-device-detect';
 
 // components
 import Navbar from '../main-components/Navbar.jsx';
@@ -17,6 +18,28 @@ import { PostViewerStyled } from './styles/PostViewer.styled.js';
 function PostViewer() {
   const passedPostID = useLoaderData();
   const [preventScrolling, setPreventScrolling] = useState(false);
+
+  // landscape for mobile
+  const [isLandscapeMode, setIsLandscapeMode] = useState(isLandscape());
+  function isLandscape() {
+    return window.innerWidth > window.innerHeight;
+  }
+
+  useEffect(() => {
+    // we don't care if not on mobile
+    if (!isMobile) return;
+
+    function handleResize() {
+      setIsLandscapeMode(isLandscape());
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   // prevent scrolling
   const handlePreventScrolling = (set) => {
@@ -53,7 +76,7 @@ function PostViewer() {
       className='post-viewer'
       style={post.isDark ? { backgroundColor: 'black', color: 'white' } : null}
     >
-      <Navbar />
+      {!(isMobile && isLandscapeMode) && <Navbar />}
       <div
         className={'scroll-container' + (preventScrolling ? ' is-locked' : '')}
       >

@@ -13,7 +13,6 @@ export const MobileImageScrollerStyled = styled.div`
     display: flex;
     align-items: center; /* Centers children vertically */
     justify-content: center; /* Centers children horizontally */
-    padding: 0 10px;
   }
 
   .image-holder {
@@ -23,6 +22,7 @@ export const MobileImageScrollerStyled = styled.div`
     justify-content: center;
     height: 250px;
     overflow: hidden;
+    padding: 0 10px;
   }
 
   img {
@@ -43,7 +43,7 @@ export const MobileImageScrollerStyled = styled.div`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 4rem; /* Large size for the arrows */
+    font-size: 3rem; /* Large size for the arrows */
     color: red;
     border: none;
     padding: 0;
