@@ -53,20 +53,20 @@ function MobileImageScroller({ title, imageURLArray }) {
             )}
           </div>
         }
-        {/* arrows */}
-        {/* left arrow */}
-        {imageIndex > 0 && (
-          <button onClick={prevImage} className='carousel-arrow left-arrow'>
-            &lt;
-          </button>
-        )}
-        {/* right arrow */}
-        {imageIndex < imageURLArray.length - 1 && (
-          <button onClick={nextImage} className='carousel-arrow right-arrow'>
-            &gt;
-          </button>
-        )}
       </div>
+      {/* arrows */}
+      {/* left arrow */}
+      {imageIndex > 0 && (
+        <button onClick={prevImage} className='carousel-arrow left-arrow'>
+          &lt;
+        </button>
+      )}
+      {/* right arrow */}
+      {imageIndex < imageURLArray.length - 1 && (
+        <button onClick={nextImage} className='carousel-arrow right-arrow'>
+          &gt;
+        </button>
+      )}
     </MobileImageScrollerStyled>
   );
 }

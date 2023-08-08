@@ -13,6 +13,7 @@ export const MobileImageScrollerStyled = styled.div`
     display: flex;
     align-items: center; /* Centers children vertically */
     justify-content: center; /* Centers children horizontally */
+    padding: 0 10px;
   }
 
   .image-holder {
@@ -22,7 +23,6 @@ export const MobileImageScrollerStyled = styled.div`
     justify-content: center;
     height: 250px;
     overflow: hidden;
-    padding: 0 10px;
   }
 
   img {
