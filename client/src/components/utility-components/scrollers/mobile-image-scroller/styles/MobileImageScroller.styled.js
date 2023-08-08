@@ -34,11 +34,16 @@ export const MobileImageScrollerStyled = styled.div`
     height: 100%;
   }
 
+  img.loading {
+    filter: grayscale(0.5); /* Grey out the image */
+    opacity: 0.5; /* Make it semi-transparent */
+  }
+
   .carousel-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 2rem; /* Large size for the arrows */
+    font-size: 4rem; /* Large size for the arrows */
     color: red;
     border: none;
     padding: 0;

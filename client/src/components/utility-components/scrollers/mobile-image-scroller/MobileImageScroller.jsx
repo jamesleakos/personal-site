@@ -9,8 +9,10 @@ import UnderlinedTitle from '../../UnderlinedTitle.jsx';
 
 function MobileImageScroller({ title, imageURLArray }) {
   const [imageIndex, setImageIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const prevImage = () => {
+    setIsLoading(true);
     if (imageIndex <= 0) {
       // setImageIndex(imageURLArray.length - 1);
       return;
@@ -20,12 +22,18 @@ function MobileImageScroller({ title, imageURLArray }) {
   };
 
   const nextImage = () => {
+    setIsLoading(true);
     if (imageIndex >= imageURLArray.length - 1) {
       // setImageIndex(0);
       return;
     } else {
       setImageIndex(imageIndex + 1);
     }
+  };
+
+  // Image's onLoad event
+  const handleImageLoad = () => {
+    setIsLoading(false);
   };
 
   return (
@@ -39,6 +47,8 @@ function MobileImageScroller({ title, imageURLArray }) {
               <img
                 src={`https://ik.imagekit.io/hfywj4j0a/tr:w-2500/${imageURLArray[imageIndex]}`}
                 alt='Carousel item'
+                onLoad={handleImageLoad}
+                className={isLoading ? 'loading' : ''}
               />
             )}
           </div>
