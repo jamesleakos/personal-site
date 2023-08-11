@@ -8,6 +8,7 @@ import { set } from 'date-fns';
 // Mapper is a required argument, as it is the function called to output the components
 // MapArray is an optional argument to Mapper that can influence the output of the Mapper function
 function TileScroller({ Mapper, MapArray, handlePreventScrolling }) {
+  // #region mouse, scroll, momentum, and text state
   // drag to scroll and text near cursor (all is for drag unless specified)
   // for drag
   const wrapperRef = useRef(null); // this is used by both
@@ -163,11 +164,42 @@ function TileScroller({ Mapper, MapArray, handlePreventScrolling }) {
       requestRef.current = requestAnimationFrame(momentumLoop);
     }
   }, [velX]);
+  // #endregion
+
+  // #region centering scroller if smaller than width
+
+  const [centerScroller, setCenterScroller] = useState(false);
+
+  useEffect(() => {
+    const checkOverflow = () => {
+      const wrapper = wrapperRef.current;
+      if (wrapper) {
+        if (!(wrapper.scrollWidth > wrapper.clientWidth)) {
+          setCenterScroller(true);
+        } else {
+          setCenterScroller(false);
+        }
+      }
+    };
+
+    // Initial check
+    checkOverflow();
+
+    // Set up event listener
+    window.addEventListener('resize', checkOverflow);
+
+    // Clean up
+    return () => {
+      window.removeEventListener('resize', checkOverflow);
+    };
+  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
+
+  // #endregion
 
   return (
     <TileScrollerStyled className='tile-scroller'>
       <div
-        className='scroll-wrapper'
+        className={'scroll-wrapper' + (centerScroller ? ' center' : '')}
         ref={wrapperRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}

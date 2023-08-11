@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import '../../../../styles/constants.css';
 
 export const ImageScrollerStyled = styled.div`
+
   .image-modal {
     position: fixed;
     top: 0;

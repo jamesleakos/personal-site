@@ -17,6 +17,10 @@ export const TileScrollerStyled = styled.div`
     overflow: hidden;
   }
 
+  .scroll-wrapper.center {
+    justify-content: center;
+  }
+
   .scroller {
     display: flex;
   }
