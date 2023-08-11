@@ -7,7 +7,12 @@ import { set } from 'date-fns';
 
 // Mapper is a required argument, as it is the function called to output the components
 // MapArray is an optional argument to Mapper that can influence the output of the Mapper function
-function TileScroller({ Mapper, MapArray, handlePreventScrolling }) {
+function TileScroller({ Mapper, MapArray }) {
+  // memoize the mapper
+  const memoizedMapper = useMemo(() => {
+    return Mapper(MapArray);
+  }, [MapArray]);
+
   // #region mouse, scroll, momentum, and text state
   // drag to scroll and text near cursor (all is for drag unless specified)
   // for drag
@@ -33,11 +38,6 @@ function TileScroller({ Mapper, MapArray, handlePreventScrolling }) {
 
   const dragOffSetX = -50;
   const dragOffSetY = -30;
-
-  // memoize the mapper
-  const memoizedMapper = useMemo(() => {
-    return Mapper(MapArray);
-  }, [MapArray]);
 
   // functions
 
@@ -166,40 +166,10 @@ function TileScroller({ Mapper, MapArray, handlePreventScrolling }) {
   }, [velX]);
   // #endregion
 
-  // #region centering scroller if smaller than width
-
-  const [centerScroller, setCenterScroller] = useState(false);
-
-  useEffect(() => {
-    const checkOverflow = () => {
-      const wrapper = wrapperRef.current;
-      if (wrapper) {
-        if (!(wrapper.scrollWidth > wrapper.clientWidth)) {
-          setCenterScroller(true);
-        } else {
-          setCenterScroller(false);
-        }
-      }
-    };
-
-    // Initial check
-    checkOverflow();
-
-    // Set up event listener
-    window.addEventListener('resize', checkOverflow);
-
-    // Clean up
-    return () => {
-      window.removeEventListener('resize', checkOverflow);
-    };
-  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
-
-  // #endregion
-
   return (
     <TileScrollerStyled className='tile-scroller'>
       <div
-        className={'scroll-wrapper' + (centerScroller ? ' center' : '')}
+        className='scroll-wrapper'
         ref={wrapperRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}

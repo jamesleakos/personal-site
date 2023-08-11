@@ -14,6 +14,7 @@
   top: var(--nav-bar-height);
   display: grid;
   grid-template-columns: 30% 1fr 1fr 1fr 1fr 30%;
+  z-index: 99;
 }
 
 @media screen and (max-width: 1200px) {

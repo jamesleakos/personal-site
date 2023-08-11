@@ -4,7 +4,7 @@ import React from 'react';
 // imports
 import { ImageScrollItemStyled } from './styles/ImageScrollItem.styled.js';
 
-const ImageMapper = (urlArr, callback) => {
+const ImageMapper = (urlArr, callback, onImageLoad) => {
   return urlArr.map((url, index) => {
     return (
       <ImageScrollItem
@@ -13,12 +13,13 @@ const ImageMapper = (urlArr, callback) => {
         callback={() => {
           if (!!callback) callback(index);
         }}
+        onImageLoad={onImageLoad}
       />
     );
   });
 };
 
-function ImageScrollItem({ url, callback }) {
+function ImageScrollItem({ url, callback, onImageLoad }) {
   return (
     <ImageScrollItemStyled
       className='image-scroll-item'
@@ -30,6 +31,7 @@ function ImageScrollItem({ url, callback }) {
           src={`https://ik.imagekit.io/hfywj4j0a/tr:w-1000/${url}`}
           alt='tile image'
           draggable='false'
+          onLoad={onImageLoad}
         />
       </div>
     </ImageScrollItemStyled>

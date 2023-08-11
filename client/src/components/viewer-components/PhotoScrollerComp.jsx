@@ -10,7 +10,7 @@ import ImageScroller from '../utility-components/scrollers/desktop-image-scrolle
 import { ImageMapper } from '../utility-components/scrollers/desktop-image-scroller/ImageScrollItem.jsx';
 import MobileImageScroller from '../utility-components/scrollers/mobile-image-scroller/MobileImageScroller.jsx';
 
-function PhotoScrollerComp({ component, handlePreventScrolling }) {
+function PhotoScrollerComp({ component }) {
   return (
     <PhotoScrollerCompStyled className='photo-scroller-comp'>
       <div className={'holder' + (isMobile ? ' mobile' : '')}>

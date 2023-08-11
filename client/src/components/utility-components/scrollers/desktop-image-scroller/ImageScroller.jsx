@@ -1,5 +1,5 @@
 // dependancies
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
 // imports
@@ -11,6 +11,56 @@ import UnderlinedTitle from '../../UnderlinedTitle.jsx';
 
 function ImageScroller({ title, imageURLArray, ImageMapper }) {
   const [urlArray, setUrlArray] = useState(imageURLArray);
+
+  useEffect(() => {
+    setUrlArray(imageURLArray);
+  }, [imageURLArray]);
+  const [centerScroller, setCenterScroller] = useState(false);
+
+  // add wrapperRef
+  const wrapperRef = useRef(null);
+
+  // useEffect(() => {
+  //   // Function to check overflow
+  //   const checkOverflow = () => {
+  //     const wrapper = wrapperRef.current;
+  //     if (wrapper) {
+  //       if (wrapper.scrollWidth <= wrapper.clientWidth) {
+  //         setCenterScroller(true);
+  //       } else {
+  //         setCenterScroller(false);
+  //       }
+  //     }
+  //   };
+
+  //   // Initial check
+  //   checkOverflow();
+
+  //   // Set up event listener for window resize
+  //   const onResize = () => checkOverflow('resize check');
+  //   window.addEventListener('resize', onResize);
+
+  //   // Listen for all images to load
+  //   const images = wrapperRef.current?.querySelectorAll('img');
+  //   if (images) {
+  //     images.forEach((img) => {
+  //       img.addEventListener('load', () => checkOverflow());
+  //     });
+  //   }
+
+  //   // Clean up
+  //   return () => {
+  //     window.removeEventListener('resize', onResize);
+  //     if (images) {
+  //       images.forEach((img) => {
+  //         img.removeEventListener('load', () => checkOverflow());
+  //       });
+  //     }
+  //   };
+  // }, [imageURLArray]);
+  // #endregion
+
+  // #region image modal
   const [showModal, setShowModal] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
   const [scale, setScale] = useState(1);
@@ -19,11 +69,6 @@ function ImageScroller({ title, imageURLArray, ImageMapper }) {
   const [initialY, setInitialY] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const [currentY, setCurrentY] = useState(0);
-
-  useEffect(() => {
-    console.log('urlArray in imageScroller: ', urlArray);
-    setUrlArray(imageURLArray);
-  }, [imageURLArray]);
 
   useEffect(() => {
     setDragging(false);
@@ -47,6 +92,7 @@ function ImageScroller({ title, imageURLArray, ImageMapper }) {
     setImageIndex(index);
     setShowModal(true);
   };
+  // #endregion
 
   // #region zooming and panning
 
@@ -135,10 +181,12 @@ function ImageScroller({ title, imageURLArray, ImageMapper }) {
   return (
     <ImageScrollerStyled className='image-scroller'>
       {!!title ? <UnderlinedTitle title={title} /> : null}
-      <TileScroller
-        key={JSON.stringify(urlArray)}
-        Mapper={() => ImageMapper(urlArray, expandImage)}
-      />
+      <div className='image-scroller-wrapper'>
+        <TileScroller
+          key={JSON.stringify(urlArray)}
+          Mapper={() => ImageMapper(urlArray, expandImage)}
+        />
+      </div>
       {/* full screen image view modal */}
       {showModal && (
         <div

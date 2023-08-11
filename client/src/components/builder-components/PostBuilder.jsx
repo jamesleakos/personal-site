@@ -28,12 +28,9 @@ function PostBuilder() {
       .get('/auth/check-auth')
       .then((res) => {
         // if 200 response, do nothing
-        console.log('auth check successful');
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
-        console.log('auth check not successful');
         setIsLoggedIn(false);
       });
 
@@ -41,7 +38,6 @@ function PostBuilder() {
     axios
       .get(`/posts/${passedPostID}`)
       .then((res) => {
-        console.log(res.data);
         setPost(res.data);
       })
       .catch((err) => {
