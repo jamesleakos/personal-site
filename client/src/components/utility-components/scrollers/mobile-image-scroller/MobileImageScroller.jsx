@@ -12,6 +12,14 @@ function MobileImageScroller({ title, imageURLArray }) {
   const [imageIndex, setImageIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    // Preload all images
+    imageURLArray.forEach((img) => {
+      const newImage = new Image();
+      newImage.src = `https://ik.imagekit.io/hfywj4j0a/tr:w-2500/${img}`;
+    });
+  }, [imageURLArray]); // Only run this once when imageURLArray changes
+
   const prevImage = () => {
     setIsLoading(true);
     if (imageIndex <= 0) {
