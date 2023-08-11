@@ -28,6 +28,35 @@ function Posts() {
   return (
     <div className='posts'>
       <Navbar />
+      <InlineImage imageURL='Personal_Site/dad_waterfall_zermatt.JPG' />
+      {/* <div className={'wm-spreads' + (!!isMobile ? ' mobile' : '')}>
+        <ImageScroller
+          title='2023 Wolfmoor Magazine'
+          imageURLArray={Array.from(
+            { length: 64 },
+            (_, i) => `0_wolfmoor_spreads/2023/WolfmoorMag2023-${i + 1}.jpg`
+          )}
+          ImageMapper={ImageMapper}
+        />
+      </div> */}
+      <PostList
+        postFilters={{ published: true, featured: true, tags: 'WM 2023' }}
+        onTileClick={loadPostViewer}
+        showAddNew={false}
+        showSearch={true}
+        title='2023 Featured Posts'
+        useWindowOffset={false}
+        amTiled={true}
+      />
+      <PostList
+        postFilters={{ published: true, tags: 'WM 2023' }}
+        onTileClick={loadPostViewer}
+        showAddNew={false}
+        showSearch={true}
+        title='2023 All Posts'
+        useWindowOffset={false}
+        amTiled={false}
+      />
       <InlineImage imageURL='Personal_Site/skinning_cropped.jpg' />
       <div className={'wm-spreads' + (!!isMobile ? ' mobile' : '')}>
         <ImageScroller
