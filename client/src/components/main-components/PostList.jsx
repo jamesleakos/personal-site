@@ -19,6 +19,7 @@ function PostList({
   title,
   useWindowOffset,
   amTiled,
+  showPostsOldToNew,
 }) {
   //
   const [posts, setPosts] = useState([]);
@@ -75,7 +76,7 @@ function PostList({
       return returning;
     });
 
-    setShownPosts(newPosts.reverse());
+    setShownPosts(!!showPostsOldToNew ? newPosts : newPosts.reverse());
   }, [search, posts, tags, postFilters]);
 
   // what should we do when a tile is clicked

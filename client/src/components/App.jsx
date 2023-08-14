@@ -16,6 +16,7 @@ import WorkPage from './work-components/WorkPage.jsx';
 import GamesPage from './game-components/GamesPage.jsx';
 import PoetryPage from './poetry-components/PoetryPage.jsx';
 import PoemPage from './poetry-components/PoemPage.jsx';
+import SummerInEuropePage from './pages/SummerInEuropePage.jsx';
 import ContactPage from './contact-page/ContactPage.jsx';
 // different posts pages
 import AllPosts from './pages/AllPostsPage.jsx';
@@ -147,6 +148,10 @@ const router = createBrowserRouter([
     loader: async ({ params }) => {
       return params.post_id;
     },
+  },
+  {
+    path: '/post-viewer/64daafdfecde6bfa3f585cde',
+    element: <SummerInEuropePage />,
   },
   {
     path: '/sign-in-up',
