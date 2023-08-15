@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import axios from 'axios';
 
 // internal
 import './styles/AllPostsPage.css';

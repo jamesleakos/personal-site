@@ -1,6 +1,7 @@
 // dependencies
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
+import axios from 'axios';
 
 // comps
 import Footer from '../../main-components/Footer.jsx';

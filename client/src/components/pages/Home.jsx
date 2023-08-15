@@ -1,6 +1,7 @@
 // dependancies
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // compos
 import Title from '../main-components/Title.jsx';
@@ -9,7 +10,6 @@ import Navbar from '../main-components/Navbar.jsx';
 import PostList from '../main-components/PostList.jsx';
 import Info from '../main-components/Info.jsx';
 import BackgroundImage from '../main-components/BackgroundImage.jsx';
-import axios from 'axios';
 
 function Home() {
   useEffect(() => {
