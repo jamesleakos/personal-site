@@ -32,6 +32,10 @@ const VisitSchema = new Schema({
     type: String,
     required: false
   },
+  user_agent: {
+    type: String,
+    required: false
+  },
 });
 
 const Visit = mongoose.model('visits', VisitSchema);

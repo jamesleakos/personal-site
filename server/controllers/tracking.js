@@ -11,6 +11,7 @@ exports.track = async (req, res) => {
             ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress || null,
             sub_id: !!req.body.id ? req.body.id : null,
             sub_name: !!req.body.name ? req.body.name : null,
+            user_agent: req.headers['user-agent'] || null,
         };
 
         // If email is provided, find the user and link the visit to them
