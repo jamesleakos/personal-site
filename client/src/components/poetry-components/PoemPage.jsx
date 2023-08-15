@@ -19,6 +19,7 @@ function PoemPage() {
   const navigate = useNavigate();
   const passedPoemID = useLoaderData();
   const { isLoggedIn } = React.useContext(AuthContext);
+  const [poem, setPoem] = useState(null);
 
   const [modalOn, setModalOn] = useState(false);
   const [deleteModalOn, setDeleteModalOn] = useState(false);
@@ -31,7 +32,7 @@ function PoemPage() {
     if (!passedPoemID) return;
     if (!poem) return;
     axios
-      .get(`/page/poem`, {
+      .post(`/page/poem`, {
         id: passedPoemID,
         name: poem.title,
       })
@@ -41,7 +42,6 @@ function PoemPage() {
       .catch((err) => console.log(err));
   }, [passedPoemID, poem]);
 
-  const [poem, setPoem] = useState(null);
   useEffect(() => {
     axios
       .get(`/poems/${passedPoemID}`)

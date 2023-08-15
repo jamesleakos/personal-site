@@ -35,7 +35,7 @@ function Admin() {
 
   useEffect(() => {
     axios
-      .get(`/page/admin`)
+      .post(`/page/admin`)
       .then((res) => {
         console.log(res.data);
       })

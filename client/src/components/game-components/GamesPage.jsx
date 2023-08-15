@@ -20,7 +20,7 @@ function GamesPage({ isMobile }) {
 
   useEffect(() => {
     axios
-      .get('/page/games')
+      .post('/page/games')
       .then((res) => {
         console.log(res.data);
       })

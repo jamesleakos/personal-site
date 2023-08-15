@@ -14,7 +14,7 @@ function SignInUpPage() {
 
   useEffect(() => {
     axios
-      .get(`/page/sign-in-up`)
+      .post(`/page/sign-in-up`)
       .then((res) => {
         console.log(res.data);
       })

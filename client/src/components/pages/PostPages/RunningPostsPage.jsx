@@ -17,7 +17,7 @@ function RunningPostsPage({ isMobile }) {
   useEffect(() => {
     if (!passedTag) return;
     axios
-      .get(`/page/running-posts`)
+      .post(`/page/running-posts`)
       .then((res) => {
         console.log(res.data);
       })

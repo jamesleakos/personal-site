@@ -18,7 +18,7 @@ function WorkPage() {
 
   useEffect(() => {
     axios
-      .get(`/page/work`)
+      .post(`/page/work`)
       .then((res) => {
         console.log(res.data);
       })

@@ -17,7 +17,7 @@ function ContactPage() {
 
   useEffect(() => {
     axios
-      .get('/page/contact')
+      .post('/page/contact')
       .then((res) => {
         console.log(res.data);
       })

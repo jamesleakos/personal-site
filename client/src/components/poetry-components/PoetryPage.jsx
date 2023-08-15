@@ -25,7 +25,7 @@ function PoetryPage() {
 
   useEffect(() => {
     axios
-      .get(`/page/poetry`)
+      .post(`/page/poetry`)
       .then((res) => {
         console.log(res.data);
       })

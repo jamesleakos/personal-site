@@ -16,7 +16,7 @@ function AdventurePostsPage({ isMobile }) {
 
   useEffect(() => {
     axios
-      .get(`/page/adventure-posts`)
+      .post(`/page/adventure-posts`)
       .then((res) => {
         console.log(res.data);
       })

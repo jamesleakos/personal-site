@@ -18,7 +18,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get('/page/home')
+      .post('/page/home')
       .then((res) => {
         console.log(res.data);
       })

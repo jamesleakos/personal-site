@@ -24,7 +24,7 @@ function Posts() {
 
   useEffect(() => {
     axios
-      .get('/page/summer-in-europe')
+      .post('/page/summer-in-europe')
       .then((res) => {
         console.log(res.data);
       })

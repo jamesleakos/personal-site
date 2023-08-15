@@ -23,7 +23,7 @@ function Posts() {
 
   useEffect(() => {
     axios
-      .get(`/page/all-posts`)
+      .post(`/page/all-posts`)
       .then((res) => {
         console.log(res.data);
       })

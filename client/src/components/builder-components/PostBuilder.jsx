@@ -19,6 +19,9 @@ function PostBuilder() {
   const navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn } = React.useContext(AuthContext);
 
+  // setting post
+  const [post, setPost] = useState(null);
+
   // starting effects
   useEffect(() => {
     // scroll to the top
@@ -47,9 +50,9 @@ function PostBuilder() {
 
   useEffect(() => {
     if (!passedPostID) return;
-    if (!post.title || post.title === '') return;
+    if (!post) return;
     axios
-      .get(`/page/post-builder`, {
+      .post(`/page/post-builder`, {
         id: passedPostID,
         name: post.title,
       })
@@ -63,11 +66,6 @@ function PostBuilder() {
   useEffect(() => {
     if (!isLoggedIn) navigate('/sign-in-up');
   }, [isLoggedIn]);
-
-  // setting post
-  const [post, setPost] = useState({
-    components: [],
-  });
 
   const [showInfoModal, setShowInfoModal] = useState(false);
 
@@ -312,10 +310,10 @@ function PostBuilder() {
   return (
     <div
       className='post-builder'
-      style={post.isDark ? { backgroundColor: 'black', color: 'white' } : null}
+      style={(!!post && post.isDark) ? { backgroundColor: 'black', color: 'white' } : null}
     >
       <Navbar />
-      {post._id ? (
+      {(!!post && post._id) ? (
         <BuilderBar
           post={post}
           setShowInfoModal={setShowInfoModal}
@@ -323,7 +321,7 @@ function PostBuilder() {
           deletePost={deletePost}
         />
       ) : null}
-      {post.components.map((component, index) => {
+      {!!post && post.components.map((component, index) => {
         switch (component.type) {
           case 'main-title':
           case 'subtitle':
@@ -379,8 +377,8 @@ function PostBuilder() {
             break;
         }
       })}
-      {!!post._id ? <AddComponentSelector addComponent={addComponent} /> : null}
-      {showInfoModal ? (
+      {(!!post && !!post._id) ? <AddComponentSelector addComponent={addComponent} /> : null}
+      {(showInfoModal && !!post) ? (
         <InfoModal
           post={post}
           modifyPost={modifyPost}

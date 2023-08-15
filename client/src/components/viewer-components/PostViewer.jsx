@@ -18,6 +18,8 @@ import { PostViewerStyled } from './styles/PostViewer.styled.js';
 function PostViewer() {
   const passedPostID = useLoaderData();
   const [preventScrolling, setPreventScrolling] = useState(false);
+  // setting post
+  const [post, setPost] = useState(null);
 
   // landscape for mobile
   const [isLandscapeMode, setIsLandscapeMode] = useState(isLandscape());
@@ -29,7 +31,7 @@ function PostViewer() {
     if (!passedPostID) return;
     if (!post) return;
     axios
-      .get(`/page/post-viewer`, {
+      .post(`/page/post-viewer`, {
         id: passedPostID,
         name: post.title,
       })
@@ -80,55 +82,53 @@ function PostViewer() {
       });
   }, []);
 
-  // setting post
-  const [post, setPost] = useState({
-    components: [],
-  });
 
   return (
     <PostViewerStyled
       className='post-viewer'
-      style={post.isDark ? { backgroundColor: 'black', color: 'white' } : null}
+      style={(!!post && post.isDark) ? { backgroundColor: 'black', color: 'white' } : null}
     >
       {!(isMobile && isLandscapeMode) && <Navbar />}
       <div
         className={'scroll-container' + (preventScrolling ? ' is-locked' : '')}
       >
         <div className='scroller'>
-          {post.components.map((component, index) => {
-            switch (component.type) {
-              case 'main-title':
-              case 'subtitle':
-              case 'section-title':
-              case 'body-text':
-              case 'quote':
-              case 'caption':
-                return (
-                  <TextComp
-                    key={component._id + index + ''}
-                    component={component}
-                  />
-                );
-              case 'photo':
-              case 'background-photo':
-                return (
-                  <PhotoComp
-                    key={component._id + index}
-                    component={component}
-                  />
-                );
-              case 'photo-scroller':
-                return (
-                  <PhotoScrollerComp
-                    key={component._id + index}
-                    component={component}
-                    handlePreventScrolling={handlePreventScrolling}
-                  />
-                );
-              default:
-                break;
-            }
-          })}
+          {
+            !!post && post.components.map((component, index) => {
+              switch (component.type) {
+                case 'main-title':
+                case 'subtitle':
+                case 'section-title':
+                case 'body-text':
+                case 'quote':
+                case 'caption':
+                  return (
+                    <TextComp
+                      key={component._id + index + ''}
+                      component={component}
+                    />
+                  );
+                case 'photo':
+                case 'background-photo':
+                  return (
+                    <PhotoComp
+                      key={component._id + index}
+                      component={component}
+                    />
+                  );
+                case 'photo-scroller':
+                  return (
+                    <PhotoScrollerComp
+                      key={component._id + index}
+                      component={component}
+                      handlePreventScrolling={handlePreventScrolling}
+                    />
+                  );
+                default:
+                  break;
+              }
+            })
+          }
         </div>
       </div>
       <Footer />
