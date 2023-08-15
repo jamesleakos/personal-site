@@ -4,12 +4,13 @@ const User = require('../../db/models/User.js');
 
 exports.track = async (req, res) => {
     try {
+        console.log('req.body', req.body);
         const visitData = {
             pageVisited: req.params.page_name,
             path: '/page' + req.path,
             ip: req.ip,
-            sub_id: !!req.body.sub_id ? req.body.sub_id : null,
-            sub_name: !!req.body.sub_name ? req.body.sub_name : null,
+            sub_id: !!req.body.id ? req.body.id : null,
+            sub_name: !!req.body.name ? req.body.name : null,
         };
 
         // If email is provided, find the user and link the visit to them
