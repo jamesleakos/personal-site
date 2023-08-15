@@ -5,7 +5,6 @@ export const PhotoScrollerCompStyled = styled.div`
   
   text-align: left;
   position: relative;
-  margin-bottom: 10px;
 
   .image img {
     height: 500px;

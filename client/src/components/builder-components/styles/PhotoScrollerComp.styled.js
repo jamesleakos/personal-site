@@ -9,7 +9,6 @@ export const PhotoScrollerCompStyled = styled.div`
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
-  margin-bottom: 10px;
 
   .not-editing {
     // background-color: var(--background-color-light-secondary);
