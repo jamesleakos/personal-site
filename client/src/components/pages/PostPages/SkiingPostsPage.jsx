@@ -15,7 +15,6 @@ function SkiingPostsPage({ isMobile }) {
   }, []);
 
   useEffect(() => {
-    if (!passedTag) return;
     axios
       .post(`/page/skiing-posts`)
       .then((res) => {

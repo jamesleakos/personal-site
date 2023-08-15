@@ -15,7 +15,6 @@ function CulturePostsPage({ isMobile }) {
   }, []);
 
   useEffect(() => {
-    if (!passedTag) return;
     axios
       .post(`/page/culture-posts`)
       .then((res) => {
