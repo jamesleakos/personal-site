@@ -5,7 +5,7 @@ export const SimpleTextStyled = styled.div`
   
 
   .text-container {
-    padding: calc(var(--post-list-margin) * 2);
+    padding: calc(var(--post-list-margin) * 2) var(--post-list-margin);
   }
 
   .text {
@@ -19,7 +19,7 @@ export const SimpleTextStyled = styled.div`
   
   @media screen and (max-width: 1000px) {
     .text {
-      width: 90%;
+      width: 100%;
     }
   }
 `;

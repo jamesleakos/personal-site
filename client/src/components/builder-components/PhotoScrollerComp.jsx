@@ -315,6 +315,14 @@ function PhotoScrollerComp({
             >
               <FontAwesomeIcon icon='fa-solid fa-image' />
             </span>
+            <span
+              className='reacting-link expand-cursor'
+              onClick={() => {
+                handleAddBelow('photo-scroller');
+              }}
+            >
+              <FontAwesomeIcon icon='fa-solid fa-images' />
+            </span>
             <FontAwesomeIcon
               onClick={endEdit}
               className='reacting-link expand-cursor'

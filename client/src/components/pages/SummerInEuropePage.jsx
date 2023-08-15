@@ -30,6 +30,16 @@ function Posts() {
     <SignInUpPageStyled className='summer-in-europe-page'>
       <Navbar />
       <InlineImage imageURL='Personal_Site/SummerInEurope/DSC01950.JPG' />
+      <PostList
+        postFilters={{ published: true, tags: 'Europe 2023' }}
+        onTileClick={loadPostViewer}
+        showAddNew={false}
+        showSearch={false}
+        title='Europe 2023'
+        useWindowOffset={false}
+        amTiled={false}
+        showPostsOldToNew={true}
+      />
       <SimpleText text='I had a great summer in Europe. I got my feet under me with some friends in London, then headed to Krakow for the weekend to chase down some of the places in a podcast I had been listening to. I met my dad in Munich for the main event, a winding roadtrip through the Alps. We headed down into Austria, then continued into Italy. We were then back up into Switzerland, and then ended the car ride in the Black Forest. We flew to Paris for some excellent food and a bit of art. When Dad flew home from Paris, I went and met a friend in Portugal, and then Sam in Rome. ' />
       <PostList
         postFilters={{ published: true, tags: 'Europe 2023' }}
@@ -39,16 +49,6 @@ function Posts() {
         title='Europe 2023'
         useWindowOffset={false}
         amTiled={true}
-        showPostsOldToNew={true}
-      />
-      <PostList
-        postFilters={{ published: true, tags: 'Europe 2023' }}
-        onTileClick={loadPostViewer}
-        showAddNew={false}
-        showSearch={false}
-        title=''
-        useWindowOffset={false}
-        amTiled={false}
         showPostsOldToNew={true}
       />
       {/* <div className={'wm-spreads' + (!!isMobile ? ' mobile' : '')}>
