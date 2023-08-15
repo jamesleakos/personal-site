@@ -8,7 +8,7 @@ exports.track = async (req, res) => {
         const visitData = {
             pageVisited: req.params.page_name,
             path: '/page' + req.path,
-            ip: req.ip,
+            ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress || null,
             sub_id: !!req.body.id ? req.body.id : null,
             sub_name: !!req.body.name ? req.body.name : null,
         };
