@@ -9,6 +9,7 @@ export const PhotoScrollerCompStyled = styled.div`
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  margin-bottom: 10px;
 
   .not-editing {
     // background-color: var(--background-color-light-secondary);
@@ -81,6 +82,15 @@ export const PhotoScrollerCompStyled = styled.div`
   }
   .text-comp .reacting-link:hover {
     -webkit-transform: scale(1.2);
+  }
+
+  /* these should be at the bottom so that they override other things */
+  .has-top-margin {
+    margin-top: var(--post-component-vertical-margin);
+  }
+
+  .has-bottom-margin {
+    margin-bottom: var(--post-component-vertical-margin);
   }
 
 `;

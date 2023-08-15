@@ -5,16 +5,18 @@ export const PhotoScrollerCompStyled = styled.div`
   
   text-align: left;
   position: relative;
-
-  .holder {
-    padding: 0 0 0 40px;
-  }
+  margin-bottom: 10px;
 
   .image img {
     height: 500px;
   }
 
-  .holder.mobile {
-    padding: 0;
+  /* these should be at the bottom so that they override other things */
+  .has-top-margin {
+    margin-top: var(--post-component-vertical-margin);
+  }
+
+  .has-bottom-margin {
+    margin-bottom: var(--post-component-vertical-margin);
   }
 `;

@@ -12,7 +12,13 @@ import MobileImageScroller from '../utility-components/scrollers/mobile-image-sc
 
 function PhotoScrollerComp({ component }) {
   return (
-    <PhotoScrollerCompStyled className='photo-scroller-comp'>
+    <PhotoScrollerCompStyled
+      className={
+        'photo-scroller-comp' +
+        (component.margin_top ? ' has-top-margin' : '') +
+        (component.margin_bottom ? ' has-bottom-margin' : '')
+      }
+    >
       <div className={'holder' + (isMobile ? ' mobile' : '')}>
         {!isMobile ? (
           <ImageScroller
