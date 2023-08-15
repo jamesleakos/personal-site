@@ -16,6 +16,14 @@ const VisitSchema = new Schema({
     type: String,
     required: false
   },
+  sub_id: {
+    type: String,
+    required: false
+  },
+  sub_name: {
+    type: String,
+    required: false
+  },
   path: {
     type: String,
     required: false

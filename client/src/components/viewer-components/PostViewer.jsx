@@ -27,13 +27,17 @@ function PostViewer() {
 
   useEffect(() => {
     if (!passedPostID) return;
+    if (!post) return;
     axios
-      .get(`/page/post-viewer/${passedPostID}`)
+      .get(`/page/post-viewer`, {
+        id: passedPostID,
+        name: post.title,
+      })
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [passedPostID]);
+  }, [passedPostID, post]);
 
   useEffect(() => {
     // we don't care if not on mobile

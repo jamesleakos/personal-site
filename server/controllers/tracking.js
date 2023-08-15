@@ -8,6 +8,8 @@ exports.track = async (req, res) => {
             pageVisited: req.params.page_name,
             path: '/page' + req.path,
             ip: req.ip,
+            sub_id: !!req.body.sub_id ? req.body.sub_id : null,
+            sub_name: !!req.body.sub_name ? req.body.sub_name : null,
         };
 
         // If email is provided, find the user and link the visit to them

@@ -47,13 +47,17 @@ function PostBuilder() {
 
   useEffect(() => {
     if (!passedPostID) return;
+    if (!post.title || post.title === '') return;
     axios
-      .get(`/page/post-builder/${passedPostID}`)
+      .get(`/page/post-builder`, {
+        id: passedPostID,
+        name: post.title,
+      })
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [passedPostID]);
+  }, [passedPostID, post]);
   
 
   useEffect(() => {

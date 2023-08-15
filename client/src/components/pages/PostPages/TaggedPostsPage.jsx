@@ -19,7 +19,10 @@ function TaggedPostsPage() {
   useEffect(() => {
     if (!passedTag) return;
     axios
-      .get(`/page/tagged-posts/${passedTag}`)
+      .get(`/page/tagged-posts`, {
+        id: passedTag,
+        name: passedTag,
+      })
       .then((res) => {
         console.log(res.data);
       })

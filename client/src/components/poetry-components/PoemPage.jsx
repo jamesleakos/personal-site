@@ -29,13 +29,17 @@ function PoemPage() {
 
   useEffect(() => {
     if (!passedPoemID) return;
+    if (!poem) return;
     axios
-      .get(`/page/poem/${passedPoemID}`)
+      .get(`/page/poem`, {
+        id: passedPoemID,
+        name: poem.title,
+      })
       .then((res) => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [passedPoemID]);
+  }, [passedPoemID, poem]);
 
   const [poem, setPoem] = useState(null);
   useEffect(() => {
