@@ -16,6 +16,15 @@ function Home() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    axios
+      .get('/page/home')
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const [opacity, setOpacity] = useState(1);
 
   let scrollDiv = React.useRef(null);

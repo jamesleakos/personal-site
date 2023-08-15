@@ -26,6 +26,16 @@ function PostViewer() {
   }
 
   useEffect(() => {
+    if (!passedPostID) return;
+    axios
+      .get(`/page/post-viewer/${passedPostID}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [passedPostID]);
+
+  useEffect(() => {
     // we don't care if not on mobile
     if (!isMobile) return;
 

@@ -17,6 +17,15 @@ function GamesPage({ isMobile }) {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    axios
+      .get('/page/games')
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const projectMapper = () => {
     const projects = [
       {

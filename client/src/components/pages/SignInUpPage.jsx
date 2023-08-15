@@ -11,6 +11,15 @@ function SignInUpPage() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`/page/sign-in-up`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <SignInUpPageStyled>
       <Navbar />

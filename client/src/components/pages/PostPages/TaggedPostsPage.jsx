@@ -17,6 +17,16 @@ function TaggedPostsPage() {
   const [tag, setTag] = useState(passedTag);
 
   useEffect(() => {
+    if (!passedTag) return;
+    axios
+      .get(`/page/tagged-posts/${passedTag}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [passedTag]);
+
+  useEffect(() => {
     const oldTag = tag;
     setTag(passedTag);
     if (oldTag !== passedTag) window.location.reload();

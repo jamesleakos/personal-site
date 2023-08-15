@@ -14,6 +14,15 @@ function ContactPage() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    axios
+      .get('/page/contact')
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <ContactPageStyled>
       <Navbar />

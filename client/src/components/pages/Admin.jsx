@@ -34,6 +34,15 @@ function Admin() {
   }, []);
 
   useEffect(() => {
+    axios
+      .get(`/page/admin`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
     if (!isLoggedIn) navigate('/sign-in-up');
   }, [isLoggedIn]);
 

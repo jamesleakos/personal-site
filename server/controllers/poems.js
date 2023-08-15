@@ -14,7 +14,6 @@ exports.getAllPoems = (req, res) => {
 
 
 exports.getOnePoem = (req, res) => {
-  console.log('req.query', req.query);
   if (!req.query.poem_id) {
     res.status(400).send('You need to supply a poem_id');
   }

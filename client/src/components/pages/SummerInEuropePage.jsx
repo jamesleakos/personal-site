@@ -21,6 +21,15 @@ function Posts() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    axios
+      .get('/page/summer-in-europe')
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const navigate = useNavigate();
   const loadPostViewer = function (post_id) {
     navigate(`/post-viewer/${post_id}`);

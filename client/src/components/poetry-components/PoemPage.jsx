@@ -27,6 +27,16 @@ function PoemPage() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (!passedPoemID) return;
+    axios
+      .get(`/page/poem/${passedPoemID}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [passedPoemID]);
+
   const [poem, setPoem] = useState(null);
   useEffect(() => {
     axios

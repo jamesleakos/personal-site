@@ -46,6 +46,17 @@ function PostBuilder() {
   }, []);
 
   useEffect(() => {
+    if (!passedPostID) return;
+    axios
+      .get(`/page/post-builder/${passedPostID}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [passedPostID]);
+  
+
+  useEffect(() => {
     if (!isLoggedIn) navigate('/sign-in-up');
   }, [isLoggedIn]);
 

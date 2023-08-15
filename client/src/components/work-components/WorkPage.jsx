@@ -15,6 +15,15 @@ function WorkPage() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`/page/work`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const projectMapper = () => {
     const projects = [
       {

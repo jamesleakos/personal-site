@@ -13,6 +13,16 @@ function CulturePostsPage({ isMobile }) {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (!passedTag) return;
+    axios
+      .get(`/page/culture-posts`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const navigate = useNavigate();
   const loadPostViewer = function (post_id) {
     navigate(`/post-viewer/${post_id}`);
