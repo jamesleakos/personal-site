@@ -24,6 +24,7 @@ const imageScrollerComponentRouter = require('./routers/image_scroller_component
 const tagRouter = require('./routers/tags.js');
 const poemRouter = require('./routers/poems.js');
 const trackingRouter = require('./routers/tracking.js');
+const visitsRouter = require('./routers/visits.js');
 
 // express app
 const app = express();
@@ -69,6 +70,7 @@ app.use('/tags', tagRouter);
 app.use('/auth', authRouter);
 app.use('/poems', poemRouter);
 app.use('/page', trackingRouter);
+app.use('/visits', visitsRouter);
 
 // needed to send the base files
 app.get('/*', function (req, res) {
