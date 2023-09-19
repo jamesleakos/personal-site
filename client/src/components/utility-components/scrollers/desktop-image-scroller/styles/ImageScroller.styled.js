@@ -6,7 +6,6 @@ export const ImageScrollerStyled = styled.div`
   .image-scroller-wrapper {
     display: flex;
     justify-content: center;
-
   }
   .image-modal {
     position: fixed;

@@ -4,7 +4,7 @@ import React from 'react';
 // imports
 import { ImageScrollItemStyled } from './styles/ImageScrollItem.styled.js';
 
-const ImageMapper = (urlArr, callback) => {
+const ImageMapper = (urlArr, callback, addLeftMargin) => {
   return urlArr.map((url, index) => {
     return (
       <ImageScrollItem
@@ -13,18 +13,24 @@ const ImageMapper = (urlArr, callback) => {
         callback={() => {
           if (!!callback) callback(index);
         }}
+        addLeftMargin={index === 0 && !!addLeftMargin}
       />
     );
   });
 };
 
-function ImageScrollItem({ url, callback }) {
+function ImageScrollItem({ url, callback, addLeftMargin }) {
   return (
     <ImageScrollItemStyled
       className='image-scroll-item'
       onDoubleClick={callback}
     >
-      <div className='image'>
+      <div
+        className='image'
+        style={{
+          marginLeft: addLeftMargin ? '10px' : '',
+        }}
+      >
         <img
           className='no-select'
           src={`https://ik.imagekit.io/hfywj4j0a/tr:w-1000/${url}`}

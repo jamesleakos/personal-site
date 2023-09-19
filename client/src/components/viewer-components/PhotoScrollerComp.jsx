@@ -24,6 +24,7 @@ function PhotoScrollerComp({ component }) {
           <ImageScroller
             imageURLArray={component.keys}
             ImageMapper={ImageMapper}
+            addLeftMargin={true}
           />
         ) : (
           <MobileImageScroller imageURLArray={component.keys} />

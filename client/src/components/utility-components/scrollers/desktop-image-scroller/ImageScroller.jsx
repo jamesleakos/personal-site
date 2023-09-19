@@ -9,7 +9,7 @@ import { ImageScrollerStyled } from './styles/ImageScroller.styled.js';
 import TileScroller from '../base-tile-scroller/TileScroller.jsx';
 import UnderlinedTitle from '../../UnderlinedTitle.jsx';
 
-function ImageScroller({ title, imageURLArray, ImageMapper }) {
+function ImageScroller({ title, imageURLArray, ImageMapper, addLeftMargin }) {
   const [urlArray, setUrlArray] = useState(imageURLArray);
 
   useEffect(() => {
@@ -184,7 +184,7 @@ function ImageScroller({ title, imageURLArray, ImageMapper }) {
       <div className='image-scroller-wrapper'>
         <TileScroller
           key={JSON.stringify(urlArray)}
-          Mapper={() => ImageMapper(urlArray, expandImage)}
+          Mapper={() => ImageMapper(urlArray, expandImage, !!addLeftMargin)}
         />
       </div>
       {/* full screen image view modal */}
