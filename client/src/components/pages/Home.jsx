@@ -76,7 +76,7 @@ function Home() {
         />
         <Info />
         <PostList
-          postFilters={{}}
+          postFilters={{ published: true }}
           onTileClick={loadPostViewer}
           showAddNew={false}
           showSearch={false}
