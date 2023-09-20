@@ -14,11 +14,7 @@ export const PhotoScrollerCompStyled = styled.div`
     // background-color: var(--background-color-light-secondary);
     overflow: hidden;
     text-align: left;
-    padding: 0 var(--post-list-margin);
-  }
-  
-  .not-editing.mobile {
-    padding-right: 0;
+    padding: 0;
   }
 
   .input-area {

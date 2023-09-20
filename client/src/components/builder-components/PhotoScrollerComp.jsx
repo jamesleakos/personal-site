@@ -335,7 +335,11 @@ function PhotoScrollerComp({
           className={'not-editing' + (isMobile ? ' mobile' : '')}
           onDoubleClick={() => handleEdit(true)}
         >
-          <ImageScroller imageURLArray={keys} ImageMapper={ImageMapper} />
+          <ImageScroller
+            imageURLArray={keys}
+            ImageMapper={ImageMapper}
+            addLeftMargin={true}
+          />
         </div>
       )}
     </PhotoScrollerCompStyled>
