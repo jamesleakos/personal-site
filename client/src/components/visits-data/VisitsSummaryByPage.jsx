@@ -8,8 +8,12 @@ const VisitsSummaryByPage = () => {
 
   useEffect(() => {
     fetch('/visits/summary-by-page')
-      .then((response) => response.json())
+      .then((response) => {
+        console.log('response: ', response);
+        return response.json();
+      })
       .then((data) => {
+        console.log('data: ', data);
         // Sort the data by the number of visits by the "Unknown" user in the last week
         const sortedData = data.sort((a, b) => {
           const aUnknownUser = a.users.find(
@@ -23,6 +27,7 @@ const VisitsSummaryByPage = () => {
             (aUnknownUser?.visitsLastWeek || 0)
           );
         });
+        console.log('sorted data: ', sortedData);
         setData(sortedData);
       })
       .catch((error) => console.error(error));
