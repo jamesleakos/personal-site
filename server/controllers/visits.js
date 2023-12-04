@@ -2,82 +2,112 @@ const mongoose = require('mongoose');
 const Visit = require('../../db/models/Visit.js');
 const { extractBrowserInfo } = require('../helpers/extractBrowserInfo.js');
 
+// tracking saves the visit to the database - visits returns the visits data
+
+const getIdentifiedUser = (ip) => {
+  if (
+    [
+      '98.97.56.141',
+      '::1',
+      '174.238.12.45',
+      '98.97.57.220',
+      '98.97.152.244',
+      '216.147.125.127',
+      '216.147.122.133',
+      '174.238.11.133',
+      '98.97.57.93',
+      '75.104.111.155',
+      '199.192.125.66',
+    ].includes(ip)
+  ) {
+    return 'James Leakos';
+  } else {
+    return 'Unknown';
+  }
+};
+
+const tagVisitWithUser = (visit) => {
+  visit.identifiedUser = getIdentifiedUser(visit.ip);
+  return visit;
+};
+
+const addUserInfoToVisits = (visits) => {
+  return visits.map((visit) => {
+    visit.browserInfo = extractBrowserInfo(visit.user_agent);
+    if (!visit.user) {
+      visit.user = 'Not Logged In';
+    }
+    visit = tagVisitWithUser(visit);
+    return visit;
+  });
+};
+
 exports.getVisitsSummaryByPage = async (req, res) => {
   try {
     // Fetch visits data
-    const visitsData = await Visit.find({}).lean();
+    let visitsData = await Visit.find({}).lean();
 
     // Process the user agent for each entry
-    visitsData.forEach(visit => {
-      visit.browserInfo = extractBrowserInfo(visit.user_agent);
-      if (!visit.user) {
-        visit.user = "Anonymous";
-      }
-    });
+    visitsData = addUserInfoToVisits(visitsData);
 
-    // Now, aggregate the processed data
-    let aggregatedData = {}; // To store the aggregated results
+    // Aggregate the processed data
+    let aggregatedData = { pages: {} };
 
-    visitsData.forEach(visit => {
-      let page = visit.pageVisited;
-      let user = visit.user;
-      let ip = visit.ip;
-      let browser = visit.browserInfo.summary;
+    visitsData.forEach((visit) => {
+      let page = !!visit.sub_name
+        ? visit.pageVisited + '/' + visit.sub_name
+        : visit.pageVisited;
+      let user = visit.identifiedUser;
+      let visitDate = new Date(visit.date); // Assuming visit has a date property
+      let now = new Date();
+      let oneWeekAgo = new Date();
+      oneWeekAgo.setDate(now.getDate() - 7);
+      let oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(now.getMonth() - 1);
 
-      if (!aggregatedData[page]) {
-        aggregatedData[page] = { users: {}, totalVisits: 0 };
-      }
-      if (!aggregatedData[page].users[user]) {
-        aggregatedData[page].users[user] = { ips: {}, totalVisits: 0 };
-      }
-      if (!aggregatedData[page].users[user].ips[ip]) {
-        aggregatedData[page].users[user].ips[ip] = { browsers: {}, totalVisits: 0 };
-      }
-      if (!aggregatedData[page].users[user].ips[ip].browsers[browser]) {
-        aggregatedData[page].users[user].ips[ip].browsers[browser] = 0;
+      if (!aggregatedData.pages[page]) {
+        aggregatedData.pages[page] = { users: {} };
       }
 
-      aggregatedData[page].users[user].ips[ip].browsers[browser]++;
-      aggregatedData[page].users[user].ips[ip].totalVisits++;
-      aggregatedData[page].users[user].totalVisits++;
-      aggregatedData[page].totalVisits++;
+      if (!aggregatedData.pages[page].users[user]) {
+        aggregatedData.pages[page].users[user] = {
+          totalVisits: 0,
+          visitsLastWeek: 0,
+          visitsLastMonth: 0,
+        };
+      }
+
+      aggregatedData.pages[page].users[user].totalVisits++;
+
+      if (visitDate >= oneWeekAgo) {
+        aggregatedData.pages[page].users[user].visitsLastWeek++;
+      }
+
+      if (visitDate >= oneMonthAgo) {
+        aggregatedData.pages[page].users[user].visitsLastMonth++;
+      }
     });
 
     // Convert the aggregated data to the desired format
-    let result = [];
-    for (let page in aggregatedData) {
+    let pagesArray = [];
+    for (let page in aggregatedData.pages) {
       let usersArray = [];
-      for (let user in aggregatedData[page].users) {
-        let ipsArray = [];
-        for (let ip in aggregatedData[page].users[user].ips) {
-          let browsers = [];
-          for (let browser in aggregatedData[page].users[user].ips[ip].browsers) {
-            browsers.push({
-              browser,
-              count: aggregatedData[page].users[user].ips[ip].browsers[browser]
-            });
-          }
-          ipsArray.push({
-            ip,
-            totalVisits: aggregatedData[page].users[user].ips[ip].totalVisits,
-            browsers
-          });
-        }
+      for (let user in aggregatedData.pages[page].users) {
         usersArray.push({
-          user,
-          totalVisits: aggregatedData[page].users[user].totalVisits,
-          ips: ipsArray
+          identifiedUser: user,
+          totalVisits: aggregatedData.pages[page].users[user].totalVisits,
+          visitsLastWeek: aggregatedData.pages[page].users[user].visitsLastWeek,
+          visitsLastMonth:
+            aggregatedData.pages[page].users[user].visitsLastMonth,
         });
       }
-      result.push({
+      pagesArray.push({
         pageVisited: page,
-        totalVisits: aggregatedData[page].totalVisits,
-        users: usersArray
+        users: usersArray,
       });
     }
 
-    res.status(200).send(result);
-
+    res.status(200).send(pagesArray);
   } catch (error) {
     console.log('error', error);
     res.status(500).send({ message: 'Error' });
@@ -87,80 +117,58 @@ exports.getVisitsSummaryByPage = async (req, res) => {
 exports.getVisitsSummary = async (req, res) => {
   try {
     // Fetch visits data
-    const visitsData = await Visit.find({}).lean();
+    let visitsData = await Visit.find({}).lean();
 
     // Process the user agent for each entry
-    visitsData.forEach(visit => {
-      visit.browserInfo = extractBrowserInfo(visit.user_agent);
-      if (!visit.user) {
-        visit.user = "Anonymous";
-      }
-    });
+    visitsData = addUserInfoToVisits(visitsData);
 
     // Aggregate the processed data
-    let aggregatedData = { users: {} };
+    let aggregatedData = { identifiedUsers: {} };
 
-    visitsData.forEach(visit => {
-      let user = visit.user;
-      let ip = visit.ip;
-      let browser = visit.browserInfo.browser;
-      let page = visit.pageVisited;
+    visitsData.forEach((visit) => {
+      let identifiedUser = visit.identifiedUser; // Use identifiedUser instead of user
+      let visitDate = new Date(visit.date); // Assuming visit has a date property
+      let now = new Date();
+      let oneWeekAgo = new Date();
+      oneWeekAgo.setDate(now.getDate() - 7);
+      let oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(now.getMonth() - 1);
 
-      if (!aggregatedData.users[user]) {
-        aggregatedData.users[user] = { ips: {}, totalVisits: 0 };
-      }
-      if (!aggregatedData.users[user].ips[ip]) {
-        aggregatedData.users[user].ips[ip] = { pages: {}, browsers: {}, totalVisits: 0 };
-      }
-      if (!aggregatedData.users[user].ips[ip].pages[page]) {
-        aggregatedData.users[user].ips[ip].pages[page] = 0;
-      }
-      if (!aggregatedData.users[user].ips[ip].browsers[browser]) {
-        aggregatedData.users[user].ips[ip].browsers[browser] = 0;
+      if (!aggregatedData.identifiedUsers[identifiedUser]) {
+        aggregatedData.identifiedUsers[identifiedUser] = {
+          totalVisits: 0,
+          visitsLastWeek: 0,
+          visitsLastMonth: 0,
+        };
       }
 
-      aggregatedData.users[user].ips[ip].pages[page]++;
-      aggregatedData.users[user].ips[ip].browsers[browser]++;
-      aggregatedData.users[user].ips[ip].totalVisits++;
-      aggregatedData.users[user].totalVisits++;
+      aggregatedData.identifiedUsers[identifiedUser].totalVisits++;
+
+      if (visitDate >= oneWeekAgo) {
+        aggregatedData.identifiedUsers[identifiedUser].visitsLastWeek++;
+      }
+
+      if (visitDate >= oneMonthAgo) {
+        aggregatedData.identifiedUsers[identifiedUser].visitsLastMonth++;
+      }
     });
 
     // Convert the aggregated data to the desired format
     let usersArray = [];
-    for (let user in aggregatedData.users) {
-      let ipsArray = [];
-      for (let ip in aggregatedData.users[user].ips) {
-        let pagesArray = Object.keys(aggregatedData.users[user].ips[ip].pages).map(page => ({
-          pageVisited: page,
-          count: aggregatedData.users[user].ips[ip].pages[page]
-        }));
-
-        let browsersArray = Object.keys(aggregatedData.users[user].ips[ip].browsers).map(browser => ({
-          browser,
-          count: aggregatedData.users[user].ips[ip].browsers[browser]
-        }));
-
-        ipsArray.push({
-          ip,
-          totalVisits: aggregatedData.users[user].ips[ip].totalVisits,
-          pages: pagesArray,
-          browsers: browsersArray
-        });
-      }
+    for (let identifiedUser in aggregatedData.identifiedUsers) {
       usersArray.push({
-        user,
-        totalVisits: aggregatedData.users[user].totalVisits,
-        ips: ipsArray
+        identifiedUser,
+        totalVisits: aggregatedData.identifiedUsers[identifiedUser].totalVisits,
+        visitsLastWeek:
+          aggregatedData.identifiedUsers[identifiedUser].visitsLastWeek,
+        visitsLastMonth:
+          aggregatedData.identifiedUsers[identifiedUser].visitsLastMonth,
       });
     }
 
     res.status(200).send(usersArray);
-
   } catch (error) {
     console.log('error', error);
     res.status(500).send({ message: 'Error' });
   }
 };
-
-
-

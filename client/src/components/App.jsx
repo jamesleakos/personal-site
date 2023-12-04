@@ -25,6 +25,7 @@ import CulturePostsPage from './pages/PostPages/CulturePostsPage.jsx';
 import RunningPostsPage from './pages/PostPages/RunningPostsPage.jsx';
 import SkiingPostsPage from './pages/PostPages/SkiingPostsPage.jsx';
 import TaggedPostPage from './pages/PostPages/TaggedPostsPage.jsx';
+import VisitsDataPage from './visits-data/VisitsDataPage.jsx';
 
 // css
 import './styles/App.css';
@@ -128,6 +129,14 @@ const router = createBrowserRouter([
     element: (
       <Protected>
         <Admin />
+      </Protected>
+    ),
+  },
+  {
+    path: '/visits-data',
+    element: (
+      <Protected>
+        <VisitsDataPage />
       </Protected>
     ),
   },

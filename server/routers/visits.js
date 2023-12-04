@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const visitsController = require('../controllers/visits.js');
 
-// tags
+// tracking saves the visit to the database - visits returns the visits data
 router.get('/summary', function (req, res) {
   if (!req.user) {
     res.send({ error: 'You are not logged in' });
@@ -23,7 +23,8 @@ router.get('/summary-by-page', function (req, res) {
   if (req.user.toJSON().role !== 'admin') {
     res.send({ error: 'You are not admin' });
     return;
-  } visitsController.getVisitsSummaryByPage(req, res);
+  }
+  visitsController.getVisitsSummaryByPage(req, res);
 });
 
 module.exports = router;
