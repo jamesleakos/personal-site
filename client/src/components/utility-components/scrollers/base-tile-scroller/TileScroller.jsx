@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 // css
 import { TileScrollerStyled } from './styles/TileScroller.styled.js';
-import { set } from 'date-fns';
 
 // Mapper is a required argument, as it is the function called to output the components
 // MapArray is an optional argument to Mapper that can influence the output of the Mapper function
@@ -22,10 +20,6 @@ function TileScroller({ Mapper, MapArray }) {
   const [velX, setVelX] = useState(0);
   const requestRef = useRef();
   const [mouseDown, setMouseIsDown] = useState(false);
-  // for long press tracking
-  const [mouseMoved, setMouseMoved] = useState(false);
-  const [longPress, setLongPress] = useState(false);
-  const [timer, setTimer] = useState(null);
   // preventing vertical scrolling
   const [scrollAxis, setScrollAxis] = useState(null);
 
@@ -52,8 +46,6 @@ function TileScroller({ Mapper, MapArray }) {
     setStartY(event.clientY);
     cancelMomentumTracking();
     setVelX(0);
-    setMouseMoved(false);
-    setTimer(setTimeout(() => setLongPress(true), 500)); // 500ms for a long press
   };
   const handleTouchStart = (event) => {
     setMouseIsDown(true);
@@ -61,8 +53,6 @@ function TileScroller({ Mapper, MapArray }) {
     setStartY(event.touches[0].clientY);
     cancelMomentumTracking();
     setVelX(0);
-    setMouseMoved(false);
-    setTimer(setTimeout(() => setLongPress(true), 500)); // 500ms for a long press
   };
 
   const handleMouseMove = (event) => {
@@ -75,8 +65,6 @@ function TileScroller({ Mapper, MapArray }) {
     // for other
     const wo = 0;
     setMousePos({ x: clientX + scrollX, y: clientY + scrollY - wo });
-    // for long press anti click
-    setMouseMoved(true);
 
     //for drag
     if (!mouseDown) return;
@@ -110,20 +98,15 @@ function TileScroller({ Mapper, MapArray }) {
     setVelX(deltaX);
     setStartX(event.touches[0].clientX);
     setStartY(event.touches[0].clientY);
-    setMouseMoved(true);
   };
 
   const handleMouseUp = () => {
     setMouseIsDown(false);
     beginMomentumTracking();
-    clearTimeout(timer);
-    setLongPress(false);
   };
   const handleTouchEnd = () => {
     setMouseIsDown(false);
     beginMomentumTracking();
-    clearTimeout(timer);
-    setLongPress(false);
     setScrollAxis(null);
   };
 
@@ -136,8 +119,6 @@ function TileScroller({ Mapper, MapArray }) {
     setMouseIsDown(false);
     // and we want to stop showing text
     setShowText(false);
-    clearTimeout(timer);
-    setLongPress(false);
   };
 
   const handleTouchLeave = () => {
@@ -145,8 +126,6 @@ function TileScroller({ Mapper, MapArray }) {
     setMouseIsDown(false);
     // and we want to stop showing text
     setShowText(false);
-    clearTimeout(timer);
-    setLongPress(false);
     setScrollAxis(null);
   };
 

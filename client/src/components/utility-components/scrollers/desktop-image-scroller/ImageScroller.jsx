@@ -15,50 +15,6 @@ function ImageScroller({ title, imageURLArray, ImageMapper, addLeftMargin }) {
   useEffect(() => {
     setUrlArray(imageURLArray);
   }, [imageURLArray]);
-  const [centerScroller, setCenterScroller] = useState(false);
-
-  // add wrapperRef
-  const wrapperRef = useRef(null);
-
-  // useEffect(() => {
-  //   // Function to check overflow
-  //   const checkOverflow = () => {
-  //     const wrapper = wrapperRef.current;
-  //     if (wrapper) {
-  //       if (wrapper.scrollWidth <= wrapper.clientWidth) {
-  //         setCenterScroller(true);
-  //       } else {
-  //         setCenterScroller(false);
-  //       }
-  //     }
-  //   };
-
-  //   // Initial check
-  //   checkOverflow();
-
-  //   // Set up event listener for window resize
-  //   const onResize = () => checkOverflow('resize check');
-  //   window.addEventListener('resize', onResize);
-
-  //   // Listen for all images to load
-  //   const images = wrapperRef.current?.querySelectorAll('img');
-  //   if (images) {
-  //     images.forEach((img) => {
-  //       img.addEventListener('load', () => checkOverflow());
-  //     });
-  //   }
-
-  //   // Clean up
-  //   return () => {
-  //     window.removeEventListener('resize', onResize);
-  //     if (images) {
-  //       images.forEach((img) => {
-  //         img.removeEventListener('load', () => checkOverflow());
-  //       });
-  //     }
-  //   };
-  // }, [imageURLArray]);
-  // #endregion
 
   // #region image modal
   const [showModal, setShowModal] = useState(false);

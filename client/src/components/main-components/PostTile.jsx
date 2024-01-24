@@ -1,5 +1,5 @@
 // dependancies
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 
 // imports
@@ -10,6 +10,24 @@ function PostTile({ post, onClick, tags }) {
   const loadTagViewer = function (tag) {
     navigate(`/posts-by-tag/${tag}`);
   };
+
+  // #region preventing accidental clicks from drags
+  const [mouseDownPosition, setMouseDownPosition] = useState({ x: 0, y: 0 });
+  const handleMouseDown = (e) => {
+    setMouseDownPosition({ x: e.clientX, y: e.clientY });
+  };
+  const handleMouseUp = (e) => {
+    const dx = e.clientX - mouseDownPosition.x;
+    const dy = e.clientY - mouseDownPosition.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    // If the distance moved by the mouse is less than 5 pixels, consider it as a click
+    if (distance < 5) {
+      onClick(post);
+    }
+  };
+
+  // #endregion
 
   return (
     <div className='post-tile'>
@@ -32,7 +50,11 @@ function PostTile({ post, onClick, tags }) {
           })
         }
       </div>
-      <div className='post-tile-title-area' onClick={() => onClick(post)}>
+      <div
+        className='post-tile-title-area'
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+      >
         {/* image */}
         {post.display_image_key ? (
           <div className='tile-title-image'>
