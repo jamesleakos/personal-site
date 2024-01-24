@@ -40,6 +40,11 @@ function TileScroller({ Mapper, MapArray }) {
   const dragOffSetY = -30;
 
   // functions
+  const handleWheel = (event) => {
+    const wrapper = wrapperRef.current;
+    const delta = event.deltaX;
+    wrapper.scrollLeft += delta;
+  };
 
   const handleMouseDown = (event) => {
     setMouseIsDown(true);
@@ -180,6 +185,7 @@ function TileScroller({ Mapper, MapArray }) {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchLeave}
+        onWheel={handleWheel}
       >
         <div className='scroller'>{memoizedMapper}</div>
       </div>
