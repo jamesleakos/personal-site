@@ -15,14 +15,15 @@
   color: var(--text-accent);
 }
 
-.text-scroller {}
+.text-scroller {
+}
 
 .title-component #title-name {
   height: 300px;
   width: 350px;
   position: absolute;
   left: 50%;
-  top: calc(10vh);
+  top: calc(100vh);
   transform: translateX(-50%);
 }
 
@@ -79,70 +80,24 @@
   width: 500px;
   position: absolute;
   left: 50%;
-  top: calc(100vh);
+  top: calc(20vh);
   transform: translateX(-50%);
 }
 
-#title-welcome #welcome {
+#title-welcome #hi {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 7rem;
 }
 
 @media screen and (max-width: 600px) {
-  #title-welcome #welcome {
+  #title-welcome #hi {
     position: absolute;
     top: 0px;
-    left: 140px;
-    font-size: 3.5rem;
-  }
-}
-
-#title-welcome #to {
-  position: absolute;
-  top: 65px;
-  left: 410px;
-  font-size: 3rem;
-}
-
-@media screen and (max-width: 600px) {
-  #title-welcome #to {
-    position: absolute;
-    top: 34px;
-    left: 355px;
-    font-size: 1.5rem;
-  }
-}
-
-#title-welcome #my {
-  position: absolute;
-  top: 120px;
-  left: 30px;
-  font-size: 3rem;
-}
-
-@media screen and (max-width: 600px) {
-  #title-welcome #my {
-    position: absolute;
-    top: 65px;
-    left: 130px;
-    font-size: 1.5rem;
-  }
-}
-
-#title-welcome #website {
-  position: absolute;
-  top: 120px;
-  left: 100px;
-  font-size: 7rem;
-}
-
-@media screen and (max-width: 600px) {
-  #title-welcome #website {
-    position: absolute;
-    top: 60px;
-    left: 170px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 3.5rem;
   }
 }

@@ -4,7 +4,7 @@ import './styles/Title.css';
 function Title() {
   const upRef = useRef(null);
   // const downRef = useRef(null);
-  // const downSpeed = 1; 
+  // const downSpeed = 1;
   const upSpeed = -2;
 
   // useEffect(() => {
@@ -29,24 +29,21 @@ function Title() {
 
   return (
     <div className='title-component'>
-      <div ref={upRef} >
+      <div ref={upRef}>
+        <div id='title-welcome' className='text-scroller'>
+          <h1 id='hi'>Hello!</h1>
+        </div>
         <div id='title-name' className='text-scroller'>
           <h1 id='im'>I'm</h1>
-          <h1 id='james' >James</h1>
+          <h1 id='james'>James</h1>
           <h1 id='leakos'>Leakos</h1>
-        </div>
-        <div id='title-welcome' className='text-scroller'>
-          <h1 id='welcome'>Welcome</h1>
-          <h1 id='to'>To</h1>
-          <h1 id='my'>My</h1>
-          <h1 id='website'>Website!</h1>
         </div>
       </div>
       {/* <div ref={downRef} >
         
       </div> */}
     </div>
-  )
+  );
 }
 
 export default Title;
