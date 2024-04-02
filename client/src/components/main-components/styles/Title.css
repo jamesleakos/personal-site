@@ -15,8 +15,8 @@
   color: var(--text-accent);
 }
 
-.text-scroller {
-}
+/* .text-scroller {
+} */
 
 .title-component #title-name {
   height: 300px;
