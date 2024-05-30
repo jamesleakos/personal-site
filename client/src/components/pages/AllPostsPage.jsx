@@ -62,7 +62,7 @@ function Posts() {
         <ImageScroller
           title='2023 Wolfmoor Magazine'
           imageURLArray={Array.from(
-            { length: 64 },
+            { length: 108 },
             (_, i) =>
               `0_wolfmoor_spreads/2023/WolfmoorMag2023-${
                 i + 1 < 10 ? '0' : ''
