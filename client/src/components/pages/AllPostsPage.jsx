@@ -38,17 +38,39 @@ function Posts() {
   return (
     <div className='posts'>
       <Navbar />
+      <InlineImage imageURL='Personal_Site/sam_on_dv_peak.JPG' />
+      <PostList
+        postFilters={{ published: true, featured: true, tags: 'WM 2024' }}
+        onTileClick={loadPostViewer}
+        showAddNew={false}
+        showSearch={true}
+        title='2024 Featured Posts'
+        useWindowOffset={false}
+        amTiled={true}
+      />
+      <PostList
+        postFilters={{ published: true, tags: 'WM 2024' }}
+        onTileClick={loadPostViewer}
+        showAddNew={false}
+        showSearch={true}
+        title='2024 All Posts'
+        useWindowOffset={false}
+        amTiled={false}
+      />
       <InlineImage imageURL='Personal_Site/dad_waterfall_zermatt.JPG' />
-      {/* <div className={'wm-spreads' + (!!isMobile ? ' mobile' : '')}>
+      <div className={'wm-spreads' + (!!isMobile ? ' mobile' : '')}>
         <ImageScroller
           title='2023 Wolfmoor Magazine'
           imageURLArray={Array.from(
             { length: 64 },
-            (_, i) => `0_wolfmoor_spreads/2023/WolfmoorMag2023-${i + 1}.jpg`
+            (_, i) =>
+              `0_wolfmoor_spreads/2023/WolfmoorMag2023-${
+                i + 1 < 10 ? '0' : ''
+              }${i + 1}.jpg`
           )}
           ImageMapper={ImageMapper}
         />
-      </div> */}
+      </div>
       <PostList
         postFilters={{ published: true, featured: true, tags: 'WM 2023' }}
         onTileClick={loadPostViewer}
